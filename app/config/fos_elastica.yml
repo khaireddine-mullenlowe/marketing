@@ -1,0 +1,10 @@
+# configuration file for elastic search
+fos_elastica:
+    clients:
+        default:
+            host: localhost
+            port: 9200
+    indexes:
+        marketing:
+            client: default
+            types: ~
