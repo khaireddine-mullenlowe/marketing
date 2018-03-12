@@ -20,10 +20,10 @@ class AppKernel extends Kernel
             new FOS\ElasticaBundle\FOSElasticaBundle(),
             new FOS\RestBundle\FOSRestBundle(), // FosRestBundle must be loaded before CommonBundle
             new Mullenlowe\CommonBundle\MullenloweCommonBundle(),
-            new AppBundle\AppBundle(),
             new Nelmio\CorsBundle\NelmioCorsBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new Mullenlowe\EtlBundle\MullenloweEtlBundle(),
+            new OfferBundle\OfferBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
