@@ -19,5 +19,7 @@
 /vendor/
 /web/bundles/
 /web/swagger-ui
-tests/_data
+!tests/_data
+tests/_data/*
+!tests/_data/.gitkeep
 /app/DoctrineMigrations
