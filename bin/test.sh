@@ -45,11 +45,11 @@ echo "Runing codecept with following arguments :  $CODECEPT_OPTIONS"
 
 codecept build
 
-php bin/console doctrine:schema:update --force --env=test
+#php bin/console doctrine:schema:update --force --env=test
 
-php bin/console fixtures:load --env=test --no-interaction
+#php bin/console fixtures:load --env=test --no-interaction
 
-sqlite3 tests/_data/test.sqlite .dump > tests/_data/test.sql
+#sqlite3 tests/_data/test.sqlite .dump > tests/_data/test.sql
 
 php bin/console cache:clear --no-warmup --env=test
 
