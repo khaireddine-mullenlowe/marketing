@@ -1,0 +1,13 @@
+/.web-server-pid
+/app/config/parameters.yml
+/build/
+/phpunit.xml
+/var/*
+/vendor/
+/web/bundles/
+/web/swagger-ui
+tests/_data
+/app/DoctrineMigrations
+
+.idea
+/c3.php
