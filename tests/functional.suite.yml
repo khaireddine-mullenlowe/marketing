@@ -13,7 +13,3 @@ modules:
         - REST:
             url: http://localhost
             depends: Symfony
-    config:
-        Db:
-            populate: false
-            cleanup: false
