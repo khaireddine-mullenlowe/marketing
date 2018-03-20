@@ -2,13 +2,24 @@
 
 namespace OfferBundle\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use OfferBundle\Validator\Constraints as OfferAssert;
 
 /**
  * BaseOffer
+ *
+ * @OfferAssert\OfferDates
  */
 abstract class BaseOffer
 {
+    public function __construct()
+    {
+        $this->createdAt = new DateTime('now');
+        $this->updatedAt = new DateTime('now');
+        $this->status = 1;
+    }
     /**
      * @var int
      *
@@ -17,30 +28,42 @@ abstract class BaseOffer
     protected $partner;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      *
-     * @ORM\Column(name="start_date", type="datetime")
+     * @Assert\GreaterThan(
+     *     "today",
+     *     message="La date de début doit ête supérieur à aujourd'hui"
+     * )
+     *
+     * @ORM\Column(name="start_date", type="date")
      */
     protected $startDate;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      *
-     * @ORM\Column(name="end_date", type="datetime")
+     * @Assert\Expression(
+     *     "value > this.getStartDate()",
+     *     message="La date de fin doit être supérieur à la date de début"
+     * )
+     *
+     * @ORM\Column(name="end_date", type="date")
      */
     protected $endDate;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      *
-     * @ORM\Column(name="created_at", type="datetime")
+     * @ORM\Column(name="created_at", type="datetime", options={"default"="CURRENT_TIMESTAMP"})
      */
     protected $createdAt;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      *
-     * @ORM\Column(name="updated_at", type="datetime")
+     * @Assert\Expression("value >= this.getCreatedAt()")
+     *
+     * @ORM\Column(name="updated_at", type="datetime", options={"default"="CURRENT_TIMESTAMP"})
      */
     protected $updatedAt;
 
@@ -54,12 +77,16 @@ abstract class BaseOffer
     /**
      * @var string
      *
+     * @Assert\NotBlank()
+     *
      * @ORM\Column(name="title", type="string", length=255)
      */
     protected $title;
 
     /**
      * @var string
+     *
+     * @Assert\NotBlank()
      *
      * @ORM\Column(name="subtitle", type="string", length=255)
      */
@@ -68,12 +95,16 @@ abstract class BaseOffer
     /**
      * @var string
      *
+     * @Assert\NotBlank()
+     *
      * @ORM\Column(name="description", type="text")
      */
     protected $description;
 
     /**
      * @var string
+     *
+     * @Assert\NotBlank()
      *
      * @ORM\Column(name="terms", type="text")
      */
@@ -82,7 +113,9 @@ abstract class BaseOffer
     /**
      * @var int
      *
-     * @ORM\Column(name="status", type="integer")
+     * @Assert\Range(min = 0, max = 1)
+     *
+     * @ORM\Column(name="status", type="integer", options={"default"=1})
      */
     protected $status;
 
@@ -118,25 +151,15 @@ abstract class BaseOffer
     }
 
     /**
-     * Get details
-     *
-     * @return string
-     */
-    public function getDetails()
-    {
-        return $this->details;
-    }
-
-    /**
      * Set startDate
      *
-     * @param \DateTime $startDate
+     * @param string $startDate
      *
-     * @return OfferAftersale
+     * @return BaseOffer
      */
-    public function setStartDate($startDate)
+    public function setStartDate(string $startDate)
     {
-        $this->startDate = $startDate;
+        $this->startDate = new DateTime($startDate);
 
         return $this;
     }
@@ -144,7 +167,7 @@ abstract class BaseOffer
     /**
      * Get startDate
      *
-     * @return \DateTime
+     * @return DateTime
      */
     public function getStartDate()
     {
@@ -154,13 +177,13 @@ abstract class BaseOffer
     /**
      * Set endDate
      *
-     * @param \DateTime $endDate
+     * @param string $endDate
      *
-     * @return OfferAftersale
+     * @return BaseOffer
      */
-    public function setEndDate($endDate)
+    public function setEndDate(string $endDate)
     {
-        $this->endDate = $endDate;
+        $this->endDate = new DateTime($endDate);
 
         return $this;
     }
@@ -168,7 +191,7 @@ abstract class BaseOffer
     /**
      * Get endDate
      *
-     * @return \DateTime
+     * @return DateTime
      */
     public function getEndDate()
     {
@@ -178,9 +201,9 @@ abstract class BaseOffer
     /**
      * Set createdAt
      *
-     * @param \DateTime $createdAt
+     * @param DateTime $createdAt
      *
-     * @return OfferAftersale
+     * @return BaseOffer
      */
     public function setCreatedAt($createdAt)
     {
@@ -192,7 +215,7 @@ abstract class BaseOffer
     /**
      * Get createdAt
      *
-     * @return \DateTime
+     * @return DateTime
      */
     public function getCreatedAt()
     {
@@ -202,9 +225,9 @@ abstract class BaseOffer
     /**
      * Set updatedAt
      *
-     * @param \DateTime $updatedAt
+     * @param DateTime $updatedAt
      *
-     * @return OfferAftersale
+     * @return BaseOffer
      */
     public function setUpdatedAt($updatedAt)
     {
@@ -216,7 +239,7 @@ abstract class BaseOffer
     /**
      * Get updatedAt
      *
-     * @return \DateTime
+     * @return DateTime
      */
     public function getUpdatedAt()
     {
@@ -228,7 +251,7 @@ abstract class BaseOffer
      *
      * @param string $visual
      *
-     * @return OfferAftersale
+     * @return BaseOffer
      */
     public function setVisual($visual)
     {
@@ -252,7 +275,7 @@ abstract class BaseOffer
      *
      * @param string $title
      *
-     * @return OfferAftersale
+     * @return BaseOffer
      */
     public function setTitle($title)
     {
@@ -276,7 +299,7 @@ abstract class BaseOffer
      *
      * @param string $subtitle
      *
-     * @return OfferAftersale
+     * @return BaseOffer
      */
     public function setSubtitle($subtitle)
     {
@@ -300,7 +323,7 @@ abstract class BaseOffer
      *
      * @param string $description
      *
-     * @return OfferAftersale
+     * @return BaseOffer
      */
     public function setDescription($description)
     {
@@ -324,7 +347,7 @@ abstract class BaseOffer
      *
      * @param string $terms
      *
-     * @return OfferAftersale
+     * @return BaseOffer
      */
     public function setTerms($terms)
     {
@@ -348,7 +371,7 @@ abstract class BaseOffer
      *
      * @param integer $status
      *
-     * @return OfferAftersale
+     * @return BaseOffer
      */
     public function setStatus($status)
     {
@@ -372,7 +395,7 @@ abstract class BaseOffer
      *
      * @param boolean $agreements
      *
-     * @return OfferAftersale
+     * @return BaseOffer
      */
     public function setAgreements($agreements)
     {

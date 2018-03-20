@@ -3,15 +3,26 @@
 namespace OfferBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use OfferBundle\Validator\Constraints as AftersaleAssert;
+use OfferBundle\Entity\OfferSubtype;
 
 /**
  * OfferAftersale
  *
  * @ORM\Table(name="offer_aftersale")
  * @ORM\Entity(repositoryClass="OfferBundle\Repository\OfferAftersaleRepository")
+ *
+ * @AftersaleAssert\Discount
  */
 class OfferAftersale extends BaseOffer
 {
+    public function __construct(OfferSubtype $subtype)
+    {
+        parent::__construct();
+        $this->subtype = $subtype;
+    }
+
     /**
      * @var int
      *
@@ -32,6 +43,8 @@ class OfferAftersale extends BaseOffer
     /**
      * @var string
      *
+     * @Assert\NotBlank()
+     *
      * @ORM\Column(name="details", type="text")
      */
     protected $details;
@@ -39,21 +52,27 @@ class OfferAftersale extends BaseOffer
     /**
      * @var float
      *
-     * @ORM\Column(name="discount_1", type="float")
+     * Assert done in entity annotation : AftersaleAssert\Discount
+     *
+     * @ORM\Column(name="discount_1", type="float", nullable=true)
      */
     protected $discount1;
 
     /**
      * @var float
      *
-     * @ORM\Column(name="discount_2", type="float")
+     * Assert done in entity annotation : AftersaleAssert\Discount
+     *
+     * @ORM\Column(name="discount_2", type="float", nullable=true)
      */
     protected $discount2;
 
     /**
      * @var float
      *
-     * @ORM\Column(name="discount_3", type="float")
+     * Assert done in entity annotation : AftersaleAssert\Discount
+     *
+     * @ORM\Column(name="discount_3", type="float", nullable=true)
      */
     protected $discount3;
 
@@ -70,7 +89,7 @@ class OfferAftersale extends BaseOffer
     /**
      * Set subtype
      *
-     * @param integer $subtype
+     * @param OfferSubtype $subtype
      *
      * @return OfferAftersale
      */
@@ -103,6 +122,16 @@ class OfferAftersale extends BaseOffer
         $this->details = $details;
 
         return $this;
+    }
+
+    /**
+     * Get details
+     *
+     * @return string
+     */
+    public function getDetails()
+    {
+        return $this->details;
     }
 
     /**

@@ -13,6 +13,12 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class OfferType
 {
+    const CATEGORY = [
+        'AFTERSALE',
+        'SECONDHANDCAR',
+        'NEWCAR'
+    ];
+
     /**
      * @var int
      *
@@ -28,8 +34,7 @@ class OfferType
      * @ORM\Column(
      *     name="category",
      *     type="string",
-     *     length=255,
-     *     columnDefinition="ENUM('AFTERSALE', 'SECONDHANDCAR', 'NEWCAR')"
+     *     length=255
      * )
      */
     protected $category;
@@ -44,7 +49,7 @@ class OfferType
     /**
      * @var string
      *
-     * @ORM\Column(name="subtitle", type="string", length=255, nullable=true)
+     * @ORM\Column(name="subtitle", type="text", nullable=true)
      */
     protected $subtitle;
 
@@ -79,6 +84,9 @@ class OfferType
      */
     public function setCategory(string $category)
     {
+        if (!in_array($category, self::CATEGORY)) {
+            throw new \InvalidArgumentException('Invalid category for OfferType');
+        }
         $this->category = $category;
 
         return $this;
@@ -140,14 +148,6 @@ class OfferType
     public function getSubtitle() : string
     {
         return $this->subtitle;
-    }
-
-    /**
-     * @return ArrayCollection
-     */
-    public function getSubtypes(): ArrayCollection
-    {
-        return $this->subtypes;
     }
 }
 

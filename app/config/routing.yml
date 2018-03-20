@@ -1,4 +1,4 @@
 offer:
     resource: "@OfferBundle/Controller/"
     type:     annotation
-    prefix:   /
+    prefix:   /offer

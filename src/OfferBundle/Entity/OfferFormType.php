@@ -13,6 +13,13 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class OfferFormType
 {
+    const TYPE = [
+        'BASIC',
+        'SIMPLE',
+        'DOUBLE',
+        'TRIPLE'
+    ];
+
     /**
      * @var int
      *
@@ -35,6 +42,13 @@ class OfferFormType
      * @ORM\Column(name="description", type="text")
      */
     protected $description;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="type", type="string")
+     */
+    protected $type;
 
     /**
      * @var ArrayCollection
@@ -104,6 +118,32 @@ class OfferFormType
     public function getDescription() : string
     {
         return $this->description;
+    }
+
+    /**
+     * Set type
+     *
+     * @param string $type
+     *
+     * @return OfferFormType
+     */
+    public function setType(string $type)
+    {
+        if (!in_array($type, self::TYPE)) {
+            throw new \InvalidArgumentException('Invalid category for OfferType');
+        }
+
+        $this->type = $type;
+    }
+
+    /**
+     * Get type
+     *
+     * @return string
+     */
+    public function getType(): string
+    {
+        return $this->type;
     }
 }
 

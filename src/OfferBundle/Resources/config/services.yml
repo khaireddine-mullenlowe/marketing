@@ -1,4 +1,4 @@
 services:
-#    offer.example:
-#        class: OfferBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
+    offer.aftersale:
+        class: OfferBundle\Service\OfferAftersale
+        arguments: ["@doctrine.orm.entity_manager"]
