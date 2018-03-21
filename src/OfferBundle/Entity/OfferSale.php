@@ -32,12 +32,20 @@ class OfferSale extends BaseOffer
     /**
      * @var float
      *
+     * In Front, a div block (to display prices) is movable and we have to keep
+     * the position to display this div block in myaudi at the same position.
+     * The X position is the top left corner abscissa position
+     *
      * @ORM\Column(name="xPosition", type="float")
      */
     private $xPosition;
 
     /**
      * @var float
+     *
+     * In Front, a div block (to display prices) is movable and we have to keep
+     * the position to display this div block in myaudi at the same position.
+     * The Y position is the top left corner ordinate position
      *
      * @ORM\Column(name="yPosition", type="float")
      */
@@ -52,6 +60,8 @@ class OfferSale extends BaseOffer
 
     /**
      * @var int
+     *
+     * The model of the vehicle
      *
      * @ORM\Column(name="model", type="integer")
      */

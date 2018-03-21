@@ -46,6 +46,8 @@ class OfferFormType
     /**
      * @var string
      *
+     * The type is used to identify how many discount must be filled
+     *
      * @ORM\Column(name="type", type="string")
      */
     protected $type;

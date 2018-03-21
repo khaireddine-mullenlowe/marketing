@@ -1,5 +1,1 @@
 services:
-    offer.aftersale:
-        class: OfferBundle\Service\OfferAftersale
-        arguments: ["@doctrine.orm.entity_manager"]
-        public: true

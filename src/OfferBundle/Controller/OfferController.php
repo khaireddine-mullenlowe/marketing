@@ -96,19 +96,28 @@ class OfferController extends MullenloweRestController
 
         $offerData = $dataInput['offer'];
 
-        $subtype = $this->get('offer.aftersale')->checkSubtype($offerData);
+        if (!empty($offerData['subtype'])) {
+            $em = $this->getDoctrine();
+            $subtype = $em->getRepository("OfferBundle:OfferSubtype")->find($offerData['subtype']);
+        }
 
-        if ($subtype['type'] === 'AFTERSALE') {
+        if (empty($subtype)) {
+            throw new \InvalidArgumentException('Invalid OfferSubtype');
+        }
+
+        $type = $subtype->getType()->getCategory();
+
+        if ($type === 'AFTERSALE') {
             $offerClass = Aftersale::class;
             $offerFormTypeClass = OfferAftersaleType::class;
-        } elseif ($subtype['type'] === 'SECONDHANDCAR' || $subtype['type'] === 'NEWCAR') {
+        } elseif ($type === 'SECONDHANDCAR' || $type === 'NEWCAR') {
             $offerClass = Sale::class;
             $offerFormTypeClass = OfferSaleType::class;
         } else {
             throw new InvalidArgumentException('Invalid offerType');
         }
 
-        $offer = new $offerClass($subtype['subtype']);
+        $offer = new $offerClass($subtype);
 
         $form = $this->createForm($offerFormTypeClass, $offer);
 

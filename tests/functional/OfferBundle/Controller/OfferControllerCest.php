@@ -23,9 +23,9 @@ class OfferControllerCest
                     "description": "Description de test",
                     "terms": "ML de test",
                     "agreements": "1",
-                    "discount1": "100",
-                    "discount2": "",
-                    "discount3": ""
+                    "discountSimple": "100",
+                    "discountDouble": "",
+                    "discountTriple": ""
                 }
             }
         ';

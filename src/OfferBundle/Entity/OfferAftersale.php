@@ -54,28 +54,40 @@ class OfferAftersale extends BaseOffer
      * @var float
      *
      * Assert done in entity annotation : AftersaleAssert\Discount
+     * According to the subtype, this attribute can be empty or not
      *
-     * @ORM\Column(name="discount_1", type="float", nullable=true)
+     * This value is used for simple, double and triple discount.
+     * It can be a price or a percent.
+     *
+     * @ORM\Column(name="discount_simple", type="float", nullable=true)
      */
-    protected $discount1;
+    protected $discountSimple;
 
     /**
      * @var float
      *
      * Assert done in entity annotation : AftersaleAssert\Discount
+     * According to the subtype, this attribute can be empty or not
      *
-     * @ORM\Column(name="discount_2", type="float", nullable=true)
+     * This value is used for double and triple discount.
+     * It can be a price or a percent.
+     *
+     * @ORM\Column(name="discount_double", type="float", nullable=true)
      */
-    protected $discount2;
+    protected $discountDouble;
 
     /**
      * @var float
      *
      * Assert done in entity annotation : AftersaleAssert\Discount
+     * According to the subtype, this attribute can be empty or not
      *
-     * @ORM\Column(name="discount_3", type="float", nullable=true)
+     * This value is used for triple discount.
+     * It can be a price or a percent.
+     *
+     * @ORM\Column(name="discount_triple", type="float", nullable=true)
      */
-    protected $discount3;
+    protected $discountTriple;
 
     /**
      * Get id
@@ -136,75 +148,75 @@ class OfferAftersale extends BaseOffer
     }
 
     /**
-     * Set discount1
+     * Set discountSimple
      *
-     * @param float $discount1
+     * @param float $discountSimple
      *
      * @return OfferAftersale
      */
-    public function setDiscount1($discount1)
+    public function setDiscountSimple($discountSimple)
     {
-        $this->discount1 = $discount1;
+        $this->discountSimple = $discountSimple;
 
         return $this;
     }
 
     /**
-     * Get discount1
+     * Get discountSimple
      *
      * @return float
      */
-    public function getDiscount1()
+    public function getDiscountSimple()
     {
-        return $this->discount1;
+        return $this->discountSimple;
     }
 
     /**
-     * Set discount2
+     * Set discountDouble
      *
-     * @param float $discount2
+     * @param float $discountDouble
      *
      * @return OfferAftersale
      */
-    public function setDiscount2($discount2)
+    public function setDiscountDouble($discountDouble)
     {
-        $this->discount2 = $discount2;
+        $this->discountDouble = $discountDouble;
 
         return $this;
     }
 
     /**
-     * Get discount2
+     * Get discountDouble
      *
      * @return float
      */
-    public function getDiscount2()
+    public function getDiscountDouble()
     {
-        return $this->discount2;
+        return $this->discountDouble;
     }
 
     /**
-     * Set discount3
+     * Set discountTriple
      *
-     * @param float $discount3
+     * @param float $discountTriple
      *
      * @return OfferAftersale
      */
-    public function setDiscount3($discount3)
+    public function setDiscountTriple($discountTriple)
     {
-        $this->discount3 = $discount3;
+        $this->discountTriple = $discountTriple;
 
         return $this;
     }
 
     /**
-     * Get discount3
+     * Get discountTriple
      *
      * @return float
      */
-    public function getDiscount3()
+    public function getDiscountTriple()
     {
-        return $this->discount3;
+        return $this->discountTriple;
     }
 }
 

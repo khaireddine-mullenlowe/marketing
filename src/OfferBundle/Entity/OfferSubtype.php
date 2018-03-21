@@ -32,6 +32,8 @@ class OfferSubtype
     /**
      * @var int
      *
+     * The is used to display subtype in order on front
+     *
      * @ORM\Column(name="rank", type="integer")
      */
     protected $rank;

@@ -109,12 +109,16 @@ abstract class BaseOffer
      *
      * @Assert\Range(min = 0, max = 1)
      *
+     * 0 = Inactivate, 1 = Activate
+     *
      * @ORM\Column(name="status", type="integer", options={"default"=1})
      */
     protected $status;
 
     /**
      * @var bool
+     *
+     * If the partner has read and accepted the user terms for offer creation
      *
      * @ORM\Column(name="agreements", type="boolean")
      */

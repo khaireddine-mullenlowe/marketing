@@ -11,21 +11,7 @@ use Symfony\Component\Validator\Validation;
 
 class OfferAftersaleTest extends Unit
 {
-    protected $service;
     protected $repository;
-    /**
-     * @var \Symfony\Component\HttpKernel\Kernel
-     */
-    protected $kernel;
-    /**
-     * @var \Doctrine\ORM\EntityManager
-     */
-    protected $entityManager;
-    /**
-     * @var \Symfony\Component\DependencyInjection\Container
-     */
-    protected $container;
-
     protected $formType;
     protected $type;
     protected $subtype;
@@ -37,13 +23,6 @@ class OfferAftersaleTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        //Only for the service constructor
-        $this->kernel = new \AppKernel('test', true);
-        $this->kernel->boot();
-        $this->entityManager = ($this->kernel->getContainer())->get('doctrine')->getManager();
-
-        $this->service = new OfferAftersale($this->entityManager);
-
         $this->formType = new OfferFormType();
         $this->formType->setName('basic')->setType('BASIC');
         $this->type = new OfferType();
@@ -52,22 +31,6 @@ class OfferAftersaleTest extends Unit
         $this->subtype->setName('Test')->setType($this->type)->setFormType($this->formType)->setRank(1);
 
         $this->date = new DateTime('now');
-    }
-
-    public function testCheckSubtypeOk()
-    {
-        $res = $this->service->checkSubtype(['subtype' => 1]);
-
-        $this->assertEquals('AFTERSALE', $res['type']);
-        $this->assertTrue($res['subtype'] instanceof OfferSubtype);
-    }
-
-    /**
-     * @expectedException InvalidArgumentException
-     */
-    public function testCheckSubtypeKo()
-    {
-        $res = $this->service->checkSubtype(['subtype' => 0]);
     }
 
     public function testValidDatesOk()
@@ -147,17 +110,17 @@ class OfferAftersaleTest extends Unit
 
         //Type SIMPLE = discount 1 only
         $this->formType->setType('SIMPLE');
-        $offer->setDiscount1('10');
+        $offer->setDiscountSimple('10');
         $this->assertEquals(count($validator->validate($offer)), 0);
 
         //Type DOULBLE = discount 1 and 2 only
         $this->formType->setType('DOUBLE');
-        $offer->setDiscount2('20');
+        $offer->setDiscountDouble('20');
         $this->assertEquals(count($validator->validate($offer)), 0);
 
         //Type TRIPLE = discount 1 2 and 3
         $this->formType->setType('TRIPLE');
-        $offer->setDiscount3('30');
+        $offer->setDiscountTriple('30');
         $this->assertEquals(count($validator->validate($offer)), 0);
     }
 
@@ -179,29 +142,29 @@ class OfferAftersaleTest extends Unit
 
         //Type BASIC = no discount
         //Too much discount
-        $offer->setDiscount1('10')->setDiscount2('10');
+        $offer->setDiscountSimple('10')->setDiscountDouble('10');
         $this->assertEquals(count($validator->validate($offer)), 1);
 
         //Type SIMPLE = discount 1 only
         //Too much discount
         $this->formType->setType('SIMPLE');
         $this->assertEquals(count($validator->validate($offer)), 1);
-        //Discount1 empty
-        $offer->setDiscount1('');
+        //DiscountSimple empty
+        $offer->setDiscountSimple('');
         $this->assertEquals(count($validator->validate($offer)), 1);
 
         //Type DOULBLE = discount 1 and 2 only
         //Discount 1 empty
         $this->formType->setType('DOUBLE');
-        $offer->setDiscount2('20');
+        $offer->setDiscountDouble('20');
         $this->assertEquals(count($validator->validate($offer)), 1);
         //Too much discount
-        $offer->setDiscount1('10')->setDiscount3('30');
+        $offer->setDiscountSimple('10')->setDiscountTriple('30');
         $this->assertEquals(count($validator->validate($offer)), 1);
 
         //Type TRIPLE = discount 1 2 and 3
         //Discount 1 empty
-        $offer->setDiscount1('')->setDiscount3('30');
+        $offer->setDiscountSimple('')->setDiscountTriple('30');
         $this->assertEquals(count($validator->validate($offer)), 1);
     }
 }
