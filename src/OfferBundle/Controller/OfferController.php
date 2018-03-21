@@ -13,6 +13,9 @@ use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\View\View;
 use Mullenlowe\CommonBundle\Controller\MullenloweRestController;
 
+/**
+ * Class OfferController
+ */
 class OfferController extends MullenloweRestController
 {
     const CONTEXT = 'Offer';
@@ -50,7 +53,7 @@ class OfferController extends MullenloweRestController
             $offerClass = Sale::class;
             $offerFormTypeClass = OfferSaleType::class;
         } else {
-            throw new InvalidArgumentException('Le type n\'est pas correct');
+            throw new InvalidArgumentException('Invalid offerType');
         }
 
         $offer = new $offerClass($subtype['subtype']);
@@ -71,15 +74,5 @@ class OfferController extends MullenloweRestController
         $em->flush();
 
         return $this->createView($offer);
-    }
-
-    /**
-     * @Rest\Put("/update")
-     *
-     * @return string
-     */
-    public function putAction()
-    {
-        return 'ok';
     }
 }

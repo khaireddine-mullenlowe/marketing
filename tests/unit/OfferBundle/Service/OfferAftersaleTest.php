@@ -204,14 +204,4 @@ class OfferAftersaleTest extends Unit
         $offer->setDiscount1('')->setDiscount3('30');
         $this->assertEquals(count($validator->validate($offer)), 1);
     }
-
-    public function count()
-    {
-        // TODO: Implement count() method.
-    }
-
-    public function run(\PHPUnit\Framework\TestResult $result = null)
-    {
-        // TODO: Implement run() method.
-    }
 }

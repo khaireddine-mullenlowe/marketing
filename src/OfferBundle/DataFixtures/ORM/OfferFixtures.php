@@ -35,6 +35,7 @@ class OfferFixtures extends Fixture
 
             $offerFormType->setName($column['name']);
             $offerFormType->setDescription($column['description']);
+            $offerFormType->setType($column['type']);
 
             $manager->persist($offerFormType);
 

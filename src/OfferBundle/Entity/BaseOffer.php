@@ -20,6 +20,7 @@ abstract class BaseOffer
         $this->updatedAt = new DateTime('now');
         $this->status = 1;
     }
+
     /**
      * @var int
      *
@@ -32,7 +33,7 @@ abstract class BaseOffer
      *
      * @Assert\GreaterThan(
      *     "today",
-     *     message="La date de début doit ête supérieur à aujourd'hui"
+     *     message="StartDate must be higher than today"
      * )
      *
      * @ORM\Column(name="start_date", type="date")
@@ -44,7 +45,7 @@ abstract class BaseOffer
      *
      * @Assert\Expression(
      *     "value > this.getStartDate()",
-     *     message="La date de fin doit être supérieur à la date de début"
+     *     message="EndDate must be higher than StartDate"
      * )
      *
      * @ORM\Column(name="end_date", type="date")
@@ -414,4 +415,3 @@ abstract class BaseOffer
         return $this->agreements;
     }
 }
-

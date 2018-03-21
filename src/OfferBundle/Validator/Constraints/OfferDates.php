@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraint;
  */
 class OfferDates extends Constraint
 {
-    public $message = 'La date de début et la date de fin doivent avoir en 3 et 92 jours de différence';
+    public $message = 'StartDate and EndDate must have a diff between 3 days and 92 days';
 
     public function getTargets()
     {

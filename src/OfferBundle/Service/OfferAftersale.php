@@ -22,7 +22,7 @@ class OfferAftersale
         $subtype = ($this->em->getRepository("OfferBundle:OfferSubtype"))->find($data['subtype']);
 
         if (empty($subtype)) {
-            throw new \InvalidArgumentException('Le sous type de l\'offre est invalide');
+            throw new \InvalidArgumentException('Invalid OfferSubtype');
         }
 
         return ['subtype' => $subtype, 'type' => $subtype->getType()->getCategory()];

@@ -17,26 +17,26 @@ class DiscountValidator extends ConstraintValidator
         switch ($formType) {
             case ('SIMPLE') :
                 if (empty($offerAftersale->getDiscount1())) {
-                    $constraint->message = 'test discount 1 empty';
+                    $constraint->message = 'Discount 1 must not be empty';
                 } elseif (!empty($offerAftersale->getDiscount2()) || !empty($offerAftersale->getDiscount3())) {
-                    $constraint->message = 'test discount 2 or 3 not empty';
+                    $constraint->message = 'Discount 2 and 3 must be empty';
                 }
                 break;
             case ('DOUBLE') :
                 if (empty($offerAftersale->getDiscount1()) || empty($offerAftersale->getDiscount2())) {
-                    $constraint->message = 'test discount 1 or 2 empty';
+                    $constraint->message = 'Discount 1 and 2 must not be empty';
                 } elseif (!empty($offerAftersale->getDiscount3())) {
-                    $constraint->message = 'test discount 3 not empty';
+                    $constraint->message = 'Discount 3 must be empty';
                 }
                 break;
             case ('TRIPLE') :
                 if (empty($offerAftersale->getDiscount1()) || empty($offerAftersale->getDiscount2()) ||  empty($offerAftersale->getDiscount3())) {
-                    $constraint->message = 'test discount 1 2 or 3 empty';
+                    $constraint->message = 'Discount 1 2 and 3 must not be empty';
                 }
                 break;
             default :
                 if (!empty($offerAftersale->getDiscount1()) || !empty($offerAftersale->getDiscount2()) ||  !empty($offerAftersale->getDiscount3())) {
-                    $constraint->message = 'test discount 1 2 or 3 not empty';
+                    $constraint->message = 'Discount 1 2 and 3 must be empty';
                 }
                 break;
         }
