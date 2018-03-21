@@ -87,6 +87,12 @@ class OfferSubtype
      */
     protected $offerSales;
 
+    public function __construct()
+    {
+        $this->offerAftersales = new ArrayCollection();
+        $this->offerSales = new ArrayCollection();
+    }
+
 
     /**
      * Get id

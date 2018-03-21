@@ -14,8 +14,7 @@ class OfferFixtures extends Fixture
     {
         $fixtures = Yaml::parse(file_get_contents(dirname(__FILE__).'/fixtures/offer.yml'));
 
-        foreach ($fixtures['OfferType'] as $reference => $column)
-        {
+        foreach ($fixtures['OfferType'] as $reference => $column) {
             $offerType = new OfferType();
 
             $offerType->setCategory($column['category']);
@@ -29,8 +28,7 @@ class OfferFixtures extends Fixture
             $this->addReference('Type_'. $reference, $offerType);
         }
 
-        foreach ($fixtures['OfferFormType'] as $reference => $column)
-        {
+        foreach ($fixtures['OfferFormType'] as $reference => $column) {
             $offerFormType = new OfferFormType();
 
             $offerFormType->setName($column['name']);
@@ -44,8 +42,7 @@ class OfferFixtures extends Fixture
             $this->addReference('FormType_'. $reference, $offerFormType);
         }
 
-        foreach ($fixtures['OfferSubtype'] as $reference => $column)
-        {
+        foreach ($fixtures['OfferSubtype'] as $reference => $column) {
             $offerSubtype = new OfferSubtype();
 
             $offerSubtype->setName($column['name']);

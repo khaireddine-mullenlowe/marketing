@@ -3,6 +3,7 @@
 namespace OfferBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use OfferBundle\OfferBundle;
 use Symfony\Component\Validator\Constraints as Assert;
 use OfferBundle\Validator\Constraints as AftersaleAssert;
 use OfferBundle\Entity\OfferSubtype;
@@ -93,7 +94,7 @@ class OfferAftersale extends BaseOffer
      *
      * @return OfferAftersale
      */
-    public function setSubtype($subtype)
+    public function setSubtype(OfferSubtype $subtype)
     {
         $this->subtype = $subtype;
 

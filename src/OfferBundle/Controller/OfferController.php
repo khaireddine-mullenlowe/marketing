@@ -12,6 +12,7 @@ use OfferBundle\Form\OfferSaleType;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\View\View;
 use Mullenlowe\CommonBundle\Controller\MullenloweRestController;
+use Swagger\Annotations as SWG;
 
 /**
  * Class OfferController
@@ -22,29 +23,80 @@ class OfferController extends MullenloweRestController
 
     /**
      * @Rest\Get("/partner/{partnerId}")
+     * @Rest\View()
      *
      * @param int $partnerId
      * @return View
+     *
+     * @SWG\Get(
+     *     path="/partner/{id}",
+     *     summary="Get offers for a partner",
+     *     operationId="getOffers",
+     *     tags={"offer"},
+     *     @SWG\Parameter(
+     *         name="partner_id",
+     *         in="query",
+     *         type="integer",
+     *         required="true",
+     *         description="Partner Id"
+     *     ),
+     *     @SWG\Response(
+     *         response="200",
+     *         description="offers",
+     *         @SWG\Schema(ref="#/definitions/Offer")
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="not found",
+     *         @SWG\Schema(ref="#/definitions/Error")
+     *     )
+     * )
      */
     public function getAction(int $partnerId)
     {
         $em = $this->getDoctrine();
-        $offers = ($em->getRepository("OfferBundle:OfferAftersale"))->findBy(['partner' => $partnerId]);
+        $offers = $em->getRepository("OfferBundle:OfferAftersale")->findBy(['partner' => $partnerId]);
 
         return $this->createView($offers);
     }
 
     /**
-     * @Rest\Post("/new")
+     * @Rest\Post("/")
      *
      * @param Request $request
      * @return View
+     *
+     * @SWG\Post(
+     *     path="/",
+     *     summary="Create an offer",
+     *     operationId="createOffer",
+     *     tags={"offer"},
+     *     @SWG\Parameter(
+     *         name="offer",
+     *         in="body",
+     *         required="true",
+     *         description="Partner Id",
+     *         @SWG\Schema(ref="#/definitions/Offer")
+     *     ),
+     *     @SWG\Response(
+     *         response="200",
+     *         description="offers",
+     *         @SWG\Schema(ref="#/definitions/Offer")
+     *     ),
+     *     @SWG\Response(
+     *         response="404",
+     *         description="not found",
+     *         @SWG\Schema(ref="#/definitions/Error")
+     *     )
+     * )
      */
     public function postAction(Request $request)
     {
         $dataInput = $request->request->all();
 
-        $subtype = $this->get('offer.aftersale')->checkSubtype($dataInput);
+        $offerData = $dataInput['offer'];
+
+        $subtype = $this->get('offer.aftersale')->checkSubtype($offerData);
 
         if ($subtype['type'] === 'AFTERSALE') {
             $offerClass = Aftersale::class;
@@ -61,7 +113,7 @@ class OfferController extends MullenloweRestController
         $form = $this->createForm($offerFormTypeClass, $offer);
 
         $form->handleRequest($request);
-        $form->submit($dataInput);
+        $form->submit($offerData);
 
         if (!$form->isSubmitted()) {
             throw new BadRequestHttpException(static::CONTEXT, "Form fields are not valid for offer");

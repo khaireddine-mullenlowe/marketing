@@ -71,11 +71,11 @@ class OfferSale extends BaseOffer
     /**
      * Set subtype
      *
-     * @param integer $subtype
+     * @param OfferSubtype $subtype
      *
      * @return OfferSale
      */
-    public function setSubtype($subtype)
+    public function setSubtype(OfferSubtype $subtype)
     {
         $this->subtype = $subtype;
 

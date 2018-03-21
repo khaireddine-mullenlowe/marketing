@@ -14,13 +14,6 @@ use OfferBundle\Validator\Constraints as OfferAssert;
  */
 abstract class BaseOffer
 {
-    public function __construct()
-    {
-        $this->createdAt = new DateTime('now');
-        $this->updatedAt = new DateTime('now');
-        $this->status = 1;
-    }
-
     /**
      * @var int
      *
@@ -126,6 +119,13 @@ abstract class BaseOffer
      * @ORM\Column(name="agreements", type="boolean")
      */
     protected $agreements;
+
+    public function __construct()
+    {
+        $this->createdAt = new DateTime('now');
+        $this->updatedAt = new DateTime('now');
+        $this->status = 1;
+    }
 
     /**
      * Set partner

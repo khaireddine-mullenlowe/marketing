@@ -3,23 +3,29 @@
 namespace OfferBundle\Service;
 
 use Doctrine\ORM\EntityManager;
-use OfferBundle\Entity\OfferAftersale as Aftersale;
 
 class OfferAftersale
 {
-    protected $subTypeRepository;
-
     protected $em;
-    protected $formType;
 
+    /**
+     * OfferAftersale constructor.
+     * @param EntityManager $em
+     */
     public function __construct(EntityManager $em)
     {
         $this->em = $em;
     }
 
+    /**
+     * @param $data
+     * @return array
+     */
     public function checkSubtype($data)
     {
-        $subtype = ($this->em->getRepository("OfferBundle:OfferSubtype"))->find($data['subtype']);
+        if (!empty($data['subtype'])) {
+            $subtype = ($this->em->getRepository("OfferBundle:OfferSubtype"))->find($data['subtype']);
+        }
 
         if (empty($subtype)) {
             throw new \InvalidArgumentException('Invalid OfferSubtype');

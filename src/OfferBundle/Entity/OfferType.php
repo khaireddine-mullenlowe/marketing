@@ -64,6 +64,11 @@ class OfferType
      */
     protected $subtypes;
 
+    public function __construct()
+    {
+        $this->subtypes= new ArrayCollection();
+    }
+
 
     /**
      * Get id
