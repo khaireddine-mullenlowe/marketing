@@ -30,7 +30,7 @@ class OfferControllerCest
             }
         ';
 
-        $I->sendPOST('/offer/new', $data);
+        $I->sendPOST('/offer/', $data);
         $I->seeResponseCodeIs(Response::HTTP_OK);
         $I->seeResponseIsJson();
         $I->seeResponseContains('Offer');
