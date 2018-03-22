@@ -67,6 +67,11 @@ class OfferSale extends BaseOffer
      */
     private $model;
 
+    public function __construct(OfferSubtype $subtype)
+    {
+        parent::__construct();
+        $this->subtype = $subtype;
+    }
 
     /**
      * Get id

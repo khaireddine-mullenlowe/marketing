@@ -82,15 +82,6 @@ abstract class BaseOffer
      *
      * @Assert\NotBlank()
      *
-     * @ORM\Column(name="subtitle", type="string", length=255)
-     */
-    protected $subtitle;
-
-    /**
-     * @var string
-     *
-     * @Assert\NotBlank()
-     *
      * @ORM\Column(name="description", type="text")
      */
     protected $description;
@@ -297,30 +288,6 @@ abstract class BaseOffer
     public function getTitle()
     {
         return $this->title;
-    }
-
-    /**
-     * Set subtitle
-     *
-     * @param string $subtitle
-     *
-     * @return BaseOffer
-     */
-    public function setSubtitle($subtitle)
-    {
-        $this->subtitle = $subtitle;
-
-        return $this;
-    }
-
-    /**
-     * Get subtitle
-     *
-     * @return string
-     */
-    public function getSubtitle()
-    {
-        return $this->subtitle;
     }
 
     /**

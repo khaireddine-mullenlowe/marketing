@@ -6,6 +6,8 @@ use OfferBundle\Entity\OfferSale as Sale;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class OfferSaleType extends AbstractType
 {
@@ -15,7 +17,19 @@ class OfferSaleType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder;
+        $builder
+            ->add('partner', IntegerType::class)
+            ->add('startDate', TextType::class)
+            ->add('endDate', TextType::class)
+            ->add('visual', TextType::class)
+            ->add('xPosition', IntegerType::class)
+            ->add('yPosition', IntegerType::class)
+            ->add('title', TextType::class)
+            ->add('description', TextType::class)
+            ->add('terms', TextType::class)
+            ->add('agreements', IntegerType::class)
+            ->add('model', IntegerType::class)
+            ->add('monthly', TextType::class);
     }
 
     /**

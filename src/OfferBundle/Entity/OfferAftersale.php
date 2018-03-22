@@ -18,12 +18,6 @@ use OfferBundle\Entity\OfferSubtype;
  */
 class OfferAftersale extends BaseOffer
 {
-    public function __construct(OfferSubtype $subtype)
-    {
-        parent::__construct();
-        $this->subtype = $subtype;
-    }
-
     /**
      * @var int
      *
@@ -88,6 +82,12 @@ class OfferAftersale extends BaseOffer
      * @ORM\Column(name="discount_triple", type="float", nullable=true)
      */
     protected $discountTriple;
+
+    public function __construct(OfferSubtype $subtype)
+    {
+        parent::__construct();
+        $this->subtype = $subtype;
+    }
 
     /**
      * Get id

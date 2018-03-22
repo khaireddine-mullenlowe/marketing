@@ -29,7 +29,7 @@ class OfferController extends MullenloweRestController
      * @return View
      *
      * @SWG\Get(
-     *     path="offer/partner/{id}",
+     *     path="offer/partner/{partnerId}",
      *     summary="Get offers for a partner",
      *     operationId="getOffers",
      *     tags={"offer"},
@@ -68,7 +68,7 @@ class OfferController extends MullenloweRestController
      *
      * @SWG\Post(
      *     path="/offer/",
-     *     summary="Create an offer",
+     *     summary="Create an offer, according to the subtype, the offer is an aftersale or sale offer",
      *     operationId="createOffer",
      *     tags={"offer"},
      *     @SWG\Parameter(
