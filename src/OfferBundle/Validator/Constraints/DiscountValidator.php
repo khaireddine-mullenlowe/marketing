@@ -17,26 +17,26 @@ class DiscountValidator extends ConstraintValidator
         switch ($formType) {
             case 'SIMPLE' :
                 if (empty($offerAftersale->getDiscountSimple())) {
-                    $constraint->message = 'Discount 1 must not be empty';
+                    $constraint->message = 'Discount simple must not be empty';
                 } elseif (!empty($offerAftersale->getDiscountDouble()) || !empty($offerAftersale->getDiscountTriple())) {
-                    $constraint->message = 'Discount 2 and 3 must be empty';
+                    $constraint->message = 'Discount double and triple must be empty';
                 }
                 break;
             case 'DOUBLE' :
                 if (empty($offerAftersale->getDiscountSimple()) || empty($offerAftersale->getDiscountDouble())) {
-                    $constraint->message = 'Discount 1 and 2 must not be empty';
+                    $constraint->message = 'Discount simple and double must not be empty';
                 } elseif (!empty($offerAftersale->getDiscountTriple())) {
-                    $constraint->message = 'Discount 3 must be empty';
+                    $constraint->message = 'Discount triple must be empty';
                 }
                 break;
             case 'TRIPLE' :
                 if (empty($offerAftersale->getDiscountSimple()) || empty($offerAftersale->getDiscountDouble()) || empty($offerAftersale->getDiscountTriple())) {
-                    $constraint->message = 'Discount 1 2 and 3 must not be empty';
+                    $constraint->message = 'Discount simple, double and triple must not be empty';
                 }
                 break;
             default :
                 if (!empty($offerAftersale->getDiscountSimple()) || !empty($offerAftersale->getDiscountDouble()) || !empty($offerAftersale->getDiscountTriple())) {
-                    $constraint->message = 'Discount 1 2 and 3 must be empty';
+                    $constraint->message = 'Discount simple, double and triple must be empty';
                 }
                 break;
         }
