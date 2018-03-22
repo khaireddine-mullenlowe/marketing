@@ -11,5 +11,4 @@ modules:
         # add a framework module here
         - \Helper\Functional
         - REST:
-            url: http://localhost
             depends: Symfony

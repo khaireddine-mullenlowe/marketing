@@ -1,0 +1,47 @@
+OfferType:
+  OfferType_1:
+    category : 'AFTERSALE'
+    name : 'Entretien'
+    subtitle : 'Sous titre 1 : Entretien'
+  OfferType_2:
+    category : 'AFTERSALE'
+    name : 'Pneu'
+    subtitle : 'Sous titre 2 : Pneu'
+  OfferType_3:
+    category : 'AFTERSALE'
+    name : 'Contrôle technique'
+    subtitle : 'Sous titre 3 : Contrôle technique'
+
+OfferFormType:
+  OfferFormType_1:
+    name: 'percent'
+    description: 'Pour un %'
+    type: 'SIMPLE'
+  OfferFormType_2:
+    name: 'price'
+    description: 'Pour un €'
+    type: 'SIMPLE'
+  OfferFormType_3:
+    name: 'price_and_percent'
+    description: 'Pour un € et %'
+    type: 'DOUBLE'
+
+OfferSubtype:
+  OfferSubtype_1:
+    name: 'Prix'
+    rank: 1
+    type: 'OfferType_1'
+    formType: 'OfferFormType_2'
+    terms: 'Les mentions légales : Entretien - Prix'
+  OfferSubtype_2:
+    name: 'Pourcentage de remise'
+    rank: 1
+    type: 'OfferType_2'
+    formType: 'OfferFormType_1'
+    terms: 'Les mentions légales : Pneu - Pourcentage'
+  OfferSubtype_3:
+    name: 'Prix du CT + pourcentage de remise sur les frais de réparation'
+    rank: 1
+    type: 'OfferType_3'
+    formType: 'OfferFormType_3'
+    terms: 'Les mentions légales : Contrôle technique - Prix du CT + pourcentage de remise sur les frais de réparation'
