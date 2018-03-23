@@ -2,14 +2,15 @@
 
 namespace OfferBundle\Tests\Controller;
 
+use FunctionalTester;
 use Symfony\Component\HttpFoundation\Response;
 
 class OfferControllerCest
 {
     /**
-     * @param \FunctionalTester $I
+     * @param FunctionalTester $I
      */
-    public function tryPostOfferAftersale(\FunctionalTester $I)
+    public function tryPostOfferAftersale(FunctionalTester $I)
     {
         $I->haveHttpHeader('Content-Type', 'application/json');
         $data = '
@@ -21,7 +22,7 @@ class OfferControllerCest
                     "startDate": "2018-05-05",
                     "endDate": "2018-06-06",
                     "visual": "image_de_test.png",
-                    "title": "Titre de test"
+                    "title": "Titre de test",
                     "description": "Description de test",
                     "terms": "ML de test",
                     "agreements": "1",
@@ -39,9 +40,9 @@ class OfferControllerCest
     }
 
     /**
-     * @param \FunctionalTester $I
+     * @param FunctionalTester $I
      */
-    public function tryPostOfferSale(\FunctionalTester $I)
+    public function tryPostOfferSale(FunctionalTester $I)
     {
         $I->haveHttpHeader('Content-Type', 'application/json');
         $data = '
@@ -54,7 +55,7 @@ class OfferControllerCest
                     "visual": "image_de_test.png",
                     "xPosition": "0",
                     "yPosition": "20",
-                    "title": "Titre de test"
+                    "title": "Titre de test",
                     "description": "Description de test",
                     "terms": "ML de test",
                     "agreements": "1",
