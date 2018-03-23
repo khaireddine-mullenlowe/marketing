@@ -11,6 +11,14 @@ OfferType:
     category : 'AFTERSALE'
     name : 'Contrôle technique'
     subtitle : 'Sous titre 3 : Contrôle technique'
+  OfferType_4:
+    category : 'SECONDHANDCAR'
+    name : 'A4'
+    subtitle : 'Sous titre 4 : A4'
+  OfferType_5:
+    category : 'NEWCAR'
+    name : 'Q5'
+    subtitle : 'Sous titre 5 : Q5'
 
 OfferFormType:
   OfferFormType_1:
@@ -25,6 +33,14 @@ OfferFormType:
     name: 'price_and_percent'
     description: 'Pour un € et %'
     type: 'DOUBLE'
+  OfferFormType_4:
+    name: 'vn'
+    description: 'VN description'
+    type: 'BASIC'
+  OfferFormType_5:
+    name: 'vo'
+    description: 'VO description'
+    type: 'BASIC'
 
 OfferSubtype:
   OfferSubtype_1:
@@ -45,3 +61,15 @@ OfferSubtype:
     type: 'OfferType_3'
     formType: 'OfferFormType_3'
     terms: 'Les mentions légales : Contrôle technique - Prix du CT + pourcentage de remise sur les frais de réparation'
+  OfferSubtype_4:
+    name: 'Q5'
+    rank: 9
+    type: 'OfferType_5'
+    formType: 'OfferFormType_4'
+    terms: 'Les mentions légales : Q5 - VN'
+  OfferSubtype_5:
+    name: 'A4'
+    rank: 3
+    type: 'OfferType_4'
+    formType: 'OfferFormType_5'
+    terms: 'Les mentions légales : A4 - VO'

@@ -38,7 +38,6 @@ class OfferAftersaleTest extends Unit
         $offer = new Offer($this->subtype);
 
         $offer
-            ->setSubtitle('Sous-titre')
             ->setDescription('Description')
             ->setAgreements(1)
             ->setDetails('Détails')
@@ -58,7 +57,6 @@ class OfferAftersaleTest extends Unit
         $offer = new Offer($this->subtype);
 
         $offer
-            ->setSubtitle('Sous-titre')
             ->setDescription('Description')
             ->setAgreements(1)
             ->setDetails('Détails')
@@ -96,7 +94,6 @@ class OfferAftersaleTest extends Unit
         $date = new DateTime('now');
         $offer = new Offer($this->subtype);
         $offer
-            ->setSubtitle('Sous-titre')
             ->setDescription('Description')
             ->setAgreements(1)
             ->setDetails('Détails')
@@ -131,7 +128,6 @@ class OfferAftersaleTest extends Unit
         $date = new DateTime('now');
         $offer = new Offer($this->subtype);
         $offer
-            ->setSubtitle('Sous-titre')
             ->setDescription('Description')
             ->setAgreements(1)
             ->setDetails('Détails')
