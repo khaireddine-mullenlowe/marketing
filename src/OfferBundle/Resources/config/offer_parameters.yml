@@ -1,0 +1,14 @@
+parameters:
+    offer_types:
+        aftersale:
+            name: 'AFTERSALE'
+            entity: OfferBundle\Entity\OfferAftersale
+            form_type: OfferBundle\Form\OfferAftersaleType
+        secondhandcar:
+            name: 'SECONDHANDCAR'
+            entity: OfferBundle\Entity\OfferSale
+            form_type: OfferBundle\Form\OfferSaleType
+        newcar:
+            name: 'NEWCAR'
+            entity: OfferBundle\Entity\OfferSale
+            form_type: OfferBundle\Form\OfferSaleType

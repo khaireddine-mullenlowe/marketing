@@ -5,10 +5,6 @@ namespace OfferBundle\Controller;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use InvalidArgumentException;
 use Mullenlowe\CommonBundle\Exception\BadRequestHttpException;
-use OfferBundle\Entity\OfferAftersale as Aftersale;
-use OfferBundle\Entity\OfferSale as Sale;
-use OfferBundle\Form\OfferAftersaleType;
-use OfferBundle\Form\OfferSaleType;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\View\View;
 use Mullenlowe\CommonBundle\Controller\MullenloweRestController;
@@ -98,28 +94,18 @@ class OfferController extends MullenloweRestController
 
         if (!empty($offerData['subtype'])) {
             $em = $this->getDoctrine();
-            $subtype = $em->getRepository("OfferBundle:OfferSubtype")->find($offerData['subtype']);
+            $subtype = $em->getRepository("OfferBundle:OfferSubtype")->find(intval($offerData['subtype']));
         }
 
         if (empty($subtype)) {
-            throw new \InvalidArgumentException('Invalid OfferSubtype');
+            throw new InvalidArgumentException('Invalid OfferSubtype');
         }
 
-        $type = $subtype->getType()->getCategory();
+        $type = $this->container->getParameter('offer_types')[strtolower($subtype->getType()->getCategory())];
 
-        if ($type === 'AFTERSALE') {
-            $offerClass = Aftersale::class;
-            $offerFormTypeClass = OfferAftersaleType::class;
-        } elseif ($type === 'SECONDHANDCAR' || $type === 'NEWCAR') {
-            $offerClass = Sale::class;
-            $offerFormTypeClass = OfferSaleType::class;
-        } else {
-            throw new InvalidArgumentException('Invalid offerType');
-        }
+        $offer = new $type['entity']($subtype);
 
-        $offer = new $offerClass($subtype);
-
-        $form = $this->createForm($offerFormTypeClass, $offer);
+        $form = $this->createForm($type['form_type'], $offer);
 
         $form->handleRequest($request);
         $form->submit($offerData);
