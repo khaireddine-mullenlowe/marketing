@@ -9,11 +9,15 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
+/**
+ * Class OfferSaleType
+ * @package OfferBundle\Form
+ */
 class OfferSaleType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -40,7 +44,7 @@ class OfferSaleType extends AbstractType
         $resolver->setDefaults([
             'data_class'         => Sale::class,
             'allow_extra_fields' => true,
-            'csrf_protection'    => false
+            'csrf_protection'    => false,
         ]);
     }
 }

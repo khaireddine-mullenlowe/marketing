@@ -16,7 +16,7 @@ class OfferType
     const CATEGORY = [
         'AFTERSALE',
         'SECONDHANDCAR',
-        'NEWCAR'
+        'NEWCAR',
     ];
 
     /**
@@ -64,9 +64,12 @@ class OfferType
      */
     protected $subtypes;
 
+    /**
+     * OfferType constructor.
+     */
     public function __construct()
     {
-        $this->subtypes= new ArrayCollection();
+        $this->subtypes = new ArrayCollection();
     }
 
 
@@ -155,4 +158,3 @@ class OfferType
         return $this->subtitle;
     }
 }
-

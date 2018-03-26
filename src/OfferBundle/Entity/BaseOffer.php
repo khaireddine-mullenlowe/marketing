@@ -115,6 +115,9 @@ abstract class BaseOffer
      */
     protected $agreements;
 
+    /**
+     * BaseOffer constructor.
+     */
     public function __construct()
     {
         $this->createdAt = new DateTime('now');

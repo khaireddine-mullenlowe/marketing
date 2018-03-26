@@ -10,6 +10,10 @@ use Symfony\Component\Validator\ConstraintValidator;
  */
 class OfferDatesValidator extends ConstraintValidator
 {
+    /**
+     * @param mixed      $offer
+     * @param Constraint $constraint
+     */
     public function validate($offer, Constraint $constraint)
     {
         $startDate = $offer->getStartDate();

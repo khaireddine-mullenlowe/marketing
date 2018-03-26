@@ -17,7 +17,7 @@ class OfferFormType
         'BASIC',
         'SIMPLE',
         'DOUBLE',
-        'TRIPLE'
+        'TRIPLE',
     ];
 
     /**
@@ -63,6 +63,9 @@ class OfferFormType
      */
     protected $subtypes;
 
+    /**
+     * OfferFormType constructor.
+     */
     public function __construct()
     {
         $this->subtypes = new ArrayCollection();
@@ -141,6 +144,8 @@ class OfferFormType
         }
 
         $this->type = $type;
+
+        return $this;
     }
 
     /**
@@ -153,4 +158,3 @@ class OfferFormType
         return $this->type;
     }
 }
-

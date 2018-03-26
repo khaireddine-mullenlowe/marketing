@@ -75,7 +75,7 @@ class OfferController extends MullenloweRestController
      *         name="offer",
      *         in="body",
      *         required="true",
-     *         description="Partner Id",
+     *         description="Offer",
      *         @SWG\Schema(ref="#/definitions/Offer")
      *     ),
      *     @SWG\Response(
@@ -121,7 +121,6 @@ class OfferController extends MullenloweRestController
 
         $form = $this->createForm($offerFormTypeClass, $offer);
 
-        $form->handleRequest($request);
         $form->submit($offerData);
 
         if (!$form->isSubmitted()) {
@@ -135,5 +134,40 @@ class OfferController extends MullenloweRestController
         $em->flush();
 
         return $this->createView($offer);
+    }
+
+    /**
+     * @Rest\Patch("/")
+     *
+     * @param Request $request
+     * @return View
+     *
+     * @SWG\Patch(
+     *     path="/offer/",
+     *     summary="Update an offer",
+     *     operationId="updateOffer",
+     *     tags={"offer"},
+     *     @SWG\Parameter(
+     *         name="offer",
+     *         in="body",
+     *         required="true",
+     *         description="Offer",
+     *         @SWG\Schema(ref="#/definitions/Offer")
+     *     ),
+     *     @SWG\Response(
+     *         response="200",
+     *         description="offers",
+     *         @SWG\Schema(ref="#/definitions/Offer")
+     *     ),
+     *     @SWG\Response(
+     *         response="404",
+     *         description="not found",
+     *         @SWG\Schema(ref="#/definitions/Error")
+     *     )
+     * )
+     */
+    public function patchAction(Request $request)
+    {
+        return $this->createView('');
     }
 }
