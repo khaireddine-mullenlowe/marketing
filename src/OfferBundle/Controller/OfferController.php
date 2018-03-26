@@ -107,7 +107,6 @@ class OfferController extends MullenloweRestController
 
         $form = $this->createForm($type['form_type'], $offer);
 
-        $form->handleRequest($request);
         $form->submit($offerData);
 
         if (!$form->isSubmitted()) {
