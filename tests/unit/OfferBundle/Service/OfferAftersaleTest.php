@@ -39,6 +39,17 @@ class OfferAftersaleTest extends Unit
         $this->date = new DateTime('now');
     }
 
+    public function testConstructorAftersaleOffer()
+    {
+        $offer = new Offer($this->subtype);
+
+        $date = new \DateTime('now');
+
+        $this->assertEquals($date->format('y-m-d'), $offer->getCreatedAt()->format('y-m-d'));
+        $this->assertEquals($date->format('y-m-d'), $offer->getUpdatedAt()->format('y-m-d'));
+        $this->assertEquals(1, $offer->getStatus());
+    }
+
     /**
      * Check :
      *  - startDate > today
@@ -194,6 +205,7 @@ class OfferAftersaleTest extends Unit
 
         //Type TRIPLE = discount 1 2 and 3
         //Discount 1 empty
+        $this->formType->setType('TRIPLE');
         $offer->setDiscountSimple('')->setDiscountTriple('30');
         $this->assertEquals(count($validator->validate($offer)), 1);
     }

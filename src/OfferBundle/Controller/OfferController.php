@@ -5,8 +5,8 @@ namespace OfferBundle\Controller;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use InvalidArgumentException;
 use Mullenlowe\CommonBundle\Exception\BadRequestHttpException;
-use OfferBundle\Entity\OfferAftersale as Aftersale;
-use OfferBundle\Entity\OfferSale as Sale;
+use OfferBundle\Entity\OfferAftersale;
+use OfferBundle\Entity\OfferSale;
 use OfferBundle\Form\OfferAftersaleType;
 use OfferBundle\Form\OfferSaleType;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,6 +21,24 @@ class OfferController extends MullenloweRestController
 {
     const CONTEXT = 'Offer';
 
+    const OFFERTYPE = [
+        'aftersale'     => [
+            'name'         => 'AFTERSALE',
+            'entity'       => OfferAftersale::class,
+            'formType'     => OfferAftersaleType::class,
+        ],
+        'secondhandcar' => [
+            'name'         => 'SECONDHANDCAR',
+            'entity'       => OfferSale::class,
+            'formType'     => OfferSaleType::class,
+        ],
+        'newcar'        => [
+            'name'         => 'NEWCAR',
+            'entity'       => OfferSale::class,
+            'formType'     => OfferSaleType::class,
+        ],
+    ];
+
     /**
      * @Rest\Get("/partner/{partnerId}")
      * @Rest\View()
@@ -29,21 +47,16 @@ class OfferController extends MullenloweRestController
      * @return View
      *
      * @SWG\Get(
-     *     path="offer/partner/{partnerId}",
+     *     path="/offer/partner/{partnerId}",
      *     summary="Get offers for a partner",
      *     operationId="getOffers",
      *     tags={"offer"},
      *     @SWG\Parameter(
-     *         name="partner_id",
-     *         in="query",
+     *         name="partnerId",
+     *         in="path",
      *         type="integer",
-     *         required="true",
+     *         required=true,
      *         description="Partner Id"
-     *     ),
-     *     @SWG\Response(
-     *         response="200",
-     *         description="offers",
-     *         @SWG\Schema(ref="#/definitions/Offer")
      *     ),
      *     @SWG\Response(
      *         response=404,
@@ -74,14 +87,14 @@ class OfferController extends MullenloweRestController
      *     @SWG\Parameter(
      *         name="offer",
      *         in="body",
-     *         required="true",
-     *         description="Offer",
-     *         @SWG\Schema(ref="#/definitions/Offer")
+     *         required=true,
+     *         description="Offer aftersale example",
+     *         @SWG\Schema(ref="#/definitions/OfferAftersale")
      *     ),
      *     @SWG\Response(
      *         response="200",
-     *         description="offers",
-     *         @SWG\Schema(ref="#/definitions/Offer")
+     *         description="offer created",
+     *         @SWG\Schema(ref="#/definitions/OfferAftersaleComplete")
      *     ),
      *     @SWG\Response(
      *         response="404",
@@ -98,28 +111,18 @@ class OfferController extends MullenloweRestController
 
         if (!empty($offerData['subtype'])) {
             $em = $this->getDoctrine();
-            $subtype = $em->getRepository("OfferBundle:OfferSubtype")->find($offerData['subtype']);
+            $subtype = $em->getRepository("OfferBundle:OfferSubtype")->find(intval($offerData['subtype']));
         }
 
         if (empty($subtype)) {
-            throw new \InvalidArgumentException('Invalid OfferSubtype');
+            throw new InvalidArgumentException('Invalid OfferSubtype');
         }
 
-        $type = $subtype->getType()->getCategory();
+        $type = self::OFFERTYPE[strtolower($subtype->getType()->getCategory())];
 
-        if ($type === 'AFTERSALE') {
-            $offerClass = Aftersale::class;
-            $offerFormTypeClass = OfferAftersaleType::class;
-        } elseif ($type === 'SECONDHANDCAR' || $type === 'NEWCAR') {
-            $offerClass = Sale::class;
-            $offerFormTypeClass = OfferSaleType::class;
-        } else {
-            throw new InvalidArgumentException('Invalid offerType');
-        }
+        $offer = new $type['entity']($subtype);
 
-        $offer = new $offerClass($subtype);
-
-        $form = $this->createForm($offerFormTypeClass, $offer);
+        $form = $this->createForm($type['formType'], $offer);
 
         $form->submit($offerData);
 
