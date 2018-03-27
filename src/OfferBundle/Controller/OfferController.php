@@ -5,6 +5,10 @@ namespace OfferBundle\Controller;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use InvalidArgumentException;
 use Mullenlowe\CommonBundle\Exception\BadRequestHttpException;
+use OfferBundle\Entity\OfferAftersale;
+use OfferBundle\Entity\OfferSale;
+use OfferBundle\Form\OfferAftersaleType;
+use OfferBundle\Form\OfferSaleType;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\View\View;
 use Mullenlowe\CommonBundle\Controller\MullenloweRestController;
@@ -18,20 +22,20 @@ class OfferController extends MullenloweRestController
     const CONTEXT = 'Offer';
 
     const OFFERTYPE = [
-        'aftersale' => [
-            'name' => 'AFTERSALE',
-            'entity' => \OfferBundle\Entity\OfferAftersale::class,
-            'formType' => \OfferBundle\Form\OfferAftersaleType::class,
+        'aftersale'     => [
+            'name'         => 'AFTERSALE',
+            'entity'       => OfferAftersale::class,
+            'formType'     => OfferAftersaleType::class,
         ],
         'secondhandcar' => [
-            'name' => 'SECONDHANDCAR',
-            'entity' => \OfferBundle\Entity\OfferSale::class,
-            'formType' => \OfferBundle\Form\OfferSaleType::class,
+            'name'         => 'SECONDHANDCAR',
+            'entity'       => OfferSale::class,
+            'formType'     => OfferSaleType::class,
         ],
-        'newcar' => [
-            'name' => 'NEWCAR',
-            'entity' => \OfferBundle\Entity\OfferSale::class,
-            'formType' => \OfferBundle\Form\OfferSaleType::class,
+        'newcar'        => [
+            'name'         => 'NEWCAR',
+            'entity'       => OfferSale::class,
+            'formType'     => OfferSaleType::class,
         ],
     ];
 
