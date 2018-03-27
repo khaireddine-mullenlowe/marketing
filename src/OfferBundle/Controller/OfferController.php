@@ -25,21 +25,16 @@ class OfferController extends MullenloweRestController
      * @return View
      *
      * @SWG\Get(
-     *     path="offer/partner/{partnerId}",
+     *     path="/offer/partner/{partnerId}",
      *     summary="Get offers for a partner",
      *     operationId="getOffers",
      *     tags={"offer"},
      *     @SWG\Parameter(
-     *         name="partner_id",
-     *         in="query",
+     *         name="partnerId",
+     *         in="path",
      *         type="integer",
-     *         required="true",
+     *         required=true,
      *         description="Partner Id"
-     *     ),
-     *     @SWG\Response(
-     *         response="200",
-     *         description="offers",
-     *         @SWG\Schema(ref="#/definitions/Offer")
      *     ),
      *     @SWG\Response(
      *         response=404,
@@ -70,14 +65,14 @@ class OfferController extends MullenloweRestController
      *     @SWG\Parameter(
      *         name="offer",
      *         in="body",
-     *         required="true",
-     *         description="Partner Id",
-     *         @SWG\Schema(ref="#/definitions/Offer")
+     *         required=true,
+     *         description="Offer aftersale example",
+     *         @SWG\Schema(ref="#/definitions/OfferAftersale")
      *     ),
      *     @SWG\Response(
      *         response="200",
-     *         description="offers",
-     *         @SWG\Schema(ref="#/definitions/Offer")
+     *         description="offer created",
+     *         @SWG\Schema(ref="#/definitions/OfferAftersaleComplete")
      *     ),
      *     @SWG\Response(
      *         response="404",

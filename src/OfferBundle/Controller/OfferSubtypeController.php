@@ -4,38 +4,40 @@ namespace OfferBundle\Controller;
 use Mullenlowe\CommonBundle\Controller\MullenloweRestController;
 use FOS\RestBundle\View\View;
 use FOS\RestBundle\Controller\Annotations as Rest;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Swagger\Annotations as SWG;
 
 /**
  * Class OfferTypeController
+ * @Route("subtype")
  */
 class OfferSubtypeController extends MullenloweRestController
 {
     const CONTEXT = 'OfferSubtype';
 
     /**
-     * @Rest\Get("/subtype/{typeId}")
+     * @Rest\Get("/{typeId}")
      * @Rest\View()
      *
      * @param int $typeId
      * @return View
      *
      * @SWG\Get(
-     *     path="offer/subtype/{typeId}",
+     *     path="/offer/subtype/{typeId}",
      *     summary="Get Subtypes",
      *     operationId="getSubtypes",
      *     tags={"subtype"},
      *     @SWG\Parameter(
-     *         name="type",
-     *         in="query",
+     *         name="typeId",
+     *         in="path",
      *         type="integer",
-     *         required="true",
+     *         required=true,
      *         description="Type Id"
      *     ),
      *     @SWG\Response(
-     *         response="200",
-     *         description="offers",
-     *         @SWG\Schema(ref="#/definitions/Types")
+     *         response=200,
+     *         description="Get subtypes",
+     *         @SWG\Schema(type="array", @SWG\Items(ref="#/definitions/Subtype"))
      *     ),
      *     @SWG\Response(
      *         response=404,
