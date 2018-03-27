@@ -17,6 +17,24 @@ class OfferController extends MullenloweRestController
 {
     const CONTEXT = 'Offer';
 
+    const OFFERTYPE = [
+        'aftersale' => [
+            'name' => 'AFTERSALE',
+            'entity' => \OfferBundle\Entity\OfferAftersale::class,
+            'formType' => \OfferBundle\Form\OfferAftersaleType::class,
+        ],
+        'secondhandcar' => [
+            'name' => 'SECONDHANDCAR',
+            'entity' => \OfferBundle\Entity\OfferSale::class,
+            'formType' => \OfferBundle\Form\OfferSaleType::class,
+        ],
+        'newcar' => [
+            'name' => 'NEWCAR',
+            'entity' => \OfferBundle\Entity\OfferSale::class,
+            'formType' => \OfferBundle\Form\OfferSaleType::class,
+        ],
+    ];
+
     /**
      * @Rest\Get("/partner/{partnerId}")
      * @Rest\View()
@@ -96,11 +114,11 @@ class OfferController extends MullenloweRestController
             throw new InvalidArgumentException('Invalid OfferSubtype');
         }
 
-        $type = $this->container->getParameter('offer_types')[strtolower($subtype->getType()->getCategory())];
+        $type = self::OFFERTYPE[strtolower($subtype->getType()->getCategory())];
 
         $offer = new $type['entity']($subtype);
 
-        $form = $this->createForm($type['form_type'], $offer);
+        $form = $this->createForm($type['formType'], $offer);
 
         $form->submit($offerData);
 
