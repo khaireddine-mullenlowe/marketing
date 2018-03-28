@@ -23,24 +23,34 @@ class DiscountValidator extends ConstraintValidator
             case 'SIMPLE':
                 if (empty($offerAftersale->getDiscountSimple())) {
                     $constraint->message = 'Discount simple must not be empty';
-                } elseif (!empty($offerAftersale->getDiscountDouble()) || !empty($offerAftersale->getDiscountTriple())) {
+                } elseif (!empty($offerAftersale->getDiscountDouble()) ||
+                    !empty($offerAftersale->getDiscountTriple())
+                ) {
                     $constraint->message = 'Discount double and triple must be empty';
                 }
                 break;
             case 'DOUBLE':
-                if (empty($offerAftersale->getDiscountSimple()) || empty($offerAftersale->getDiscountDouble())) {
+                if (empty($offerAftersale->getDiscountSimple()) ||
+                    empty($offerAftersale->getDiscountDouble())
+                ) {
                     $constraint->message = 'Discount simple and double must not be empty';
                 } elseif (!empty($offerAftersale->getDiscountTriple())) {
                     $constraint->message = 'Discount triple must be empty';
                 }
                 break;
             case 'TRIPLE':
-                if (empty($offerAftersale->getDiscountSimple()) || empty($offerAftersale->getDiscountDouble()) || empty($offerAftersale->getDiscountTriple())) {
+                if (empty($offerAftersale->getDiscountSimple()) ||
+                    empty($offerAftersale->getDiscountDouble()) ||
+                    empty($offerAftersale->getDiscountTriple())
+                ) {
                     $constraint->message = 'Discount simple, double and triple must not be empty';
                 }
                 break;
             default:
-                if (!empty($offerAftersale->getDiscountSimple()) || !empty($offerAftersale->getDiscountDouble()) || !empty($offerAftersale->getDiscountTriple())) {
+                if (!empty($offerAftersale->getDiscountSimple()) ||
+                    !empty($offerAftersale->getDiscountDouble()) ||
+                    !empty($offerAftersale->getDiscountTriple())
+                ) {
                     $constraint->message = 'Discount simple, double and triple must be empty';
                 }
                 break;

@@ -95,8 +95,16 @@ class SwaggerDefinitions
      *     @SWG\Definition(
      *         definition="OfferAftersaleAttributes",
      *         @SWG\Property(property="details", type="string"),
-     *         @SWG\Property(property="discountSimple", type="string", description="required according to the subtype"),
-     *         @SWG\Property(property="discountDouble", type="string", description="required according to the subtype"),
+     *         @SWG\Property(
+     *             property="discountSimple",
+     *             type="string",
+     *             description="required according to the subtype"
+     *         ),
+     *         @SWG\Property(
+     *             property="discountDouble",
+     *             type="string",
+     *             description="required according to the subtype"
+     *         ),
      *         @SWG\Property(property="discountTriple", type="string", description="required according to the subtype"),
      *         required={"details"}
      *     ),
@@ -105,8 +113,16 @@ class SwaggerDefinitions
      *         definition="OfferSaleAttributes",
      *         @SWG\Property(property="monthly", type="float"),
      *         @SWG\Property(property="model", type="integer", description="model id of the vehicle"),
-     *         @SWG\Property(property="xPosition", type="float", description="the abscissa of the div block that contains prices"),
-     *         @SWG\Property(property="yPosition", type="float", description="the ordinate of the div block that contains prices"),
+     *         @SWG\Property(
+     *             property="xPosition",
+     *             type="float",
+     *             description="the abscissa of the div block that contains prices"
+     *         ),
+     *         @SWG\Property(
+     *             property="yPosition",
+     *             type="float",
+     *             description="the ordinate of the div block that contains prices"
+     *         ),
      *         required={"monthly", "model", "xPosition", "yPosition"}
      *     ),
      *
