@@ -73,3 +73,39 @@ OfferSubtype:
     type: 'OfferType_4'
     formType: 'OfferFormType_5'
     terms: 'Les mentions légales : A4 - VO'
+
+OfferAftersale:
+  OfferAftersale_1:
+    subtype: 'OfferSubtype_1'
+    details: 'details test'
+    discount_simple: '100'
+    discount_double: ''
+    discount_triple: ''
+    partner: 1
+    start_date: '2018-06-06'
+    end_date: '2018-07-07'
+    created_at: '2018-03-05 10:00:00'
+    updated_at: '2018-03-05 10:00:00'
+    visual: 'visual_test.png'
+    title: 'title test'
+    description: 'description test'
+    terms: 'terms test'
+    status:  1
+    agreements: 1
+  OfferAftersale_2:
+    subtype: 'OfferSubtype_3'
+    details: 'details test 2'
+    discount_simple: '150'
+    discount_double: '10'
+    discount_triple: ''
+    partner: 2
+    start_date: '2018-08-08'
+    end_date: '2018-09-09'
+    created_at: '2018-03-05 10:00:00'
+    updated_at: '2018-03-05 10:00:00'
+    visual: 'visuel_test_2.png'
+    title: 'title test 2'
+    description: 'description test 2'
+    terms: 'terms test 2'
+    status: 1
+    agreements: 1

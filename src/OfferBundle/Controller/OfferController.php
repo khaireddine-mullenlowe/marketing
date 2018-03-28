@@ -187,7 +187,14 @@ class OfferController extends MullenloweRestController
 
         $type = self::OFFERTYPE[strtolower($subtype->getType()->getCategory())];
 
-        $offer = $this->getDoctrine()->getRepository($type['repository'])->find($offerData['id']);
+        $offer = $this->getDoctrine()->getRepository($type['repository'])->findOneBy([
+            'id' => $offerData['id'],
+            'subtype' => $offerData['subtype'],
+        ]);
+
+        if (empty($offer)) {
+            throw new InvalidArgumentException('Invalid Offer');
+        }
 
         $form = $this->createForm($type['formType'], $offer);
 
