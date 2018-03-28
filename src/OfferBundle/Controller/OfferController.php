@@ -26,6 +26,7 @@ class OfferController extends MullenloweRestController
             'name'         => 'AFTERSALE',
             'entity'       => OfferAftersale::class,
             'formType'     => OfferAftersaleType::class,
+            'repository'   => 'OfferBundle:OfferAftersale',
         ],
         'secondhandcar' => [
             'name'         => 'SECONDHANDCAR',
@@ -153,14 +154,14 @@ class OfferController extends MullenloweRestController
      *     @SWG\Parameter(
      *         name="offer",
      *         in="body",
-     *         required="true",
+     *         required=true,
      *         description="Offer",
-     *         @SWG\Schema(ref="#/definitions/Offer")
+     *         @SWG\Schema(ref="#/definitions/OfferUpdate")
      *     ),
      *     @SWG\Response(
      *         response="200",
      *         description="offers",
-     *         @SWG\Schema(ref="#/definitions/Offer")
+     *         @SWG\Schema(ref="#/definitions/OfferSaleComplete")
      *     ),
      *     @SWG\Response(
      *         response="404",
@@ -171,6 +172,37 @@ class OfferController extends MullenloweRestController
      */
     public function patchAction(Request $request)
     {
-        return $this->createView('');
+        $dataInput = $request->request->all();
+
+        $offerData = $dataInput['offer'];
+
+        if (!empty($offerData['subtype'])) {
+            $em = $this->getDoctrine();
+            $subtype = $em->getRepository("OfferBundle:OfferSubtype")->find(intval($offerData['subtype']));
+        }
+
+        if (empty($subtype)) {
+            throw new InvalidArgumentException('Invalid OfferSubtype');
+        }
+
+        $type = self::OFFERTYPE[strtolower($subtype->getType()->getCategory())];
+
+        $offer = $this->getDoctrine()->getRepository($type['repository'])->find($offerData['id']);
+
+        $form = $this->createForm($type['formType'], $offer);
+
+        $form->submit($offerData, false);
+
+        if (!$form->isSubmitted()) {
+            throw new BadRequestHttpException(static::CONTEXT, "Form fields are not valid for offer");
+        } elseif (!$form->isValid()) {
+            return $this->view($form);
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($offer);
+        $em->flush();
+
+        return $this->createView($offer);
     }
 }

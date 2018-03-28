@@ -150,6 +150,31 @@ class SwaggerDefinitions
      *         }
      *     ),
      *
+     *     @SWG\definition(
+     *         definition="OfferUpdate",
+     *         allOf={
+     *             @SWG\Definition(ref="#definitions/Id"),
+     *             @SWG\Definition(ref="#definitions/Description"),
+     *         },
+     *         @SWG\Property(property="subtype", type="integer", description="subtype id"),
+     *         @SWG\Property(property="endDate", type="string", format="y-m-d"),
+     *         @SWG\Property(property="visual", type="string")
+     *     ),
+     *
+     *     @SWG\definition(
+     *         definition="OfferSaleComplete",
+     *         @SWG\Property(property="status", type="integer", default="1"),
+     *         allOf={
+     *             @SWG\Definition(ref="#definitions/Id"),
+     *             @SWG\Definition(ref="#definitions/TimestampableEntity"),
+     *             @SWG\Definition(ref="#definitions/TimestampableOfferEntity"),
+     *             @SWG\Definition(ref="#definitions/OfferBaseAttributes"),
+     *             @SWG\Definition(ref="#definitions/Description"),
+     *             @SWG\Definition(ref="#definitions/Terms"),
+     *             @SWG\Definition(ref="#definitions/OfferSaleAttributes")
+     *         }
+     *     ),
+     *
      *     @SWG\Definition(
      *         definition="Name",
      *         @SWG\Property(property="name", type="string")

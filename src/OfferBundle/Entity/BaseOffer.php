@@ -6,6 +6,7 @@ use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use OfferBundle\Validator\Constraints as OfferAssert;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * BaseOffer
@@ -56,6 +57,8 @@ abstract class BaseOffer
      * @var DateTime
      *
      * @Assert\Expression("value >= this.getCreatedAt()")
+     *
+     * @Gedmo\Timestampable(on="update")
      *
      * @ORM\Column(name="updated_at", type="datetime", options={"default"="CURRENT_TIMESTAMP"})
      */
@@ -224,13 +227,11 @@ abstract class BaseOffer
     /**
      * Set updatedAt
      *
-     * @param DateTime $updatedAt
-     *
      * @return BaseOffer
      */
-    public function setUpdatedAt($updatedAt)
+    public function setUpdatedAt()
     {
-        $this->updatedAt = $updatedAt;
+        $this->updatedAt = new DateTime('now');
 
         return $this;
     }
@@ -368,7 +369,7 @@ abstract class BaseOffer
     /**
      * Set agreements
      *
-     * @param boolean $agreements
+     * @param bool $agreements
      *
      * @return BaseOffer
      */
@@ -386,6 +387,6 @@ abstract class BaseOffer
      */
     public function getAgreements()
     {
-        return $this->agreements;
+        return (int) $this->agreements;
     }
 }
