@@ -32,11 +32,13 @@ class OfferController extends MullenloweRestController
             'name'         => 'SECONDHANDCAR',
             'entity'       => OfferSale::class,
             'formType'     => OfferSaleType::class,
+            'repository'   => 'OfferBundle:OfferSale',
         ],
         'newcar'        => [
             'name'         => 'NEWCAR',
             'entity'       => OfferSale::class,
             'formType'     => OfferSaleType::class,
+            'repository'   => 'OfferBundle:OfferSale',
         ],
     ];
 
