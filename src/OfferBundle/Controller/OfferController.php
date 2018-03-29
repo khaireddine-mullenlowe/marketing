@@ -179,8 +179,8 @@ class OfferController extends MullenloweRestController
         $offerData = $dataInput['offer'];
 
         if (!empty($offerData['subtype'])) {
-            $em = $this->getDoctrine();
-            $subtype = $em->getRepository("OfferBundle:OfferSubtype")->find(intval($offerData['subtype']));
+            $doctrine = $this->getDoctrine();
+            $subtype = $doctrine->getRepository("OfferBundle:OfferSubtype")->find(intval($offerData['subtype']));
         }
 
         if (empty($subtype)) {
@@ -189,7 +189,7 @@ class OfferController extends MullenloweRestController
 
         $type = self::OFFERTYPE[strtolower($subtype->getType()->getCategory())];
 
-        $offer = $this->getDoctrine()->getRepository($type['repository'])->findOneBy([
+        $offer = $doctrine->getRepository($type['repository'])->findOneBy([
             'id' => $offerData['id'],
             'subtype' => $offerData['subtype'],
         ]);
@@ -208,7 +208,7 @@ class OfferController extends MullenloweRestController
             return $this->view($form);
         }
 
-        $em = $this->getDoctrine()->getManager();
+        $em = $doctrine->getManager();
         $em->persist($offer);
         $em->flush();
 
