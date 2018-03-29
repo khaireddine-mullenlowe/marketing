@@ -7,8 +7,11 @@ use InvalidArgumentException;
 use Mullenlowe\CommonBundle\Exception\BadRequestHttpException;
 use OfferBundle\Entity\OfferAftersale;
 use OfferBundle\Entity\OfferSale;
+use OfferBundle\Form\OfferAftersaleTermsType;
 use OfferBundle\Form\OfferAftersaleType;
+use OfferBundle\Form\OfferNewCarTermsType;
 use OfferBundle\Form\OfferSaleType;
+use OfferBundle\Form\OfferSecondhandCarTermsType;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\View\View;
 use Mullenlowe\CommonBundle\Controller\MullenloweRestController;
@@ -23,19 +26,22 @@ class OfferController extends MullenloweRestController
 
     const OFFERTYPE = [
         'aftersale'     => [
-            'name'         => 'AFTERSALE',
+            'name'         => 'Aftersale',
             'entity'       => OfferAftersale::class,
             'formType'     => OfferAftersaleType::class,
+            'formTerms'    => OfferAftersaleTermsType::class,
         ],
         'secondhandcar' => [
-            'name'         => 'SECONDHANDCAR',
+            'name'         => 'SecondHandCar',
             'entity'       => OfferSale::class,
             'formType'     => OfferSaleType::class,
+            'formTerms'    => OfferSecondhandCarTermsType::class,
         ],
         'newcar'        => [
-            'name'         => 'NEWCAR',
+            'name'         => 'NewCar',
             'entity'       => OfferSale::class,
             'formType'     => OfferSaleType::class,
+            'formTerms'    => OfferNewCarTermsType::class,
         ],
     ];
 
@@ -119,6 +125,13 @@ class OfferController extends MullenloweRestController
         }
 
         $type = self::OFFERTYPE[strtolower($subtype->getType()->getCategory())];
+
+        if (!empty($dataInput['terms'])) {
+            $formTerms = $this->createForm($type['formTerms']);
+            $offerData['terms'] = $this->get('offer.terms')->generateNewTerms($formTerms, $dataInput, $subtype);
+        } else {
+            throw new InvalidArgumentException('Invalid terms');
+        }
 
         $offer = new $type['entity']($subtype);
 
