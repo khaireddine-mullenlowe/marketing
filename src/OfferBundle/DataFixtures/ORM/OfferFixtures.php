@@ -3,13 +3,21 @@ namespace OfferBundle\DataFixtures\ORM;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
+use OfferBundle\Entity\OfferAftersale;
 use OfferBundle\Entity\OfferFormType;
 use OfferBundle\Entity\OfferSubtype;
 use OfferBundle\Entity\OfferType;
 use Symfony\Component\Yaml\Yaml;
 
+/**
+ * Class OfferFixtures
+ * @package OfferBundle\DataFixtures\ORM
+ */
 class OfferFixtures extends Fixture
 {
+    /**
+     * @param ObjectManager $manager
+     */
     public function load(ObjectManager $manager)
     {
         $fixtures = Yaml::parse(file_get_contents(dirname(__FILE__).'/fixtures/offer.yml'));
@@ -22,10 +30,9 @@ class OfferFixtures extends Fixture
             $offerType->setSubtitle($column['subtitle']);
 
             $manager->persist($offerType);
-
             $manager->flush();
 
-            $this->addReference('Type_'. $reference, $offerType);
+            $this->addReference('Type_'.$reference, $offerType);
         }
 
         foreach ($fixtures['OfferFormType'] as $reference => $column) {
@@ -36,10 +43,9 @@ class OfferFixtures extends Fixture
             $offerFormType->setType($column['type']);
 
             $manager->persist($offerFormType);
-
             $manager->flush();
 
-            $this->addReference('FormType_'. $reference, $offerFormType);
+            $this->addReference('FormType_'.$reference, $offerFormType);
         }
 
         foreach ($fixtures['OfferSubtype'] as $reference => $column) {
@@ -48,12 +54,35 @@ class OfferFixtures extends Fixture
             $offerSubtype->setName($column['name']);
             $offerSubtype->setTerms($column['terms']);
             $offerSubtype->setRank($column['rank']);
-            $offerSubtype->setFormType($this->getReference('FormType_' . $column['formType']));
-            $offerSubtype->setType($this->getReference('Type_' . $column['type']));
+            $offerSubtype->setFormType($this->getReference('FormType_'.$column['formType']));
+            $offerSubtype->setType($this->getReference('Type_'.$column['type']));
 
             $manager->persist($offerSubtype);
+            $manager->flush();
+
+            $this->addReference('Subtype_'.$reference, $offerSubtype);
         }
 
-        $manager->flush();
+        foreach ($fixtures['OfferAftersale'] as $reference => $column) {
+            $offerAftersale = new OfferAftersale($this->getReference('Subtype_'.$column['subtype']));
+
+            $offerAftersale->setPartner($column['partner']);
+            $offerAftersale->setDetails($column['details']);
+            $offerAftersale->setStartDate($column['start_date']);
+            $offerAftersale->setEndDate($column['end_date']);
+            $offerAftersale->setCreatedAt(new \DateTime($column['created_at']));
+            $offerAftersale->setUpdatedAt();
+            $offerAftersale->setVisual($column['visual']);
+            $offerAftersale->setTitle($column['title']);
+            $offerAftersale->setDescription($column['description']);
+            $offerAftersale->setTerms($column['terms']);
+            $offerAftersale->setAgreements($column['agreements']);
+            $offerAftersale->setDiscountSimple($column['discount_simple']);
+            $offerAftersale->setDiscountDouble($column['discount_double']);
+            $offerAftersale->setDiscountTriple($column['discount_triple']);
+
+            $manager->persist($offerAftersale);
+            $manager->flush();
+        }
     }
 }

@@ -95,8 +95,16 @@ class SwaggerDefinitions
      *     @SWG\Definition(
      *         definition="OfferAftersaleAttributes",
      *         @SWG\Property(property="details", type="string"),
-     *         @SWG\Property(property="discountSimple", type="string", description="required according to the subtype"),
-     *         @SWG\Property(property="discountDouble", type="string", description="required according to the subtype"),
+     *         @SWG\Property(
+     *             property="discountSimple",
+     *             type="string",
+     *             description="required according to the subtype"
+     *         ),
+     *         @SWG\Property(
+     *             property="discountDouble",
+     *             type="string",
+     *             description="required according to the subtype"
+     *         ),
      *         @SWG\Property(property="discountTriple", type="string", description="required according to the subtype"),
      *         required={"details"}
      *     ),
@@ -105,8 +113,16 @@ class SwaggerDefinitions
      *         definition="OfferSaleAttributes",
      *         @SWG\Property(property="monthly", type="float"),
      *         @SWG\Property(property="model", type="integer", description="model id of the vehicle"),
-     *         @SWG\Property(property="xPosition", type="float", description="the abscissa of the div block that contains prices"),
-     *         @SWG\Property(property="yPosition", type="float", description="the ordinate of the div block that contains prices"),
+     *         @SWG\Property(
+     *             property="xPosition",
+     *             type="float",
+     *             description="the abscissa of the div block that contains prices"
+     *         ),
+     *         @SWG\Property(
+     *             property="yPosition",
+     *             type="float",
+     *             description="the ordinate of the div block that contains prices"
+     *         ),
      *         required={"monthly", "model", "xPosition", "yPosition"}
      *     ),
      *
@@ -147,6 +163,31 @@ class SwaggerDefinitions
      *             @SWG\Definition(ref="#definitions/Description"),
      *             @SWG\Definition(ref="#definitions/Terms"),
      *             @SWG\Definition(ref="#definitions/OfferAftersaleAttributes")
+     *         }
+     *     ),
+     *
+     *     @SWG\definition(
+     *         definition="OfferUpdate",
+     *         allOf={
+     *             @SWG\Definition(ref="#definitions/Id"),
+     *             @SWG\Definition(ref="#definitions/Description"),
+     *         },
+     *         @SWG\Property(property="subtype", type="integer", description="subtype id"),
+     *         @SWG\Property(property="endDate", type="string", format="y-m-d"),
+     *         @SWG\Property(property="visual", type="string")
+     *     ),
+     *
+     *     @SWG\definition(
+     *         definition="OfferSaleComplete",
+     *         @SWG\Property(property="status", type="integer", default="1"),
+     *         allOf={
+     *             @SWG\Definition(ref="#definitions/Id"),
+     *             @SWG\Definition(ref="#definitions/TimestampableEntity"),
+     *             @SWG\Definition(ref="#definitions/TimestampableOfferEntity"),
+     *             @SWG\Definition(ref="#definitions/OfferBaseAttributes"),
+     *             @SWG\Definition(ref="#definitions/Description"),
+     *             @SWG\Definition(ref="#definitions/Terms"),
+     *             @SWG\Definition(ref="#definitions/OfferSaleAttributes")
      *         }
      *     ),
      *

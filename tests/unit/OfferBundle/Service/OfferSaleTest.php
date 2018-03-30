@@ -5,8 +5,12 @@ use OfferBundle\Entity\OfferFormType;
 use OfferBundle\Entity\OfferSubtype;
 use OfferBundle\Entity\OfferType;
 use OfferBundle\Entity\OfferSale as Offer;
+use OfferBundle\Repository\OfferSaleRepository;
 use Symfony\Component\Validator\Validation;
 
+/**
+ * Class OfferSaleTest
+ */
 class OfferSaleTest extends Unit
 {
     protected $repository;
@@ -15,6 +19,9 @@ class OfferSaleTest extends Unit
     protected $subtype;
     protected $date;
 
+    /**
+     * Initialisation
+     */
     public function setUp()
     {
         $this->repository = $this->getMockBuilder(OfferSaleRepository::class)
@@ -31,6 +38,12 @@ class OfferSaleTest extends Unit
         $this->date = new DateTime('now');
     }
 
+    /**
+     * Check :
+     *  - startDate > today
+     *  - endDate > startDate
+     *  - diff startDate and endDate >=3 days and diff startDate and endDate <=92 days
+     */
     public function testValidDatesOk()
     {
         $offer = new Offer($this->subtype);
@@ -48,6 +61,12 @@ class OfferSaleTest extends Unit
         $this->assertEquals(count($validator->validate($offer)), 0);
     }
 
+    /**
+     * Check :
+     *  - diff startDate endDate > 92 days
+     *  - diff startDate endDate < 3 days
+     *  - startDate < today
+     */
     public function testValidDatesKo()
     {
         $validator = Validation::createValidatorBuilder()->enableAnnotationMapping()->getValidator();

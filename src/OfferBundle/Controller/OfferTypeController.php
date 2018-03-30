@@ -50,6 +50,7 @@ class OfferTypeController extends MullenloweRestController
     {
         $em = $this->getDoctrine();
         $types = $em->getRepository("OfferBundle:OfferType")->findBy(['category' => strtoupper($category)]);
+
         return $this->createView($types);
     }
 }

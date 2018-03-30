@@ -2,6 +2,7 @@
 
 namespace OfferBundle\Validator\Constraints;
 
+use OfferBundle\Entity\OfferAftersale;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
@@ -10,32 +11,44 @@ use Symfony\Component\Validator\ConstraintValidator;
  */
 class DiscountValidator extends ConstraintValidator
 {
+    /**
+     * @param OfferAftersale $offerAftersale
+     * @param Constraint     $constraint
+     */
     public function validate($offerAftersale, Constraint $constraint)
     {
         $formType = $offerAftersale->getSubtype()->getFormType()->getType();
 
+        $discountSimple = $offerAftersale->getDiscountSimple();
+        $discountDouble = $offerAftersale->getDiscountDouble();
+        $discountTriple = $offerAftersale->getDiscountTriple();
+
         switch ($formType) {
-            case 'SIMPLE' :
-                if (empty($offerAftersale->getDiscountSimple())) {
+            case 'SIMPLE':
+                if (empty($discountSimple)) {
                     $constraint->message = 'Discount simple must not be empty';
-                } elseif (!empty($offerAftersale->getDiscountDouble()) || !empty($offerAftersale->getDiscountTriple())) {
+                } elseif (!empty($discountDouble) || !empty($discountTriple)
+                ) {
                     $constraint->message = 'Discount double and triple must be empty';
                 }
                 break;
-            case 'DOUBLE' :
-                if (empty($offerAftersale->getDiscountSimple()) || empty($offerAftersale->getDiscountDouble())) {
+            case 'DOUBLE':
+                if (empty($discountSimple) || empty($discountDouble)
+                ) {
                     $constraint->message = 'Discount simple and double must not be empty';
-                } elseif (!empty($offerAftersale->getDiscountTriple())) {
+                } elseif (!empty($discountTriple)) {
                     $constraint->message = 'Discount triple must be empty';
                 }
                 break;
-            case 'TRIPLE' :
-                if (empty($offerAftersale->getDiscountSimple()) || empty($offerAftersale->getDiscountDouble()) || empty($offerAftersale->getDiscountTriple())) {
+            case 'TRIPLE':
+                if (empty($discountSimple) ||  empty($discountDouble) || empty($discountTriple)
+                ) {
                     $constraint->message = 'Discount simple, double and triple must not be empty';
                 }
                 break;
-            default :
-                if (!empty($offerAftersale->getDiscountSimple()) || !empty($offerAftersale->getDiscountDouble()) || !empty($offerAftersale->getDiscountTriple())) {
+            default:
+                if (!empty($discountSimple) || !empty($discountDouble) || !empty($discountTriple)
+                ) {
                     $constraint->message = 'Discount simple, double and triple must be empty';
                 }
                 break;

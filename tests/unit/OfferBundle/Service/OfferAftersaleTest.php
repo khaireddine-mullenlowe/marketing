@@ -9,6 +9,9 @@ use OfferBundle\Repository\OfferAftersaleRepository;
 use OfferBundle\Service\OfferAftersale;
 use Symfony\Component\Validator\Validation;
 
+/**
+ * Class OfferAftersaleTest
+ */
 class OfferAftersaleTest extends Unit
 {
     protected $repository;
@@ -17,6 +20,9 @@ class OfferAftersaleTest extends Unit
     protected $subtype;
     protected $date;
 
+    /**
+     * Initialisation
+     */
     public function setUp()
     {
         $this->repository = $this->getMockBuilder(OfferAftersaleRepository::class)
@@ -44,6 +50,12 @@ class OfferAftersaleTest extends Unit
         $this->assertEquals(1, $offer->getStatus());
     }
 
+    /**
+     * Check :
+     *  - startDate > today
+     *  - endDate > startDate
+     *  - diff startDate and endDate >=3 days and diff startDate and endDate <=92 days
+     */
     public function testValidDatesOk()
     {
         $offer = new Offer($this->subtype);
@@ -61,6 +73,12 @@ class OfferAftersaleTest extends Unit
         $this->assertEquals(count($validator->validate($offer)), 0);
     }
 
+    /**
+     * Check :
+     *  - diff startDate endDate > 92 days
+     *  - diff startDate endDate < 3 days
+     *  - startDate < today
+     */
     public function testValidDatesKo()
     {
         $validator = Validation::createValidatorBuilder()->enableAnnotationMapping()->getValidator();
@@ -98,6 +116,14 @@ class OfferAftersaleTest extends Unit
         $this->assertEquals(count($validator->validate($offer)), 2);
     }
 
+    /**
+     * Check :
+     *  formType :
+     *      - BASIC  : no discount
+     *      - SIMPLE : discount simple filled
+     *      - DOUBLE : discount simple and double filled
+     *      - TRIPLE : discount simple, double and triple filled
+     */
     public function testValidDiscountOk()
     {
         $validator = Validation::createValidatorBuilder()->enableAnnotationMapping()->getValidator();
@@ -132,6 +158,14 @@ class OfferAftersaleTest extends Unit
         $this->assertEquals(count($validator->validate($offer)), 0);
     }
 
+    /**
+     * Check :
+     *  formType :
+     *      - BASIC  : with a discount
+     *      - SIMPLE : discount simple empty, discount double filled
+     *      - DOUBLE : discount simple empty, discount triple filled
+     *      - TRIPLE : discount simple empty
+     */
     public function testValidDiscountKo()
     {
         $validator = Validation::createValidatorBuilder()->enableAnnotationMapping()->getValidator();

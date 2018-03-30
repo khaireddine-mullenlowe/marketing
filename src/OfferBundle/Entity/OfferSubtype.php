@@ -89,12 +89,14 @@ class OfferSubtype
      */
     protected $offerSales;
 
+    /**
+     * OfferSubtype constructor.
+     */
     public function __construct()
     {
         $this->offerAftersales = new ArrayCollection();
         $this->offerSales = new ArrayCollection();
     }
-
 
     /**
      * Get id
@@ -226,4 +228,3 @@ class OfferSubtype
         return $this->terms;
     }
 }
-
