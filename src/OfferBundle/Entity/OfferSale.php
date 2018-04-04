@@ -67,6 +67,10 @@ class OfferSale extends BaseOffer
      */
     private $model;
 
+    /**
+     * OfferSale constructor.
+     * @param OfferSubtype $subtype
+     */
     public function __construct(OfferSubtype $subtype)
     {
         parent::__construct();
@@ -203,4 +207,3 @@ class OfferSale extends BaseOffer
         return $this->model;
     }
 }
-

@@ -13,6 +13,9 @@ class Discount extends Constraint
 {
     public $message = '';
 
+    /**
+     * @return array
+     */
     public function getTargets()
     {
         return array(self::PROPERTY_CONSTRAINT, self::CLASS_CONSTRAINT);

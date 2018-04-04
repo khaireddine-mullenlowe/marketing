@@ -30,18 +30,21 @@ class OfferController extends MullenloweRestController
             'entity'       => OfferAftersale::class,
             'formType'     => OfferAftersaleType::class,
             'formTerms'    => OfferAftersaleTermsType::class,
+            'repository'   => 'OfferBundle:OfferAftersale',
         ],
         'secondhandcar' => [
             'name'         => 'SecondHandCar',
             'entity'       => OfferSale::class,
             'formType'     => OfferSaleType::class,
             'formTerms'    => OfferSecondhandCarTermsType::class,
+            'repository'   => 'OfferBundle:OfferSale',
         ],
         'newcar'        => [
             'name'         => 'NewCar',
             'entity'       => OfferSale::class,
             'formType'     => OfferSaleType::class,
             'formTerms'    => OfferNewCarTermsType::class,
+            'repository'   => 'OfferBundle:OfferSale',
         ],
     ];
 
@@ -146,6 +149,81 @@ class OfferController extends MullenloweRestController
         }
 
         $em = $this->getDoctrine()->getManager();
+        $em->persist($offer);
+        $em->flush();
+
+        return $this->createView($offer);
+    }
+
+    /**
+     * @Rest\Patch("/")
+     *
+     * @param Request $request
+     * @return View
+     *
+     * @SWG\Patch(
+     *     path="/offer/",
+     *     summary="Update an offer",
+     *     operationId="updateOffer",
+     *     tags={"offer"},
+     *     @SWG\Parameter(
+     *         name="offer",
+     *         in="body",
+     *         required=true,
+     *         description="Offer",
+     *         @SWG\Schema(ref="#/definitions/OfferUpdate")
+     *     ),
+     *     @SWG\Response(
+     *         response="200",
+     *         description="offers",
+     *         @SWG\Schema(ref="#/definitions/OfferSaleComplete")
+     *     ),
+     *     @SWG\Response(
+     *         response="404",
+     *         description="not found",
+     *         @SWG\Schema(ref="#/definitions/Error")
+     *     )
+     * )
+     */
+    public function patchAction(Request $request)
+    {
+        $dataInput = $request->request->all();
+
+        $offerData = $dataInput['offer'];
+
+        if (!empty($offerData['subtype'])) {
+            $doctrine = $this->getDoctrine();
+            $subtype = $doctrine->getRepository("OfferBundle:OfferSubtype")->find(intval($offerData['subtype']));
+        }
+
+        if (empty($subtype)) {
+            throw new InvalidArgumentException('Invalid OfferSubtype');
+        }
+
+        $type = self::OFFERTYPE[strtolower($subtype->getType()->getCategory())];
+
+        $offer = $doctrine->getRepository($type['repository'])->findOneBy([
+            'id' => $offerData['id'],
+            'subtype' => $offerData['subtype'],
+        ]);
+
+        if (empty($offer)) {
+            throw new InvalidArgumentException('Invalid Offer');
+        }
+
+        $offerData['terms'] = $this->get('offer.terms')->generateUpdatedTerms($offer, $offerData['endDate'], $subtype);
+
+        $form = $this->createForm($type['formType'], $offer);
+
+        $form->submit($offerData, false);
+
+        if (!$form->isSubmitted()) {
+            throw new BadRequestHttpException(static::CONTEXT, "Form fields are not valid for offer");
+        } elseif (!$form->isValid()) {
+            return $this->view($form);
+        }
+
+        $em = $doctrine->getManager();
         $em->persist($offer);
         $em->flush();
 

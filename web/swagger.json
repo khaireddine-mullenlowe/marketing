@@ -1,6 +1,583 @@
 {
     "swagger": "2.0",
+    "info": {
+        "title": "Marketing Api",
+        "version": "1.0.0"
+    },
     "host": "api5.audi.dev.agence-one.net",
-    "paths": {},
-    "definitions": {}
+    "basePath": "/marketing/dev/",
+    "schemes": [
+        "http"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/offer/partner/{partnerId}": {
+            "get": {
+                "tags": [
+                    "offer"
+                ],
+                "summary": "Get offers for a partner",
+                "operationId": "getOffers",
+                "parameters": [
+                    {
+                        "name": "partnerId",
+                        "in": "path",
+                        "description": "Partner Id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/offer/": {
+            "post": {
+                "tags": [
+                    "offer"
+                ],
+                "summary": "Create an offer, according to the subtype, the offer is an aftersale or sale offer",
+                "operationId": "createOffer",
+                "parameters": [
+                    {
+                        "name": "offer",
+                        "in": "body",
+                        "description": "Offer aftersale example",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/OfferAftersale"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "offer created",
+                        "schema": {
+                            "$ref": "#/definitions/OfferAftersaleComplete"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "offer"
+                ],
+                "summary": "Update an offer",
+                "operationId": "updateOffer",
+                "parameters": [
+                    {
+                        "name": "offer",
+                        "in": "body",
+                        "description": "Offer",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/OfferUpdate"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "offers",
+                        "schema": {
+                            "$ref": "#/definitions/OfferSaleComplete"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/offer/subtype/{typeId}": {
+            "get": {
+                "tags": [
+                    "subtype"
+                ],
+                "summary": "Get Subtypes",
+                "operationId": "getSubtypes",
+                "parameters": [
+                    {
+                        "name": "typeId",
+                        "in": "path",
+                        "description": "Type Id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Get subtypes",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Subtype"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/offer/type/{category}": {
+            "get": {
+                "tags": [
+                    "type"
+                ],
+                "summary": "Get Types",
+                "operationId": "getTypes",
+                "parameters": [
+                    {
+                        "name": "category",
+                        "in": "path",
+                        "description": "Category name : AFTERSALE, SECONDHANDCAR, NEWCAR",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Get types",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Type"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Context": {
+            "properties": {
+                "context": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Success": {
+            "properties": {
+                "data": {
+                    "properties": {
+                        "message": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Context"
+                }
+            ]
+        },
+        "Error": {
+            "required": [
+                "errors"
+            ],
+            "properties": {
+                "errors": {
+                    "type": "array",
+                    "items": {
+                        "properties": {
+                            "message": {
+                                "type": "string"
+                            },
+                            "code": {
+                                "type": "integer"
+                            },
+                            "type": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            },
+            "type": "object",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Context"
+                }
+            ]
+        },
+        "Id": {
+            "required": [
+                "id"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "TimestampableEntity": {
+            "properties": {
+                "createdAt": {
+                    "type": "string",
+                    "format": "date-time",
+                    "default": "now"
+                },
+                "updatedAt": {
+                    "type": "string",
+                    "format": "date-time",
+                    "default": "now"
+                }
+            }
+        },
+        "TimestampableOfferEntity": {
+            "required": [
+                "startDate",
+                "endDate"
+            ],
+            "properties": {
+                "startDate": {
+                    "type": "string",
+                    "format": "y-m-d"
+                },
+                "endDate": {
+                    "type": "string",
+                    "format": "y-m-d"
+                }
+            }
+        },
+        "Description": {
+            "required": [
+                "description"
+            ],
+            "properties": {
+                "description": {
+                    "type": "string"
+                }
+            }
+        },
+        "Terms": {
+            "required": [
+                "terms"
+            ],
+            "properties": {
+                "terms": {
+                    "type": "string"
+                }
+            }
+        },
+        "OfferBaseAttributes": {
+            "required": [
+                "agreement",
+                "title",
+                "visual",
+                "subtype",
+                "partner"
+            ],
+            "properties": {
+                "agreement": {
+                    "description": "1 or 0",
+                    "type": "integer"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "visual": {
+                    "description": "visual name",
+                    "type": "string"
+                },
+                "subtype": {
+                    "description": "subtype id",
+                    "type": "integer"
+                },
+                "partner": {
+                    "description": "partner id",
+                    "type": "integer"
+                }
+            }
+        },
+        "OfferAftersaleAttributes": {
+            "required": [
+                "details"
+            ],
+            "properties": {
+                "details": {
+                    "type": "string"
+                },
+                "discountSimple": {
+                    "description": "required according to the subtype",
+                    "type": "string"
+                },
+                "discountDouble": {
+                    "description": "required according to the subtype",
+                    "type": "string"
+                },
+                "discountTriple": {
+                    "description": "required according to the subtype",
+                    "type": "string"
+                }
+            }
+        },
+        "OfferSaleAttributes": {
+            "required": [
+                "monthly",
+                "model",
+                "xPosition",
+                "yPosition"
+            ],
+            "properties": {
+                "monthly": {
+                    "type": "float"
+                },
+                "model": {
+                    "description": "model id of the vehicle",
+                    "type": "integer"
+                },
+                "xPosition": {
+                    "description": "the abscissa of the div block that contains prices",
+                    "type": "float"
+                },
+                "yPosition": {
+                    "description": "the ordinate of the div block that contains prices",
+                    "type": "float"
+                }
+            }
+        },
+        "OfferAftersale": {
+            "properties": {
+                "offer": {
+                    "type": "object",
+                    "allOf": [
+                        {
+                            "$ref": "#definitions/TimestampableOfferEntity"
+                        },
+                        {
+                            "$ref": "#definitions/OfferBaseAttributes"
+                        },
+                        {
+                            "$ref": "#definitions/Description"
+                        },
+                        {
+                            "$ref": "#definitions/Terms"
+                        },
+                        {
+                            "$ref": "#definitions/OfferAftersaleAttributes"
+                        }
+                    ]
+                }
+            }
+        },
+        "OfferSale": {
+            "properties": {
+                "offer": {
+                    "type": "object",
+                    "allOf": [
+                        {
+                            "$ref": "#definitions/TimestampableOfferEntity"
+                        },
+                        {
+                            "$ref": "#definitions/OfferBaseAttributes"
+                        },
+                        {
+                            "$ref": "#definitions/Description"
+                        },
+                        {
+                            "$ref": "#definitions/Terms"
+                        },
+                        {
+                            "$ref": "#definitions/OfferSaleAttributes"
+                        }
+                    ]
+                }
+            }
+        },
+        "OfferAftersaleComplete": {
+            "properties": {
+                "status": {
+                    "type": "integer",
+                    "default": "1"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#definitions/Id"
+                },
+                {
+                    "$ref": "#definitions/TimestampableEntity"
+                },
+                {
+                    "$ref": "#definitions/TimestampableOfferEntity"
+                },
+                {
+                    "$ref": "#definitions/OfferBaseAttributes"
+                },
+                {
+                    "$ref": "#definitions/Description"
+                },
+                {
+                    "$ref": "#definitions/Terms"
+                },
+                {
+                    "$ref": "#definitions/OfferAftersaleAttributes"
+                }
+            ]
+        },
+        "OfferUpdate": {
+            "properties": {
+                "subtype": {
+                    "description": "subtype id",
+                    "type": "integer"
+                },
+                "endDate": {
+                    "type": "string",
+                    "format": "y-m-d"
+                },
+                "visual": {
+                    "type": "string"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#definitions/Id"
+                },
+                {
+                    "$ref": "#definitions/Description"
+                }
+            ]
+        },
+        "OfferSaleComplete": {
+            "properties": {
+                "status": {
+                    "type": "integer",
+                    "default": "1"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#definitions/Id"
+                },
+                {
+                    "$ref": "#definitions/TimestampableEntity"
+                },
+                {
+                    "$ref": "#definitions/TimestampableOfferEntity"
+                },
+                {
+                    "$ref": "#definitions/OfferBaseAttributes"
+                },
+                {
+                    "$ref": "#definitions/Description"
+                },
+                {
+                    "$ref": "#definitions/Terms"
+                },
+                {
+                    "$ref": "#definitions/OfferSaleAttributes"
+                }
+            ]
+        },
+        "Name": {
+            "properties": {
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "Type": {
+            "properties": {
+                "category": {
+                    "type": "string"
+                },
+                "subtitle": {
+                    "type": "string"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#definitions/Id"
+                },
+                {
+                    "$ref": "#definitions/Name"
+                }
+            ]
+        },
+        "FormType": {
+            "properties": {
+                "type": {
+                    "type": "string"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#definitions/Id"
+                },
+                {
+                    "$ref": "#definitions/Description"
+                },
+                {
+                    "$ref": "#definitions/Name"
+                }
+            ]
+        },
+        "Subtype": {
+            "properties": {
+                "rank": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "object",
+                    "allOf": [
+                        {
+                            "$ref": "#definitions/Type"
+                        }
+                    ]
+                },
+                "formType": {
+                    "type": "object",
+                    "allOf": [
+                        {
+                            "$ref": "#definitions/FormType"
+                        }
+                    ]
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#definitions/Id"
+                },
+                {
+                    "$ref": "#definitions/Terms"
+                },
+                {
+                    "$ref": "#definitions/Name"
+                }
+            ]
+        }
+    }
 }

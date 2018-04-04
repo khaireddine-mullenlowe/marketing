@@ -3,10 +3,9 @@
 namespace OfferBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use OfferBundle\OfferBundle;
+use OfferBundle\Entity\OfferSubtype;
 use Symfony\Component\Validator\Constraints as Assert;
 use OfferBundle\Validator\Constraints as AftersaleAssert;
-use OfferBundle\Entity\OfferSubtype;
 
 /**
  * OfferAftersale
@@ -28,7 +27,7 @@ class OfferAftersale extends BaseOffer
     protected $id;
 
     /**
-     * @var OfferSubtype
+     * @var OfferSubtype $subtype
      *
      * @ORM\ManyToOne(targetEntity="OfferSubtype", inversedBy="offerAftersales")
      * @ORM\JoinColumn(name="subtype_id", referencedColumnName="id", nullable=false)
@@ -83,6 +82,10 @@ class OfferAftersale extends BaseOffer
      */
     protected $discountTriple;
 
+    /**
+     * OfferAftersale constructor.
+     * @param OfferSubtype $subtype
+     */
     public function __construct(OfferSubtype $subtype)
     {
         parent::__construct();
@@ -219,4 +222,3 @@ class OfferAftersale extends BaseOffer
         return $this->discountTriple;
     }
 }
-
