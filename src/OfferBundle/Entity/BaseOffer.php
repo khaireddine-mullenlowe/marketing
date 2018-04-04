@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use OfferBundle\Validator\Constraints as OfferAssert;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 /**
  * BaseOffer
@@ -15,6 +16,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 abstract class BaseOffer
 {
+    use TimestampableEntity;
+
     /**
      * @var int
      *
@@ -45,24 +48,6 @@ abstract class BaseOffer
      * @ORM\Column(name="end_date", type="date")
      */
     protected $endDate;
-
-    /**
-     * @var DateTime
-     *
-     * @ORM\Column(name="created_at", type="datetime", options={"default"="CURRENT_TIMESTAMP"})
-     */
-    protected $createdAt;
-
-    /**
-     * @var DateTime
-     *
-     * @Assert\Expression("value >= this.getCreatedAt()")
-     *
-     * @Gedmo\Timestampable(on="update")
-     *
-     * @ORM\Column(name="updated_at", type="datetime", options={"default"="CURRENT_TIMESTAMP"})
-     */
-    protected $updatedAt;
 
     /**
      * @var string
@@ -123,8 +108,6 @@ abstract class BaseOffer
      */
     public function __construct()
     {
-        $this->createdAt = new DateTime('now');
-        $this->updatedAt = new DateTime('now');
         $this->status = 1;
     }
 
@@ -198,52 +181,6 @@ abstract class BaseOffer
     public function getEndDate()
     {
         return $this->endDate;
-    }
-
-    /**
-     * Set createdAt
-     *
-     * @param DateTime $createdAt
-     *
-     * @return BaseOffer
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * Get createdAt
-     *
-     * @return DateTime
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * Set updatedAt
-     *
-     * @return BaseOffer
-     */
-    public function setUpdatedAt()
-    {
-        $this->updatedAt = new DateTime('now');
-
-        return $this;
-    }
-
-    /**
-     * Get updatedAt
-     *
-     * @return DateTime
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
     }
 
     /**
