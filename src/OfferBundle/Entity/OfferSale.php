@@ -24,7 +24,7 @@ class OfferSale extends BaseOffer
     /**
      * @var OfferSubtype
      *
-     * @ORM\ManyToOne(targetEntity="OfferSubtype", inversedBy="offerSales")
+     * @ORM\ManyToOne(targetEntity="OfferSubtype", inversedBy="offerSales", fetch="EAGER")
      * @ORM\JoinColumn(name="subtype_id", referencedColumnName="id", nullable=false)
      */
     protected $subtype;

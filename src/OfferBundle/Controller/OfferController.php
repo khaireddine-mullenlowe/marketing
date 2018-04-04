@@ -211,7 +211,7 @@ class OfferController extends MullenloweRestController
             throw new InvalidArgumentException('Invalid Offer');
         }
 
-        $offerData['terms'] = $this->get('offer.terms')->generateUpdatedTerms($offer, $offerData['endDate'], $subtype);
+        $offerData['terms'] = $this->get('offer.terms')->generateUpdatedTerms($offer, $offerData['endDate']);
 
         $form = $this->createForm($type['formType'], $offer);
 

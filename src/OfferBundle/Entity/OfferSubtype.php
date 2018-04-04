@@ -43,7 +43,8 @@ class OfferSubtype
      *
      * @ORM\ManyToOne(
      *     targetEntity="OfferType",
-     *     inversedBy="subtypes"
+     *     inversedBy="subtypes",
+     *     fetch="EAGER"
      * )
      * @ORM\JoinColumn(referencedColumnName="id")
      */
@@ -54,7 +55,8 @@ class OfferSubtype
      *
      * @ORM\ManyToOne(
      *     targetEntity="OfferFormType",
-     *     inversedBy="subtypes"
+     *     inversedBy="subtypes",
+     *     fetch="EAGER"
      * )
      * @ORM\JoinColumn(referencedColumnName="id")
      */
