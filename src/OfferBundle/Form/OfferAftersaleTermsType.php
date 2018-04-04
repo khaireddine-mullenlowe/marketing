@@ -28,13 +28,11 @@ class OfferAftersaleTermsType extends AbstractType
         $builder
             ->add(
                 'endDate',
-                TextType::class,
-                ['required' => true]
+                TextType::class
             )
             ->add(
                 'km',
-                IntegerType::class,
-                ['required' => false]
+                IntegerType::class
             );
 
         $builder

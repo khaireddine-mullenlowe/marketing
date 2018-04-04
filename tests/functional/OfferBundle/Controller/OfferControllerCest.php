@@ -2,6 +2,8 @@
 
 namespace OfferBundle\Tests\Controller;
 
+use DateInterval;
+use DateTime;
 use FunctionalTester;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -13,14 +15,16 @@ class OfferControllerCest
     public function tryPostOfferAftersale(FunctionalTester $I)
     {
         $I->haveHttpHeader('Content-Type', 'application/json');
+        $date = new DateTime('now');
+
         $data = '
             {
                 "offer": {
                     "partner": "1",
                     "subtype": "1",
                     "details": "Détail de test",
-                    "startDate": "2018-05-05",
-                    "endDate": "2018-06-06",
+                    "startDate": "'.$date->add(new DateInterval('P1D'))->format('Y-m-d').'",
+                    "endDate": "'.$date->add(new DateInterval('P30D'))->format('Y-m-d').'",
                     "visual": "image_de_test.png",
                     "title": "Titre de test",
                     "description": "Description de test",
@@ -29,6 +33,9 @@ class OfferControllerCest
                     "discountSimple": "100",
                     "discountDouble": "",
                     "discountTriple": ""
+                },
+                "terms": {
+                    "km": "30000"
                 }
             }
         ';
@@ -45,13 +52,15 @@ class OfferControllerCest
     public function tryPostOfferSale(FunctionalTester $I)
     {
         $I->haveHttpHeader('Content-Type', 'application/json');
+        $date = new DateTime('now');
+
         $data = '
             {
                 "offer": {
                     "partner": "1",
                     "subtype": "4",
-                    "startDate": "2018-05-05",
-                    "endDate": "2018-06-06",
+                    "startDate": "'.$date->add(new DateInterval('P1D'))->format('Y-m-d').'",
+                    "endDate": "'.$date->add(new DateInterval('P30D'))->format('Y-m-d').'",
                     "visual": "image_de_test.png",
                     "xPosition": "0",
                     "yPosition": "20",
@@ -61,6 +70,23 @@ class OfferControllerCest
                     "agreements": "1",
                     "monthly": "100",
                     "model": "12"
+                },
+                "terms": {
+                    "monthNumber": "30",
+                    "maximumKm": "50000",
+                    "partner": "Concession PONEY",
+                    "advancePayment": "5000.00",
+                    "monthRentalNumber": "29",
+                    "monthly": "499.99",
+                    "modelName": "Audi A5 Sportback S Line",
+                    "engine": "V8 3.2",
+                    "options": "Vitre teintée, jantes aliage",
+                    "rangeName": "A5",
+                    "mgpMin": "3.2",
+                    "mgpMax": "5.8",
+                    "co2EmissionMin": "5.9",
+                    "co2EmissionMax": "15.2",
+                    "priceDate": "2017-09-01"
                 }
             }
         ';
@@ -77,13 +103,15 @@ class OfferControllerCest
     public function tryPostOfferBadSubtype(FunctionalTester $I)
     {
         $I->haveHttpHeader('Content-Type', 'application/json');
+        $date = new DateTime('now');
+
         $data = '
             {
                 "offer": {
                     "partner": "1",
                     "subtype": "0",
-                    "startDate": "2018-05-05",
-                    "endDate": "2018-06-06",
+                    "startDate": "'.$date->add(new DateInterval('P1D'))->format('Y-m-d').'",
+                    "endDate": "'.$date->add(new DateInterval('P30D'))->format('Y-m-d').'",
                     "visual": "image_de_test.png",
                     "xPosition": "0",
                     "yPosition": "20",
@@ -109,13 +137,18 @@ class OfferControllerCest
     public function tryPostOfferInvalid(FunctionalTester $I)
     {
         $I->haveHttpHeader('Content-Type', 'application/json');
+        $date = new DateTime('now');
+
         $data = '
             {
                 "offer": {
                     "partner": "1",
                     "subtype": "1",
-                    "startDate": "2018-05-05",
-                    "endDate": "2018-06-06"
+                    "startDate": "'.$date->add(new DateInterval('P1D'))->format('Y-m-d').'",
+                    "endDate": "'.$date->add(new DateInterval('P30D'))->format('Y-m-d').'",
+                },
+                "terms: {
+                    "km": "30000"
                 }
             }
         ';
@@ -123,7 +156,7 @@ class OfferControllerCest
         $I->sendPOST('/offer/', $data);
         $I->seeResponseCodeIs(Response::HTTP_BAD_REQUEST);
         $I->seeResponseIsJson();
-        $I->seeResponseContains('Invalid Field');
+        $I->seeResponseContains('Invalid');
     }
 
     /**
@@ -132,12 +165,14 @@ class OfferControllerCest
     public function tryPatchOffer(FunctionalTester $I)
     {
         $I->haveHttpHeader('Content-Type', 'application/json');
+        $date = new DateTime('now');
+
         $data = '
             {
                 "offer": {
                     "id": "1",
                     "subtype": "1",
-                    "endDate": "2018-08-08",
+                    "endDate": "'.$date->add(new DateInterval('P34D'))->format('Y-m-d').'",
                     "description": "Description de test 2",
                     "visual": "image_de_test_2.png"
                 }
@@ -156,12 +191,14 @@ class OfferControllerCest
     public function tryPatchOfferBadSubtype(FunctionalTester $I)
     {
         $I->haveHttpHeader('Content-Type', 'application/json');
+        $date = new DateTime('now');
+
         $data = '
             {
                 "offer": {
                     "id": "1",
                     "subtype": "2",
-                    "endDate": "2018-08-08",
+                    "endDate": "'.$date->add(new DateInterval('P30D'))->format('Y-m-d').'",
                     "description": "Description de test 2",
                     "visual": "image_de_test_2.png"
                 }

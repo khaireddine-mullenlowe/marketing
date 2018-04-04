@@ -32,8 +32,8 @@ class OfferNewCarTermsType extends AbstractType
                 IntegerType::class,
                 [
                     'constraints' => [
-                        new NotNull(),
-                        new Range(['min' => 1, 'max' => 100000]),
+                        new NotNull(['message' => 'monthNumber must not be empty']),
+                        new Range(['min' => 1, 'max' => 500]),
                     ],
                 ]
             )
@@ -42,20 +42,26 @@ class OfferNewCarTermsType extends AbstractType
                 MoneyType::class,
                 [
                     'constraints' => [
-                        new NotNull(),
+                        new NotNull(['message' => 'advancePayment must not be empty']),
                     ],
                 ]
             )
             ->add(
                 'monthRentalNumber',
-                IntegerType::class
+                IntegerType::class,
+                [
+                    'constraints' => [
+                        new NotNull(['message' => 'monthRentalNumber must not be empty']),
+                        new Range(['min' => 1, 'max' => 500]),
+                    ],
+                ]
             )
             ->add(
                 'monthly',
                 MoneyType::class,
                 [
                     'constraints' => [
-                        new NotNull(),
+                        new NotNull(['message' => 'monthly must not be empty']),
                     ],
                 ]
             )
@@ -64,7 +70,7 @@ class OfferNewCarTermsType extends AbstractType
                 TextType::class,
                 [
                     'constraints' => [
-                        new NotNull(),
+                        new NotNull(['message' => 'startDate must not be empty']),
                         new Regex('/[0-9]{2} [a-zA-Z]{1,10} [0-9]{4}/'),
                     ],
                 ]
@@ -74,7 +80,7 @@ class OfferNewCarTermsType extends AbstractType
                 TextType::class,
                 [
                     'constraints' => [
-                        new NotNull(),
+                        new NotNull(['message' => 'endDate must not be empty']),
                         new Regex('/[0-9]{2} [a-zA-Z]{1,10} [0-9]{4}/'),
                     ],
                 ]
@@ -84,7 +90,7 @@ class OfferNewCarTermsType extends AbstractType
                 TextType::class,
                 [
                     'constraints' => [
-                        new NotNull(),
+                        new NotNull(['message' => 'priceDate must not be empty']),
                         new Regex('/[0-9]{2} [a-zA-Z]{1,10} [0-9]{4}/'),
                     ],
                 ]
@@ -94,7 +100,7 @@ class OfferNewCarTermsType extends AbstractType
                 TextType::class,
                 [
                     'constraints' => [
-                        new NotNull(),
+                        new NotNull(['message' => 'modelName must not be empty']),
                     ],
                 ]
             )
@@ -103,7 +109,7 @@ class OfferNewCarTermsType extends AbstractType
                 TextType::class,
                 [
                     'constraints' => [
-                        new NotNull(),
+                        new NotNull(['message' => 'engine must not be empty']),
                     ],
                 ]
             )
@@ -112,7 +118,7 @@ class OfferNewCarTermsType extends AbstractType
                 TextType::class,
                 [
                     'constraints' => [
-                        new NotNull(),
+                        new NotNull(['message' => 'options must not be empty']),
                     ],
                 ]
             )
@@ -121,7 +127,7 @@ class OfferNewCarTermsType extends AbstractType
                 TextType::class,
                 [
                     'constraints' => [
-                        new NotNull(),
+                        new NotNull(['message' => 'rangeName must not be empty']),
                     ],
                 ]
             )
@@ -130,7 +136,7 @@ class OfferNewCarTermsType extends AbstractType
                 MoneyType::class,
                 [
                     'constraints' => [
-                        new NotNull(),
+                        new NotNull(['message' => 'mgpMin must not be empty']),
                     ],
                 ]
             )
@@ -139,7 +145,7 @@ class OfferNewCarTermsType extends AbstractType
                 MoneyType::class,
                 [
                     'constraints' => [
-                        new NotNull(),
+                        new NotNull(['message' => 'mgpMax must not be empty']),
                     ],
                 ]
             )
@@ -148,7 +154,7 @@ class OfferNewCarTermsType extends AbstractType
                 MoneyType::class,
                 [
                     'constraints' => [
-                        new NotNull(),
+                        new NotNull(['message' => 'co2EmissionMin must not be empty']),
                     ],
                 ]
             )
@@ -157,7 +163,7 @@ class OfferNewCarTermsType extends AbstractType
                 MoneyType::class,
                 [
                     'constraints' => [
-                        new NotNull(),
+                        new NotNull(['message' => 'co2EmissionMax must not be empty']),
                     ],
                 ]
             )
@@ -166,7 +172,7 @@ class OfferNewCarTermsType extends AbstractType
                 IntegerType::class,
                 [
                     'constraints' => [
-                        new NotNull(),
+                        new NotNull(['message' => 'maximumKm must not be empty']),
                     ],
                 ]
             )
@@ -175,7 +181,7 @@ class OfferNewCarTermsType extends AbstractType
                 TextType::class,
                 [
                     'constraints' => [
-                        new NotNull(),
+                        new NotNull(['message' => 'partner must not be empty']),
                     ],
                 ]
             );

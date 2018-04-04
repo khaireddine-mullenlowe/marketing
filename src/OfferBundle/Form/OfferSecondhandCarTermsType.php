@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\NotNull;
 use Symfony\Component\Validator\Constraints\Regex;
 
@@ -38,7 +39,7 @@ class OfferSecondhandCarTermsType extends AbstractType
                 TextType::class,
                 [
                     'constraints' => [
-                        new NotNull(),
+                        new NotNull(['message' => 'modelName must not be empty']),
                     ],
                 ]
             )
@@ -47,7 +48,7 @@ class OfferSecondhandCarTermsType extends AbstractType
                 TextType::class,
                 [
                     'constraints' => [
-                        new NotNull(),
+                        new NotNull(['message' => 'engine must not be empty']),
                     ],
                 ]
             )
@@ -56,7 +57,8 @@ class OfferSecondhandCarTermsType extends AbstractType
                 TextType::class,
                 [
                     'constraints' => [
-                        new NotNull(),
+                        new NotNull(['message' => 'email must not be empty']),
+                        new Email(),
                     ],
                 ]
             )
@@ -65,7 +67,7 @@ class OfferSecondhandCarTermsType extends AbstractType
                 TextType::class,
                 [
                     'constraints' => [
-                        new NotNull(),
+                        new NotNull(['message' => 'address must not be empty']),
                     ],
                 ]
             );

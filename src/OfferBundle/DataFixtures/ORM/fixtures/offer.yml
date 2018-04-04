@@ -82,8 +82,6 @@ OfferAftersale:
     discount_double: ''
     discount_triple: ''
     partner: 1
-    start_date: '2018-06-06'
-    end_date: '2018-07-07'
     created_at: '2018-03-05 10:00:00'
     updated_at: '2018-03-05 10:00:00'
     visual: 'visual_test.png'
@@ -99,8 +97,6 @@ OfferAftersale:
     discount_double: '10'
     discount_triple: ''
     partner: 2
-    start_date: '2018-08-08'
-    end_date: '2018-09-09'
     created_at: '2018-03-05 10:00:00'
     updated_at: '2018-03-05 10:00:00'
     visual: 'visuel_test_2.png'

@@ -68,10 +68,10 @@ class OfferFixtures extends Fixture
 
             $offerAftersale->setPartner($column['partner']);
             $offerAftersale->setDetails($column['details']);
-            $offerAftersale->setStartDate($column['start_date']);
-            $offerAftersale->setEndDate($column['end_date']);
-            $offerAftersale->setCreatedAt(new \DateTime($column['created_at']));
-            $offerAftersale->setUpdatedAt();
+            $offerAftersale->setStartDate((new \DateTime('now'))->add(new \DateInterval('P2D'))->format('y-m-d'));
+            $offerAftersale->setEndDate((new \DateTime('now'))->add(new \DateInterval('P20D'))->format('y-m-d'));
+            $offerAftersale->setCreatedAt(new \DateTime('now'));
+            $offerAftersale->setUpdatedAt(new \DateTime('now'));
             $offerAftersale->setVisual($column['visual']);
             $offerAftersale->setTitle($column['title']);
             $offerAftersale->setDescription($column['description']);
