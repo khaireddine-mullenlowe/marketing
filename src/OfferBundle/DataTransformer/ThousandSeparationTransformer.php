@@ -25,6 +25,12 @@ class ThousandSeparationTransformer implements DataTransformerInterface
      */
     public function reverseTransform($value)
     {
-        return number_format($value, 0, '', ' ');
+        $strArray = explode('.', $value);
+
+        if (!empty($strArray[1])) {
+            return number_format($value, 2, ',', ' ');
+        } else {
+            return number_format($value, 0, ',', ' ');
+        }
     }
 }

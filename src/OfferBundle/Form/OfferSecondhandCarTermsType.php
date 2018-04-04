@@ -2,11 +2,13 @@
 
 namespace OfferBundle\Form;
 
+use OfferBundle\DataTransformer\DateToStringMonthTransformer;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\NotNull;
+use Symfony\Component\Validator\Constraints\Regex;
 
 /**
  * Class OfferAftersaleTermsType
@@ -24,27 +26,53 @@ class OfferSecondhandCarTermsType extends AbstractType
             ->add(
                 'endDate',
                 TextType::class,
-                ['required' => true]
+                [
+                    'constraints' => [
+                        new NotNull(),
+                        new Regex('/[0-9]{2} [a-zA-Z]{1,10} [0-9]{4}/'),
+                    ],
+                ]
             )
             ->add(
                 'modelName',
                 TextType::class,
-                ['required' => true]
+                [
+                    'constraints' => [
+                        new NotNull(),
+                    ],
+                ]
             )
             ->add(
                 'engine',
                 TextType::class,
-                ['required' => true]
+                [
+                    'constraints' => [
+                        new NotNull(),
+                    ],
+                ]
             )
             ->add(
                 'email',
                 TextType::class,
-                ['required' => true]
+                [
+                    'constraints' => [
+                        new NotNull(),
+                    ],
+                ]
             )
             ->add(
                 'address',
                 TextType::class,
-                ['required' => true]
+                [
+                    'constraints' => [
+                        new NotNull(),
+                    ],
+                ]
+            );
+
+        $builder
+            ->get('endDate')->addModelTransformer(
+                new DateToStringMonthTransformer()
             );
     }
 
@@ -55,6 +83,7 @@ class OfferSecondhandCarTermsType extends AbstractType
     {
         $resolver->setDefaults([
             'csrf_protection'    => false,
+            'allow_extra_fields' => true,
         ]);
     }
 }

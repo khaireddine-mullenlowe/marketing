@@ -28,10 +28,14 @@ class OfferTerms
 
         $form->submit($dataForTerms);
 
-        $dataToInsert = $form->getData();
+        if ($form->isValid()) {
+            $dataToInsert = $form->getData();
 
-        foreach ($dataToInsert as $key => $value) {
-            $finalTerms = str_replace('#'.$key.'#', $value, $finalTerms);
+            foreach ($dataToInsert as $key => $value) {
+                if (!empty($value)) {
+                    $finalTerms = str_replace('#'.$key.'#', $value, $finalTerms);
+                }
+            }
         }
 
         $regex = '/\#[a-zA-Z2]{1,20}\#/';
