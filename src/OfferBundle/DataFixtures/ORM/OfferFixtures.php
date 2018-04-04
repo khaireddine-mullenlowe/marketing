@@ -71,7 +71,7 @@ class OfferFixtures extends Fixture
             $offerAftersale->setStartDate($column['start_date']);
             $offerAftersale->setEndDate($column['end_date']);
             $offerAftersale->setCreatedAt(new \DateTime($column['created_at']));
-            $offerAftersale->setUpdatedAt();
+            $offerAftersale->setUpdatedAt(new \DateTime($column['updated_at']));
             $offerAftersale->setVisual($column['visual']);
             $offerAftersale->setTitle($column['title']);
             $offerAftersale->setDescription($column['description']);
