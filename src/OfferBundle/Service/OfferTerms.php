@@ -43,7 +43,7 @@ class OfferTerms
         preg_match($regex, $finalTerms, $res);
 
         if (!empty($res)) {
-            throw new InvalidArgumentException('Terms are not complete');
+            throw new InvalidArgumentException(sprintf('Terms are not complete %s', $res[0]));
         }
 
         return $finalTerms;
