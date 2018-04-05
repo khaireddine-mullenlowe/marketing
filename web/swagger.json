@@ -174,6 +174,40 @@
                     }
                 }
             }
+        },
+        "/offer/funding": {
+            "post": {
+                "tags": [
+                    "Offer Funding"
+                ],
+                "summary": "Create a funding offer.",
+                "operationId": "createFundingOffer",
+                "parameters": [
+                    {
+                        "name": "offerFunding",
+                        "in": "body",
+                        "description": "Funding offer example",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/OfferFunding"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "offer created",
+                        "schema": {
+                            "$ref": "#/definitions/FundingComplete"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -576,6 +610,101 @@
                 },
                 {
                     "$ref": "#definitions/Name"
+                }
+            ]
+        },
+        "FundingAttributes": {
+            "required": [
+                "type",
+                "modelId",
+                "rangeId",
+                "price",
+                "withContribution",
+                "guaranteed",
+                "maintained",
+                "details",
+                "legalNotice",
+                "visual",
+                "active"
+            ],
+            "properties": {
+                "allOf": [
+                    {
+                        "$ref": "#definitions/TimestampableOfferEntity"
+                    }
+                ],
+                "type": {
+                    "description": "NATIONAL or LOCAL",
+                    "type": "string",
+                    "default": "NATIONAL"
+                },
+                "label": {
+                    "description": "Label",
+                    "type": "string"
+                },
+                "modelId": {
+                    "description": "Model ID",
+                    "type": "string"
+                },
+                "rangeId": {
+                    "description": "Range ID",
+                    "type": "integer"
+                },
+                "price": {
+                    "description": "Price",
+                    "type": "integer"
+                },
+                "withContribution": {
+                    "description": "With Contribution",
+                    "type": "integer"
+                },
+                "guaranteed": {
+                    "description": "Guaranteed for 3 years ?",
+                    "type": "integer"
+                },
+                "maintained": {
+                    "description": "Include maintain pack ?",
+                    "type": "integer"
+                },
+                "details": {
+                    "description": "Details",
+                    "type": "string"
+                },
+                "legalNotice": {
+                    "description": "Legal notice",
+                    "type": "string"
+                },
+                "visual": {
+                    "description": "Visual Name",
+                    "type": "string"
+                },
+                "active": {
+                    "description": "Is offer active ?",
+                    "type": "integer"
+                }
+            }
+        },
+        "OfferFunding": {
+            "properties": {
+                "funding": {
+                    "type": "object",
+                    "allOf": [
+                        {
+                            "$ref": "#definitions/FundingAttributes"
+                        }
+                    ]
+                }
+            }
+        },
+        "FundingComplete": {
+            "properties": {
+                "active": {
+                    "type": "boolean"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#definitions/FundingAttributes"
                 }
             ]
         }
