@@ -48,24 +48,48 @@
                 "operationId": "createOffer",
                 "parameters": [
                     {
-                        "name": "offer",
+                        "name": "offer aftersale",
                         "in": "body",
                         "description": "Offer aftersale example",
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/OfferAftersale"
                         }
+                    },
+                    {
+                        "name": "offer sale - SecondhandCar",
+                        "in": "body",
+                        "description": "Offer sale secondhand example",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/OfferSecondhandCar"
+                        }
+                    },
+                    {
+                        "name": "offer sale - NewCar",
+                        "in": "body",
+                        "description": "Offer sale newcar example",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/OfferNewCar"
+                        }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "offer created",
+                        "description": "Offer created - Example for aftersale",
                         "schema": {
                             "$ref": "#/definitions/OfferAftersaleComplete"
                         }
                     },
                     "404": {
                         "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "Bad Subtype or Invalid terms",
                         "schema": {
                             "$ref": "#/definitions/Error"
                         }
@@ -91,13 +115,19 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "offers",
+                        "description": "offer updated - Example for sale",
                         "schema": {
                             "$ref": "#/definitions/OfferSaleComplete"
                         }
                     },
                     "404": {
                         "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "Bad Subtype or Invalid offer",
                         "schema": {
                             "$ref": "#/definitions/Error"
                         }
@@ -294,14 +324,14 @@
         },
         "OfferBaseAttributes": {
             "required": [
-                "agreement",
+                "agreements",
                 "title",
                 "visual",
                 "subtype",
                 "partner"
             ],
             "properties": {
-                "agreement": {
+                "agreements": {
                     "description": "1 or 0",
                     "type": "integer"
                 },
@@ -322,6 +352,40 @@
                 }
             }
         },
+        "OfferBaseCompleteAttributes": {
+            "required": [
+                "agreements",
+                "title",
+                "visual",
+                "subtype",
+                "partner"
+            ],
+            "properties": {
+                "agreements": {
+                    "description": "1 or 0",
+                    "type": "integer"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "visual": {
+                    "description": "visual name",
+                    "type": "string"
+                },
+                "partner": {
+                    "description": "partner id",
+                    "type": "integer"
+                },
+                "subtype": {
+                    "type": "object",
+                    "allOf": [
+                        {
+                            "$ref": "#definitions/Subtype"
+                        }
+                    ]
+                }
+            }
+        },
         "OfferAftersaleAttributes": {
             "required": [
                 "details"
@@ -331,16 +395,23 @@
                     "type": "string"
                 },
                 "discountSimple": {
-                    "description": "required according to the subtype",
+                    "description": "required according to the subtype, float",
                     "type": "string"
                 },
                 "discountDouble": {
-                    "description": "required according to the subtype",
+                    "description": "required according to the subtype, float",
                     "type": "string"
                 },
                 "discountTriple": {
-                    "description": "required according to the subtype",
+                    "description": "required according to the subtype, float",
                     "type": "string"
+                }
+            }
+        },
+        "OfferAftersaleTerms": {
+            "properties": {
+                "km": {
+                    "type": "integer"
                 }
             }
         },
@@ -353,7 +424,7 @@
             ],
             "properties": {
                 "monthly": {
-                    "type": "float"
+                    "type": "string"
                 },
                 "model": {
                     "description": "model id of the vehicle",
@@ -361,11 +432,83 @@
                 },
                 "xPosition": {
                     "description": "the abscissa of the div block that contains prices",
-                    "type": "float"
+                    "type": "string"
                 },
                 "yPosition": {
                     "description": "the ordinate of the div block that contains prices",
-                    "type": "float"
+                    "type": "string"
+                }
+            }
+        },
+        "OfferSecondhandCarTerms": {
+            "properties": {
+                "modelName": {
+                    "type": "string"
+                },
+                "engine": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "address": {
+                    "type": "string"
+                }
+            }
+        },
+        "OfferNewCarTerms": {
+            "properties": {
+                "monthNumber": {
+                    "type": "integer"
+                },
+                "advancePayment": {
+                    "description": "float",
+                    "type": "string"
+                },
+                "monthRentalNumber": {
+                    "type": "integer"
+                },
+                "monthly": {
+                    "description": "float",
+                    "type": "string"
+                },
+                "priceDate": {
+                    "type": "string",
+                    "format": "y-m-d"
+                },
+                "modelName": {
+                    "type": "string"
+                },
+                "engine": {
+                    "type": "string"
+                },
+                "options": {
+                    "type": "string"
+                },
+                "rangeName": {
+                    "type": "string"
+                },
+                "mgpMin": {
+                    "description": "float",
+                    "type": "string"
+                },
+                "mgpMax": {
+                    "description": "float",
+                    "type": "string"
+                },
+                "co2EmissionMin": {
+                    "description": "float",
+                    "type": "string"
+                },
+                "co2EmissionMax": {
+                    "description": "float",
+                    "type": "string"
+                },
+                "maximumKm": {
+                    "type": "integer"
+                },
+                "partner": {
+                    "type": "string"
                 }
             }
         },
@@ -388,6 +531,14 @@
                         },
                         {
                             "$ref": "#definitions/OfferAftersaleAttributes"
+                        }
+                    ]
+                },
+                "terms": {
+                    "type": "object",
+                    "allOf": [
+                        {
+                            "$ref": "#definitions/OfferAftersaleTerms"
                         }
                     ]
                 }
@@ -417,6 +568,40 @@
                 }
             }
         },
+        "OfferSecondhandCar": {
+            "properties": {
+                "terms": {
+                    "type": "object",
+                    "allOf": [
+                        {
+                            "$ref": "#definitions/OfferSecondhandCarTerms"
+                        }
+                    ]
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#definitions/OfferSale"
+                }
+            ]
+        },
+        "OfferNewCar": {
+            "properties": {
+                "terms": {
+                    "type": "object",
+                    "allOf": [
+                        {
+                            "$ref": "#definitions/OfferNewCarTerms"
+                        }
+                    ]
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#definitions/OfferSale"
+                }
+            ]
+        },
         "OfferAftersaleComplete": {
             "properties": {
                 "status": {
@@ -435,7 +620,7 @@
                     "$ref": "#definitions/TimestampableOfferEntity"
                 },
                 {
-                    "$ref": "#definitions/OfferBaseAttributes"
+                    "$ref": "#definitions/OfferBaseCompleteAttributes"
                 },
                 {
                     "$ref": "#definitions/Description"
@@ -489,7 +674,7 @@
                     "$ref": "#definitions/TimestampableOfferEntity"
                 },
                 {
-                    "$ref": "#definitions/OfferBaseAttributes"
+                    "$ref": "#definitions/OfferBaseCompleteAttributes"
                 },
                 {
                     "$ref": "#definitions/Description"

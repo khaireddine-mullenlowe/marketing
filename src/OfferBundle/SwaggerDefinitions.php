@@ -84,12 +84,26 @@ class SwaggerDefinitions
      *
      *     @SWG\Definition(
      *         definition="OfferBaseAttributes",
-     *         @SWG\Property(property="agreement", type="integer", description="1 or 0"),
+     *         @SWG\Property(property="agreements", type="integer", description="1 or 0"),
      *         @SWG\Property(property="title", type="string"),
      *         @SWG\Property(property="visual", type="string", description="visual name"),
      *         @SWG\Property(property="subtype", type="integer", description="subtype id"),
      *         @SWG\Property(property="partner", type="integer", description="partner id"),
-     *         required={"agreement", "title", "visual", "subtype", "partner"}
+     *         required={"agreements", "title", "visual", "subtype", "partner"}
+     *     ),
+     *
+     *     @SWG\Definition(
+     *         definition="OfferBaseCompleteAttributes",
+     *         @SWG\Property(property="agreements", type="integer", description="1 or 0"),
+     *         @SWG\Property(property="title", type="string"),
+     *         @SWG\Property(property="visual", type="string", description="visual name"),
+     *         @SWG\Property(property="partner", type="integer", description="partner id"),
+     *         @SWG\Property(property="subtype", type="object",
+     *             allOf={
+     *                 @SWG\Definition(ref="#definitions/Subtype"),
+     *             },
+     *         ),
+     *         required={"agreements", "title", "visual", "subtype", "partner"}
      *     ),
      *
      *     @SWG\Definition(
@@ -98,33 +112,96 @@ class SwaggerDefinitions
      *         @SWG\Property(
      *             property="discountSimple",
      *             type="string",
-     *             description="required according to the subtype"
+     *             description="required according to the subtype, float"
      *         ),
      *         @SWG\Property(
      *             property="discountDouble",
      *             type="string",
-     *             description="required according to the subtype"
+     *             description="required according to the subtype, float"
      *         ),
-     *         @SWG\Property(property="discountTriple", type="string", description="required according to the subtype"),
+     *         @SWG\Property(
+     *             property="discountTriple",
+     *             type="string",
+     *             description="required according to the subtype, float"
+     *         ),
      *         required={"details"}
      *     ),
      *
      *     @SWG\Definition(
+     *         definition="OfferAftersaleTerms",
+     *         @SWG\Property(property="km", type="integer")
+     *     ),
+     *
+     *     @SWG\Definition(
      *         definition="OfferSaleAttributes",
-     *         @SWG\Property(property="monthly", type="float"),
-     *         @SWG\Property(property="model", type="integer", description="model id of the vehicle"),
+     *         @SWG\Property(property="monthly", type="string"),
+     *         @SWG\Property(
+     *             property="model",
+     *             type="integer",
+     *             description="model id of the vehicle"),
      *         @SWG\Property(
      *             property="xPosition",
-     *             type="float",
+     *             type="string",
      *             description="the abscissa of the div block that contains prices"
      *         ),
      *         @SWG\Property(
      *             property="yPosition",
-     *             type="float",
+     *             type="string",
      *             description="the ordinate of the div block that contains prices"
      *         ),
      *         required={"monthly", "model", "xPosition", "yPosition"}
      *     ),
+     *
+     *     @SWG\Definition(
+     *         definition="OfferSecondhandCarTerms",
+     *         @SWG\Property(property="modelName", type="string"),
+     *         @SWG\Property(property="engine", type="string"),
+     *         @SWG\Property(property="email", type="string"),
+     *         @SWG\Property(property="address", type="string")
+     *     ),
+     *
+     *     @SWG\Definition(
+     *          definition="OfferNewCarTerms",
+     *          @SWG\Property(property="monthNumber", type="integer"),
+     *          @SWG\Property(
+     *              property="advancePayment",
+     *              type="string",
+     *              description="float"
+     *          ),
+     *          @SWG\Property(property="monthRentalNumber", type="integer"),
+     *          @SWG\Property(
+     *              property="monthly",
+     *              type="string",
+     *              description="float"
+     *          ),
+     *          @SWG\Property(property="priceDate", type="string", format="y-m-d"),
+     *          @SWG\Property(property="modelName", type="string"),
+     *          @SWG\Property(property="engine", type="string"),
+     *          @SWG\Property(property="options", type="string"),
+     *          @SWG\Property(property="rangeName", type="string"),
+     *          @SWG\Property(
+     *              property="mgpMin",
+     *              type="string",
+     *              description="float"
+     *          ),
+     *          @SWG\Property(
+     *              property="mgpMax",
+     *              type="string",
+     *              description="float"
+     *          ),
+     *          @SWG\Property(
+     *              property="co2EmissionMin",
+     *              type="string",
+     *              description="float"
+     *          ),
+     *          @SWG\Property(
+     *              property="co2EmissionMax",
+     *              type="string",
+     *              description="float"
+     *          ),
+     *          @SWG\Property(property="maximumKm", type="integer"),
+     *          @SWG\Property(property="partner", type="string")
+     *      ),
      *
      *     @SWG\definition(
      *         definition="OfferAftersale",
@@ -135,6 +212,11 @@ class SwaggerDefinitions
      *                 @SWG\Definition(ref="#definitions/Description"),
      *                 @SWG\Definition(ref="#definitions/Terms"),
      *                 @SWG\Definition(ref="#definitions/OfferAftersaleAttributes")
+     *             }
+     *         ),
+     *         @SWG\Property(property="terms", type="object",
+     *             allOf={
+     *                 @SWG\Definition(ref="#definitions/OfferAftersaleTerms")
      *             }
      *         )
      *     ),
@@ -153,13 +235,37 @@ class SwaggerDefinitions
      *     ),
      *
      *     @SWG\definition(
+     *         definition="OfferSecondhandCar",
+     *         allOf={
+     *             @SWG\Definition(ref="#definitions/OfferSale")
+     *         },
+     *         @SWG\Property(property="terms", type="object",
+     *             allOf={
+     *                 @SWG\Definition(ref="#definitions/OfferSecondhandCarTerms")
+     *             }
+     *         )
+     *     ),
+     *
+     *     @SWG\definition(
+     *         definition="OfferNewCar",
+     *         allOf={
+     *             @SWG\Definition(ref="#definitions/OfferSale")
+     *         },
+     *         @SWG\Property(property="terms", type="object",
+     *             allOf={
+     *                 @SWG\Definition(ref="#definitions/OfferNewCarTerms")
+     *             }
+     *         )
+     *     ),
+     *
+     *     @SWG\definition(
      *         definition="OfferAftersaleComplete",
      *         @SWG\Property(property="status", type="integer", default="1"),
      *         allOf={
      *             @SWG\Definition(ref="#definitions/Id"),
      *             @SWG\Definition(ref="#definitions/TimestampableEntity"),
      *             @SWG\Definition(ref="#definitions/TimestampableOfferEntity"),
-     *             @SWG\Definition(ref="#definitions/OfferBaseAttributes"),
+     *             @SWG\Definition(ref="#definitions/OfferBaseCompleteAttributes"),
      *             @SWG\Definition(ref="#definitions/Description"),
      *             @SWG\Definition(ref="#definitions/Terms"),
      *             @SWG\Definition(ref="#definitions/OfferAftersaleAttributes")
@@ -184,7 +290,7 @@ class SwaggerDefinitions
      *             @SWG\Definition(ref="#definitions/Id"),
      *             @SWG\Definition(ref="#definitions/TimestampableEntity"),
      *             @SWG\Definition(ref="#definitions/TimestampableOfferEntity"),
-     *             @SWG\Definition(ref="#definitions/OfferBaseAttributes"),
+     *             @SWG\Definition(ref="#definitions/OfferBaseCompleteAttributes"),
      *             @SWG\Definition(ref="#definitions/Description"),
      *             @SWG\Definition(ref="#definitions/Terms"),
      *             @SWG\Definition(ref="#definitions/OfferSaleAttributes")

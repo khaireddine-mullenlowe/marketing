@@ -94,20 +94,39 @@ class OfferController extends MullenloweRestController
      *     operationId="createOffer",
      *     tags={"offer"},
      *     @SWG\Parameter(
-     *         name="offer",
+     *         name="offer aftersale",
      *         in="body",
      *         required=true,
      *         description="Offer aftersale example",
      *         @SWG\Schema(ref="#/definitions/OfferAftersale")
      *     ),
+     *     @SWG\Parameter(
+     *         name="offer sale - SecondhandCar",
+     *         in="body",
+     *         required=true,
+     *         description="Offer sale secondhand example",
+     *         @SWG\Schema(ref="#/definitions/OfferSecondhandCar")
+     *     ),
+     *     @SWG\Parameter(
+     *         name="offer sale - NewCar",
+     *         in="body",
+     *         required=true,
+     *         description="Offer sale newcar example",
+     *         @SWG\Schema(ref="#/definitions/OfferNewCar")
+     *     ),
      *     @SWG\Response(
      *         response="200",
-     *         description="offer created",
+     *         description="Offer created - Example for aftersale",
      *         @SWG\Schema(ref="#/definitions/OfferAftersaleComplete")
      *     ),
      *     @SWG\Response(
      *         response="404",
      *         description="not found",
+     *         @SWG\Schema(ref="#/definitions/Error")
+     *     ),
+     *     @SWG\Response(
+     *         response="500",
+     *         description="Bad Subtype or Invalid terms",
      *         @SWG\Schema(ref="#/definitions/Error")
      *     )
      * )
@@ -175,12 +194,17 @@ class OfferController extends MullenloweRestController
      *     ),
      *     @SWG\Response(
      *         response="200",
-     *         description="offers",
+     *         description="offer updated - Example for sale",
      *         @SWG\Schema(ref="#/definitions/OfferSaleComplete")
      *     ),
      *     @SWG\Response(
      *         response="404",
      *         description="not found",
+     *         @SWG\Schema(ref="#/definitions/Error")
+     *     ),
+     *     @SWG\Response(
+     *         response="500",
+     *         description="Bad Subtype or Invalid offer",
      *         @SWG\Schema(ref="#/definitions/Error")
      *     )
      * )
