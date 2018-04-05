@@ -1,10 +1,13 @@
 <?php
 
 use Codeception\Test\Unit;
+use DateTime;
 use OfferBundle\Entity\OfferFormType;
+use OfferBundle\Entity\OfferSale;
 use OfferBundle\Entity\OfferSubtype;
 use OfferBundle\Entity\OfferType;
 use OfferBundle\Form\OfferAftersaleTermsType;
+use OfferBundle\Form\OfferNewCarTermsType;
 use OfferBundle\Form\OfferSecondhandCarTermsType;
 use OfferBundle\Service\OfferTerms;
 
@@ -35,19 +38,19 @@ class OfferTermsTest extends Unit
         $this->subtype->setName('Test')->setType($this->type)->setFormType($this->formType)->setRank(1);
     }
 
-    public function testGenerateAftersaleTerms()
+    public function testGenerateAftersaleTermsOk()
     {
         $this->type->setCategory('AFTERSALE');
         $this->subtype->setTerms('Offre jusqu\'au #endDate#, et jusqu\'à #km# km.');
 
-        $endDate = (new \DateTime('now'))->add(new DateInterval('P30D'));
+        $endDate = (new DateTime('now'))->add(new DateInterval('P30D'));
 
         $data = [
             'terms' => [
                 'km' => '30000',
             ],
             'offer' => [
-                'startDate' => (new \DateTime('now'))->add(new DateInterval('P3D')),
+                'startDate' => (new DateTime('now'))->add(new DateInterval('P3D')),
                 'endDate' => $endDate,
             ],
         ];
@@ -76,7 +79,7 @@ class OfferTermsTest extends Unit
         );
     }
 
-    public function testGenerateSecondhandCarTerms()
+    public function testGenerateSecondhandCarTermsOk()
     {
         $this->type->setCategory('SECONDHANDCAR');
         $this->subtype->setTerms(
@@ -84,7 +87,7 @@ class OfferTermsTest extends Unit
             Contact par mail : #email# ou par courrier #address#'
         );
 
-        $endDate = (new \DateTime('now'))->add(new DateInterval('P30D'));
+        $endDate = (new DateTime('now'))->add(new DateInterval('P30D'));
 
         $data = [
             'terms' => [
@@ -94,7 +97,7 @@ class OfferTermsTest extends Unit
                 'address' => '3 rue des poneys 75015 PARIS',
             ],
             'offer' => [
-                'startDate' => (new \DateTime('now'))->add(new DateInterval('P3D')),
+                'startDate' => (new DateTime('now'))->add(new DateInterval('P3D')),
                 'endDate' => $endDate,
             ],
         ];
@@ -127,7 +130,7 @@ class OfferTermsTest extends Unit
         );
     }
 
-    public function testGenerateNewCarTerms()
+    public function testGenerateNewCarTermsOk()
     {
         $this->type->setCategory('NEWCAR');
         $this->subtype->setTerms(
@@ -139,8 +142,8 @@ class OfferTermsTest extends Unit
             Offre proposé par #partner#.'
         );
 
-        $startDate = (new \DateTime('now'))->add(new DateInterval('P3D'));
-        $endDate = (new \DateTime('now'))->add(new DateInterval('P30D'));
+        $startDate = (new DateTime('now'))->add(new DateInterval('P3D'));
+        $endDate = (new DateTime('now'))->add(new DateInterval('P30D'));
 
         $data = [
             'terms' => [
@@ -214,5 +217,53 @@ class OfferTermsTest extends Unit
             Offre proposé par Concession PARIS.',
             $res
         );
+    }
+
+    public function testUpdateTermsOk()
+    {
+        $this->type->setCategory('NEWCAR');
+
+        $offer = new OfferSale($this->subtype);
+        $offer->setTerms(
+            'Offre du 08 Avril 2019 au 15 June 2019 pour une A5 Audi A5 Sportback'
+        );
+        $offer->setEndDate('2019-06-15');
+
+        $res = $this->service->generateUpdatedTerms($offer, '2019-06-17');
+
+        $this->assertEquals(
+            'Offre du 08 Avril 2019 au 17 June 2019 pour une A5 Audi A5 Sportback',
+            $res
+        );
+    }
+
+    /**
+     * @expectedException InvalidArgumentException
+     */
+    public function testGenerateTermsKo()
+    {
+        $this->type->setCategory('AFTERSALE');
+        $this->subtype->setTerms('Offre jusqu\'au #endDate#, et jusqu\'à #km# km.');
+
+        $endDate = (new DateTime('now'))->add(new DateInterval('P30D'));
+
+        $data = [
+            'terms' => [],
+            'offer' => [
+                'startDate' => (new DateTime('now'))->add(new DateInterval('P3D')),
+                'endDate' => $endDate,
+            ],
+        ];
+
+        $form = $this
+            ->getMockBuilder(OfferAftersaleTermsType::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['submit', 'isValid', 'getData'])
+            ->getMock();
+
+        $form->method('submit');
+        $form->method('isValid')->will($this->returnValue(false));
+
+        $this->service->generateNewTerms($form, $data, $this->subtype);
     }
 }
