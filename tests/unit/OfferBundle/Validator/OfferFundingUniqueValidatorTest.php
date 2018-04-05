@@ -2,7 +2,6 @@
 
 namespace Tests\unit\OfferBundle\Service;
 
-use Doctrine\Common\Persistence\ObjectRepository;
 use OfferBundle\Entity\OfferFunding;
 use OfferBundle\Repository\OfferFundingRepository;
 use OfferBundle\Validator\Constraints\OfferFundingUnique;

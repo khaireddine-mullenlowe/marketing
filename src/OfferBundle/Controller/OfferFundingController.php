@@ -10,7 +10,10 @@ use OfferBundle\Form\OfferFundingType;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Swagger\Annotations as SWG;
+<<<<<<< HEAD
 use Symfony\Component\HttpFoundation\Response;
+=======
+>>>>>>> Funding offer : Create
 
 /**
  * Class OfferFundingController
@@ -25,7 +28,11 @@ class OfferFundingController extends MullenloweRestController
      * @Rest\Post("/funding")
      *
      * @param Request $request
+<<<<<<< HEAD
      * @return \FOS\RestBundle\View\View
+=======
+     * @return View
+>>>>>>> Funding offer : Create
      *
      * @SWG\Post(
      *     path="/",
@@ -40,7 +47,11 @@ class OfferFundingController extends MullenloweRestController
      *         @SWG\Schema(ref="#/definitions/OfferFunding")
      *     ),
      *     @SWG\Response(
+<<<<<<< HEAD
      *         response="201",
+=======
+     *         response="200",
+>>>>>>> Funding offer : Create
      *         description="OfferFunding created",
      *         @SWG\Schema(ref="#/definitions/OfferFundingComplete")
      *     ),
@@ -48,18 +59,25 @@ class OfferFundingController extends MullenloweRestController
      *         response="404",
      *         description="not found",
      *         @SWG\Schema(ref="#/definitions/Error")
+<<<<<<< HEAD
      *     ),
      *     @SWG\Response(
      *         response=500,
      *         description="Bad request",
      *         @SWG\Schema(ref="#/definitions/Error")
+=======
+>>>>>>> Funding offer : Create
      *     )
      * )
      */
     public function postAction(Request $request)
     {
         if ($request->request->count() === 0 || !$request->request->has('funding')) {
+<<<<<<< HEAD
             throw new BadRequestHttpException(self::CONTEXT, 'Input data are empty.');
+=======
+            throw new BadRequestHttpException(self::CONTEXT,'Input data are empty.');
+>>>>>>> Funding offer : Create
         }
 
         $data = $request->request->get('funding');
@@ -78,7 +96,11 @@ class OfferFundingController extends MullenloweRestController
         $em->persist($funding);
         $em->flush();
 
+<<<<<<< HEAD
         return $this->createView($funding, Response::HTTP_CREATED);
+=======
+        return $this->createView($funding);
+>>>>>>> Funding offer : Create
     }
 
 }

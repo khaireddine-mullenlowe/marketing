@@ -37,7 +37,11 @@ class OfferFundingControllerCest
         ';
 
         $I->sendPOST('/offer/funding', $data);
+<<<<<<< HEAD
         $I->seeResponseCodeIs(Response::HTTP_CREATED);
+=======
+        $I->seeResponseCodeIs(Response::HTTP_OK);
+>>>>>>> Funding offer : Create
         $I->seeResponseIsJson();
         $I->seeResponseContains('OfferFunding');
     }

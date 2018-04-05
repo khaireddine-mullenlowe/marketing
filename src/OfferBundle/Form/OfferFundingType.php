@@ -44,6 +44,7 @@ class OfferFundingType extends AbstractType
             'csrf_protection'    => false,
         ]);
     }
+<<<<<<< HEAD
 
     /**
      * {@inheritdoc}
@@ -52,4 +53,6 @@ class OfferFundingType extends AbstractType
     {
         return null;
     }
+=======
+>>>>>>> Funding offer : Create
 }

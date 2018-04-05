@@ -2,6 +2,7 @@
 
 namespace OfferBundle\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use OfferBundle\Entity\Traits\TimestampableOfferEntityTrait;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -18,6 +19,7 @@ abstract class BaseOffer
     use TimestampableEntity;
 
     use TimestampableOfferEntityTrait;
+
     /**
      * @var int
      *
