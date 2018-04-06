@@ -4,6 +4,7 @@ namespace OfferBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use OfferBundle\Service\OfferTerms;
 
 /**
  * Subtype
@@ -63,11 +64,16 @@ class OfferSubtype
     protected $formType;
 
     /**
-     * @var string
+     * @var OfferTermsTemplate
      *
-     * @ORM\Column(name="terms", type="text")
+     * @ORM\ManyToOne(
+     *     targetEntity="OfferTermsTemplate",
+     *     inversedBy="subtypes",
+     *     fetch="EAGER"
+     * )
+     * @ORM\JoinColumn(referencedColumnName="id")
      */
-    protected $terms;
+    protected $termsTemplate;
 
     /**
      * @var ArrayCollection
@@ -209,13 +215,13 @@ class OfferSubtype
     /**
      * Set terms
      *
-     * @param string $terms
+     * @param OfferTermsTemplate $offerTermsTemplate
      *
      * @return OfferSubtype
      */
-    public function setTerms(string $terms)
+    public function setTermsTemplate(OfferTermsTemplate $offerTermsTemplate)
     {
-        $this->terms = $terms;
+        $this->termsTemplate = $offerTermsTemplate;
 
         return $this;
     }
@@ -223,10 +229,10 @@ class OfferSubtype
     /**
      * Get terms
      *
-     * @return string
+     * @return string|OfferTermsTemplate
      */
-    public function getTerms() : string
+    public function getTermsTemplate() : OfferTermsTemplate
     {
-        return $this->terms;
+        return $this->termsTemplate;
     }
 }

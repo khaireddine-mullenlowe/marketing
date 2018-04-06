@@ -20,31 +20,7 @@ class OfferTerms
     */
     public function generateNewTerms($form, $data, OfferSubtype $subtype)
     {
-        $finalTerms = $subtype->getTerms();
-
-        $dataForTerms = $data['terms'];
-        $dataForTerms['startDate'] = $data['offer']['startDate'];
-        $dataForTerms['endDate']   = $data['offer']['endDate'];
-
-        $form->submit($dataForTerms);
-
-        if ($form->isValid()) {
-            $dataToInsert = $form->getData();
-
-            foreach ($dataToInsert as $key => $value) {
-                if (!empty($value)) {
-                    $finalTerms = str_replace('#'.$key.'#', $value, $finalTerms);
-                }
-            }
-        }
-
-        $regex = '/\#[a-zA-Z2]{1,20}\#/';
-
-        preg_match($regex, $finalTerms, $res);
-
-        if (!empty($res)) {
-            throw new InvalidArgumentException(sprintf('Terms are not complete %s', $res[0]));
-        }
+        $finalTerms = $subtype->getTermsTemplate()->getTemplate();
 
         return $finalTerms;
     }
