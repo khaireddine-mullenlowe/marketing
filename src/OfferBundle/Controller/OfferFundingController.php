@@ -10,6 +10,7 @@ use OfferBundle\Form\OfferFundingType;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Swagger\Annotations as SWG;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class OfferFundingController
@@ -24,7 +25,7 @@ class OfferFundingController extends MullenloweRestController
      * @Rest\Post("/funding")
      *
      * @param Request $request
-     * @return View
+     * @return \FOS\RestBundle\View\View
      *
      * @SWG\Post(
      *     path="/",
@@ -39,7 +40,7 @@ class OfferFundingController extends MullenloweRestController
      *         @SWG\Schema(ref="#/definitions/OfferFunding")
      *     ),
      *     @SWG\Response(
-     *         response="200",
+     *         response="201",
      *         description="OfferFunding created",
      *         @SWG\Schema(ref="#/definitions/OfferFundingComplete")
      *     ),
@@ -47,13 +48,18 @@ class OfferFundingController extends MullenloweRestController
      *         response="404",
      *         description="not found",
      *         @SWG\Schema(ref="#/definitions/Error")
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="Bad request",
+     *         @SWG\Schema(ref="#/definitions/Error")
      *     )
      * )
      */
     public function postAction(Request $request)
     {
         if ($request->request->count() === 0 || !$request->request->has('funding')) {
-            throw new BadRequestHttpException(self::CONTEXT,'Input data are empty.');
+            throw new BadRequestHttpException(self::CONTEXT, 'Input data are empty.');
         }
 
         $data = $request->request->get('funding');
@@ -72,7 +78,7 @@ class OfferFundingController extends MullenloweRestController
         $em->persist($funding);
         $em->flush();
 
-        return $this->createView($funding);
+        return $this->createView($funding, Response::HTTP_CREATED);
     }
 
 }

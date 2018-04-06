@@ -10,4 +10,5 @@ use Doctrine\ORM\EntityRepository;
  */
 class OfferFundingRepository extends EntityRepository
 {
+
 }

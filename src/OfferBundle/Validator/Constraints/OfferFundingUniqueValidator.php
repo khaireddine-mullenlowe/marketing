@@ -2,21 +2,20 @@
 
 namespace OfferBundle\Validator\Constraints;
 
-
-use Doctrine\Common\Persistence\ObjectManager;
 use OfferBundle\Entity\OfferFunding;
+use OfferBundle\Repository\OfferFundingRepository;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
 class OfferFundingUniqueValidator extends ConstraintValidator
 {
-    /** @var ObjectManager */
-    protected $em;
+    /** @var OfferFundingRepository */
+    protected $repository;
 
-    public function __construct(ObjectManager $em)
+    public function __construct(OfferFundingRepository $repository)
     {
-        $this->em = $em;
+        $this->entityRepository = $repository;
     }
 
     /**
@@ -35,8 +34,7 @@ class OfferFundingUniqueValidator extends ConstraintValidator
             throw new UnexpectedTypeException($value, 'OfferFunding');
         }
 
-        $offer = $this->em->getRepository('OfferBundle:OfferFunding')
-            ->findOneBy(['label' => $value->getLabel()]);
+        $offer = $this->entityRepository->findOneBy(['label' => $value->getLabel()]);
         if (null === $offer) {
             return;
         }

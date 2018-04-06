@@ -28,3 +28,10 @@ services:
         resource: '../../src/OfferBundle/Controller'
         public: true
         tags: ['controller.service_arguments']
+
+    OfferBundle\Repository\OfferFundingRepository:
+        factory: 'doctrine.orm.default_entity_manager:getRepository'
+        arguments:
+            - OfferBundle\Entity\OfferFunding
+        public:  true
+

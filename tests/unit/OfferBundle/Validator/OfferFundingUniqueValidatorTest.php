@@ -2,17 +2,15 @@
 
 namespace Tests\unit\OfferBundle\Service;
 
-use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\Persistence\ObjectRepository;
 use OfferBundle\Entity\OfferFunding;
+use OfferBundle\Repository\OfferFundingRepository;
 use OfferBundle\Validator\Constraints\OfferFundingUnique;
 use OfferBundle\Validator\Constraints\OfferFundingUniqueValidator;
 use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;
 
 class OfferFundingUniqueValidatorTest extends ConstraintValidatorTestCase
 {
-
-    protected $em;
     protected $repository;
     /** @var OfferFunding */
     protected $offerFunding;
@@ -35,11 +33,7 @@ class OfferFundingUniqueValidatorTest extends ConstraintValidatorTestCase
             ->setEndDate((new \DateTime())->add(new \DateInterval('P40D'))->format('Y-m-d'))
         ;
 
-        $this->em = $this->getMockBuilder(ObjectManager::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $this->repository = $this->getMockBuilder(ObjectRepository::class)
+        $this->repository = $this->getMockBuilder(OfferFundingRepository::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -47,11 +41,7 @@ class OfferFundingUniqueValidatorTest extends ConstraintValidatorTestCase
             ->method('findOneBy')
             ->willReturn($this->offerFunding);
 
-        $this->em->expects($this->any())
-            ->method('getRepository')
-            ->willReturn($this->repository);
-
-        return new OfferFundingUniqueValidator($this->em);
+        return new OfferFundingUniqueValidator($this->repository);
     }
 
     public function testNoViolationPeriodeAfter()
