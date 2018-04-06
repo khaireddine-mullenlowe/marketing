@@ -33,5 +33,4 @@ services:
         factory: 'doctrine.orm.default_entity_manager:getRepository'
         arguments:
             - OfferBundle\Entity\OfferFunding
-        public:  true
 
