@@ -10,8 +10,5 @@ use Doctrine\ORM\EntityRepository;
  */
 class OfferFundingRepository extends EntityRepository
 {
-<<<<<<< HEAD
 
-=======
->>>>>>> Funding offer : Create
 }
