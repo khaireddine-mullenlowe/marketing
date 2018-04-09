@@ -236,4 +236,33 @@ class OfferSale extends BaseOffer
     {
         return $this->model;
     }
+
+    /**
+     * @param OfferNewCarTermsProperty|OfferSecondhandCarTermsProperty $termsProperty
+     * @return OfferSale
+     */
+    public function setTermsProperty($termsProperty)
+    {
+        $category = $this->getSubtype()->getType()->getCategory();
+        if ($category === 'SECONDHANDCAR') {
+            $this->termsPropertySecondhandCar = $termsProperty;
+        } else {
+            $this->termsPropertyNewCar = $termsProperty;
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return OfferSecondhandCarTermsProperty|OfferNewCarTermsProperty
+     */
+    public function getTermsProperty()
+    {
+        $category = $this->getSubtype()->getType()->getCategory();
+        if ($category === 'SECONDHANDCAR') {
+            return $this->termsPropertySecondhandCar;
+        }
+
+        return $this->termsPropertyNewCar;
+    }
 }

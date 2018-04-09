@@ -1,5 +1,1 @@
 services:
-    offer.terms:
-        class: OfferBundle\Service\OfferTerms
-        arguments: []
-        public: true
