@@ -19,6 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\View\View;
 use Mullenlowe\CommonBundle\Controller\MullenloweRestController;
 use Swagger\Annotations as SWG;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class OfferController
@@ -121,7 +122,7 @@ class OfferController extends MullenloweRestController
      *         @SWG\Schema(ref="#/definitions/OfferNewCar")
      *     ),
      *     @SWG\Response(
-     *         response="200",
+     *         response="201",
      *         description="Offer created - Example for aftersale",
      *         @SWG\Schema(ref="#/definitions/OfferAftersaleComplete")
      *     ),
@@ -187,7 +188,7 @@ class OfferController extends MullenloweRestController
         $em->persist($offer);
         $em->flush();
 
-        return $this->createView($offer);
+        return $this->createView($offer, Response::HTTP_CREATED);
     }
 
     /**

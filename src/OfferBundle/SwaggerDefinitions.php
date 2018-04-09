@@ -341,6 +341,60 @@ class SwaggerDefinitions
      *             @SWG\Definition(ref="#definitions/Name")
      *         }
      *     )
+     *     @SWG\definition(
+     *         definition:"OfferFunding",
+     *         allOf={
+     *             @SWG\Definition(ref="#definitions/TimestampableOfferEntity")
+     *         },
+     *         @SWG\Property(
+     *             property="type",
+     *             type="string"
+     *         ),
+     *         @SWG\Property(
+     *             property="label",
+     *             type="string"
+     *         ),
+     *         @SWG\Property(
+     *             property="modelId",
+     *             type="string"
+     *         ),
+     *         @SWG\Property(
+     *             property="rangeId",
+     *             type="string"
+     *         ),
+     *         @SWG\Property(
+     *             property="price",
+     *             type="string"
+     *         ),
+     *         @SWG\Property(
+     *             property="withContribution",
+     *             type="boolean"
+     *         ),
+     *         @SWG\Property(
+     *             property="guaranteed",
+     *             type="boolean"
+     *         ),
+     *         @SWG\Property(
+     *             property="maintained",
+     *             type="boolean"
+     *         ),
+     *         @SWG\Property(
+     *             property="details",
+     *             type="string"
+     *         ),
+     *         @SWG\Property(
+     *             property="legalNotice",
+     *             type="string"
+     *         ),
+     *         @SWG\Property(
+     *             property="visual",
+     *             type="string"
+     *         ),
+     *         @SWG\Property(
+     *             property="active",
+     *             type="boolean"
+     *         )
+     *     )
      * )
      */
 }
