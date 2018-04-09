@@ -28,7 +28,7 @@ coverage:
         - src/*
         - vendor/mullenlowe/*/src/*
     exclude:
-        - src/*Bundle/DataFixtures/*
+        - src/*Bundle/DataFixtures
         - src/*Bundle/Resources/*
         - vendor/mullenlowe/*/src/Resources/*
     low_limit: 30

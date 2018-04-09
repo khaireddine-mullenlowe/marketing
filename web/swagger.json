@@ -58,7 +58,7 @@
                     }
                 ],
                 "responses": {
-                    "200": {
+                    "201": {
                         "description": "offer created",
                         "schema": {
                             "$ref": "#/definitions/OfferAftersaleComplete"

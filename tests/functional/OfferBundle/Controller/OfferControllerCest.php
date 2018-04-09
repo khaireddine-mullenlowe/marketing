@@ -34,7 +34,7 @@ class OfferControllerCest
         ';
 
         $I->sendPOST('/offer/', $data);
-        $I->seeResponseCodeIs(Response::HTTP_OK);
+        $I->seeResponseCodeIs(Response::HTTP_CREATED);
         $I->seeResponseIsJson();
         $I->seeResponseContains('Offer');
     }
@@ -66,7 +66,7 @@ class OfferControllerCest
         ';
 
         $I->sendPOST('/offer/', $data);
-        $I->seeResponseCodeIs(Response::HTTP_OK);
+        $I->seeResponseCodeIs(Response::HTTP_CREATED);
         $I->seeResponseIsJson();
         $I->seeResponseContains('Offer');
     }
