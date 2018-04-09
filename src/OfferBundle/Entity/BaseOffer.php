@@ -2,11 +2,11 @@
 
 namespace OfferBundle\Entity;
 
-use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use OfferBundle\Entity\Traits\TimestampableOfferEntityTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 use OfferBundle\Validator\Constraints as OfferAssert;
-use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 /**
  * BaseOffer
