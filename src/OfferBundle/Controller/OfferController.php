@@ -6,7 +6,10 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 use InvalidArgumentException;
 use Mullenlowe\CommonBundle\Exception\BadRequestHttpException;
 use OfferBundle\Entity\OfferAftersale;
+use OfferBundle\Entity\OfferAftersaleTermsProperty;
 use OfferBundle\Entity\OfferSale;
+use OfferBundle\Entity\OfferSecondhandCarTermsProperty;
+use OfferBundle\Entity\OfferNewCarTermsProperty;
 use OfferBundle\Form\OfferAftersaleTermsType;
 use OfferBundle\Form\OfferAftersaleType;
 use OfferBundle\Form\OfferNewCarTermsType;
@@ -31,6 +34,7 @@ class OfferController extends MullenloweRestController
             'formType'     => OfferAftersaleType::class,
             'formTerms'    => OfferAftersaleTermsType::class,
             'repository'   => 'OfferBundle:OfferAftersale',
+            'termsEntity'  => OfferAftersaleTermsProperty::class,
         ],
         'secondhandcar' => [
             'name'         => 'SecondHandCar',
@@ -38,6 +42,7 @@ class OfferController extends MullenloweRestController
             'formType'     => OfferSaleType::class,
             'formTerms'    => OfferSecondhandCarTermsType::class,
             'repository'   => 'OfferBundle:OfferSale',
+            'termsEntity'  => OfferSecondhandCarTermsProperty::class,
         ],
         'newcar'        => [
             'name'         => 'NewCar',
@@ -45,6 +50,7 @@ class OfferController extends MullenloweRestController
             'formType'     => OfferSaleType::class,
             'formTerms'    => OfferNewCarTermsType::class,
             'repository'   => 'OfferBundle:OfferSale',
+            'termsEntity'  => OfferNewCarTermsProperty::class,
         ],
     ];
 
@@ -149,8 +155,15 @@ class OfferController extends MullenloweRestController
         $type = self::OFFERTYPE[strtolower($subtype->getType()->getCategory())];
 
         if (!empty($dataInput['terms'])) {
-            $formTerms = $this->createForm($type['formTerms']);
-            $offerData['terms'] = $this->get('offer.terms')->generateNewTerms($formTerms, $dataInput, $subtype);
+            $termsProperty = new $type['termsEntity'];
+            $formTerms = $this->createForm($type['formTerms'], $termsProperty);
+            $formTerms->submit($dataInput['terms']);
+
+            if (!$formTerms->isSubmitted()) {
+                throw new BadRequestHttpException(static::CONTEXT, "Form fields are not valid for terms");
+            } elseif (!$formTerms->isValid()) {
+                return $this->view($formTerms);
+            }
         } else {
             throw new InvalidArgumentException('Invalid terms');
         }
@@ -166,6 +179,9 @@ class OfferController extends MullenloweRestController
         } elseif (!$form->isValid()) {
             return $this->view($form);
         }
+
+        $offer->setTermsProperty($termsProperty);
+        $termsProperty->setOffer($offer);
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($offer);

@@ -19,7 +19,7 @@ class OfferSale extends BaseOffer
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var OfferSubtype
@@ -46,7 +46,7 @@ class OfferSale extends BaseOffer
      *
      * @ORM\Column(name="xPosition", type="float")
      */
-    private $xPosition;
+    protected $xPosition;
 
     /**
      * @var float
@@ -57,14 +57,14 @@ class OfferSale extends BaseOffer
      *
      * @ORM\Column(name="yPosition", type="float")
      */
-    private $yPosition;
+    protected $yPosition;
 
     /**
      * @var float
      *
      * @ORM\Column(name="monthly", type="float")
      */
-    private $monthly;
+    protected $monthly;
 
     /**
      * @var int
@@ -73,7 +73,29 @@ class OfferSale extends BaseOffer
      *
      * @ORM\Column(name="model", type="integer")
      */
-    private $model;
+    protected $model;
+
+    /**
+     * @var OfferSecondhandCarTermsProperty
+     *
+     * @ORM\OneToOne(
+     *     targetEntity="OfferSecondhandCarTermsProperty",
+     *     mappedBy="offer",
+     *     cascade={"persist", "remove"}
+     * )
+     */
+    protected $termsPropertySecondhandCar;
+
+    /**
+     * @var OfferNewCarTermsProperty
+     *
+     * @ORM\OneToOne(
+     *     targetEntity="OfferNewCarTermsProperty",
+     *     mappedBy="offer",
+     *     cascade={"persist", "remove"}
+     * )
+     */
+    protected $termsPropertyNewCar;
 
     /**
      * OfferSale constructor.

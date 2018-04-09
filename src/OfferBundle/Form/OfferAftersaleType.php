@@ -29,7 +29,6 @@ class OfferAftersaleType extends AbstractType
             ->add('visual', TextType::class)
             ->add('title', TextType::class)
             ->add('description', TextType::class)
-            ->add('terms', TextType::class)
             ->add('agreements', IntegerType::class)
             ->add('discountSimple', TextType::class)
             ->add('discountDouble', TextType::class)

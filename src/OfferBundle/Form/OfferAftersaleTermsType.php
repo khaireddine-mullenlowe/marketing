@@ -2,15 +2,10 @@
 
 namespace OfferBundle\Form;
 
-use DateTime;
-use OfferBundle\DataTransformer\DateToStringMonthTransformer;
-use OfferBundle\DataTransformer\ThousandSeparationTransformer;
+use OfferBundle\Entity\OfferAftersaleTermsProperty;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -27,23 +22,8 @@ class OfferAftersaleTermsType extends AbstractType
     {
         $builder
             ->add(
-                'endDate',
-                TextType::class
-            )
-            ->add(
                 'km',
                 IntegerType::class
-            );
-
-        $builder
-            ->get('endDate')->addModelTransformer(
-                new DateToStringMonthTransformer()
-            );
-
-        $builder
-            ->get('km')
-            ->addModelTransformer(
-                new ThousandSeparationTransformer()
             );
     }
 
@@ -53,6 +33,7 @@ class OfferAftersaleTermsType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
+            'data_class'         => OfferAftersaleTermsProperty::class,
             'csrf_protection'    => false,
             'allow_extra_fields' => true,
         ]);

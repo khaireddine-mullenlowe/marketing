@@ -2,17 +2,14 @@
 
 namespace OfferBundle\Form;
 
-use OfferBundle\DataTransformer\DateToStringMonthTransformer;
+use OfferBundle\Entity\OfferSecondhandCarTermsProperty;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\Email;
-use Symfony\Component\Validator\Constraints\NotNull;
-use Symfony\Component\Validator\Constraints\Regex;
 
 /**
- * Class OfferAftersaleTermsType
+ * Class OfferSecondhandTermsType
  * @package OfferBundle\Form
  */
 class OfferSecondhandCarTermsType extends AbstractType
@@ -25,56 +22,20 @@ class OfferSecondhandCarTermsType extends AbstractType
     {
         $builder
             ->add(
-                'endDate',
-                TextType::class,
-                [
-                    'constraints' => [
-                        new NotNull(),
-                        new Regex('/[0-9]{2} [a-zA-Z]{1,10} [0-9]{4}/'),
-                    ],
-                ]
-            )
-            ->add(
                 'modelName',
-                TextType::class,
-                [
-                    'constraints' => [
-                        new NotNull(['message' => 'modelName must not be empty']),
-                    ],
-                ]
+                TextType::class
             )
             ->add(
                 'engine',
-                TextType::class,
-                [
-                    'constraints' => [
-                        new NotNull(['message' => 'engine must not be empty']),
-                    ],
-                ]
+                TextType::class
             )
             ->add(
                 'email',
-                TextType::class,
-                [
-                    'constraints' => [
-                        new NotNull(['message' => 'email must not be empty']),
-                        new Email(),
-                    ],
-                ]
+                TextType::class
             )
             ->add(
                 'address',
-                TextType::class,
-                [
-                    'constraints' => [
-                        new NotNull(['message' => 'address must not be empty']),
-                    ],
-                ]
-            );
-
-        $builder
-            ->get('endDate')->addModelTransformer(
-                new DateToStringMonthTransformer()
+                TextType::class
             );
     }
 
@@ -84,6 +45,7 @@ class OfferSecondhandCarTermsType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
+            'data_class'         => OfferSecondhandCarTermsProperty::class,
             'csrf_protection'    => false,
             'allow_extra_fields' => true,
         ]);

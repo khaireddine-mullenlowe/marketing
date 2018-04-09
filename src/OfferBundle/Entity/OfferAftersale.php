@@ -93,9 +93,10 @@ class OfferAftersale extends BaseOffer
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(
+     * @ORM\OneToOne(
      *     targetEntity="OfferAftersaleTermsProperty",
-     *     mappedBy="offer"
+     *     mappedBy="offer",
+     *     cascade={"persist", "remove"}
      * )
      */
     protected $termsProperties;
@@ -238,5 +239,23 @@ class OfferAftersale extends BaseOffer
     public function getDiscountTriple()
     {
         return $this->discountTriple;
+    }
+
+    /**
+     * @return OfferAftersale
+     */
+    public function setTermsProperty($termsProperty)
+    {
+        $this->termsProperties = $termsProperty;
+
+        return $this;
+    }
+
+    /**
+     * @return OfferAftersaleTermsProperty
+     */
+    public function getTermsProperty()
+    {
+        return $this->termsProperties;
     }
 }

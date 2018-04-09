@@ -3,11 +3,12 @@
 namespace OfferBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * OfferTermsProperty
+ * OfferAftersaleTermsProperty
  *
- * @ORM\Table(name="offer_terms_property")
+ * @ORM\Table(name="offer_aftersale_terms_property")
  * @ORM\Entity(repositoryClass="OfferBundle\Repository\OfferAftersaleTermsPropertyRepository")
  */
 class OfferAftersaleTermsProperty
@@ -19,32 +20,27 @@ class OfferAftersaleTermsProperty
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=255)
-     */
-    private $name;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="value", type="string", length=255)
-     */
-    private $value;
+    protected $id;
 
     /**
      * @var OfferAftersale
      *
-     * @ORM\ManyToOne(
+     * @ORM\OneToOne(
      *     targetEntity="OfferAftersale",
      *     inversedBy="termsProperties"
      * )
      * @ORM\JoinColumn(referencedColumnName="id")
      */
     protected $offer;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="km", type="integer")
+     *
+     * @Assert\Range(min=1, max=100000)
+     */
+    protected $km;
 
     /**
      * Get id
@@ -57,50 +53,50 @@ class OfferAftersaleTermsProperty
     }
 
     /**
-     * Set name
+     * Get offer
      *
-     * @param string $name
+     * @return OfferAftersale
+     */
+    public function getOffer() : OfferAftersale
+    {
+        return $this->offer;
+    }
+
+    /**
+     * Set offer
+     *
+     * @param OfferAftersale $offer
      *
      * @return OfferAftersaleTermsProperty
      */
-    public function setName($name)
+    public function setOffer(OfferAftersale $offer)
     {
-        $this->name = $name;
+        $this->offer = $offer;
 
         return $this;
     }
 
     /**
-     * Get name
+     * Set km
      *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * Set value
-     *
-     * @param string $value
+     * @param int $km
      *
      * @return OfferAftersaleTermsProperty
      */
-    public function setValue($value)
+    public function setKm(int $km)
     {
-        $this->value = $value;
+        $this->km = $km;
 
         return $this;
     }
 
     /**
-     * Get value
+     * Get km
      *
-     * @return string
+     * @return int
      */
-    public function getValue()
+    public function getKm()
     {
-        return $this->value;
+        return $this->km;
     }
 }

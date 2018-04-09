@@ -90,15 +90,6 @@ abstract class BaseOffer
     protected $description;
 
     /**
-     * @var string
-     *
-     * @Assert\NotBlank()
-     *
-     * @ORM\Column(name="terms", type="text")
-     */
-    protected $terms;
-
-    /**
      * @var int
      *
      * @Assert\Range(min = 0, max = 1)
@@ -316,30 +307,6 @@ abstract class BaseOffer
     public function getDescription()
     {
         return $this->description;
-    }
-
-    /**
-     * Set terms
-     *
-     * @param string $terms
-     *
-     * @return BaseOffer
-     */
-    public function setTerms($terms)
-    {
-        $this->terms = $terms;
-
-        return $this;
-    }
-
-    /**
-     * Get terms
-     *
-     * @return string
-     */
-    public function getTerms()
-    {
-        return $this->terms;
     }
 
     /**
