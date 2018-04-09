@@ -2,11 +2,10 @@
 
 namespace OfferBundle\Entity;
 
-use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use OfferBundle\Entity\Traits\TimestampableOfferEntityTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 use OfferBundle\Validator\Constraints as OfferAssert;
-use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 /**
@@ -18,36 +17,13 @@ abstract class BaseOffer
 {
     use TimestampableEntity;
 
+    use TimestampableOfferEntityTrait;
     /**
      * @var int
      *
      * @ORM\Column(name="partner_id", type="integer")
      */
     protected $partner;
-
-    /**
-     * @var DateTime
-     *
-     * @Assert\GreaterThan(
-     *     "today",
-     *     message="StartDate must be higher than today"
-     * )
-     *
-     * @ORM\Column(name="start_date", type="date")
-     */
-    protected $startDate;
-
-    /**
-     * @var DateTime
-     *
-     * @Assert\Expression(
-     *     "value > this.getStartDate()",
-     *     message="EndDate must be higher than StartDate"
-     * )
-     *
-     * @ORM\Column(name="end_date", type="date")
-     */
-    protected $endDate;
 
     /**
      * @var string
@@ -133,54 +109,6 @@ abstract class BaseOffer
     public function getPartner()
     {
         return $this->partner;
-    }
-
-    /**
-     * Set startDate
-     *
-     * @param string $startDate
-     *
-     * @return BaseOffer
-     */
-    public function setStartDate(string $startDate)
-    {
-        $this->startDate = new DateTime($startDate);
-
-        return $this;
-    }
-
-    /**
-     * Get startDate
-     *
-     * @return DateTime
-     */
-    public function getStartDate()
-    {
-        return $this->startDate;
-    }
-
-    /**
-     * Set endDate
-     *
-     * @param string $endDate
-     *
-     * @return BaseOffer
-     */
-    public function setEndDate(string $endDate)
-    {
-        $this->endDate = new DateTime($endDate);
-
-        return $this;
-    }
-
-    /**
-     * Get endDate
-     *
-     * @return DateTime
-     */
-    public function getEndDate()
-    {
-        return $this->endDate;
     }
 
     /**
