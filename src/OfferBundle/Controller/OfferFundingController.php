@@ -29,7 +29,7 @@ class OfferFundingController extends MullenloweRestController
      * @return \FOS\RestBundle\View\View
      *
      * @SWG\Post(
-     *     path="/",
+     *     path="/offer/funding",
      *     summary="Create a funding offer.",
      *     operationId="createOfferFunding",
      *     tags={"Offer Funding"},

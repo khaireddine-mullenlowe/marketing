@@ -234,12 +234,22 @@ class SwaggerDefinitions
      *             @SWG\Definition(ref="#definitions/Terms"),
      *             @SWG\Definition(ref="#definitions/Name")
      *         }
-     *     )
-     *     @SWG\definition(
-     *         definition:"OfferFunding",
-     *         allOf={
-     *             @SWG\Definition(ref="#definitions/TimestampableOfferEntity")
-     *         },
+     *     ),
+     *
+     *     @SWG\Definition(
+     *         definition="OfferFunding",
+     *         @SWG\Property(
+     *             property="funding",
+     *             allOf={
+     *                  @SWG\Definition(ref="#definitions/TimestampableOfferEntity"),
+     *                  @SWG\Definition(ref="#definitions/OfferFundingAttributes")
+     *             }
+     *         )
+     *
+     *     ),
+     *
+     *     @SWG\Definition(
+     *         definition="OfferFundingAttributes",
      *         @SWG\Property(
      *             property="type",
      *             type="string"
@@ -288,6 +298,16 @@ class SwaggerDefinitions
      *             property="active",
      *             type="boolean"
      *         )
+     *     ),
+     *
+     *     @SWG\definition(
+     *         definition="OfferFundingComplete",
+     *         @SWG\Property(property="status", type="integer", default="1"),
+     *         allOf={
+     *             @SWG\Definition(ref="#definitions/Id"),
+     *             @SWG\Definition(ref="#definitions/TimestampableOfferEntity"),
+     *             @SWG\Definition(ref="#definitions/OfferFundingAttributes")
+     *         }
      *     )
      * )
      */
