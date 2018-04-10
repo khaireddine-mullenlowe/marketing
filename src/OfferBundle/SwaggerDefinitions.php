@@ -300,7 +300,7 @@ class SwaggerDefinitions
      *         )
      *     ),
      *
-     *     @SWG\definition(
+     *     @SWG\Definition(
      *         definition="OfferFundingComplete",
      *         @SWG\Property(property="status", type="integer", default="1"),
      *         allOf={
