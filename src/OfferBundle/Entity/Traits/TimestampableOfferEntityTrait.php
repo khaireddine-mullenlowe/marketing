@@ -36,7 +36,7 @@ trait TimestampableOfferEntityTrait
      *
      * @param string $startDate
      *
-     * @return BaseOffer
+     * @return $this
      */
     public function setStartDate(string $startDate)
     {
@@ -60,7 +60,7 @@ trait TimestampableOfferEntityTrait
      *
      * @param string $endDate
      *
-     * @return BaseOffer
+     * @return $this
      */
     public function setEndDate(string $endDate)
     {

@@ -34,11 +34,11 @@ class OfferFunding
     private $id;
 
     /**
+     *
      * @var string
      *
      * @Assert\NotBlank()
      *
-     * @SWG\Property
      * @ORM\Column(name="type", type="string", length=255, nullable=true)
      */
     private $type;
@@ -48,7 +48,6 @@ class OfferFunding
      *
      * @Assert\NotBlank()
      *
-     * @SWG\Property
      * @ORM\Column(name="model_id", type="integer")
      */
     private $modelId;
@@ -58,7 +57,6 @@ class OfferFunding
      *
      * @Assert\NotBlank()
      *
-     * @SWG\Property
      * @ORM\Column(name="range_id", type="integer")
      */
     private $rangeId;
@@ -68,7 +66,6 @@ class OfferFunding
      *
      * @Assert\NotBlank()
      *
-     * @SWG\Property
      * @ORM\Column(name="price", type="string", length=255)
      */
     private $price;
@@ -78,7 +75,6 @@ class OfferFunding
      *
      * @Assert\NotNull()
      *
-     * @SWG\Property
      * @ORM\Column(name="with_contribution", type="boolean")
      */
     private $withContribution = false;
@@ -88,7 +84,6 @@ class OfferFunding
      *
      * @Assert\NotNull()
      *
-     * @SWG\Property
      * @ORM\Column(name="guaranteed", type="boolean")
      */
     private $guaranteed = false;
@@ -98,7 +93,6 @@ class OfferFunding
      *
      * @Assert\NotNull()
      *
-     * @SWG\Property
      * @ORM\Column(name="maintained", type="boolean")
      */
     private $maintained = false;
@@ -108,7 +102,6 @@ class OfferFunding
      *
      * @Assert\NotBlank()
      *
-     * @SWG\Property
      * @ORM\Column(name="details", type="text")
      */
     private $details;
@@ -118,7 +111,6 @@ class OfferFunding
      *
      * @Assert\NotBlank()
      *
-     * @SWG\Property
      * @ORM\Column(name="legalNotice", type="text")
      */
     private $legalNotice;
@@ -128,7 +120,6 @@ class OfferFunding
      *
      * @Assert\NotBlank()
      *
-     * @SWG\Property
      * @ORM\Column(name="visual", type="text")
      */
     private $visual;
@@ -138,7 +129,6 @@ class OfferFunding
      *
      * @Assert\NotNull()
      *
-     * @SWG\Property
      * @ORM\Column(name="active", type="boolean")
      */
     private $active = false;
@@ -148,7 +138,6 @@ class OfferFunding
      *
      * @Assert\NotBlank()
      *
-     * @SWG\Property
      * @ORM\Column(name="label", type="string", length=255)
      */
     private $label;

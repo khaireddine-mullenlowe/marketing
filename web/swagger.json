@@ -105,6 +105,140 @@
                 }
             }
         },
+        "/offer/funding": {
+            "post": {
+                "tags": [
+                    "Offer Funding"
+                ],
+                "summary": "Create a funding offer.",
+                "operationId": "createOfferFunding",
+                "parameters": [
+                    {
+                        "name": "offerFunding",
+                        "in": "body",
+                        "description": "OfferFunding offer example",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/OfferFunding"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "OfferFunding created",
+                        "schema": {
+                            "$ref": "#/definitions/OfferFundingComplete"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "Bad request",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/funding/{id}": {
+            "get": {
+                "tags": [
+                    "Offer Funding"
+                ],
+                "summary": "Get a funding offer.",
+                "operationId": "getOfferFunding",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "OfferFunding Id to get",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OfferFunding returned",
+                        "schema": {
+                            "$ref": "#/definitions/OfferFundingComplete"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Offer Funding"
+                ],
+                "summary": "Edit a funding offer.",
+                "operationId": "editOfferFunding",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "OfferFunding Id to update",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "offerFunding",
+                        "in": "body",
+                        "description": "OfferFunding offer example",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/OfferFunding"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OfferFunding edited",
+                        "schema": {
+                            "$ref": "#/definitions/OfferFunding"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/funding/": {
+            "get": {
+                "tags": [
+                    "Offer Funding"
+                ],
+                "summary": "Get a funding offers.",
+                "operationId": "getOfferFundings",
+                "responses": {
+                    "200": {
+                        "description": "OfferFundings returned",
+                        "schema": {
+                            "$ref": "#/definitions/OfferFundingComplete"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
         "/offer/subtype/{typeId}": {
             "get": {
                 "tags": [
@@ -164,120 +298,6 @@
                             "items": {
                                 "$ref": "#/definitions/Type"
                             }
-                        }
-                    },
-                    "404": {
-                        "description": "not found",
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }
-        },
-        "/offer/funding": {
-            "get": {
-                "tags": [
-                    "Offer Funding"
-                ],
-                "summary": "Get funding offers",
-                "operationId": "getOfferFundings",
-                "responses": {
-                    "404": {
-                        "description": "not found",
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "Offer Funding"
-                ],
-                "summary": "Create a funding offer.",
-                "operationId": "createFundingOffer",
-                "parameters": [
-                    {
-                        "name": "offerFunding",
-                        "in": "body",
-                        "description": "Funding offer example",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/OfferFunding"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "offer created",
-                        "schema": {
-                            "$ref": "#/definitions/FundingComplete"
-                        }
-                    },
-                    "404": {
-                        "description": "not found",
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }
-        },
-        "/offer/funding/{id}": {
-            "get": {
-                "tags": [
-                    "Offer Funding"
-                ],
-                "summary": "Get funding offer by id",
-                "operationId": "getOfferFunding",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "Offer Funding Id",
-                        "required": true,
-                        "type": "integer"
-                    }
-                ],
-                "responses": {
-                    "404": {
-                        "description": "not found",
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            },
-            "patch": {
-                "tags": [
-                    "Offer Funding"
-                ],
-                "summary": "Update a funding offer.",
-                "operationId": "updateFundingOffer",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "OfferFunding Id to update",
-                        "required": true,
-                        "type": "integer"
-                    },
-                    {
-                        "name": "offerFunding",
-                        "in": "body",
-                        "description": "Funding offer example",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/OfferFunding"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "offer edited",
-                        "schema": {
-                            "$ref": "#/definitions/FundingComplete"
                         }
                     },
                     "404": {
@@ -693,98 +713,76 @@
                 }
             ]
         },
-        "FundingAttributes": {
-            "required": [
-                "type",
-                "modelId",
-                "rangeId",
-                "price",
-                "withContribution",
-                "guaranteed",
-                "maintained",
-                "details",
-                "legalNotice",
-                "visual",
-                "active"
-            ],
-            "properties": {
-                "allOf": [
-                    {
-                        "$ref": "#definitions/TimestampableOfferEntity"
-                    }
-                ],
-                "type": {
-                    "description": "NATIONAL or LOCAL",
-                    "type": "string",
-                    "default": "NATIONAL"
-                },
-                "label": {
-                    "description": "Label",
-                    "type": "string"
-                },
-                "modelId": {
-                    "description": "Model ID",
-                    "type": "string"
-                },
-                "rangeId": {
-                    "description": "Range ID",
-                    "type": "integer"
-                },
-                "price": {
-                    "description": "Price",
-                    "type": "integer"
-                },
-                "withContribution": {
-                    "description": "With Contribution",
-                    "type": "integer"
-                },
-                "guaranteed": {
-                    "description": "Guaranteed for 3 years ?",
-                    "type": "integer"
-                },
-                "maintained": {
-                    "description": "Include maintain pack ?",
-                    "type": "integer"
-                },
-                "details": {
-                    "description": "Details",
-                    "type": "string"
-                },
-                "legalNotice": {
-                    "description": "Legal notice",
-                    "type": "string"
-                },
-                "visual": {
-                    "description": "Visual Name",
-                    "type": "string"
-                },
-                "active": {
-                    "description": "Is offer active ?",
-                    "type": "integer"
-                }
-            }
-        },
         "OfferFunding": {
             "properties": {
                 "funding": {
-                    "type": "object",
                     "allOf": [
                         {
-                            "$ref": "#definitions/FundingAttributes"
+                            "$ref": "#definitions/TimestampableOfferEntity"
+                        },
+                        {
+                            "$ref": "#definitions/OfferFundingAttributes"
                         }
                     ]
                 }
             }
         },
-        "FundingComplete": {
+        "OfferFundingAttributes": {
             "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "label": {
+                    "type": "string"
+                },
+                "modelId": {
+                    "type": "string"
+                },
+                "rangeId": {
+                    "type": "string"
+                },
+                "price": {
+                    "type": "string"
+                },
+                "withContribution": {
+                    "type": "boolean"
+                },
+                "guaranteed": {
+                    "type": "boolean"
+                },
+                "maintained": {
+                    "type": "boolean"
+                },
+                "details": {
+                    "type": "string"
+                },
+                "legalNotice": {
+                    "type": "string"
+                },
+                "visual": {
+                    "type": "string"
+                },
                 "active": {
                     "type": "boolean"
+                }
+            }
+        },
+        "OfferFundingComplete": {
+            "properties": {
+                "status": {
+                    "type": "integer",
+                    "default": "1"
                 }
             },
             "allOf": [
                 {
-                    "$ref": "#definitions/FundingAttributes"
+                    "$ref": "#definitions/Id"
+                },
+                {
+                    "$ref": "#definitions/TimestampableOfferEntity"
+                },
+                {
+                    "$ref": "#definitions/OfferFundingAttributes"
                 }
             ]
         }

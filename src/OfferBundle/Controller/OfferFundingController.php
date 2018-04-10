@@ -29,7 +29,7 @@ class OfferFundingController extends MullenloweRestController
      * @return \FOS\RestBundle\View\View
      *
      * @SWG\Post(
-     *     path="/",
+     *     path="/offer/funding",
      *     summary="Create a funding offer.",
      *     operationId="createOfferFunding",
      *     tags={"Offer Funding"},
@@ -76,7 +76,7 @@ class OfferFundingController extends MullenloweRestController
      * @return \FOS\RestBundle\View\View
      *
      * @SWG\Patch(
-     *     path="/{id}",
+     *     path="/funding/{id}",
      *     summary="Edit a funding offer.",
      *     operationId="editOfferFunding",
      *     tags={"Offer Funding"},
@@ -128,7 +128,7 @@ class OfferFundingController extends MullenloweRestController
      * @return array
      *
      * @SWG\Get(
-     *     path="/",
+     *     path="/funding/",
      *     summary="Get a funding offers.",
      *     operationId="getOfferFundings",
      *     tags={"Offer Funding"},
@@ -178,7 +178,7 @@ class OfferFundingController extends MullenloweRestController
      * @return \FOS\RestBundle\View\View
      *
      * @SWG\Get(
-     *     path="/{id}",
+     *     path="/funding/{id}",
      *     summary="Get a funding offer.",
      *     operationId="getOfferFunding",
      *     tags={"Offer Funding"},
