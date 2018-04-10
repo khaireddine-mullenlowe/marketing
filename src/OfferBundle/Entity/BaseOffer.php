@@ -18,6 +18,7 @@ abstract class BaseOffer
     use TimestampableEntity;
 
     use TimestampableOfferEntityTrait;
+
     /**
      * @var int
      *

@@ -176,6 +176,21 @@
             }
         },
         "/offer/funding": {
+            "get": {
+                "tags": [
+                    "Offer Funding"
+                ],
+                "summary": "Get funding offers",
+                "operationId": "getOfferFundings",
+                "responses": {
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
             "post": {
                 "tags": [
                     "Offer Funding"
@@ -196,6 +211,71 @@
                 "responses": {
                     "200": {
                         "description": "offer created",
+                        "schema": {
+                            "$ref": "#/definitions/FundingComplete"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/offer/funding/{id}": {
+            "get": {
+                "tags": [
+                    "Offer Funding"
+                ],
+                "summary": "Get funding offer by id",
+                "operationId": "getOfferFunding",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Offer Funding Id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Offer Funding"
+                ],
+                "summary": "Update a funding offer.",
+                "operationId": "updateFundingOffer",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "OfferFunding Id to update",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "offerFunding",
+                        "in": "body",
+                        "description": "Funding offer example",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/OfferFunding"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "offer edited",
                         "schema": {
                             "$ref": "#/definitions/FundingComplete"
                         }

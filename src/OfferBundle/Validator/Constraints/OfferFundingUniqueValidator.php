@@ -35,7 +35,7 @@ class OfferFundingUniqueValidator extends ConstraintValidator
         }
 
         $offer = $this->entityRepository->findOneBy(['label' => $value->getLabel()]);
-        if (null === $offer) {
+        if (null === $offer || (null !== $value->getId() && $value->getId() === $offer->getId())) {
             return;
         }
 
