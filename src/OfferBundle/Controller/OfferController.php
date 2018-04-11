@@ -140,9 +140,8 @@ class OfferController extends MullenloweRestController
      */
     public function postAction(Request $request)
     {
-        $dataInput = $request->request->all();
-
-        $offerData = $dataInput['offer'];
+        $offerData = $request->request->get('offer');
+        $termsData = $request->request->get('terms');
 
         if (!empty($offerData['subtype'])) {
             $em = $this->getDoctrine();
@@ -155,10 +154,10 @@ class OfferController extends MullenloweRestController
 
         $type = self::OFFERTYPE[strtolower($subtype->getType()->getCategory())];
 
-        if (!empty($dataInput['terms'])) {
+        if (!empty($termsData)) {
             $termsProperty = new $type['termsEntity'];
             $formTerms = $this->createForm($type['formTerms'], $termsProperty);
-            $formTerms->submit($dataInput['terms']);
+            $formTerms->submit($termsData);
 
             if (!$formTerms->isSubmitted()) {
                 throw new BadRequestHttpException(static::CONTEXT, "Form fields are not valid for terms");
@@ -228,9 +227,7 @@ class OfferController extends MullenloweRestController
      */
     public function patchAction(Request $request)
     {
-        $dataInput = $request->request->all();
-
-        $offerData = $dataInput['offer'];
+        $offerData = $request->request->get('offer');
 
         if (!empty($offerData['subtype'])) {
             $doctrine = $this->getDoctrine();

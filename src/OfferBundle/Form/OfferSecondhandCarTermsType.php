@@ -21,22 +21,10 @@ class OfferSecondhandCarTermsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add(
-                'modelName',
-                TextType::class
-            )
-            ->add(
-                'engine',
-                TextType::class
-            )
-            ->add(
-                'email',
-                TextType::class
-            )
-            ->add(
-                'address',
-                TextType::class
-            );
+            ->add('modelName', TextType::class)
+            ->add('engine', TextType::class)
+            ->add('email', TextType::class)
+            ->add('address', TextType::class);
     }
 
     /**

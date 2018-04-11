@@ -22,7 +22,7 @@ class OfferSaleType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('partner', IntegerType::class)
+            ->add('partnerId', IntegerType::class)
             ->add('startDate', TextType::class)
             ->add('endDate', TextType::class)
             ->add('visual', TextType::class)
@@ -31,7 +31,7 @@ class OfferSaleType extends AbstractType
             ->add('title', TextType::class)
             ->add('description', TextType::class)
             ->add('agreements', IntegerType::class)
-            ->add('model', IntegerType::class)
+            ->add('modelId', IntegerType::class)
             ->add('monthly', TextType::class);
     }
 

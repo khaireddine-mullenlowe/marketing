@@ -23,7 +23,7 @@ abstract class BaseOffer
      *
      * @ORM\Column(name="partner_id", type="integer")
      */
-    protected $partner;
+    protected $partnerId;
 
     /**
      * @var string
@@ -79,27 +79,27 @@ abstract class BaseOffer
     }
 
     /**
-     * Set partner
+     * Set partnerId
      *
-     * @param integer $partner
+     * @param integer $partnerId
      *
      * @return BaseOffer
      */
-    public function setPartner($partner)
+    public function setPartnerId($partnerId)
     {
-        $this->partner = $partner;
+        $this->partnerId = $partnerId;
 
         return $this;
     }
 
     /**
-     * Get partner
+     * Get partnerId
      *
      * @return int
      */
-    public function getPartner()
+    public function getPartnerId()
     {
-        return $this->partner;
+        return $this->partnerId;
     }
 
     /**

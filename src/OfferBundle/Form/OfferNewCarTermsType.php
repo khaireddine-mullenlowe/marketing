@@ -23,66 +23,20 @@ class OfferNewCarTermsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add(
-                'monthNumber',
-                IntegerType::class
-            )
-            ->add(
-                'advancePayment',
-                MoneyType::class
-            )
-            ->add(
-                'monthRentalNumber',
-                IntegerType::class
-            )
-            ->add(
-                'monthly',
-                MoneyType::class
-            )
-            ->add(
-                'priceDate',
-                TextType::class
-            )
-            ->add(
-                'modelName',
-                TextType::class
-            )
-            ->add(
-                'engine',
-                TextType::class
-            )
-            ->add(
-                'options',
-                TextType::class
-            )
-            ->add(
-                'rangeName',
-                TextType::class
-            )
-            ->add(
-                'mgpMin',
-                MoneyType::class
-            )
-            ->add(
-                'mgpMax',
-                MoneyType::class
-            )
-            ->add(
-                'co2EmissionMin',
-                MoneyType::class
-            )
-            ->add(
-                'co2EmissionMax',
-                MoneyType::class
-            )
-            ->add(
-                'maximumKm',
-                IntegerType::class
-            )
-            ->add(
-                'partner',
-                TextType::class
-            );
+            ->add('monthNumber', IntegerType::class)
+            ->add('advancePayment', MoneyType::class)
+            ->add('monthly', MoneyType::class)
+            ->add('priceDate', TextType::class)
+            ->add('modelName', TextType::class)
+            ->add('engine', TextType::class)
+            ->add('options', TextType::class)
+            ->add('rangeName', TextType::class)
+            ->add('mgpMin', MoneyType::class)
+            ->add('mgpMax', MoneyType::class)
+            ->add('co2EmissionMin', MoneyType::class)
+            ->add('co2EmissionMax', MoneyType::class)
+            ->add('maximumKm', IntegerType::class)
+            ->add('partnerName', TextType::class);
     }
 
     /**

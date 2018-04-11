@@ -20,7 +20,7 @@ class OfferControllerCest
         $data = '
             {
                 "offer": {
-                    "partner": "1",
+                    "partnerId": "1",
                     "subtype": "1",
                     "details": "Détail de test",
                     "startDate": "'.$date->add(new DateInterval('P1D'))->format('Y-m-d').'",
@@ -57,7 +57,7 @@ class OfferControllerCest
         $data = '
             {
                 "offer": {
-                    "partner": "1",
+                    "partnerId": "1",
                     "subtype": "4",
                     "startDate": "'.$date->add(new DateInterval('P1D'))->format('Y-m-d').'",
                     "endDate": "'.$date->add(new DateInterval('P30D'))->format('Y-m-d').'",
@@ -69,14 +69,13 @@ class OfferControllerCest
                     "terms": "ML de test",
                     "agreements": "1",
                     "monthly": "100",
-                    "model": "12"
+                    "modelId": "12"
                 },
                 "terms": {
                     "monthNumber": "30",
                     "maximumKm": "50000",
-                    "partner": "Concession PONEY",
+                    "partnerName": "Concession PONEY",
                     "advancePayment": "5000.00",
-                    "monthRentalNumber": "29",
                     "monthly": "499.99",
                     "modelName": "Audi A5 Sportback S Line",
                     "engine": "V8 3.2",
@@ -108,7 +107,7 @@ class OfferControllerCest
         $data = '
             {
                 "offer": {
-                    "partner": "1",
+                    "partnerId": "1",
                     "subtype": "0",
                     "startDate": "'.$date->add(new DateInterval('P1D'))->format('Y-m-d').'",
                     "endDate": "'.$date->add(new DateInterval('P30D'))->format('Y-m-d').'",
@@ -120,7 +119,7 @@ class OfferControllerCest
                     "terms": "ML de test",
                     "agreements": "1",
                     "monthly": "100",
-                    "model": "12"
+                    "modelId": "12"
                 }
             }
         ';
@@ -142,7 +141,7 @@ class OfferControllerCest
         $data = '
             {
                 "offer": {
-                    "partner": "1",
+                    "partnerId": "1",
                     "subtype": "1",
                     "startDate": "'.$date->add(new DateInterval('P1D'))->format('Y-m-d').'",
                     "endDate": "'.$date->add(new DateInterval('P30D'))->format('Y-m-d').'",

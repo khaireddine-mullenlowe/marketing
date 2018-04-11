@@ -22,7 +22,7 @@ class OfferAftersaleType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('partner', IntegerType::class)
+            ->add('partnerId', IntegerType::class)
             ->add('details', TextType::class)
             ->add('startDate', TextType::class)
             ->add('endDate', TextType::class)

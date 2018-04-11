@@ -78,7 +78,7 @@ class OfferFixtures extends Fixture
         foreach ($fixtures['OfferAftersale'] as $reference => $column) {
             $offerAftersale = new OfferAftersale($this->getReference('Subtype_'.$column['subtype']));
 
-            $offerAftersale->setPartner($column['partner']);
+            $offerAftersale->setPartnerId($column['partner']);
             $offerAftersale->setDetails($column['details']);
             $offerAftersale->setStartDate((new \DateTime('now'))->add(new \DateInterval('P2D'))->format('y-m-d'));
             $offerAftersale->setEndDate((new \DateTime('now'))->add(new \DateInterval('P20D'))->format('y-m-d'));

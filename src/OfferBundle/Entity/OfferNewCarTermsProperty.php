@@ -38,6 +38,8 @@ class OfferNewCarTermsProperty
      * @var int
      *
      * @ORM\Column(name="month_number", type="integer")
+     *
+     * @Assert\Range(min= 1, max= 999)
      */
     protected $monthNumber;
 
@@ -52,6 +54,8 @@ class OfferNewCarTermsProperty
      * @var int
      *
      * @ORM\Column(name="month_rental_number", type="integer")
+     *
+     * @Assert\Range(min= 1, max= 999)
      */
     protected $monthRentalNumber;
 
@@ -93,7 +97,7 @@ class OfferNewCarTermsProperty
     /**
      * @var string
      *
-     * @ORM\Column(name="range_name", type="float")
+     * @ORM\Column(name="range_name", type="string")
      */
     protected $rangeName;
 
@@ -135,9 +139,9 @@ class OfferNewCarTermsProperty
     /**
      * @var string
      *
-     * @ORM\Column(name="partner", type="string")
+     * @ORM\Column(name="partner_name", type="string")
      */
-    protected $partner;
+    protected $partnerName;
 
     /**
      * Get id
@@ -496,26 +500,26 @@ class OfferNewCarTermsProperty
     }
 
     /**
-     * Set partner
+     * Set partnerName
      *
-     * @param string $partner
+     * @param string $partnerName
      *
      * @return OfferNewCarTermsProperty
      */
-    public function setPartner(string $partner)
+    public function setPartnerName(string $partnerName)
     {
-        $this->partner = $partner;
+        $this->partnerName = $partnerName;
 
         return $this;
     }
 
     /**
-     * Get partner
+     * Get partnerName
      *
      * @return string
      */
-    public function getPartner()
+    public function getPartnerName()
     {
-        return $this->partner;
+        return $this->partnerName;
     }
 }

@@ -12,6 +12,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class OfferSale extends BaseOffer
 {
+    const SECONDNHAND = 'SECONDHANDCAR';
+
     /**
      * @var int
      *
@@ -44,7 +46,7 @@ class OfferSale extends BaseOffer
      * the position to display this div block in myaudi at the same position.
      * The X position is the top left corner abscissa position
      *
-     * @ORM\Column(name="xPosition", type="float")
+     * @ORM\Column(name="x_position", type="float")
      */
     protected $xPosition;
 
@@ -55,7 +57,7 @@ class OfferSale extends BaseOffer
      * the position to display this div block in myaudi at the same position.
      * The Y position is the top left corner ordinate position
      *
-     * @ORM\Column(name="yPosition", type="float")
+     * @ORM\Column(name="y_position", type="float")
      */
     protected $yPosition;
 
@@ -71,9 +73,9 @@ class OfferSale extends BaseOffer
      *
      * The model of the vehicle
      *
-     * @ORM\Column(name="model", type="integer")
+     * @ORM\Column(name="model_id", type="integer")
      */
-    protected $model;
+    protected $modelId;
 
     /**
      * @var OfferSecondhandCarTermsProperty
@@ -214,27 +216,27 @@ class OfferSale extends BaseOffer
     }
 
     /**
-     * Set model
+     * Set modelId
      *
-     * @param integer $model
+     * @param integer $modelId
      *
      * @return OfferSale
      */
-    public function setModel($model)
+    public function setModelId($modelId)
     {
-        $this->model = $model;
+        $this->modelId = $modelId;
 
         return $this;
     }
 
     /**
-     * Get model
+     * Get modelId
      *
      * @return int
      */
-    public function getModel()
+    public function getModelId()
     {
-        return $this->model;
+        return $this->modelId;
     }
 
     /**
@@ -244,7 +246,7 @@ class OfferSale extends BaseOffer
     public function setTermsProperty($termsProperty)
     {
         $category = $this->getSubtype()->getType()->getCategory();
-        if ($category === 'SECONDHANDCAR') {
+        if ($category === self::SECONDNHAND) {
             $this->termsPropertySecondhandCar = $termsProperty;
         } else {
             $this->termsPropertyNewCar = $termsProperty;
@@ -259,7 +261,7 @@ class OfferSale extends BaseOffer
     public function getTermsProperty()
     {
         $category = $this->getSubtype()->getType()->getCategory();
-        if ($category === 'SECONDHANDCAR') {
+        if ($category === self::SECONDNHAND) {
             return $this->termsPropertySecondhandCar;
         }
 
