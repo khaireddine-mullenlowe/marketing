@@ -1,0 +1,12 @@
+OfferFunding:
+  OfferFunding_1:
+    startDate: '2018-08-10'
+    endDate: '2018-09-11'
+    visual: 'Visual test'
+    label: 'Offre funding test'
+    type: 'NATIONAL'
+    modelId: '201'
+    rangeId: '205'
+    price: '1200.15'
+    details: 'details test'
+    legalNotice: 'Legal notice test'
