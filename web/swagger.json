@@ -16,7 +16,7 @@
         "/offer/partner/{partnerId}": {
             "get": {
                 "tags": [
-                    "offer"
+                    "Offer"
                 ],
                 "summary": "Get offers for a partner",
                 "operationId": "getOffers",
@@ -42,7 +42,7 @@
         "/offer/": {
             "post": {
                 "tags": [
-                    "offer"
+                    "Offer"
                 ],
                 "summary": "Create an offer, according to the subtype, the offer is an aftersale or sale offer",
                 "operationId": "createOffer",
@@ -77,7 +77,7 @@
                 ],
                 "responses": {
                     "201": {
-                        "description": "offer created",
+                        "description": "Offer created - Example for aftersale",
                         "schema": {
                             "$ref": "#/definitions/OfferAftersaleComplete"
                         }
@@ -98,7 +98,7 @@
             },
             "patch": {
                 "tags": [
-                    "offer"
+                    "Offer"
                 ],
                 "summary": "Update an offer",
                 "operationId": "updateOffer",
@@ -272,7 +272,7 @@
         "/offer/subtype/{typeId}": {
             "get": {
                 "tags": [
-                    "subtype"
+                    "Subtype"
                 ],
                 "summary": "Get Subtypes",
                 "operationId": "getSubtypes",
@@ -307,7 +307,7 @@
         "/offer/type/{category}": {
             "get": {
                 "tags": [
-                    "type"
+                    "Type"
                 ],
                 "summary": "Get Types",
                 "operationId": "getTypes",
@@ -462,7 +462,7 @@
                 "title",
                 "visual",
                 "subtype",
-                "partner"
+                "partnerId"
             ],
             "properties": {
                 "agreements": {
@@ -480,7 +480,7 @@
                     "description": "subtype id",
                     "type": "integer"
                 },
-                "partner": {
+                "partnerId": {
                     "description": "partner id",
                     "type": "integer"
                 }
@@ -492,7 +492,7 @@
                 "title",
                 "visual",
                 "subtype",
-                "partner"
+                "partnerId"
             ],
             "properties": {
                 "agreements": {
@@ -506,7 +506,7 @@
                     "description": "visual name",
                     "type": "string"
                 },
-                "partner": {
+                "partnerId": {
                     "description": "partner id",
                     "type": "integer"
                 },
@@ -552,7 +552,7 @@
         "OfferSaleAttributes": {
             "required": [
                 "monthly",
-                "model",
+                "modelId",
                 "xPosition",
                 "yPosition"
             ],
@@ -560,7 +560,7 @@
                 "monthly": {
                     "type": "string"
                 },
-                "model": {
+                "modelId": {
                     "description": "model id of the vehicle",
                     "type": "integer"
                 },
@@ -598,9 +598,6 @@
                 "advancePayment": {
                     "description": "float",
                     "type": "string"
-                },
-                "monthRentalNumber": {
-                    "type": "integer"
                 },
                 "monthly": {
                     "description": "float",
@@ -741,6 +738,14 @@
                 "status": {
                     "type": "integer",
                     "default": "1"
+                },
+                "termProperty": {
+                    "type": "object",
+                    "allOf": [
+                        {
+                            "$ref": "#definitions/OfferAftersaleTerms"
+                        }
+                    ]
                 }
             },
             "allOf": [
@@ -760,10 +765,10 @@
                     "$ref": "#definitions/Description"
                 },
                 {
-                    "$ref": "#definitions/Terms"
+                    "$ref": "#definitions/OfferAftersaleAttributes"
                 },
                 {
-                    "$ref": "#definitions/OfferAftersaleAttributes"
+                    "$ref": "#definitions/OfferAftersaleTerms"
                 }
             ]
         },
@@ -795,6 +800,14 @@
                 "status": {
                     "type": "integer",
                     "default": "1"
+                },
+                "termsProperty": {
+                    "type": "object",
+                    "allOf": [
+                        {
+                            "$ref": "#definitions/OfferNewCarTerms"
+                        }
+                    ]
                 }
             },
             "allOf": [
@@ -812,9 +825,6 @@
                 },
                 {
                     "$ref": "#definitions/Description"
-                },
-                {
-                    "$ref": "#definitions/Terms"
                 },
                 {
                     "$ref": "#definitions/OfferSaleAttributes"
@@ -864,6 +874,21 @@
                 }
             ]
         },
+        "TermsTemplate": {
+            "required": [
+                "template"
+            ],
+            "properties": {
+                "template": {
+                    "type": "string"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#definitions/Id"
+                }
+            ]
+        },
         "Subtype": {
             "properties": {
                 "rank": {
@@ -884,14 +909,19 @@
                             "$ref": "#definitions/FormType"
                         }
                     ]
+                },
+                "termsTemplate": {
+                    "type": "object",
+                    "allOf": [
+                        {
+                            "$ref": "#definitions/TermsTemplate"
+                        }
+                    ]
                 }
             },
             "allOf": [
                 {
                     "$ref": "#definitions/Id"
-                },
-                {
-                    "$ref": "#definitions/Terms"
                 },
                 {
                     "$ref": "#definitions/Name"

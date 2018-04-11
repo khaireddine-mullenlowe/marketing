@@ -66,7 +66,7 @@ class OfferController extends MullenloweRestController
      *     path="/offer/partner/{partnerId}",
      *     summary="Get offers for a partner",
      *     operationId="getOffers",
-     *     tags={"offer"},
+     *     tags={"Offer"},
      *     @SWG\Parameter(
      *         name="partnerId",
      *         in="path",
@@ -99,7 +99,7 @@ class OfferController extends MullenloweRestController
      *     path="/offer/",
      *     summary="Create an offer, according to the subtype, the offer is an aftersale or sale offer",
      *     operationId="createOffer",
-     *     tags={"offer"},
+     *     tags={"Offer"},
      *     @SWG\Parameter(
      *         name="offer aftersale",
      *         in="body",
@@ -200,7 +200,7 @@ class OfferController extends MullenloweRestController
      *     path="/offer/",
      *     summary="Update an offer",
      *     operationId="updateOffer",
-     *     tags={"offer"},
+     *     tags={"Offer"},
      *     @SWG\Parameter(
      *         name="offer",
      *         in="body",
