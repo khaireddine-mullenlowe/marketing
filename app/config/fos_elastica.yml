@@ -7,4 +7,35 @@ fos_elastica:
     indexes:
         marketing:
             client: default
-            types: ~
+            types:
+                offer_funding:
+                    properties:
+                        id:
+                            type: integer
+                        type:
+                            type: string
+                        modelId:
+                            type: integer
+                        rangeId:
+                            type: integer
+                        price:
+                            type: string
+                        start_date:
+                            type: date
+                        end_date:
+                            type: date
+                        details:
+                            type: string
+                        legalNotice:
+                            type: string
+                        visual:
+                            type: string
+                        label:
+                            type: string
+                    persistence:
+                        driver: orm
+                        model: OfferBundle\Entity\OfferFunding
+                        finder: ~
+                        provider: ~
+                        listener: ~
+                        repository: OfferBundle\Repository\Elastica\OfferFundingRepository

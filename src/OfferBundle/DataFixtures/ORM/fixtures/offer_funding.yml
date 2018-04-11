@@ -3,7 +3,7 @@ OfferFunding:
     startDate: '2018-08-10'
     endDate: '2018-09-11'
     visual: 'Visual test'
-    label: 'Offre funding test'
+    label: 'myFundingOffer'
     type: 'NATIONAL'
     modelId: '201'
     rangeId: '205'
