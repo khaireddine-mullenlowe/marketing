@@ -45,6 +45,8 @@ echo "Runing codecept with following arguments :  $CODECEPT_OPTIONS"
 
 codecept build
 
+php bin/console doctrine:database:drop --force -n --env=test
+php bin/console doctrine:database:create --env=test
 php bin/console doctrine:schema:update --force --env=test
 php bin/console doctrine:fixtures:load --env=test --no-interaction
 
