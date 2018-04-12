@@ -15,6 +15,7 @@ use OfferBundle\Form\OfferAftersaleType;
 use OfferBundle\Form\OfferNewCarTermsType;
 use OfferBundle\Form\OfferSaleType;
 use OfferBundle\Form\OfferSecondhandCarTermsType;
+use PHPSQLParser\Test\Parser\selectTest;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\View\View;
 use Mullenlowe\CommonBundle\Controller\MullenloweRestController;
@@ -27,6 +28,8 @@ use Symfony\Component\HttpFoundation\Response;
 class OfferController extends MullenloweRestController
 {
     const CONTEXT = 'Offer';
+
+    const SERVICING = 'Entretien';
 
     const OFFERTYPE = [
         'aftersale'     => [
@@ -152,21 +155,7 @@ class OfferController extends MullenloweRestController
             throw new InvalidArgumentException('Invalid OfferSubtype');
         }
 
-        $type = self::OFFERTYPE[strtolower($subtype->getType()->getCategory())];
-
-        if (!empty($termsData)) {
-            $termsProperty = new $type['termsEntity'];
-            $formTerms = $this->createForm($type['formTerms'], $termsProperty);
-            $formTerms->submit($termsData);
-
-            if (!$formTerms->isSubmitted()) {
-                throw new BadRequestHttpException(static::CONTEXT, "Form fields are not valid for terms");
-            } elseif (!$formTerms->isValid()) {
-                return $this->view($formTerms);
-            }
-        } else {
-            throw new InvalidArgumentException('Invalid terms');
-        }
+        $type  = self::OFFERTYPE[strtolower($subtype->getType()->getCategory())];
 
         $offer = new $type['entity']($subtype);
 
@@ -180,8 +169,32 @@ class OfferController extends MullenloweRestController
             return $this->view($form);
         }
 
-        $offer->setTermsProperty($termsProperty);
-        $termsProperty->setOffer($offer);
+        if (
+            $type['name'] !== self::OFFERTYPE['aftersale']['name'] ||
+            (
+                $type['name'] === self::OFFERTYPE['aftersale']['name']
+                && $subtype->getType()->getName() === 'Entretien'
+                && $subtype->getRank() < 4
+            )
+        ) {
+            if (!empty($termsData)) {
+                $termsProperty = new $type['termsEntity'];
+                $formTerms = $this->createForm($type['formTerms'], $termsProperty);
+                $formTerms->submit($termsData);
+
+                if (!$formTerms->isSubmitted()) {
+                    throw new BadRequestHttpException(static::CONTEXT, "Form fields are not valid for terms");
+                } elseif (!$formTerms->isValid()) {
+                    return $this->view($formTerms);
+                }
+            } else {
+                throw new InvalidArgumentException('Invalid terms');
+            }
+
+            $offer->setTermsProperty($termsProperty);
+
+            $termsProperty->setOffer($offer);
+        }
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($offer);
