@@ -106,6 +106,27 @@
             }
         },
         "/offer/funding": {
+            "get": {
+                "tags": [
+                    "Offer Funding"
+                ],
+                "summary": "Get a funding offers.",
+                "operationId": "getOfferFundings",
+                "responses": {
+                    "200": {
+                        "description": "OfferFundings returned",
+                        "schema": {
+                            "$ref": "#/definitions/OfferFundingComplete"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
             "post": {
                 "tags": [
                     "Offer Funding"
@@ -145,7 +166,7 @@
                 }
             }
         },
-        "/funding/{id}": {
+        "/offer/funding/{id}": {
             "get": {
                 "tags": [
                     "Offer Funding"
@@ -212,17 +233,32 @@
                         "schema": {
                             "$ref": "#/definitions/Error"
                         }
+                    },
+                    "500": {
+                        "description": "Bad request",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
                     }
                 }
             }
         },
-        "/funding/": {
+        "/offer/funding/search": {
             "get": {
                 "tags": [
                     "Offer Funding"
                 ],
-                "summary": "Get a funding offers.",
-                "operationId": "getOfferFundings",
+                "summary": "Get a funding offers by label.",
+                "operationId": "searchOfferFunding",
+                "parameters": [
+                    {
+                        "name": "q",
+                        "in": "query",
+                        "description": "OfferFunding label to search",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OfferFundings returned",
@@ -232,6 +268,12 @@
                     },
                     "404": {
                         "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "Bad request",
                         "schema": {
                             "$ref": "#/definitions/Error"
                         }

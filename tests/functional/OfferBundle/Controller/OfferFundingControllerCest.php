@@ -115,6 +115,15 @@ class OfferFundingControllerCest
         $I->seeResponseContains('OfferFunding {1999} not found');
     }
 
+    public function trySearch(FunctionalTester $I)
+    {
+        $I->sendGET('/offer/funding/search?q=myFundingOffer');
+        $I->seeResponseCodeIs(Response::HTTP_OK);
+        $I->seeResponseContains('pagination');
+        $I->seeResponseContains('data');
+        $I->seeResponseContains('1200.15');
+    }
+
     public function tryPatchOfferFundingEmptyData(FunctionalTester $I)
     {
         $I->sendPATCH('/offer/funding/1999');

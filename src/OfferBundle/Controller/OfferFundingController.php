@@ -2,12 +2,13 @@
 
 namespace OfferBundle\Controller;
 
-
+use Knp\Component\Pager\Pagination\SlidingPagination;
 use Mullenlowe\CommonBundle\Controller\MullenloweRestController;
 use Mullenlowe\CommonBundle\Exception\BadRequestHttpException;
 use Mullenlowe\CommonBundle\Exception\NotFoundHttpException;
 use OfferBundle\Entity\OfferFunding;
 use OfferBundle\Form\OfferFundingType;
+use OfferBundle\Repository\Elastica\OfferFundingRepository;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Swagger\Annotations as SWG;
@@ -76,7 +77,7 @@ class OfferFundingController extends MullenloweRestController
      * @return \FOS\RestBundle\View\View
      *
      * @SWG\Patch(
-     *     path="/funding/{id}",
+     *     path="/offer/funding/{id}",
      *     summary="Edit a funding offer.",
      *     operationId="editOfferFunding",
      *     tags={"Offer Funding"},
@@ -103,6 +104,11 @@ class OfferFundingController extends MullenloweRestController
      *         response="404",
      *         description="not found",
      *         @SWG\Schema(ref="#/definitions/Error")
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="Bad request",
+     *         @SWG\Schema(ref="#/definitions/Error")
      *     )
      * )
      */
@@ -128,7 +134,7 @@ class OfferFundingController extends MullenloweRestController
      * @return array
      *
      * @SWG\Get(
-     *     path="/funding/",
+     *     path="/offer/funding",
      *     summary="Get a funding offers.",
      *     operationId="getOfferFundings",
      *     tags={"Offer Funding"},
@@ -172,13 +178,64 @@ class OfferFundingController extends MullenloweRestController
     }
 
     /**
+     * @Rest\Get("/funding/search")
+     * @param Request $request
+     * @return array
+     *
+     * @SWG\Get(
+     *     path="/offer/funding/search",
+     *     summary="Get a funding offers by label.",
+     *     operationId="searchOfferFunding",
+     *     tags={"Offer Funding"},
+     *     @SWG\Parameter(
+     *         name="q",
+     *         in="query",
+     *         type="string",
+     *         required=false,
+     *         description="OfferFunding label to search"
+     *     ),
+     *     @SWG\Response(
+     *         response="200",
+     *         description="OfferFundings returned",
+     *         @SWG\Schema(ref="#/definitions/OfferFundingComplete")
+     *     ),
+     *     @SWG\Response(
+     *         response="404",
+     *         description="not found",
+     *         @SWG\Schema(ref="#/definitions/Error")
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="Bad request",
+     *         @SWG\Schema(ref="#/definitions/Error")
+     *     )
+     * )
+     */
+    public function searchAction(Request $request)
+    {
+        if (!$request->query->get('q')) {
+            throw new BadRequestHttpException(self::CONTEXT, 'Input data are empty.');
+        }
+
+        $label = $request->query->get('q');
+        /** @var OfferFundingRepository $repository */
+        $repository = $this->get('fos_elastica.manager')->getRepository('OfferBundle:OfferFunding');
+
+        $paginator = $this->get('knp_paginator');
+        $results = $repository->findByLabel($label);
+        $pager = $paginator->paginate($results, $request->query->getInt('page', 1), $request->query->getInt('limit', 1));
+
+        return $this->createPaginatedView($pager);
+    }
+
+    /**
      * @Rest\Get("/funding/{id}")
      * @param Request $request
      * @param integer $id
      * @return \FOS\RestBundle\View\View
      *
      * @SWG\Get(
-     *     path="/funding/{id}",
+     *     path="/offer/funding/{id}",
      *     summary="Get a funding offer.",
      *     operationId="getOfferFunding",
      *     tags={"Offer Funding"},
