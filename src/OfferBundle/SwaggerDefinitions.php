@@ -111,18 +111,22 @@ class SwaggerDefinitions
      *         @SWG\Property(property="details", type="string"),
      *         @SWG\Property(
      *             property="discountSimple",
-     *             type="string",
-     *             description="required according to the subtype, float"
+     *             type="number",
+     *             type="number",
+     *             format="float",
+     *             description="required according to the subtype"
      *         ),
      *         @SWG\Property(
      *             property="discountDouble",
-     *             type="string",
-     *             description="required according to the subtype, float"
+     *             type="number",
+     *             format="float",
+     *             description="required according to the subtype"
      *         ),
      *         @SWG\Property(
      *             property="discountTriple",
-     *             type="string",
-     *             description="required according to the subtype, float"
+     *             type="number",
+     *             format="float",
+     *             description="required according to the subtype"
      *         ),
      *         required={"details"}
      *     ),
@@ -134,19 +138,25 @@ class SwaggerDefinitions
      *
      *     @SWG\Definition(
      *         definition="OfferSaleAttributes",
-     *         @SWG\Property(property="monthly", type="string"),
+     *         @SWG\Property(
+     *             property="monthly",
+     *             type="number",
+     *             format="float"
+     *         ),
      *         @SWG\Property(
      *             property="modelId",
      *             type="integer",
      *             description="model id of the vehicle"),
      *         @SWG\Property(
      *             property="xPosition",
-     *             type="string",
+     *             type="number",
+     *             format="float",
      *             description="the abscissa of the div block that contains prices"
      *         ),
      *         @SWG\Property(
      *             property="yPosition",
-     *             type="string",
+     *             type="number",
+     *             format="float",
      *             description="the ordinate of the div block that contains prices"
      *         ),
      *         required={"monthly", "modelId", "xPosition", "yPosition"}
@@ -165,12 +175,14 @@ class SwaggerDefinitions
      *          @SWG\Property(property="monthNumber", type="integer"),
      *          @SWG\Property(
      *              property="advancePayment",
-     *              type="string",
+     *              type="number",
+     *              format="float",
      *              description="float"
      *          ),
      *          @SWG\Property(
      *              property="monthly",
-     *              type="string",
+     *              type="number",
+     *              format="float",
      *              description="float"
      *          ),
      *          @SWG\Property(property="priceDate", type="string", format="y-m-d"),
@@ -180,22 +192,26 @@ class SwaggerDefinitions
      *          @SWG\Property(property="rangeName", type="string"),
      *          @SWG\Property(
      *              property="mgpMin",
-     *              type="string",
+     *              type="number",
+     *              format="float",
      *              description="float"
      *          ),
      *          @SWG\Property(
      *              property="mgpMax",
-     *              type="string",
+     *              type="number",
+     *              format="float",
      *              description="float"
      *          ),
      *          @SWG\Property(
      *              property="co2EmissionMin",
-     *              type="string",
+     *              type="number",
+     *              format="float",
      *              description="float"
      *          ),
      *          @SWG\Property(
      *              property="co2EmissionMax",
-     *              type="string",
+     *              type="number",
+     *              format="float",
      *              description="float"
      *          ),
      *          @SWG\Property(property="maximumKm", type="integer"),
