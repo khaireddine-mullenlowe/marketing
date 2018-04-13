@@ -26,7 +26,7 @@ class OfferTypeController extends MullenloweRestController
      *     path="/offer/type/{category}",
      *     summary="Get Types",
      *     operationId="getTypes",
-     *     tags={"type"},
+     *     tags={"Type"},
      *     @SWG\Parameter(
      *         name="category",
      *         in="path",

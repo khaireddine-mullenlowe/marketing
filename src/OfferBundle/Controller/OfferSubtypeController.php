@@ -26,7 +26,7 @@ class OfferSubtypeController extends MullenloweRestController
      *     path="/offer/subtype/{typeId}",
      *     summary="Get Subtypes",
      *     operationId="getSubtypes",
-     *     tags={"subtype"},
+     *     tags={"Subtype"},
      *     @SWG\Parameter(
      *         name="typeId",
      *         in="path",

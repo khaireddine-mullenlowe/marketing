@@ -22,7 +22,7 @@ class OfferSaleType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('partner', IntegerType::class)
+            ->add('partnerId', IntegerType::class)
             ->add('startDate', TextType::class)
             ->add('endDate', TextType::class)
             ->add('visual', TextType::class)
@@ -30,9 +30,8 @@ class OfferSaleType extends AbstractType
             ->add('yPosition', IntegerType::class)
             ->add('title', TextType::class)
             ->add('description', TextType::class)
-            ->add('terms', TextType::class)
             ->add('agreements', IntegerType::class)
-            ->add('model', IntegerType::class)
+            ->add('modelId', IntegerType::class)
             ->add('monthly', TextType::class);
     }
 
@@ -46,5 +45,13 @@ class OfferSaleType extends AbstractType
             'allow_extra_fields' => true,
             'csrf_protection'    => false,
         ]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return null;
     }
 }

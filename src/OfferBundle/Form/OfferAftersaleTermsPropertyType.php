@@ -2,18 +2,17 @@
 
 namespace OfferBundle\Form;
 
-use OfferBundle\Entity\OfferAftersale as Aftersale;
+use OfferBundle\Entity\OfferAftersaleTermsProperty;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class OfferAftersaleType
+ * Class OfferAftersaleTermsPropertyType
  * @package OfferBundle\Form
  */
-class OfferAftersaleType extends AbstractType
+class OfferAftersaleTermsPropertyType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -22,17 +21,10 @@ class OfferAftersaleType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('partnerId', IntegerType::class)
-            ->add('details', TextType::class)
-            ->add('startDate', TextType::class)
-            ->add('endDate', TextType::class)
-            ->add('visual', TextType::class)
-            ->add('title', TextType::class)
-            ->add('description', TextType::class)
-            ->add('agreements', IntegerType::class)
-            ->add('discountSimple', TextType::class)
-            ->add('discountDouble', TextType::class)
-            ->add('discountTriple', TextType::class);
+            ->add(
+                'km',
+                IntegerType::class
+            );
     }
 
     /**
@@ -41,9 +33,9 @@ class OfferAftersaleType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class'         => Aftersale::class,
-            'allow_extra_fields' => true,
+            'data_class'         => OfferAftersaleTermsProperty::class,
             'csrf_protection'    => false,
+            'allow_extra_fields' => true,
         ]);
     }
 

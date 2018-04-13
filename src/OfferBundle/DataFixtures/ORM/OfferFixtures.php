@@ -6,6 +6,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use OfferBundle\Entity\OfferAftersale;
 use OfferBundle\Entity\OfferFormType;
 use OfferBundle\Entity\OfferSubtype;
+use OfferBundle\Entity\OfferTermsTemplate;
 use OfferBundle\Entity\OfferType;
 use Symfony\Component\Yaml\Yaml;
 
@@ -48,11 +49,22 @@ class OfferFixtures extends Fixture
             $this->addReference('FormType_'.$reference, $offerFormType);
         }
 
+        foreach ($fixtures['OfferTermsTemplate'] as $reference => $column) {
+            $offerTermsTemplate = new OfferTermsTemplate();
+
+            $offerTermsTemplate->setTemplate($column['template']);
+
+            $manager->persist($offerTermsTemplate);
+            $manager->flush();
+
+            $this->addReference('TermsTemplate_'.$reference, $offerTermsTemplate);
+        }
+
         foreach ($fixtures['OfferSubtype'] as $reference => $column) {
             $offerSubtype = new OfferSubtype();
 
             $offerSubtype->setName($column['name']);
-            $offerSubtype->setTerms($column['terms']);
+            $offerSubtype->setTermsTemplate($this->getReference('TermsTemplate_'.$column['termsTemplate']));
             $offerSubtype->setRank($column['rank']);
             $offerSubtype->setFormType($this->getReference('FormType_'.$column['formType']));
             $offerSubtype->setType($this->getReference('Type_'.$column['type']));
@@ -66,16 +78,15 @@ class OfferFixtures extends Fixture
         foreach ($fixtures['OfferAftersale'] as $reference => $column) {
             $offerAftersale = new OfferAftersale($this->getReference('Subtype_'.$column['subtype']));
 
-            $offerAftersale->setPartner($column['partner']);
+            $offerAftersale->setPartnerId($column['partner']);
             $offerAftersale->setDetails($column['details']);
-            $offerAftersale->setStartDate($column['start_date']);
-            $offerAftersale->setEndDate($column['end_date']);
-            $offerAftersale->setCreatedAt(new \DateTime($column['created_at']));
-            $offerAftersale->setUpdatedAt(new \DateTime($column['updated_at']));
+            $offerAftersale->setStartDate((new \DateTime('now'))->add(new \DateInterval('P2D'))->format('y-m-d'));
+            $offerAftersale->setEndDate((new \DateTime('now'))->add(new \DateInterval('P20D'))->format('y-m-d'));
+            $offerAftersale->setCreatedAt(new \DateTime('now'));
+            $offerAftersale->setUpdatedAt(new \DateTime('now'));
             $offerAftersale->setVisual($column['visual']);
             $offerAftersale->setTitle($column['title']);
             $offerAftersale->setDescription($column['description']);
-            $offerAftersale->setTerms($column['terms']);
             $offerAftersale->setAgreements($column['agreements']);
             $offerAftersale->setDiscountSimple($column['discount_simple']);
             $offerAftersale->setDiscountDouble($column['discount_double']);

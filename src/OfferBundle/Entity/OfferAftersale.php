@@ -2,8 +2,8 @@
 
 namespace OfferBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use OfferBundle\Entity\OfferSubtype;
 use Symfony\Component\Validator\Constraints as Assert;
 use OfferBundle\Validator\Constraints as AftersaleAssert;
 
@@ -29,8 +29,16 @@ class OfferAftersale extends BaseOffer
     /**
      * @var OfferSubtype $subtype
      *
-     * @ORM\ManyToOne(targetEntity="OfferSubtype", inversedBy="offerAftersales")
-     * @ORM\JoinColumn(name="subtype_id", referencedColumnName="id", nullable=false)
+     * @ORM\ManyToOne(
+     *     targetEntity="OfferSubtype",
+     *     inversedBy="offerAftersales",
+     *     fetch="EAGER"
+     * )
+     * @ORM\JoinColumn(
+     *     name="subtype_id",
+     *     referencedColumnName="id",
+     *     nullable=false
+     * )
      */
     protected $subtype;
 
@@ -81,6 +89,17 @@ class OfferAftersale extends BaseOffer
      * @ORM\Column(name="discount_triple", type="float", nullable=true)
      */
     protected $discountTriple;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToOne(
+     *     targetEntity="OfferAftersaleTermsProperty",
+     *     mappedBy="offer",
+     *     cascade={"persist", "remove"}
+     * )
+     */
+    protected $termsProperties;
 
     /**
      * OfferAftersale constructor.
@@ -220,5 +239,23 @@ class OfferAftersale extends BaseOffer
     public function getDiscountTriple()
     {
         return $this->discountTriple;
+    }
+
+    /**
+     * @return OfferAftersale
+     */
+    public function setTermsProperty($termsProperty)
+    {
+        $this->termsProperties = $termsProperty;
+
+        return $this;
+    }
+
+    /**
+     * @return OfferAftersaleTermsProperty
+     */
+    public function getTermsProperty()
+    {
+        return $this->termsProperties;
     }
 }

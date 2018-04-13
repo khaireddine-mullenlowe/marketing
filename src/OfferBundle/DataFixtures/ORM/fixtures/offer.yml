@@ -42,37 +42,45 @@ OfferFormType:
     description: 'VO description'
     type: 'BASIC'
 
+OfferTermsTemplate:
+  OfferTermsTemplate_1:
+    template: 'Offre jusqu''au #endDate# pour #km# km.'
+  OfferTermsTemplate_2:
+    template: 'Offre du #startDate# au #endDate# pour le modèle #modelName#. Contact : #email#.'
+  OfferTermsTemplate_3:
+    template: 'Offre du #startDate# au #endDate# pour le modèle #modelName# avec les options #options#.'
+
 OfferSubtype:
   OfferSubtype_1:
     name: 'Prix'
     rank: 1
     type: 'OfferType_1'
     formType: 'OfferFormType_2'
-    terms: 'Les mentions légales : Entretien - Prix'
+    termsTemplate: 'OfferTermsTemplate_1'
   OfferSubtype_2:
     name: 'Pourcentage de remise'
     rank: 1
     type: 'OfferType_2'
     formType: 'OfferFormType_1'
-    terms: 'Les mentions légales : Pneu - Pourcentage'
+    termsTemplate: 'OfferTermsTemplate_1'
   OfferSubtype_3:
     name: 'Prix du CT + pourcentage de remise sur les frais de réparation'
     rank: 1
     type: 'OfferType_3'
     formType: 'OfferFormType_3'
-    terms: 'Les mentions légales : Contrôle technique - Prix du CT + pourcentage de remise sur les frais de réparation'
+    termsTemplate: 'OfferTermsTemplate_1'
   OfferSubtype_4:
     name: 'Q5'
     rank: 9
     type: 'OfferType_5'
     formType: 'OfferFormType_4'
-    terms: 'Les mentions légales : Q5 - VN'
+    termsTemplate: 'OfferTermsTemplate_3'
   OfferSubtype_5:
     name: 'A4'
     rank: 3
     type: 'OfferType_4'
     formType: 'OfferFormType_5'
-    terms: 'Les mentions légales : A4 - VO'
+    termsTemplate: 'OfferTermsTemplate_2'
 
 OfferAftersale:
   OfferAftersale_1:
@@ -82,8 +90,6 @@ OfferAftersale:
     discount_double: ''
     discount_triple: ''
     partner: 1
-    start_date: '2018-06-06'
-    end_date: '2018-07-07'
     created_at: '2018-03-05 10:00:00'
     updated_at: '2018-03-05 10:00:00'
     visual: 'visual_test.png'
@@ -99,8 +105,6 @@ OfferAftersale:
     discount_double: '10'
     discount_triple: ''
     partner: 2
-    start_date: '2018-08-08'
-    end_date: '2018-09-09'
     created_at: '2018-03-05 10:00:00'
     updated_at: '2018-03-05 10:00:00'
     visual: 'visuel_test_2.png'

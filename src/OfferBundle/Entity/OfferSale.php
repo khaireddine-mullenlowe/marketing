@@ -12,6 +12,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class OfferSale extends BaseOffer
 {
+    const SECONDNHAND = 'SECONDHANDCAR';
+
     /**
      * @var int
      *
@@ -19,13 +21,21 @@ class OfferSale extends BaseOffer
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var OfferSubtype
      *
-     * @ORM\ManyToOne(targetEntity="OfferSubtype", inversedBy="offerSales")
-     * @ORM\JoinColumn(name="subtype_id", referencedColumnName="id", nullable=false)
+     * @ORM\ManyToOne(
+     *     targetEntity="OfferSubtype",
+     *     inversedBy="offerSales",
+     *     fetch="EAGER"
+     * )
+     * @ORM\JoinColumn(
+     *     name="subtype_id",
+     *     referencedColumnName="id",
+     *     nullable=false
+     * )
      */
     protected $subtype;
 
@@ -36,9 +46,9 @@ class OfferSale extends BaseOffer
      * the position to display this div block in myaudi at the same position.
      * The X position is the top left corner abscissa position
      *
-     * @ORM\Column(name="xPosition", type="float")
+     * @ORM\Column(name="x_position", type="float")
      */
-    private $xPosition;
+    protected $xPosition;
 
     /**
      * @var float
@@ -47,25 +57,47 @@ class OfferSale extends BaseOffer
      * the position to display this div block in myaudi at the same position.
      * The Y position is the top left corner ordinate position
      *
-     * @ORM\Column(name="yPosition", type="float")
+     * @ORM\Column(name="y_position", type="float")
      */
-    private $yPosition;
+    protected $yPosition;
 
     /**
      * @var float
      *
      * @ORM\Column(name="monthly", type="float")
      */
-    private $monthly;
+    protected $monthly;
 
     /**
      * @var int
      *
      * The model of the vehicle
      *
-     * @ORM\Column(name="model", type="integer")
+     * @ORM\Column(name="model_id", type="integer")
      */
-    private $model;
+    protected $modelId;
+
+    /**
+     * @var OfferSecondhandCarTermsProperty
+     *
+     * @ORM\OneToOne(
+     *     targetEntity="OfferSecondhandCarTermsProperty",
+     *     mappedBy="offer",
+     *     cascade={"persist", "remove"}
+     * )
+     */
+    protected $termsPropertySecondhandCar;
+
+    /**
+     * @var OfferNewCarTermsProperty
+     *
+     * @ORM\OneToOne(
+     *     targetEntity="OfferNewCarTermsProperty",
+     *     mappedBy="offer",
+     *     cascade={"persist", "remove"}
+     * )
+     */
+    protected $termsPropertyNewCar;
 
     /**
      * OfferSale constructor.
@@ -184,26 +216,55 @@ class OfferSale extends BaseOffer
     }
 
     /**
-     * Set model
+     * Set modelId
      *
-     * @param integer $model
+     * @param integer $modelId
      *
      * @return OfferSale
      */
-    public function setModel($model)
+    public function setModelId($modelId)
     {
-        $this->model = $model;
+        $this->modelId = $modelId;
 
         return $this;
     }
 
     /**
-     * Get model
+     * Get modelId
      *
      * @return int
      */
-    public function getModel()
+    public function getModelId()
     {
-        return $this->model;
+        return $this->modelId;
+    }
+
+    /**
+     * @param OfferNewCarTermsProperty|OfferSecondhandCarTermsProperty $termsProperty
+     * @return OfferSale
+     */
+    public function setTermsProperty($termsProperty)
+    {
+        $category = $this->getSubtype()->getType()->getCategory();
+        if ($category === self::SECONDNHAND) {
+            $this->termsPropertySecondhandCar = $termsProperty;
+        } else {
+            $this->termsPropertyNewCar = $termsProperty;
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return OfferSecondhandCarTermsProperty|OfferNewCarTermsProperty
+     */
+    public function getTermsProperty()
+    {
+        $category = $this->getSubtype()->getType()->getCategory();
+        if ($category === self::SECONDNHAND) {
+            return $this->termsPropertySecondhandCar;
+        }
+
+        return $this->termsPropertyNewCar;
     }
 }

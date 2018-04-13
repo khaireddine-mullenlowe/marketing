@@ -24,7 +24,7 @@ abstract class BaseOffer
      *
      * @ORM\Column(name="partner_id", type="integer")
      */
-    protected $partner;
+    protected $partnerId;
 
     /**
      * @var string
@@ -50,15 +50,6 @@ abstract class BaseOffer
      * @ORM\Column(name="description", type="text")
      */
     protected $description;
-
-    /**
-     * @var string
-     *
-     * @Assert\NotBlank()
-     *
-     * @ORM\Column(name="terms", type="text")
-     */
-    protected $terms;
 
     /**
      * @var int
@@ -89,27 +80,27 @@ abstract class BaseOffer
     }
 
     /**
-     * Set partner
+     * Set partnerId
      *
-     * @param integer $partner
+     * @param integer $partnerId
      *
      * @return BaseOffer
      */
-    public function setPartner($partner)
+    public function setPartnerId($partnerId)
     {
-        $this->partner = $partner;
+        $this->partnerId = $partnerId;
 
         return $this;
     }
 
     /**
-     * Get partner
+     * Get partnerId
      *
      * @return int
      */
-    public function getPartner()
+    public function getPartnerId()
     {
-        return $this->partner;
+        return $this->partnerId;
     }
 
     /**
@@ -182,30 +173,6 @@ abstract class BaseOffer
     public function getDescription()
     {
         return $this->description;
-    }
-
-    /**
-     * Set terms
-     *
-     * @param string $terms
-     *
-     * @return BaseOffer
-     */
-    public function setTerms($terms)
-    {
-        $this->terms = $terms;
-
-        return $this;
-    }
-
-    /**
-     * Get terms
-     *
-     * @return string
-     */
-    public function getTerms()
-    {
-        return $this->terms;
     }
 
     /**
