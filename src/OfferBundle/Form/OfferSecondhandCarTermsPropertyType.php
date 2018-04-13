@@ -2,17 +2,17 @@
 
 namespace OfferBundle\Form;
 
-use OfferBundle\Entity\OfferAftersaleTermsProperty;
+use OfferBundle\Entity\OfferSecondhandCarTermsProperty;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class OfferAftersaleTermsType
+ * Class OfferSecondhandTermsType
  * @package OfferBundle\Form
  */
-class OfferAftersaleTermsType extends AbstractType
+class OfferSecondhandCarTermsType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -21,10 +21,10 @@ class OfferAftersaleTermsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add(
-                'km',
-                IntegerType::class
-            );
+            ->add('modelName', TextType::class)
+            ->add('engine', TextType::class)
+            ->add('email', TextType::class)
+            ->add('address', TextType::class);
     }
 
     /**
@@ -33,9 +33,17 @@ class OfferAftersaleTermsType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class'         => OfferAftersaleTermsProperty::class,
+            'data_class'         => OfferSecondhandCarTermsProperty::class,
             'csrf_protection'    => false,
             'allow_extra_fields' => true,
         ]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return null;
     }
 }
