@@ -46,4 +46,12 @@ class OfferSaleType extends AbstractType
             'csrf_protection'    => false,
         ]);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return null;
+    }
 }

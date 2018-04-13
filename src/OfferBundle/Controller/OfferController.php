@@ -10,12 +10,11 @@ use OfferBundle\Entity\OfferAftersaleTermsProperty;
 use OfferBundle\Entity\OfferSale;
 use OfferBundle\Entity\OfferSecondhandCarTermsProperty;
 use OfferBundle\Entity\OfferNewCarTermsProperty;
-use OfferBundle\Form\OfferAftersaleTermsType;
+use OfferBundle\Form\OfferAftersaleTermsPropertyType;
 use OfferBundle\Form\OfferAftersaleType;
-use OfferBundle\Form\OfferNewCarTermsType;
+use OfferBundle\Form\OfferNewCarTermsPropertyType;
 use OfferBundle\Form\OfferSaleType;
-use OfferBundle\Form\OfferSecondhandCarTermsType;
-use PHPSQLParser\Test\Parser\selectTest;
+use OfferBundle\Form\OfferSecondhandCarTermsPropertyType;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\View\View;
 use Mullenlowe\CommonBundle\Controller\MullenloweRestController;
@@ -36,7 +35,7 @@ class OfferController extends MullenloweRestController
             'name'         => 'Aftersale',
             'entity'       => OfferAftersale::class,
             'formType'     => OfferAftersaleType::class,
-            'formTerms'    => OfferAftersaleTermsType::class,
+            'formTerms'    => OfferAftersaleTermsPropertyType::class,
             'repository'   => 'OfferBundle:OfferAftersale',
             'termsEntity'  => OfferAftersaleTermsProperty::class,
         ],
@@ -44,7 +43,7 @@ class OfferController extends MullenloweRestController
             'name'         => 'SecondHandCar',
             'entity'       => OfferSale::class,
             'formType'     => OfferSaleType::class,
-            'formTerms'    => OfferSecondhandCarTermsType::class,
+            'formTerms'    => OfferSecondhandCarTermsPropertyType::class,
             'repository'   => 'OfferBundle:OfferSale',
             'termsEntity'  => OfferSecondhandCarTermsProperty::class,
         ],
@@ -52,7 +51,7 @@ class OfferController extends MullenloweRestController
             'name'         => 'NewCar',
             'entity'       => OfferSale::class,
             'formType'     => OfferSaleType::class,
-            'formTerms'    => OfferNewCarTermsType::class,
+            'formTerms'    => OfferNewCarTermsPropertyType::class,
             'repository'   => 'OfferBundle:OfferSale',
             'termsEntity'  => OfferNewCarTermsProperty::class,
         ],

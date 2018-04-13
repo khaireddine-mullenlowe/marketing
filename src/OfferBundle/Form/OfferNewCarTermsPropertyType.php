@@ -11,10 +11,10 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class OfferAftersaleTermsType
+ * Class OfferNewCarTermsPropertyType
  * @package OfferBundle\Form
  */
-class OfferNewCarTermsType extends AbstractType
+class OfferNewCarTermsPropertyType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
