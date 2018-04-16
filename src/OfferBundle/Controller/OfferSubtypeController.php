@@ -16,14 +16,14 @@ class OfferSubtypeController extends MullenloweRestController
     const CONTEXT = 'OfferSubtype';
 
     /**
-     * @Rest\Get("/{typeId}")
+     * @Rest\Get("/type/{typeId}")
      * @Rest\View()
      *
      * @param int $typeId
      * @return View
      *
      * @SWG\Get(
-     *     path="/offer/subtype/{typeId}",
+     *     path="/offer/subtype/type/{typeId}",
      *     summary="Get Subtypes",
      *     operationId="getSubtypes",
      *     tags={"Subtype"},
@@ -52,5 +52,44 @@ class OfferSubtypeController extends MullenloweRestController
         $subtypes = $em->getRepository("OfferBundle:OfferSubtype")->findBy(['type' => $typeId]);
 
         return $this->createView($subtypes);
+    }
+
+    /**
+     * @Rest\Get("/{id}")
+     * @Rest\View()
+     *
+     * @param int $id
+     * @return View
+     *
+     * @SWG\Get(
+     *     path="/offer/subtype/{id}",
+     *     summary="Get Subtype",
+     *     operationId="getSubtype",
+     *     tags={"Subtype"},
+     *     @SWG\Parameter(
+     *         name="id",
+     *         in="path",
+     *         type="integer",
+     *         required=true,
+     *         description="Subtype Id"
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Get subtype",
+     *         @SWG\Schema(type="array", @SWG\Items(ref="#/definitions/Subtype"))
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="not found",
+     *         @SWG\Schema(ref="#/definitions/Error")
+     *     )
+     * )
+     */
+    public function getAction(int $id)
+    {
+        $em = $this->getDoctrine();
+        $subtype = $em->getRepository("OfferBundle:OfferSubtype")->find($id);
+
+        return $this->createView($subtype);
     }
 }

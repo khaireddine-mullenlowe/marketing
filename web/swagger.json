@@ -311,7 +311,7 @@
                 }
             }
         },
-        "/offer/subtype/{typeId}": {
+        "/offer/subtype/type/{typeId}": {
             "get": {
                 "tags": [
                     "Subtype"
@@ -330,6 +330,41 @@
                 "responses": {
                     "200": {
                         "description": "Get subtypes",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Subtype"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/offer/subtype/{id}": {
+            "get": {
+                "tags": [
+                    "Subtype"
+                ],
+                "summary": "Get Subtype",
+                "operationId": "getSubtype",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Subtype Id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Get subtype",
                         "schema": {
                             "type": "array",
                             "items": {
@@ -571,16 +606,19 @@
                     "type": "string"
                 },
                 "discountSimple": {
-                    "description": "required according to the subtype, float",
-                    "type": "string"
+                    "description": "required according to the subtype",
+                    "type": "number",
+                    "format": "float"
                 },
                 "discountDouble": {
-                    "description": "required according to the subtype, float",
-                    "type": "string"
+                    "description": "required according to the subtype",
+                    "type": "number",
+                    "format": "float"
                 },
                 "discountTriple": {
-                    "description": "required according to the subtype, float",
-                    "type": "string"
+                    "description": "required according to the subtype",
+                    "type": "number",
+                    "format": "float"
                 }
             }
         },
@@ -600,7 +638,8 @@
             ],
             "properties": {
                 "monthly": {
-                    "type": "string"
+                    "type": "number",
+                    "format": "float"
                 },
                 "modelId": {
                     "description": "model id of the vehicle",
@@ -608,11 +647,13 @@
                 },
                 "xPosition": {
                     "description": "the abscissa of the div block that contains prices",
-                    "type": "string"
+                    "type": "number",
+                    "format": "float"
                 },
                 "yPosition": {
                     "description": "the ordinate of the div block that contains prices",
-                    "type": "string"
+                    "type": "number",
+                    "format": "float"
                 }
             }
         },
@@ -638,12 +679,12 @@
                     "type": "integer"
                 },
                 "advancePayment": {
-                    "description": "float",
-                    "type": "string"
+                    "type": "number",
+                    "format": "float"
                 },
                 "monthly": {
-                    "description": "float",
-                    "type": "string"
+                    "type": "number",
+                    "format": "float"
                 },
                 "priceDate": {
                     "type": "string",
@@ -662,20 +703,20 @@
                     "type": "string"
                 },
                 "mgpMin": {
-                    "description": "float",
-                    "type": "string"
+                    "type": "number",
+                    "format": "float"
                 },
                 "mgpMax": {
-                    "description": "float",
-                    "type": "string"
+                    "type": "number",
+                    "format": "float"
                 },
                 "co2EmissionMin": {
-                    "description": "float",
-                    "type": "string"
+                    "type": "number",
+                    "format": "float"
                 },
                 "co2EmissionMax": {
-                    "description": "float",
-                    "type": "string"
+                    "type": "number",
+                    "format": "float"
                 },
                 "maximumKm": {
                     "type": "integer"
