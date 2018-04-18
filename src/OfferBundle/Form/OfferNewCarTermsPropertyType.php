@@ -45,8 +45,9 @@ class OfferNewCarTermsPropertyType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class'       => OfferNewCarTermsProperty::class,
-            'csrf_protection'  => false,
+            'data_class'         => OfferNewCarTermsProperty::class,
+            'csrf_protection'    => false,
+            'allow_extra_fields' => true,
         ]);
     }
 
