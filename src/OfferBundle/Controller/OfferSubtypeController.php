@@ -37,7 +37,14 @@ class OfferSubtypeController extends MullenloweRestController
      *     @SWG\Response(
      *         response=200,
      *         description="Get subtypes",
-     *         @SWG\Schema(type="array", @SWG\Items(ref="#/definitions/Subtype"))
+     *         @SWG\Schema(
+     *             allOf={
+     *                 @SWG\Definition(ref="#/definitions/Context"),
+     *                 @SWG\Definition(
+     *                     @SWG\Property(property="data", type="array", @SWG\Items(ref="#definitions/Subtype"))
+     *                 )
+     *             }
+     *         )
      *     ),
      *     @SWG\Response(
      *         response=404,
@@ -76,8 +83,20 @@ class OfferSubtypeController extends MullenloweRestController
      *     @SWG\Response(
      *         response=200,
      *         description="Get subtype",
-     *         @SWG\Schema(type="array", @SWG\Items(ref="#/definitions/Subtype"))
+     *         @SWG\Schema(
+     *             allOf={
+     *                 @SWG\Definition(ref="#/definitions/Context"),
+     *                 @SWG\Definition(
+     *                     @SWG\Property(property="data", type="object",
+     *                         allOf={
+     *                             @SWG\Definition(ref="#definitions/Subtype")
+     *                         }
+     *                     )
+     *                 )
+     *             }
+     *         )
      *     ),
+     *
      *     @SWG\Response(
      *         response=404,
      *         description="not found",

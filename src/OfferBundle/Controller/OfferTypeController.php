@@ -37,7 +37,14 @@ class OfferTypeController extends MullenloweRestController
      *     @SWG\Response(
      *         response=200,
      *         description="Get types",
-     *         @SWG\Schema(type="array", @SWG\Items(ref="#/definitions/Type"))
+     *         @SWG\Schema(
+     *             allOf={
+     *                 @SWG\Definition(ref="#/definitions/Context"),
+     *                 @SWG\Definition(
+     *                     @SWG\Property(property="data", type="array", @SWG\Items(ref="#/definitions/Type")),
+     *                 ),
+     *             }
+     *         )
      *     ),
      *     @SWG\Response(
      *         response=404,

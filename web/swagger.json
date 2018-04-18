@@ -79,7 +79,23 @@
                     "201": {
                         "description": "Offer created - Example for aftersale",
                         "schema": {
-                            "$ref": "#/definitions/OfferAftersaleComplete"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "allOf": [
+                                                {
+                                                    "$ref": "#definitions/OfferAftersaleComplete"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "404": {
@@ -115,9 +131,25 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "offer updated - Example for sale",
+                        "description": "Offer updated - Example for sale",
                         "schema": {
-                            "$ref": "#/definitions/OfferSaleComplete"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "allOf": [
+                                                {
+                                                    "$ref": "#definitions/OfferSaleComplete"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "404": {
@@ -331,10 +363,21 @@
                     "200": {
                         "description": "Get subtypes",
                         "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Subtype"
-                            }
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#definitions/Subtype"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "404": {
@@ -366,10 +409,23 @@
                     "200": {
                         "description": "Get subtype",
                         "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Subtype"
-                            }
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "allOf": [
+                                                {
+                                                    "$ref": "#definitions/Subtype"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "404": {
@@ -401,10 +457,21 @@
                     "200": {
                         "description": "Get types",
                         "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Type"
-                            }
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/Type"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "404": {
