@@ -176,14 +176,12 @@ class SwaggerDefinitions
      *          @SWG\Property(
      *              property="advancePayment",
      *              type="number",
-     *              format="float",
-     *              description="float"
+     *              format="float"
      *          ),
      *          @SWG\Property(
      *              property="monthly",
      *              type="number",
-     *              format="float",
-     *              description="float"
+     *              format="float"
      *          ),
      *          @SWG\Property(property="priceDate", type="string", format="y-m-d"),
      *          @SWG\Property(property="modelName", type="string"),
@@ -193,26 +191,22 @@ class SwaggerDefinitions
      *          @SWG\Property(
      *              property="mgpMin",
      *              type="number",
-     *              format="float",
-     *              description="float"
+     *              format="float"
      *          ),
      *          @SWG\Property(
      *              property="mgpMax",
      *              type="number",
-     *              format="float",
-     *              description="float"
+     *              format="float"
      *          ),
      *          @SWG\Property(
      *              property="co2EmissionMin",
      *              type="number",
-     *              format="float",
-     *              description="float"
+     *              format="float"
      *          ),
      *          @SWG\Property(
      *              property="co2EmissionMax",
      *              type="number",
-     *              format="float",
-     *              description="float"
+     *              format="float"
      *          ),
      *          @SWG\Property(property="maximumKm", type="integer"),
      *          @SWG\Property(property="partner", type="string")

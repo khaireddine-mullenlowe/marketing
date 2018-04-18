@@ -20,9 +20,11 @@ use FOS\RestBundle\View\View;
 use Mullenlowe\CommonBundle\Controller\MullenloweRestController;
 use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Response;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 /**
  * Class OfferController
+ * @Route("partner")
  */
 class OfferController extends MullenloweRestController
 {
@@ -98,7 +100,7 @@ class OfferController extends MullenloweRestController
      * @return View
      *
      * @SWG\Post(
-     *     path="/offer/",
+     *     path="/offer/partner",
      *     summary="Create an offer, according to the subtype, the offer is an aftersale or sale offer",
      *     operationId="createOffer",
      *     tags={"Offer"},
@@ -126,7 +128,18 @@ class OfferController extends MullenloweRestController
      *     @SWG\Response(
      *         response="201",
      *         description="Offer created - Example for aftersale",
-     *         @SWG\Schema(ref="#/definitions/OfferAftersaleComplete")
+     *         @SWG\Schema(
+     *             allOf={
+     *                 @SWG\Definition(ref="#/definitions/Context"),
+     *                 @SWG\Definition(
+     *                     @SWG\Property(property="data", type="object",
+     *                         allOf={
+     *                             @SWG\Definition(ref="#definitions/OfferAftersaleComplete")
+     *                         }
+     *                     )
+     *                 )
+     *             }
+     *         )
      *     ),
      *     @SWG\Response(
      *         response="404",
@@ -209,7 +222,7 @@ class OfferController extends MullenloweRestController
      * @return View
      *
      * @SWG\Patch(
-     *     path="/offer/",
+     *     path="/offer/partner",
      *     summary="Update an offer",
      *     operationId="updateOffer",
      *     tags={"Offer"},
@@ -222,8 +235,19 @@ class OfferController extends MullenloweRestController
      *     ),
      *     @SWG\Response(
      *         response="200",
-     *         description="offer updated - Example for sale",
-     *         @SWG\Schema(ref="#/definitions/OfferSaleComplete")
+     *         description="Offer updated - Example for sale",
+     *         @SWG\Schema(
+     *             allOf={
+     *                 @SWG\Definition(ref="#/definitions/Context"),
+     *                 @SWG\Definition(
+     *                     @SWG\Property(property="data", type="object",
+     *                         allOf={
+     *                             @SWG\Definition(ref="#definitions/OfferSaleComplete")
+     *                         }
+     *                     )
+     *                 )
+     *             }
+     *         )
      *     ),
      *     @SWG\Response(
      *         response="404",

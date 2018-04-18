@@ -10,7 +10,7 @@ class OfferTypeControllerCest
     public function tryCGetTypeOk(FunctionalTester $I)
     {
         $I->haveHttpHeader('Content-Type', 'application/json');
-        $I->sendGET('/offer/type/aftersale');
+        $I->sendGET('/offer/partner/type/aftersale');
         $I->seeResponseCodeIs(Response::HTTP_OK);
         $I->seeResponseIsJson();
         $I->seeResponseContains('OfferType');
@@ -22,10 +22,8 @@ class OfferTypeControllerCest
     public function tryCGetTypeEmpty(FunctionalTester $I)
     {
         $I->haveHttpHeader('Content-Type', 'application/json');
-        $I->sendGET('/offer/type/test');
-        $I->seeResponseCodeIs(Response::HTTP_OK);
+        $I->sendGET('/offer/partner/type/test');
+        $I->seeResponseCodeIs(Response::HTTP_NOT_FOUND);
         $I->seeResponseIsJson();
-        $I->seeResponseContains('OfferType');
-        $I->seeResponseContains('"data":[]');
     }
 }
