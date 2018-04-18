@@ -9,7 +9,7 @@ use Swagger\Annotations as SWG;
 
 /**
  * Class OfferTypeController
- * @Route("subtype")
+ * @Route("partner/subtype")
  */
 class OfferSubtypeController extends MullenloweRestController
 {
@@ -23,7 +23,7 @@ class OfferSubtypeController extends MullenloweRestController
      * @return View
      *
      * @SWG\Get(
-     *     path="/offer/subtype/type/{typeId}",
+     *     path="/offer/partner/subtype/type/{typeId}",
      *     summary="Get Subtypes",
      *     operationId="getSubtypes",
      *     tags={"Subtype"},
@@ -69,7 +69,7 @@ class OfferSubtypeController extends MullenloweRestController
      * @return View
      *
      * @SWG\Get(
-     *     path="/offer/subtype/{id}",
+     *     path="/offer/partner/subtype/{id}",
      *     summary="Get Subtype",
      *     operationId="getSubtype",
      *     tags={"Subtype"},

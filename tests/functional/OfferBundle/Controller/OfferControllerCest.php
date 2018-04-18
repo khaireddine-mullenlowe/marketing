@@ -40,7 +40,7 @@ class OfferControllerCest
             }
         ';
 
-        $I->sendPOST('/offer/', $data);
+        $I->sendPOST('/offer/partner/', $data);
         $I->seeResponseCodeIs(Response::HTTP_CREATED);
         $I->seeResponseIsJson();
         $I->seeResponseContains('Offer');
@@ -90,7 +90,7 @@ class OfferControllerCest
             }
         ';
 
-        $I->sendPOST('/offer/', $data);
+        $I->sendPOST('/offer/partner/', $data);
         $I->seeResponseCodeIs(Response::HTTP_CREATED);
         $I->seeResponseIsJson();
         $I->seeResponseContains('Offer');
@@ -124,7 +124,7 @@ class OfferControllerCest
             }
         ';
 
-        $I->sendPOST('/offer/', $data);
+        $I->sendPOST('/offer/partner/', $data);
         $I->seeResponseCodeIs(Response::HTTP_INTERNAL_SERVER_ERROR);
         $I->seeResponseIsJson();
         $I->seeResponseContains('Invalid OfferSubtype');
@@ -152,7 +152,7 @@ class OfferControllerCest
             }
         ';
 
-        $I->sendPOST('/offer/', $data);
+        $I->sendPOST('/offer/partner/', $data);
         $I->seeResponseCodeIs(Response::HTTP_BAD_REQUEST);
         $I->seeResponseIsJson();
         $I->seeResponseContains('Invalid');
@@ -178,7 +178,7 @@ class OfferControllerCest
             }
         ';
 
-        $I->sendPATCH('/offer/', $data);
+        $I->sendPATCH('/offer/partner/', $data);
         $I->seeResponseCodeIs(Response::HTTP_OK);
         $I->seeResponseIsJson();
         $I->seeResponseContains('Offer');
@@ -204,7 +204,7 @@ class OfferControllerCest
             }
         ';
 
-        $I->sendPATCH('/offer/', $data);
+        $I->sendPATCH('/offer/partner/', $data);
         $I->seeResponseCodeIs(Response::HTTP_INTERNAL_SERVER_ERROR);
         $I->seeResponseIsJson();
         $I->seeResponseContains('Invalid Offer');

@@ -20,9 +20,11 @@ use FOS\RestBundle\View\View;
 use Mullenlowe\CommonBundle\Controller\MullenloweRestController;
 use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Response;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 /**
  * Class OfferController
+ * @Route("partner")
  */
 class OfferController extends MullenloweRestController
 {
@@ -98,7 +100,7 @@ class OfferController extends MullenloweRestController
      * @return View
      *
      * @SWG\Post(
-     *     path="/offer/",
+     *     path="/offer/partner",
      *     summary="Create an offer, according to the subtype, the offer is an aftersale or sale offer",
      *     operationId="createOffer",
      *     tags={"Offer"},
@@ -220,7 +222,7 @@ class OfferController extends MullenloweRestController
      * @return View
      *
      * @SWG\Patch(
-     *     path="/offer/",
+     *     path="/offer/partner",
      *     summary="Update an offer",
      *     operationId="updateOffer",
      *     tags={"Offer"},
