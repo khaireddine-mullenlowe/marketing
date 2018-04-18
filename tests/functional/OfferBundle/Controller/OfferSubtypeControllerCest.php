@@ -22,10 +22,8 @@ class OfferSubtypeControllerCest
     {
         $I->haveHttpHeader('Content-Type', 'application/json');
         $I->sendGET('/offer/partner/subtype/9999');
-        $I->seeResponseCodeIs(Response::HTTP_OK);
+        $I->seeResponseCodeIs(Response::HTTP_NOT_FOUND);
         $I->seeResponseIsJson();
-        $I->dontSeeResponseContains('terms');
-        $I->dontSeeResponseContains('formType');
     }
 
     public function tryCGetSubtypeOk(FunctionalTester $I)
@@ -43,9 +41,7 @@ class OfferSubtypeControllerCest
     {
         $I->haveHttpHeader('Content-Type', 'application/json');
         $I->sendGET('/offer/partner/subtype/type/9999');
-        $I->seeResponseCodeIs(Response::HTTP_OK);
+        $I->seeResponseCodeIs(Response::HTTP_NOT_FOUND);
         $I->seeResponseIsJson();
-        $I->dontSeeResponseContains('terms');
-        $I->dontSeeResponseContains('formType');
     }
 }

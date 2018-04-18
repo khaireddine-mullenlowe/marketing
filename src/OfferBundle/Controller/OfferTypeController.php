@@ -4,6 +4,7 @@ namespace OfferBundle\Controller;
 use Mullenlowe\CommonBundle\Controller\MullenloweRestController;
 use FOS\RestBundle\View\View;
 use FOS\RestBundle\Controller\Annotations as Rest;
+use Mullenlowe\CommonBundle\Exception\NotFoundHttpException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Swagger\Annotations as SWG;
 
@@ -57,6 +58,10 @@ class OfferTypeController extends MullenloweRestController
     {
         $em = $this->getDoctrine();
         $types = $em->getRepository("OfferBundle:OfferType")->findBy(['category' => strtoupper($category)]);
+
+        if (empty($types)) {
+            throw new NotFoundHttpException(static::CONTEXT, 'Types not found');
+        }
 
         return $this->createView($types);
     }

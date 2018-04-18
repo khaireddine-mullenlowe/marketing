@@ -23,9 +23,7 @@ class OfferTypeControllerCest
     {
         $I->haveHttpHeader('Content-Type', 'application/json');
         $I->sendGET('/offer/partner/type/test');
-        $I->seeResponseCodeIs(Response::HTTP_OK);
+        $I->seeResponseCodeIs(Response::HTTP_NOT_FOUND);
         $I->seeResponseIsJson();
-        $I->seeResponseContains('OfferType');
-        $I->seeResponseContains('"data":[]');
     }
 }
