@@ -12,6 +12,32 @@ class OfferControllerCest
     /**
      * @param FunctionalTester $I
      */
+    public function tryCGetOffer(FunctionalTester $I) {
+        $I->haveHttpHeader('Content-Type', 'application/json');
+
+        $I->sendGET('/offer/partner?category=aftersale&partnersIds=1');
+        $I->seeResponseCodeIs(Response::HTTP_OK);
+        $I->seeResponseIsJson();
+        $I->seeResponseContains('Offer');
+    }
+
+    /**
+     * @param FunctionalTester $I
+     */
+    public function tryGetOffersWithoutCategory(FunctionalTester $I)
+    {
+        $I->haveHttpHeader('Content-Type', 'application/json');
+
+        $I->sendGET('/offer/partner');
+        $I->seeResponseCodeIs(Response::HTTP_INTERNAL_SERVER_ERROR);
+        $I->seeResponseIsJson();
+        $I->seeResponseContains('Empty category');
+    }
+
+
+    /**
+     * @param FunctionalTester $I
+     */
     public function tryPostOfferAftersale(FunctionalTester $I)
     {
         $I->haveHttpHeader('Content-Type', 'application/json');
