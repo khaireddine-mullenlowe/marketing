@@ -88,14 +88,7 @@ class OfferController extends MullenloweRestController
      *     @SWG\Response(
      *         response="200",
      *         description="Offers - Example for aftersale",
-     *         @SWG\Schema(
-     *             allOf={
-     *                 @SWG\Definition(ref="#/definitions/Context"),
-     *                 @SWG\Definition(
-     *                     @SWG\Property(property="data", type="array", @SWG\Items(ref="#definitions/OfferAftersaleComplete"))
-     *                 )
-     *             }
-     *         )
+     *         @SWG\Definition(ref="#/definitions/OfferAftersaleContextMulti"),
      *     ),
      *     @SWG\Response(
      *         response=404,
@@ -116,7 +109,7 @@ class OfferController extends MullenloweRestController
 
         $parnerIds = $request->query->get('partnerIds');
 
-        if(!empty($parnerIds) && is_string($parnerIds)) {
+        if (!empty($parnerIds) && is_string($parnerIds)) {
             $parnerIds = explode(',', $parnerIds);
         }
 
@@ -161,18 +154,7 @@ class OfferController extends MullenloweRestController
      *     @SWG\Response(
      *         response="201",
      *         description="Offer created - Example for aftersale",
-     *         @SWG\Schema(
-     *             allOf={
-     *                 @SWG\Definition(ref="#/definitions/Context"),
-     *                 @SWG\Definition(
-     *                     @SWG\Property(property="data", type="object",
-     *                         allOf={
-     *                             @SWG\Definition(ref="#definitions/OfferAftersaleComplete")
-     *                         }
-     *                     )
-     *                 )
-     *             }
-     *         )
+     *         @SWG\Definition(ref="#definitions/OfferAftersaleContext")
      *     ),
      *     @SWG\Response(
      *         response="404",
@@ -269,18 +251,7 @@ class OfferController extends MullenloweRestController
      *     @SWG\Response(
      *         response="200",
      *         description="Offer updated - Example for sale",
-     *         @SWG\Schema(
-     *             allOf={
-     *                 @SWG\Definition(ref="#/definitions/Context"),
-     *                 @SWG\Definition(
-     *                     @SWG\Property(property="data", type="object",
-     *                         allOf={
-     *                             @SWG\Definition(ref="#definitions/OfferSaleComplete")
-     *                         }
-     *                     )
-     *                 )
-     *             }
-     *         )
+     *         @SWG\Definition(ref="#definitions/OfferSaleContext")
      *     ),
      *     @SWG\Response(
      *         response="404",
