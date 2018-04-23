@@ -13,7 +13,7 @@
         "application/json"
     ],
     "paths": {
-        "/offer/partner/{partnerId}": {
+        "/offer/partner": {
             "get": {
                 "tags": [
                     "Offer"
@@ -22,14 +22,41 @@
                 "operationId": "getOffers",
                 "parameters": [
                     {
-                        "name": "partnerId",
-                        "in": "path",
-                        "description": "Partner Id",
+                        "name": "category",
+                        "in": "query",
+                        "description": "Sale or Aftersale",
                         "required": true,
-                        "type": "integer"
+                        "type": "string"
+                    },
+                    {
+                        "name": "partnerIds",
+                        "in": "query",
+                        "description": "Partner Ids splited by a comma",
+                        "required": false,
+                        "type": "string"
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "description": "Offers - Example for aftersale",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#definitions/OfferAftersaleComplete"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
                     "404": {
                         "description": "not found",
                         "schema": {
@@ -37,9 +64,7 @@
                         }
                     }
                 }
-            }
-        },
-        "/offer/": {
+            },
             "post": {
                 "tags": [
                     "Offer"
@@ -343,7 +368,7 @@
                 }
             }
         },
-        "/offer/subtype/type/{typeId}": {
+        "/offer/partner/subtype/type/{typeId}": {
             "get": {
                 "tags": [
                     "Subtype"
@@ -389,7 +414,7 @@
                 }
             }
         },
-        "/offer/subtype/{id}": {
+        "/offer/partner/subtype/{id}": {
             "get": {
                 "tags": [
                     "Subtype"
@@ -437,7 +462,7 @@
                 }
             }
         },
-        "/offer/type/{category}": {
+        "/offer/partner/type/{category}": {
             "get": {
                 "tags": [
                     "Type"

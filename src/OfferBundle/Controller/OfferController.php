@@ -60,23 +60,42 @@ class OfferController extends MullenloweRestController
     ];
 
     /**
-     * @Rest\Get("/partner/{partnerId}")
-     * @Rest\View()
+     * @Rest\Get("")
+     * @Rest\View(serializerGroups={"rest"})
      *
-     * @param int $partnerId
+     * @param Request $request
      * @return View
-     *
+
      * @SWG\Get(
-     *     path="/offer/partner/{partnerId}",
+     *     path="/offer/partner",
      *     summary="Get offers for a partner",
      *     operationId="getOffers",
      *     tags={"Offer"},
      *     @SWG\Parameter(
-     *         name="partnerId",
-     *         in="path",
-     *         type="integer",
+     *         name="category",
+     *         in="query",
+     *         type="string",
      *         required=true,
-     *         description="Partner Id"
+     *         description="newcar or aftersale"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="partnerIds",
+     *         in="query",
+     *         type="string",
+     *         required=false,
+     *         description="Partner Ids splited by a comma"
+     *     ),
+     *     @SWG\Response(
+     *         response="200",
+     *         description="Offers - Example for aftersale",
+     *         @SWG\Schema(
+     *             allOf={
+     *                 @SWG\Definition(ref="#/definitions/Context"),
+     *                 @SWG\Definition(
+     *                     @SWG\Property(property="data", type="array", @SWG\Items(ref="#definitions/OfferAftersaleComplete"))
+     *                 )
+     *             }
+     *         )
      *     ),
      *     @SWG\Response(
      *         response=404,
@@ -85,10 +104,24 @@ class OfferController extends MullenloweRestController
      *     )
      * )
      */
-    public function getAction(int $partnerId)
+    public function cgetAction(Request $request)
     {
+        $category = $request->query->get('category');
+
+        if (empty($category)) {
+            throw new InvalidArgumentException('Empty category');
+        }
+
+        $type = self::OFFERTYPE[$category];
+
+        $parnerIds = $request->query->get('partnerIds');
+
+        if(!empty($parnerIds) && is_string($parnerIds)) {
+            $parnerIds = explode(',', $parnerIds);
+        }
+
         $em = $this->getDoctrine();
-        $offers = $em->getRepository("OfferBundle:OfferAftersale")->findBy(['partner' => $partnerId]);
+        $offers = $em->getRepository($type['repository'])->findOffersSinceAYear($parnerIds);
 
         return $this->createView($offers);
     }
@@ -185,7 +218,7 @@ class OfferController extends MullenloweRestController
             $type['name'] !== self::OFFERTYPE['aftersale']['name'] ||
             (
                 $type['name'] === self::OFFERTYPE['aftersale']['name']
-                && $subtype->getType()->getName() === 'Entretien'
+                && $subtype->getType()->getName() === self::SERVICING
                 && $subtype->getRank() < 4
             )
         ) {

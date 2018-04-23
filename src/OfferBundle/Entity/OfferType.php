@@ -4,6 +4,7 @@ namespace OfferBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * OfferType
@@ -25,6 +26,8 @@ class OfferType
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     *
+     * @Groups({"rest"})
      */
     protected $id;
 
@@ -36,6 +39,8 @@ class OfferType
      *     type="string",
      *     length=255
      * )
+     *
+     * @Groups({"rest"})
      */
     protected $category;
 
@@ -43,6 +48,8 @@ class OfferType
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
+     *
+     * @Groups({"rest"})
      */
     protected $name;
 
@@ -50,6 +57,8 @@ class OfferType
      * @var string
      *
      * @ORM\Column(name="subtitle", type="text", nullable=true)
+     *
+     * @Groups({"rest"})
      */
     protected $subtitle;
 
