@@ -29,7 +29,7 @@ class OfferControllerCest
         $I->haveHttpHeader('Content-Type', 'application/json');
 
         $I->sendGET('/offer/partner');
-        $I->seeResponseCodeIs(Response::HTTP_INTERNAL_SERVER_ERROR);
+        $I->seeResponseCodeIs(Response::HTTP_BAD_REQUEST);
         $I->seeResponseIsJson();
         $I->seeResponseContains('Empty category');
     }
