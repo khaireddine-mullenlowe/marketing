@@ -102,7 +102,7 @@ class OfferController extends MullenloweRestController
         $category = $request->query->get('category');
 
         if (empty($category)) {
-            throw new BadRequestHttpException('CGetOffer', 'Empty category');
+            throw new BadRequestHttpException(self::CONTEXT, 'Empty category');
         }
 
         $type = self::OFFERTYPE[$category];

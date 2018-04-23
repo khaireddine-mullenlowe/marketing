@@ -18,7 +18,6 @@ class OfferAftersaleRepository extends \Doctrine\ORM\EntityRepository
 
         $qb = $this->createQueryBuilder('offer');
         $qb
-            ->select('offer')
             ->leftJoin('offer.termsProperty', 'terms')
             ->where('offer.endDate > :date')
             ->setParameter(':date', $date)
