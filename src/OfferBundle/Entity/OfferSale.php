@@ -3,6 +3,7 @@
 namespace OfferBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * OfferSale
@@ -20,6 +21,8 @@ class OfferSale extends BaseOffer
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     *
+     * @Groups({"rest"})
      */
     protected $id;
 
@@ -36,6 +39,8 @@ class OfferSale extends BaseOffer
      *     referencedColumnName="id",
      *     nullable=false
      * )
+     *
+     * @Groups({"rest"})
      */
     protected $subtype;
 
@@ -47,6 +52,8 @@ class OfferSale extends BaseOffer
      * The X position is the top left corner abscissa position
      *
      * @ORM\Column(name="x_position", type="float")
+     *
+     * @Groups({"rest"})
      */
     protected $xPosition;
 
@@ -58,6 +65,8 @@ class OfferSale extends BaseOffer
      * The Y position is the top left corner ordinate position
      *
      * @ORM\Column(name="y_position", type="float")
+     *
+     * @Groups({"rest"})
      */
     protected $yPosition;
 
@@ -65,6 +74,8 @@ class OfferSale extends BaseOffer
      * @var float
      *
      * @ORM\Column(name="monthly", type="float")
+     *
+     * @Groups({"rest"})
      */
     protected $monthly;
 
@@ -74,6 +85,8 @@ class OfferSale extends BaseOffer
      * The model of the vehicle
      *
      * @ORM\Column(name="model_id", type="integer")
+     *
+     * @Groups({"rest"})
      */
     protected $modelId;
 
@@ -85,6 +98,8 @@ class OfferSale extends BaseOffer
      *     mappedBy="offer",
      *     cascade={"persist", "remove"}
      * )
+     *
+     * @Groups({"rest"})
      */
     protected $termsPropertySecondhandCar;
 
@@ -96,6 +111,8 @@ class OfferSale extends BaseOffer
      *     mappedBy="offer",
      *     cascade={"persist", "remove"}
      * )
+     *
+     * @Groups({"rest"})
      */
     protected $termsPropertyNewCar;
 
@@ -240,6 +257,44 @@ class OfferSale extends BaseOffer
     }
 
     /**
+     * @param OfferNewCarTermsProperty $termsPropertyNewCar
+     * @return OfferSale
+     */
+    public function setTermsPropertyNewCar(OfferNewCarTermsProperty $termsPropertyNewCar)
+    {
+        $this->termsPropertyNewCar = $termsPropertyNewCar;
+
+        return $this;
+    }
+
+    /**
+     * @return OfferNewCarTermsProperty
+     */
+    public function getTermsPropertyNewCar()
+    {
+        return $this->termsPropertyNewCar;
+    }
+
+    /**
+     * @param OfferSecondhandCarTermsProperty $termsPropertySecondhandCar
+     * @return OfferSale
+     */
+    public function setTermsPropertySecondhandCar(OfferSecondhandCarTermsProperty $termsPropertySecondhandCar)
+    {
+        $this->termsPropertySecondhandCar = $termsPropertySecondhandCar;
+
+        return $this;
+    }
+
+    /**
+     * @return OfferSecondhandCarTermsProperty
+     */
+    public function getTermsPropertySecondhandCar()
+    {
+        return $this->termsPropertySecondhandCar;
+    }
+
+    /**
      * @param OfferNewCarTermsProperty|OfferSecondhandCarTermsProperty $termsProperty
      * @return OfferSale
      */
@@ -247,9 +302,9 @@ class OfferSale extends BaseOffer
     {
         $category = $this->getSubtype()->getType()->getCategory();
         if ($category === self::SECONDNHAND) {
-            $this->termsPropertySecondhandCar = $termsProperty;
+            $this->setTermsPropertySecondhandCar($termsProperty);
         } else {
-            $this->termsPropertyNewCar = $termsProperty;
+            $this->setTermsPropertyNewCar($termsProperty);
         }
 
         return $this;
@@ -262,9 +317,9 @@ class OfferSale extends BaseOffer
     {
         $category = $this->getSubtype()->getType()->getCategory();
         if ($category === self::SECONDNHAND) {
-            return $this->termsPropertySecondhandCar;
+            return $this->getTermsPropertySecondhandCar();
         }
 
-        return $this->termsPropertyNewCar;
+        return $this->getTermsPropertyNewCar();
     }
 }

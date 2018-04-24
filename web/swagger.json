@@ -13,7 +13,7 @@
         "application/json"
     ],
     "paths": {
-        "/offer/partner/{partnerId}": {
+        "/offer/partner": {
             "get": {
                 "tags": [
                     "Offer"
@@ -22,14 +22,27 @@
                 "operationId": "getOffers",
                 "parameters": [
                     {
-                        "name": "partnerId",
-                        "in": "path",
-                        "description": "Partner Id",
+                        "name": "category",
+                        "in": "query",
+                        "description": "newcar or aftersale",
                         "required": true,
-                        "type": "integer"
+                        "type": "string"
+                    },
+                    {
+                        "name": "partnerIds",
+                        "in": "query",
+                        "description": "Partner Ids splited by a comma",
+                        "required": false,
+                        "type": "string"
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "description": "Offers - Example for aftersale",
+                        "schema": {
+                            "$ref": "#/definitions/OfferAftersaleContextMulti"
+                        }
+                    },
                     "404": {
                         "description": "not found",
                         "schema": {
@@ -37,9 +50,7 @@
                         }
                     }
                 }
-            }
-        },
-        "/offer/": {
+            },
             "post": {
                 "tags": [
                     "Offer"
@@ -79,23 +90,7 @@
                     "201": {
                         "description": "Offer created - Example for aftersale",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/Context"
-                                },
-                                {
-                                    "properties": {
-                                        "data": {
-                                            "type": "object",
-                                            "allOf": [
-                                                {
-                                                    "$ref": "#definitions/OfferAftersaleComplete"
-                                                }
-                                            ]
-                                        }
-                                    }
-                                }
-                            ]
+                            "$ref": "#definitions/OfferAftersaleContext"
                         }
                     },
                     "404": {
@@ -133,23 +128,7 @@
                     "200": {
                         "description": "Offer updated - Example for sale",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/Context"
-                                },
-                                {
-                                    "properties": {
-                                        "data": {
-                                            "type": "object",
-                                            "allOf": [
-                                                {
-                                                    "$ref": "#definitions/OfferSaleComplete"
-                                                }
-                                            ]
-                                        }
-                                    }
-                                }
-                            ]
+                            "$ref": "#definitions/OfferSaleContext"
                         }
                     },
                     "404": {
@@ -343,7 +322,7 @@
                 }
             }
         },
-        "/offer/subtype/type/{typeId}": {
+        "/offer/partner/subtype/type/{typeId}": {
             "get": {
                 "tags": [
                     "Subtype"
@@ -363,21 +342,7 @@
                     "200": {
                         "description": "Get subtypes",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/Context"
-                                },
-                                {
-                                    "properties": {
-                                        "data": {
-                                            "type": "array",
-                                            "items": {
-                                                "$ref": "#definitions/Subtype"
-                                            }
-                                        }
-                                    }
-                                }
-                            ]
+                            "$ref": "#/definitions/SubtypeContextMulti"
                         }
                     },
                     "404": {
@@ -389,7 +354,7 @@
                 }
             }
         },
-        "/offer/subtype/{id}": {
+        "/offer/partner/subtype/{id}": {
             "get": {
                 "tags": [
                     "Subtype"
@@ -409,23 +374,7 @@
                     "200": {
                         "description": "Get subtype",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/Context"
-                                },
-                                {
-                                    "properties": {
-                                        "data": {
-                                            "type": "object",
-                                            "allOf": [
-                                                {
-                                                    "$ref": "#definitions/Subtype"
-                                                }
-                                            ]
-                                        }
-                                    }
-                                }
-                            ]
+                            "$ref": "#/definitions/SubtypeContext"
                         }
                     },
                     "404": {
@@ -437,7 +386,7 @@
                 }
             }
         },
-        "/offer/type/{category}": {
+        "/offer/partner/type/{category}": {
             "get": {
                 "tags": [
                     "Type"
@@ -457,21 +406,7 @@
                     "200": {
                         "description": "Get types",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/Context"
-                                },
-                                {
-                                    "properties": {
-                                        "data": {
-                                            "type": "array",
-                                            "items": {
-                                                "$ref": "#/definitions/Type"
-                                            }
-                                        }
-                                    }
-                                }
-                            ]
+                            "$ref": "#/definitions/TypeContextMulti"
                         }
                     },
                     "404": {
@@ -922,6 +857,38 @@
                 }
             ]
         },
+        "OfferAftersaleContext": {
+            "properties": {
+                "data": {
+                    "type": "object",
+                    "allOf": [
+                        {
+                            "$ref": "#definitions/OfferAftersaleComplete"
+                        }
+                    ]
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#definitions/Context"
+                }
+            ]
+        },
+        "OfferAftersaleContextMulti": {
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#definitions/OfferAftersaleComplete"
+                    }
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#definitions/Context"
+                }
+            ]
+        },
         "OfferUpdate": {
             "properties": {
                 "subtype": {
@@ -981,6 +948,23 @@
                 }
             ]
         },
+        "OfferSaleContext": {
+            "properties": {
+                "data": {
+                    "type": "object",
+                    "allOf": [
+                        {
+                            "$ref": "#definitions/OfferSaleComplete"
+                        }
+                    ]
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#definitions/Context"
+                }
+            ]
+        },
         "Name": {
             "properties": {
                 "name": {
@@ -1003,6 +987,21 @@
                 },
                 {
                     "$ref": "#definitions/Name"
+                }
+            ]
+        },
+        "TypeContextMulti": {
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#definitions/Type"
+                    }
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#definitions/Context"
                 }
             ]
         },
@@ -1075,6 +1074,38 @@
                 },
                 {
                     "$ref": "#definitions/Name"
+                }
+            ]
+        },
+        "SubtypeContext": {
+            "properties": {
+                "data": {
+                    "type": "object",
+                    "allOf": [
+                        {
+                            "$ref": "#definitions/Subtype"
+                        }
+                    ]
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#definitions/Context"
+                }
+            ]
+        },
+        "SubtypeContextMulti": {
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#definitions/Subtype"
+                    }
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#definitions/Context"
                 }
             ]
         },

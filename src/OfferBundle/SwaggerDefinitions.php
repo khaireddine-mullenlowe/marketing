@@ -212,7 +212,7 @@ class SwaggerDefinitions
      *          @SWG\Property(property="partner", type="string")
      *      ),
      *
-     *     @SWG\definition(
+     *     @SWG\Definition(
      *         definition="OfferAftersale",
      *         @SWG\Property(property="offer", type="object",
      *             allOf={
@@ -230,7 +230,7 @@ class SwaggerDefinitions
      *         )
      *     ),
      *
-     *     @SWG\definition(
+     *     @SWG\Definition(
      *         definition="OfferSale",
      *         @SWG\Property(property="offer", type="object",
      *             allOf={
@@ -243,7 +243,7 @@ class SwaggerDefinitions
      *         )
      *     ),
      *
-     *     @SWG\definition(
+     *     @SWG\Definition(
      *         definition="OfferSecondhandCar",
      *         allOf={
      *             @SWG\Definition(ref="#definitions/OfferSale")
@@ -255,7 +255,7 @@ class SwaggerDefinitions
      *         )
      *     ),
      *
-     *     @SWG\definition(
+     *     @SWG\Definition(
      *         definition="OfferNewCar",
      *         allOf={
      *             @SWG\Definition(ref="#definitions/OfferSale")
@@ -267,7 +267,7 @@ class SwaggerDefinitions
      *         )
      *     ),
      *
-     *     @SWG\definition(
+     *     @SWG\Definition(
      *         definition="OfferAftersaleComplete",
      *         @SWG\Property(property="status", type="integer", default="1"),
      *         allOf={
@@ -286,7 +286,29 @@ class SwaggerDefinitions
      *         )
      *     ),
      *
-     *     @SWG\definition(
+     *     @SWG\Definition(
+     *         definition="OfferAftersaleContext",
+     *         allOf={
+     *             @SWG\Definition(ref="#definitions/Context")
+     *         },
+     *         @SWG\Property(property="data", type="object",
+     *             allOf={
+     *                 @SWG\Definition(ref="#definitions/OfferAftersaleComplete")
+     *             }
+     *         )
+     *     ),
+     *
+     *     @SWG\Definition(
+     *         definition="OfferAftersaleContextMulti",
+     *         allOf={
+     *             @SWG\Definition(ref="#definitions/Context")
+     *         },
+     *         @SWG\Property(property="data", type="array",
+     *             @SWG\Items(ref="#definitions/OfferAftersaleComplete")
+     *         )
+     *     ),
+     *
+     *     @SWG\Definition(
      *         definition="OfferUpdate",
      *         allOf={
      *             @SWG\Definition(ref="#definitions/Id"),
@@ -297,7 +319,7 @@ class SwaggerDefinitions
      *         @SWG\Property(property="visual", type="string")
      *     ),
      *
-     *     @SWG\definition(
+     *     @SWG\Definition(
      *         definition="OfferSaleComplete",
      *         @SWG\Property(property="status", type="integer", default="1"),
      *         allOf={
@@ -316,11 +338,23 @@ class SwaggerDefinitions
      *     ),
      *
      *     @SWG\Definition(
+     *         definition="OfferSaleContext",
+     *         allOf={
+     *             @SWG\Definition(ref="#definitions/Context")
+     *         },
+     *         @SWG\Property(property="data", type="object",
+     *             allOf={
+     *                 @SWG\Definition(ref="#definitions/OfferSaleComplete")
+     *             }
+     *         )
+     *     ),
+     *
+     *     @SWG\Definition(
      *         definition="Name",
      *         @SWG\Property(property="name", type="string")
      *     ),
      *
-     *     @SWG\definition(
+     *     @SWG\Definition(
      *         definition="Type",
      *         @SWG\Property(property="category", type="string"),
      *         @SWG\Property(property="subtitle", type="string"),
@@ -330,7 +364,17 @@ class SwaggerDefinitions
      *         }
      *     ),
      *
-     *     @SWG\definition(
+     *     @SWG\Definition(
+     *         definition="TypeContextMulti",
+     *         allOf={
+     *             @SWG\Definition(ref="#definitions/Context")
+     *         },
+     *         @SWG\Property(property="data", type="array",
+     *             @SWG\Items(ref="#definitions/Type")
+     *         )
+     *     ),
+     *
+     *     @SWG\Definition(
      *         definition="FormType",
      *         @SWG\Property(property="type", type="string"),
      *         allOf={
@@ -340,7 +384,7 @@ class SwaggerDefinitions
      *         }
      *     ),
      *
-     *     @SWG\definition(
+     *     @SWG\Definition(
      *         definition="TermsTemplate",
      *         @SWG\Property(property="template", type="string"),
      *         allOf={
@@ -349,7 +393,7 @@ class SwaggerDefinitions
      *         required={"template"}
      *     ),
      *
-     *     @SWG\definition(
+     *     @SWG\Definition(
      *         definition="Subtype",
      *         @SWG\Property(property="rank", type="string"),
      *         @SWG\Property(property="type", type="object",
@@ -371,6 +415,28 @@ class SwaggerDefinitions
      *             @SWG\Definition(ref="#definitions/Id"),
      *             @SWG\Definition(ref="#definitions/Name")
      *         }
+     *     ),
+     *
+     *     @SWG\Definition(
+     *         definition="SubtypeContext",
+     *         allOf={
+     *             @SWG\Definition(ref="#definitions/Context")
+     *         },
+     *         @SWG\Property(property="data", type="object",
+     *             allOf={
+     *                 @SWG\Definition(ref="#definitions/Subtype")
+     *             }
+     *         )
+     *     ),
+     *
+     *     @SWG\Definition(
+     *         definition="SubtypeContextMulti",
+     *         allOf={
+     *             @SWG\Definition(ref="#definitions/Context")
+     *         },
+     *         @SWG\Property(property="data", type="array",
+     *             @SWG\Items(ref="#definitions/Subtype")
+     *         )
      *     ),
      *
      *     @SWG\Definition(

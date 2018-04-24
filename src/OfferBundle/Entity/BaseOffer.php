@@ -7,6 +7,7 @@ use OfferBundle\Entity\Traits\TimestampableOfferEntityTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 use OfferBundle\Validator\Constraints as OfferAssert;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * BaseOffer
@@ -23,6 +24,8 @@ abstract class BaseOffer
      * @var int
      *
      * @ORM\Column(name="partner_id", type="integer")
+     *
+     * @Groups({"rest"})
      */
     protected $partnerId;
 
@@ -30,6 +33,8 @@ abstract class BaseOffer
      * @var string
      *
      * @ORM\Column(name="visual", type="string", length=255)
+     *
+     * @Groups({"rest"})
      */
     protected $visual;
 
@@ -39,6 +44,8 @@ abstract class BaseOffer
      * @Assert\NotBlank()
      *
      * @ORM\Column(name="title", type="string", length=255)
+     *
+     * @Groups({"rest"})
      */
     protected $title;
 
@@ -48,6 +55,8 @@ abstract class BaseOffer
      * @Assert\NotBlank()
      *
      * @ORM\Column(name="description", type="text")
+     *
+     * @Groups({"rest"})
      */
     protected $description;
 
@@ -59,6 +68,8 @@ abstract class BaseOffer
      * 0 = Inactivate, 1 = Activate
      *
      * @ORM\Column(name="status", type="integer", options={"default"=1})
+     *
+     * @Groups({"rest"})
      */
     protected $status;
 
@@ -68,6 +79,8 @@ abstract class BaseOffer
      * If the partner has read and accepted the user terms for offer creation
      *
      * @ORM\Column(name="agreements", type="boolean")
+     *
+     * @Groups({"rest"})
      */
     protected $agreements;
 

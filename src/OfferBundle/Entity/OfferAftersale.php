@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use OfferBundle\Validator\Constraints as AftersaleAssert;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * OfferAftersale
@@ -23,6 +24,8 @@ class OfferAftersale extends BaseOffer
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     *
+     * @Groups({"rest"})
      */
     protected $id;
 
@@ -39,6 +42,8 @@ class OfferAftersale extends BaseOffer
      *     referencedColumnName="id",
      *     nullable=false
      * )
+     *
+     * @Groups({"rest"})
      */
     protected $subtype;
 
@@ -48,6 +53,8 @@ class OfferAftersale extends BaseOffer
      * @Assert\NotBlank()
      *
      * @ORM\Column(name="details", type="text")
+     *
+     * @Groups({"rest"})
      */
     protected $details;
 
@@ -61,6 +68,8 @@ class OfferAftersale extends BaseOffer
      * It can be a price or a percent.
      *
      * @ORM\Column(name="discount_simple", type="float", nullable=true)
+     *
+     * @Groups({"rest"})
      */
     protected $discountSimple;
 
@@ -74,6 +83,8 @@ class OfferAftersale extends BaseOffer
      * It can be a price or a percent.
      *
      * @ORM\Column(name="discount_double", type="float", nullable=true)
+     *
+     * @Groups({"rest"})
      */
     protected $discountDouble;
 
@@ -87,6 +98,8 @@ class OfferAftersale extends BaseOffer
      * It can be a price or a percent.
      *
      * @ORM\Column(name="discount_triple", type="float", nullable=true)
+     *
+     * @Groups({"rest"})
      */
     protected $discountTriple;
 
@@ -98,8 +111,10 @@ class OfferAftersale extends BaseOffer
      *     mappedBy="offer",
      *     cascade={"persist", "remove"}
      * )
+     *
+     * @Groups({"rest"})
      */
-    protected $termsProperties;
+    protected $termsProperty;
 
     /**
      * OfferAftersale constructor.
@@ -246,7 +261,7 @@ class OfferAftersale extends BaseOffer
      */
     public function setTermsProperty($termsProperty)
     {
-        $this->termsProperties = $termsProperty;
+        $this->termsProperty = $termsProperty;
 
         return $this;
     }
@@ -256,6 +271,6 @@ class OfferAftersale extends BaseOffer
      */
     public function getTermsProperty()
     {
-        return $this->termsProperties;
+        return $this->termsProperty;
     }
 }

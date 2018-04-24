@@ -4,7 +4,7 @@ namespace OfferBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use OfferBundle\Service\OfferTerms;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Subtype
@@ -20,6 +20,8 @@ class OfferSubtype
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     *
+     * @Groups({"rest"})
      */
     protected $id;
 
@@ -27,6 +29,8 @@ class OfferSubtype
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
+     *
+     * @Groups({"rest"})
      */
     protected $name;
 
@@ -36,6 +40,8 @@ class OfferSubtype
      * The is used to display subtype in order on front
      *
      * @ORM\Column(name="rank", type="integer")
+     *
+     * @Groups({"rest"})
      */
     protected $rank;
 
@@ -48,6 +54,8 @@ class OfferSubtype
      *     fetch="EAGER"
      * )
      * @ORM\JoinColumn(referencedColumnName="id")
+     *
+     * @Groups({"rest"})
      */
     protected $type;
 

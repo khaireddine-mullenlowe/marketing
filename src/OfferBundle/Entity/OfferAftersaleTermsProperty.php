@@ -4,6 +4,7 @@ namespace OfferBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * OfferAftersaleTermsProperty
@@ -19,6 +20,8 @@ class OfferAftersaleTermsProperty
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     *
+     * @Groups({"rest"})
      */
     protected $id;
 
@@ -27,9 +30,11 @@ class OfferAftersaleTermsProperty
      *
      * @ORM\OneToOne(
      *     targetEntity="OfferAftersale",
-     *     inversedBy="termsProperties"
+     *     inversedBy="termsProperty"
      * )
      * @ORM\JoinColumn(referencedColumnName="id")
+     *
+     * @Groups({"rest"})
      */
     protected $offer;
 
@@ -39,6 +44,8 @@ class OfferAftersaleTermsProperty
      * @ORM\Column(name="km", type="integer")
      *
      * @Assert\Range(min=1, max=100000)
+     *
+     * @Groups({"rest"})
      */
     protected $km;
 
