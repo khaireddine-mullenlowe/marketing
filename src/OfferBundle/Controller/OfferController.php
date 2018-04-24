@@ -60,7 +60,7 @@ class OfferController extends MullenloweRestController
     ];
 
     /**
-     * @Rest\Get("")
+     * @Rest\Get("/")
      * @Rest\View(serializerGroups={"rest"})
      *
      * @param Request $request
