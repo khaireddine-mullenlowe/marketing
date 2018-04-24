@@ -107,14 +107,8 @@ class OfferController extends MullenloweRestController
 
         $type = self::OFFERTYPE[$category];
 
-        $parnerIds = $request->query->get('partnerIds');
-
-        if (!empty($parnerIds) && is_string($parnerIds)) {
-            $parnerIds = explode(',', $parnerIds);
-        }
-
         $em = $this->getDoctrine();
-        $offers = $em->getRepository($type['repository'])->findOffersSinceAYear($parnerIds);
+        $offers = $em->getRepository($type['repository'])->findOffersSinceAYear($request->query->get('partnerIds'));
 
         return $this->createView($offers);
     }

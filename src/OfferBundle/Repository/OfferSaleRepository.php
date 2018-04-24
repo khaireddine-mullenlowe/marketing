@@ -8,11 +8,10 @@ namespace OfferBundle\Repository;
 class OfferSaleRepository extends \Doctrine\ORM\EntityRepository
 {
     /**
-     *
-     * @param array|null $partnersIds
+     * @param string|null $partnerIds
      * @return mixed
      */
-    public function findOffersSinceAYear(array $partnersIds = null)
+    public function findOffersSinceAYear(string $partnerIds = null)
     {
         $date = date('Y-m-d', strtotime("-1 year", strtotime(date('Y-m-d'))));
 
@@ -24,9 +23,10 @@ class OfferSaleRepository extends \Doctrine\ORM\EntityRepository
             ->setParameter(':date', $date)
             ->orderBy('offer.createdAt');
 
-        if (!empty($partnersIds)) {
+        if (!empty($partnerIds)) {
+            $partnerIds = explode(',', $partnerIds);
             $qb->andWhere('offer.partnerId IN (:partners)')
-                ->setParameter(':partners', $partnersIds);
+                ->setParameter(':partners', $partnerIds);
         }
 
         return $qb->getQuery()->getResult();
