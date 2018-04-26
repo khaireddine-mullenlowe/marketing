@@ -104,7 +104,7 @@ class OfferAftersale extends BaseOffer
     protected $discountTriple;
 
     /**
-     * @var ArrayCollection
+     * @var OfferAftersaleTermsProperty
      *
      * @ORM\OneToOne(
      *     targetEntity="OfferAftersaleTermsProperty",
@@ -117,6 +117,17 @@ class OfferAftersale extends BaseOffer
     protected $termsProperty;
 
     /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(
+     *     targetEntity="OfferAftersaleMyaudiUser",
+     *     mappedBy="offer",
+     *     cascade={"persist", "remove"}
+     * )
+     */
+    protected $myaudiUsers;
+
+    /**
      * OfferAftersale constructor.
      * @param OfferSubtype $subtype
      */
@@ -124,6 +135,7 @@ class OfferAftersale extends BaseOffer
     {
         parent::__construct();
         $this->subtype = $subtype;
+        $this->myaudiUsers = new ArrayCollection();
     }
 
     /**
@@ -257,6 +269,7 @@ class OfferAftersale extends BaseOffer
     }
 
     /**
+     * @param OfferAftersaleTermsProperty $termsProperty
      * @return OfferAftersale
      */
     public function setTermsProperty($termsProperty)
@@ -272,5 +285,25 @@ class OfferAftersale extends BaseOffer
     public function getTermsProperty()
     {
         return $this->termsProperty;
+    }
+
+    /**
+     * @param ArrayCollection $myaudiUsers
+     *
+     * @return OfferAftersale
+     */
+    public function setMyaudiUsers(ArrayCollection $myaudiUsers)
+    {
+        $this->myaudiUsers = $myaudiUsers;
+
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getMyaudiUsers()
+    {
+        return $this->myaudiUsers;
     }
 }
