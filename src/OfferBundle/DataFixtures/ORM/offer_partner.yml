@@ -1,0 +1,93 @@
+parameters:
+  offer_type_name_aftersale:
+    - 'Entretien'
+    - 'Distribution'
+
+  offer_type_name_sale:
+    - 'A5'
+    - 'A7'
+
+  offer_form_type_simple:
+    - 'price'
+    - 'percent'
+
+OfferBundle\Entity\OfferType:
+  offer_type1:
+    name: 'Pneu'
+    subtitle: 'Subtitle : TEST'
+    category: 'AFTERSALE'
+  offer_type{2..3}:
+    name: '<randomElement(<{offer_type_name_aftersale}>)>'
+    subtitle: 'Subtitle : TEST'
+    category: 'AFTERSALE'
+  offer_type{4..5}:
+    name: '<randomElement(<{offer_type_name_sale}>)>'
+    subtitle: 'Subtitle : TEST'
+    category: 'NEWCAR'
+
+OfferBundle\Entity\OfferFormType:
+  offer_form_type{1..2}:
+    name: '<randomElement(<{offer_form_type_simple}>)>'
+    description: 'Simple description'
+    type: 'SIMPLE'
+  offer_form_type3:
+    name: 'price_twice'
+    description: 'Description TEST'
+    type: 'DOUBLE'
+  offer_form_type{4..5}:
+    name: 'basic'
+    description: 'Basic description'
+    type: 'BASIC'
+
+OfferBundle\Entity\OfferTermsTemplate:
+  offer_terms_template1:
+    template: 'Offre jusqu''au #endDate# pour #km# km.'
+  offer_terms_template2:
+    template: 'Offre du #startDate# au #endDate# pour le modèle #modelName#. Contact : #email#.'
+  offer_terms_template3:
+    template: 'Offre du #startDate# au #endDate# pour le modèle #modelName# avec les options #options#.'
+
+OfferBundle\Entity\OfferSubtype:
+  offer_subtype1:
+    type: '@offer_type1'
+    form_type: '@offer_form_type1'
+    name: 'subtype name'
+    rank: '1'
+    terms_template: '@offer_terms_template1'
+  offer_subtype{2..3}:
+    type: '@offer_type<numberBetween(2,3)>'
+    form_type: '@offer_form_type<numberBetween(1,4)>'
+    name: 'subtype name'
+    rank: '1'
+    terms_template: '@offer_terms_template1'
+  offer_subtype{4..5}:
+    type: '@offer_type<numberBetween(4,5)>'
+    form_type: '@offer_form_type4'
+    name: 'subtype name'
+    rank: '1'
+    terms_template: '@offer_terms_template<numberBetween(2,3)>'
+
+OfferBundle\Entity\OfferAftersale:
+  offer_aftersale1:
+    __construct: false
+    subtype: '@offer_subtype1'
+    details: 'details TEST'
+    discount_simple: '90'
+    discount_double: ''
+    discount_triple: ''
+    partner_id: '<numberBetween(1,3)>'
+    start_date: '<((new \DateTime("now"))->add(new DateInterval("P10D"))->format("Y-m-d"))>'
+    end_date: '<((new \DateTime("now"))->add(new DateInterval("P20D"))->format("Y-m-d"))>'
+    created_at: '<(new \DateTime("now"))>'
+    updated_at: '<(new \DateTime("now"))>'
+    visual: 'visual.png'
+    title: 'title TEST'
+    description: 'description TEST'
+    status: 1
+    agreements: 1
+
+OfferBundle\Entity\OfferAftersaleTermsProperty:
+  offer_aftersale_terms_property1:
+    offer: '@offer_aftersale1'
+    km: '40000'
+
