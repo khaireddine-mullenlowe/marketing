@@ -140,7 +140,7 @@ class OfferFormType
     public function setType(string $type)
     {
         if (!in_array($type, self::TYPE)) {
-            throw new \InvalidArgumentException('Invalid category for OfferType');
+            throw new \InvalidArgumentException('Invalid type for OfferFormType');
         }
 
         $this->type = $type;
