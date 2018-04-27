@@ -2,6 +2,7 @@
 
 namespace OfferBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
@@ -117,6 +118,17 @@ class OfferSale extends BaseOffer
     protected $termsPropertyNewCar;
 
     /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(
+     *     targetEntity="OfferSaleMyaudiUser",
+     *     mappedBy="offer",
+     *     cascade={"persist", "remove"}
+     * )
+     */
+    protected $myaudiUsers;
+
+    /**
      * OfferSale constructor.
      * @param OfferSubtype $subtype
      */
@@ -124,6 +136,7 @@ class OfferSale extends BaseOffer
     {
         parent::__construct();
         $this->subtype = $subtype;
+        $this->myaudiUsers = new ArrayCollection();
     }
 
     /**
@@ -321,5 +334,25 @@ class OfferSale extends BaseOffer
         }
 
         return $this->getTermsPropertyNewCar();
+    }
+
+    /**
+     * @param ArrayCollection $myaudiUsers
+     *
+     * @return OfferAftersale
+     */
+    public function setMyaudiUsers(ArrayCollection $myaudiUsers)
+    {
+        $this->myaudiUsers = $myaudiUsers;
+
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getMyaudiUsers()
+    {
+        return $this->myaudiUsers;
     }
 }
