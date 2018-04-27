@@ -29,9 +29,9 @@ class OfferSaleMyaudiUser
      * @var int
      *
      * @ORM\Id
-     * @ORM\Column(name="MyaudiUser", type="integer")
+     * @ORM\Column(name="myaudi_user_id", type="integer")
      */
-    private $myaudiUser;
+    private $myaudiUserId;
 
     /**
      * Set offer
@@ -58,27 +58,27 @@ class OfferSaleMyaudiUser
     }
 
     /**
-     * Set myaudiUser
+     * Set myaudiUserId
      *
-     * @param integer $myaudiUser
+     * @param integer $myaudiUserId
      *
      * @return OfferSaleMyaudiUser
      */
-    public function setMyaudiUser($myaudiUser)
+    public function setMyaudiUser($myaudiUserId)
     {
-        $this->myaudiUser = $myaudiUser;
+        $this->myaudiUserId = $myaudiUserId;
 
         return $this;
     }
 
     /**
-     * Get myaudiUser
+     * Get myaudiUserId
      *
      * @return int
      */
     public function getMyaudiUser()
     {
-        return $this->myaudiUser;
+        return $this->myaudiUserId;
     }
 }
 
