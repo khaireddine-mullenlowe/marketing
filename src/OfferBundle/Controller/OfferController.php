@@ -6,8 +6,10 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 use InvalidArgumentException;
 use Mullenlowe\CommonBundle\Exception\BadRequestHttpException;
 use OfferBundle\Entity\OfferAftersale;
+use OfferBundle\Entity\OfferAftersaleMyaudiUser;
 use OfferBundle\Entity\OfferAftersaleTermsProperty;
 use OfferBundle\Entity\OfferSale;
+use OfferBundle\Entity\OfferSaleMyaudiUser;
 use OfferBundle\Entity\OfferSecondhandCarTermsProperty;
 use OfferBundle\Entity\OfferNewCarTermsProperty;
 use OfferBundle\Form\OfferAftersaleTermsPropertyType;
@@ -34,28 +36,34 @@ class OfferController extends MullenloweRestController
 
     const OFFERTYPE = [
         'aftersale'     => [
-            'name'         => 'Aftersale',
-            'entity'       => OfferAftersale::class,
-            'formType'     => OfferAftersaleType::class,
-            'formTerms'    => OfferAftersaleTermsPropertyType::class,
-            'repository'   => 'OfferBundle:OfferAftersale',
-            'termsEntity'  => OfferAftersaleTermsProperty::class,
+            'name'                  => 'Aftersale',
+            'entity'                => OfferAftersale::class,
+            'formType'              => OfferAftersaleType::class,
+            'formTerms'             => OfferAftersaleTermsPropertyType::class,
+            'repository'            => 'OfferBundle:OfferAftersale',
+            'termsEntity'           => OfferAftersaleTermsProperty::class,
+            'myaudiUser'            => OfferAftersaleMyaudiUser::class,
+            'myaudiUserRepository'  => 'OfferBundle:OfferAftersaleMyaudiUser',
         ],
         'secondhandcar' => [
-            'name'         => 'SecondHandCar',
-            'entity'       => OfferSale::class,
-            'formType'     => OfferSaleType::class,
-            'formTerms'    => OfferSecondhandCarTermsPropertyType::class,
-            'repository'   => 'OfferBundle:OfferSale',
-            'termsEntity'  => OfferSecondhandCarTermsProperty::class,
+            'name'                  => 'SecondHandCar',
+            'entity'                => OfferSale::class,
+            'formType'              => OfferSaleType::class,
+            'formTerms'             => OfferSecondhandCarTermsPropertyType::class,
+            'repository'            => 'OfferBundle:OfferSale',
+            'termsEntity'           => OfferSecondhandCarTermsProperty::class,
+            'myaudiUser'            => OfferSaleMyaudiUser::class,
+            'myaudiUserRepository'  => 'OfferBundle:OfferSaleMyaudiUser',
         ],
         'newcar'        => [
-            'name'         => 'NewCar',
-            'entity'       => OfferSale::class,
-            'formType'     => OfferSaleType::class,
-            'formTerms'    => OfferNewCarTermsPropertyType::class,
-            'repository'   => 'OfferBundle:OfferSale',
-            'termsEntity'  => OfferNewCarTermsProperty::class,
+            'name'                  => 'NewCar',
+            'entity'                => OfferSale::class,
+            'formType'              => OfferSaleType::class,
+            'formTerms'             => OfferNewCarTermsPropertyType::class,
+            'repository'            => 'OfferBundle:OfferSale',
+            'termsEntity'           => OfferNewCarTermsProperty::class,
+            'myaudiUser'            => OfferSaleMyaudiUser::class,
+            'myaudiUserRepository'  => 'OfferBundle:OfferSaleMyaudiUser',
         ],
     ];
 
@@ -65,7 +73,7 @@ class OfferController extends MullenloweRestController
      *
      * @param Request $request
      * @return View
-
+     *
      * @SWG\Get(
      *     path="/offer/partner",
      *     summary="Get offers for a partner",
@@ -298,5 +306,84 @@ class OfferController extends MullenloweRestController
         $em->flush();
 
         return $this->createView($offer);
+    }
+
+    /**
+     * @Rest\POST("/contact")
+     * @Rest\View(serializerGroups={"rest"})
+     *
+     * @SWG\Post(
+     *     path="/offer/partner/contact",
+     *     summary="Add a contact to an offer",
+     *     operationId="addContactToOffer",
+     *     tags={"Offer"},
+     *     @SWG\Parameter(
+     *         name="myaudiUser",
+     *         in="body",
+     *         required=true,
+     *         description="ID User Myaudi, ID Subtype, ID Offer",
+     *         @SWG\Schema(ref="#/definitions/MyaudiUser")
+     *     ),
+     *     @SWG\Response(
+     *         response="200",
+     *         description="Contact added or not - return a bool for existing user with this offer or not",
+     *         @SWG\Definition(ref="#definitions/OfferAftersaleMyaudiUserContext")
+     *     ),
+     *     @SWG\Response(
+     *         response="404",
+     *         description="not found",
+     *         @SWG\Schema(ref="#/definitions/Error")
+     *     ),
+     *     @SWG\Response(
+     *         response="500",
+     *         description="Bad Subtype or Invalid offer",
+     *         @SWG\Schema(ref="#/definitions/Error")
+     *     )
+     * )
+     *
+     * @param Request $request
+     * @return View
+     */
+    public function addContactToOfferAction(Request $request)
+    {
+        $data = $request->request->all();
+
+        if (!empty($data['subtype'])) {
+            $doctrine = $this->getDoctrine();
+            $subtype = $doctrine->getRepository("OfferBundle:OfferSubtype")->find(intval($data['subtype']));
+        }
+
+        if (empty($subtype)) {
+            throw new InvalidArgumentException('Invalid OfferSubtype');
+        }
+
+        $type = self::OFFERTYPE[strtolower($subtype->getType()->getCategory())];
+
+        $offer = $doctrine->getRepository($type['repository'])->findOneBy([
+            'id' => $data['id'],
+            'subtype' => $data['subtype'],
+        ]);
+
+        if (empty($offer)) {
+            throw new InvalidArgumentException('Invalid Offer');
+        }
+
+        $myaudiUser = $doctrine->getRepository($type['myaudiUserRepository'])->findBy(['offer' => $data['id'], 'myaudiUserId' => $data['myaudiUserId']]);
+        $userExist = 1;
+
+        if (empty($myaudiUser)) {
+            /** @var OfferAftersaleMyaudiUser|OfferSaleMyaudiUser $myaudiUser */
+            $myaudiUser = new $type['myaudiUser']();
+
+            $myaudiUser->setOffer($offer);
+            $myaudiUser->setMyaudiUserId($data['myaudiUserId']);
+
+            $doctrine->getManager()->persist($myaudiUser);
+            $doctrine->getManager()->flush();
+
+            $userExist = 0;
+        }
+
+        return $this->createView($userExist);
     }
 }

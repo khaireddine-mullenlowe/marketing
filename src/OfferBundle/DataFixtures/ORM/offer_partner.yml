@@ -91,3 +91,7 @@ OfferBundle\Entity\OfferAftersaleTermsProperty:
     offer: '@offer_aftersale1'
     km: '40000'
 
+OfferBundle\Entity\OfferAftersaleMyaudiUser:
+  offer_aftersale_myaudi_user1:
+    offer: '@offer_aftersale1'
+    myaudiUserId: 1

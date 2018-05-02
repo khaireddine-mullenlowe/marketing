@@ -235,4 +235,44 @@ class OfferControllerCest
         $I->seeResponseIsJson();
         $I->seeResponseContains('Invalid Offer');
     }
+
+    /**
+     * @param FunctionalTester $I
+     */
+    public function tryAddContactToOffer(FunctionalTester $I)
+    {
+        $data = '
+            {
+                "myaudiUserId": 2,
+                "id": 1,
+                "subtype": 1
+            }
+        ';
+
+        $I->haveHttpHeader('Content-Type', 'application/json');
+        $I->sendPOST('/offer/partner/contact', $data);
+        $I->seeResponseCodeIs(Response::HTTP_OK);
+        $I->seeResponseIsJson();
+        $I->seeResponseContains('data":0');
+    }
+
+    /**
+     * @param FunctionalTester $I
+     */
+    public function tryAddContactToOfferExist(FunctionalTester $I)
+    {
+        $data = '
+            {
+                "myaudiUserId": 1,
+                "id": 1,
+                "subtype": 1
+            }
+        ';
+
+        $I->haveHttpHeader('Content-Type', 'application/json');
+        $I->sendPOST('/offer/partner/contact', $data);
+        $I->seeResponseCodeIs(Response::HTTP_OK);
+        $I->seeResponseIsJson();
+        $I->seeResponseContains('data":1');
+    }
 }
