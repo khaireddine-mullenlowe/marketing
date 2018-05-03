@@ -253,7 +253,7 @@ class OfferControllerCest
         $I->sendPOST('/offer/partner/contact', $data);
         $I->seeResponseCodeIs(Response::HTTP_OK);
         $I->seeResponseIsJson();
-        $I->seeResponseContains('data":0');
+        $I->seeResponseContains('userExists":0');
     }
 
     /**
@@ -273,6 +273,6 @@ class OfferControllerCest
         $I->sendPOST('/offer/partner/contact', $data);
         $I->seeResponseCodeIs(Response::HTTP_OK);
         $I->seeResponseIsJson();
-        $I->seeResponseContains('data":1');
+        $I->seeResponseContains('userExists":1');
     }
 }

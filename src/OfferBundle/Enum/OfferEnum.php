@@ -2,6 +2,8 @@
 
 namespace OfferBundle\Enum;
 
+use OfferBundle\Entity\OfferAftersaleMyaudiUser;
+use OfferBundle\Entity\OfferSaleMyaudiUser;
 use OfferBundle\Entity\OfferSecondhandCarTermsProperty;
 use OfferBundle\Entity\OfferNewCarTermsProperty;
 use OfferBundle\Form\OfferAftersaleTermsPropertyType;
