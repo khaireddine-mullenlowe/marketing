@@ -5,24 +5,15 @@ namespace OfferBundle\Controller;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use InvalidArgumentException;
 use Mullenlowe\CommonBundle\Exception\BadRequestHttpException;
-use OfferBundle\Entity\OfferAftersale;
 use OfferBundle\Entity\OfferAftersaleMyaudiUser;
-use OfferBundle\Entity\OfferAftersaleTermsProperty;
-use OfferBundle\Entity\OfferSale;
 use OfferBundle\Entity\OfferSaleMyaudiUser;
-use OfferBundle\Entity\OfferSecondhandCarTermsProperty;
-use OfferBundle\Entity\OfferNewCarTermsProperty;
-use OfferBundle\Form\OfferAftersaleTermsPropertyType;
-use OfferBundle\Form\OfferAftersaleType;
-use OfferBundle\Form\OfferNewCarTermsPropertyType;
-use OfferBundle\Form\OfferSaleType;
-use OfferBundle\Form\OfferSecondhandCarTermsPropertyType;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\View\View;
 use Mullenlowe\CommonBundle\Controller\MullenloweRestController;
 use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use OfferBundle\Enum\OfferEnum;
 
 /**
  * Class OfferController
@@ -33,39 +24,6 @@ class OfferController extends MullenloweRestController
     const CONTEXT = 'Offer';
 
     const SERVICING = 'Entretien';
-
-    const OFFERTYPE = [
-        'aftersale'     => [
-            'name'                  => 'Aftersale',
-            'entity'                => OfferAftersale::class,
-            'formType'              => OfferAftersaleType::class,
-            'formTerms'             => OfferAftersaleTermsPropertyType::class,
-            'repository'            => 'OfferBundle:OfferAftersale',
-            'termsEntity'           => OfferAftersaleTermsProperty::class,
-            'myaudiUser'            => OfferAftersaleMyaudiUser::class,
-            'myaudiUserRepository'  => 'OfferBundle:OfferAftersaleMyaudiUser',
-        ],
-        'secondhandcar' => [
-            'name'                  => 'SecondHandCar',
-            'entity'                => OfferSale::class,
-            'formType'              => OfferSaleType::class,
-            'formTerms'             => OfferSecondhandCarTermsPropertyType::class,
-            'repository'            => 'OfferBundle:OfferSale',
-            'termsEntity'           => OfferSecondhandCarTermsProperty::class,
-            'myaudiUser'            => OfferSaleMyaudiUser::class,
-            'myaudiUserRepository'  => 'OfferBundle:OfferSaleMyaudiUser',
-        ],
-        'newcar'        => [
-            'name'                  => 'NewCar',
-            'entity'                => OfferSale::class,
-            'formType'              => OfferSaleType::class,
-            'formTerms'             => OfferNewCarTermsPropertyType::class,
-            'repository'            => 'OfferBundle:OfferSale',
-            'termsEntity'           => OfferNewCarTermsProperty::class,
-            'myaudiUser'            => OfferSaleMyaudiUser::class,
-            'myaudiUserRepository'  => 'OfferBundle:OfferSaleMyaudiUser',
-        ],
-    ];
 
     /**
      * @Rest\Get("/")
@@ -113,7 +71,7 @@ class OfferController extends MullenloweRestController
             throw new BadRequestHttpException(self::CONTEXT, 'Empty category');
         }
 
-        $type = self::OFFERTYPE[$category];
+        $type = OfferEnum::OFFERTYPE[$category];
 
         $em = $this->getDoctrine();
         $offers = $em->getRepository($type['repository'])->findOffersSinceAYear($request->query->get('partnerIds'));
@@ -184,7 +142,13 @@ class OfferController extends MullenloweRestController
             throw new InvalidArgumentException('Invalid OfferSubtype');
         }
 
-        $type  = self::OFFERTYPE[strtolower($subtype->getType()->getCategory())];
+        $category = strtolower($subtype->getType()->getCategory());
+
+        if (empty(OfferEnum::OFFERTYPE[$category])) {
+            throw new InvalidArgumentException('Invalid Category');
+        }
+
+        $type  = OfferEnum::OFFERTYPE[$category];
 
         $offer = new $type['entity']($subtype);
 
@@ -199,9 +163,9 @@ class OfferController extends MullenloweRestController
         }
 
         if (
-            $type['name'] !== self::OFFERTYPE['aftersale']['name'] ||
+            $type['name'] !== OfferEnum::OFFERTYPE['aftersale']['name'] ||
             (
-                $type['name'] === self::OFFERTYPE['aftersale']['name']
+                $type['name'] === OfferEnum::OFFERTYPE['aftersale']['name']
                 && $subtype->getType()->getName() === self::SERVICING
                 && $subtype->getRank() < 4
             )
@@ -280,7 +244,13 @@ class OfferController extends MullenloweRestController
             throw new InvalidArgumentException('Invalid OfferSubtype');
         }
 
-        $type = self::OFFERTYPE[strtolower($subtype->getType()->getCategory())];
+        $category = strtolower($subtype->getType()->getCategory());
+
+        if (empty(OfferEnum::OFFERTYPE[$category])) {
+            throw new InvalidArgumentException('Invalid Category');
+        }
+
+        $type = OfferEnum::OFFERTYPE[strtolower($subtype->getType()->getCategory())];
 
         $offer = $doctrine->getRepository($type['repository'])->findOneBy([
             'id' => $offerData['id'],
@@ -357,21 +327,29 @@ class OfferController extends MullenloweRestController
             throw new InvalidArgumentException('Invalid OfferSubtype');
         }
 
-        $type = self::OFFERTYPE[strtolower($subtype->getType()->getCategory())];
+        $category = strtolower($subtype->getType()->getCategory());
 
-        $offer = $doctrine->getRepository($type['repository'])->findOneBy([
-            'id' => $data['id'],
-            'subtype' => $data['subtype'],
-        ]);
-
-        if (empty($offer)) {
-            throw new InvalidArgumentException('Invalid Offer');
+        if (empty(OfferEnum::OFFERTYPE[$category])) {
+            throw new InvalidArgumentException('Invalid Category');
         }
 
-        $myaudiUser = $doctrine->getRepository($type['myaudiUserRepository'])->findBy(['offer' => $data['id'], 'myaudiUserId' => $data['myaudiUserId']]);
+        $type = OfferEnum::OFFERTYPE[$category];
+
+        $myaudiUser = $doctrine
+            ->getRepository($type['myaudiUserRepository'])
+            ->findBy(['offer' => $data['id'], 'myaudiUserId' => $data['myaudiUserId']]);
         $userExist = 1;
 
         if (empty($myaudiUser)) {
+            $offer = $doctrine->getRepository($type['repository'])->findOneBy([
+                'id' => $data['id'],
+                'subtype' => $data['subtype'],
+            ]);
+
+            if (empty($offer)) {
+                throw new InvalidArgumentException('Invalid Offer');
+            }
+
             /** @var OfferAftersaleMyaudiUser|OfferSaleMyaudiUser $myaudiUser */
             $myaudiUser = new $type['myaudiUser']();
 
@@ -384,6 +362,6 @@ class OfferController extends MullenloweRestController
             $userExist = 0;
         }
 
-        return $this->createView($userExist);
+        return $this->createView(['userExists' => $userExist]);
     }
 }
