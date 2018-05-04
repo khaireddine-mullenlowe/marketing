@@ -146,6 +146,46 @@
                 }
             }
         },
+        "/offer/partner/contact": {
+            "post": {
+                "tags": [
+                    "Offer"
+                ],
+                "summary": "Add a contact to an offer",
+                "operationId": "addContactToOffer",
+                "parameters": [
+                    {
+                        "name": "myaudiUser",
+                        "in": "body",
+                        "description": "ID User Myaudi, ID Subtype, ID Offer",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/MyaudiUser"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Contact added or not - return a bool for existing user with this offer or not",
+                        "schema": {
+                            "$ref": "#definitions/OfferAftersaleMyaudiUserContext"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "Bad Subtype or Invalid offer",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
         "/offer/funding": {
             "get": {
                 "tags": [
@@ -1101,6 +1141,41 @@
                     "items": {
                         "$ref": "#definitions/Subtype"
                     }
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#definitions/Context"
+                }
+            ]
+        },
+        "MyaudiUser": {
+            "required": [
+                "myaudiUserId",
+                "id",
+                "subtype"
+            ],
+            "properties": {
+                "myaudiUserId": {
+                    "type": "integer"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "subtype": {
+                    "type": "integer"
+                }
+            }
+        },
+        "OfferAftersaleMyaudiUserContext": {
+            "properties": {
+                "data": {
+                    "properties": {
+                        "myaudiUserId": {
+                            "type": "integer"
+                        }
+                    },
+                    "type": "object"
                 }
             },
             "allOf": [

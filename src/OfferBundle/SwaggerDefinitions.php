@@ -440,6 +440,24 @@ class SwaggerDefinitions
      *     ),
      *
      *     @SWG\Definition(
+     *         definition="MyaudiUser",
+     *         @SWG\Property(property="myaudiUserId", type="integer"),
+     *         @SWG\Property(property="id", type="integer"),
+     *         @SWG\Property(property="subtype", type="integer"),
+     *         required={"myaudiUserId", "id", "subtype"}
+     *     ),
+     *
+     *     @SWG\Definition(
+     *         definition="OfferAftersaleMyaudiUserContext",
+     *         allOf={
+     *             @SWG\Definition(ref="#definitions/Context")
+     *         },
+     *         @SWG\Property(property="data", type="object",
+     *             @SWG\Property(property="myaudiUserId", type="integer")
+     *         )
+     *     ),
+     *
+     *     @SWG\Definition(
      *         definition="OfferFunding",
      *         @SWG\Property(
      *             property="funding",

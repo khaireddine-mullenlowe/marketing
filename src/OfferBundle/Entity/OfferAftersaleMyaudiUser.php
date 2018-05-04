@@ -3,6 +3,7 @@
 namespace OfferBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * OfferAftersaleMyaudiUser
@@ -29,6 +30,7 @@ class OfferAftersaleMyaudiUser
      * @var int
      * @ORM\Id
      * @ORM\Column(name="myaudi_user_id", type="integer")
+     * @Groups({"rest"})
      */
     private $myaudiUserId;
 
@@ -65,7 +67,7 @@ class OfferAftersaleMyaudiUser
      */
     public function setMyaudiUserId($myaudiUserId)
     {
-        $this->myaudiUser = $myaudiUserId;
+        $this->myaudiUserId = $myaudiUserId;
 
         return $this;
     }
