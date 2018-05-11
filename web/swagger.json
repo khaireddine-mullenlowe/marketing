@@ -209,6 +209,12 @@
                             "$ref": "#/definitions/MyaudiUserOffers"
                         }
                     },
+                    "500": {
+                        "description": "Empty myaudiUserId",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
                     "404": {
                         "description": "not found",
                         "schema": {

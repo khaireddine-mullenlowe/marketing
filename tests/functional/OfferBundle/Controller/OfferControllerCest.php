@@ -275,4 +275,28 @@ class OfferControllerCest
         $I->seeResponseIsJson();
         $I->seeResponseContains('userExists":1');
     }
+
+    /**
+     * @param FunctionalTester $I
+     */
+    public function tryCGetForMyaudiUserOk(FunctionalTester $I)
+    {
+        $I->haveHttpHeader('Content-Type', 'application/json');
+        $I->sendGET('/offer/partner/myaudi?myaudiUserId=1');
+        $I->seeResponseCodeIs(Response::HTTP_OK);
+        $I->seeResponseIsJson();
+        $I->seeResponseContains('aftersale');
+    }
+
+    /**
+     * @param FunctionalTester $I
+     */
+    public function tryCGetForMyaudiUserKo(FunctionalTester $I)
+    {
+        $I->haveHttpHeader('Content-Type', 'application/json');
+        $I->sendGET('/offer/partner/myaudi');
+        $I->seeResponseCodeIs(Response::HTTP_BAD_REQUEST);
+        $I->seeResponseIsJson();
+        $I->seeResponseContains('Invalid myAudi user ID');
+    }
 }

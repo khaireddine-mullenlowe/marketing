@@ -387,6 +387,11 @@ class OfferController extends MullenloweRestController
      *         @SWG\Definition(ref="#/definitions/MyaudiUserOffers"),
      *     ),
      *     @SWG\Response(
+     *         response="500",
+     *         description="Empty myaudiUserId",
+     *         @SWG\Definition(ref="#/definitions/Error"),
+     *     ),
+     *     @SWG\Response(
      *         response=404,
      *         description="not found",
      *         @SWG\Schema(ref="#/definitions/Error")
@@ -401,7 +406,7 @@ class OfferController extends MullenloweRestController
         $myaudiUserId = $request->query->get('myaudiUserId');
 
         if (empty($myaudiUserId)) {
-            throw new InvalidArgumentException('Invalid myAudi user ID');
+            throw new BadRequestHttpException(static::CONTEXT, "Invalid myAudi user ID");
         }
 
         $doctrine = $this->getDoctrine();
