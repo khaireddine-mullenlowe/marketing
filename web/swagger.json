@@ -1225,21 +1225,10 @@
         "MyaudiUserOffers": {
             "properties": {
                 "data": {
-                    "properties": {
-                        "aftersale": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#definitions/OfferAftersaleComplete"
-                            }
-                        },
-                        "sale": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#definitions/OfferSaleComplete"
-                            }
-                        }
-                    },
-                    "type": "object"
+                    "type": "array",
+                    "items": {
+                        "$ref": "#definitions/OfferAftersaleComplete"
+                    }
                 }
             },
             "allOf": [

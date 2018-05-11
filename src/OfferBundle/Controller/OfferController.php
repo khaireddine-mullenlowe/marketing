@@ -418,7 +418,7 @@ class OfferController extends MullenloweRestController
             ->getRepository(OfferEnum::OFFERTYPE['newcar']['repository'])
             ->findByMyaudiUser($myaudiUserId);
 
-        $offers = ['aftersale' => $aftersaleOffers, 'sale' => $saleOffers];
+        $offers = array_merge($aftersaleOffers, $saleOffers);
 
         return $this->createView($offers);
     }

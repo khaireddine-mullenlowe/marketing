@@ -462,13 +462,8 @@ class SwaggerDefinitions
      *         allOf={
      *             @SWG\Definition(ref="#definitions/Context")
      *         },
-     *         @SWG\Property(property="data", type="object",
-     *             @SWG\Property(property="aftersale", type="array",
-     *                 @SWG\Items(ref="#definitions/OfferAftersaleComplete")
-     *             ),
-     *             @SWG\Property(property="sale", type="array",
-     *                 @SWG\Items(ref="#definitions/OfferSaleComplete")
-     *             )
+     *         @SWG\Property(property="data", type="array",
+     *             @SWG\Items(ref="#definitions/OfferAftersaleComplete")
      *         )
      *     ),
      *
