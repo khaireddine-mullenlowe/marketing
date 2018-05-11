@@ -285,7 +285,7 @@ class OfferControllerCest
         $I->sendGET('/offer/partner/myaudi?myaudiUserId=1');
         $I->seeResponseCodeIs(Response::HTTP_OK);
         $I->seeResponseIsJson();
-        $I->seeResponseContains('aftersale');
+        $I->seeResponseContains('data');
     }
 
     /**
