@@ -458,6 +458,21 @@ class SwaggerDefinitions
      *     ),
      *
      *     @SWG\Definition(
+     *         definition="MyaudiUserOffers",
+     *         allOf={
+     *             @SWG\Definition(ref="#definitions/Context")
+     *         },
+     *         @SWG\Property(property="data", type="object",
+     *             @SWG\Property(property="aftersale", type="array",
+     *                 @SWG\Items(ref="#definitions/OfferAftersaleComplete")
+     *             ),
+     *             @SWG\Property(property="sale", type="array",
+     *                 @SWG\Items(ref="#definitions/OfferSaleComplete")
+     *             )
+     *         )
+     *     ),
+     *
+     *     @SWG\Definition(
      *         definition="OfferFunding",
      *         @SWG\Property(
      *             property="funding",

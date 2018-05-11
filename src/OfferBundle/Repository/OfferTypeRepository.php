@@ -2,9 +2,11 @@
 
 namespace OfferBundle\Repository;
 
+use Doctrine\ORM\EntityRepository;
+
 /**
  * OfferTypeRepository
  */
-class OfferTypeRepository extends \Doctrine\ORM\EntityRepository
+class OfferTypeRepository extends EntityRepository
 {
 }

@@ -20,5 +20,4 @@ class OfferDates extends Constraint
     {
         return array(self::PROPERTY_CONSTRAINT, self::CLASS_CONSTRAINT);
     }
-
 }

@@ -186,6 +186,38 @@
                 }
             }
         },
+        "/offer/partner/myaudi": {
+            "get": {
+                "tags": [
+                    "Offer"
+                ],
+                "summary": "Get offers for a myAudi User",
+                "operationId": "getOffersForMyaudiUser",
+                "parameters": [
+                    {
+                        "name": "myaudiUserId",
+                        "in": "query",
+                        "description": "ID myAudi User",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Offers aftersale and sale",
+                        "schema": {
+                            "$ref": "#/definitions/MyaudiUserOffers"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
         "/offer/funding": {
             "get": {
                 "tags": [
@@ -1173,6 +1205,32 @@
                     "properties": {
                         "myaudiUserId": {
                             "type": "integer"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#definitions/Context"
+                }
+            ]
+        },
+        "MyaudiUserOffers": {
+            "properties": {
+                "data": {
+                    "properties": {
+                        "aftersale": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#definitions/OfferAftersaleComplete"
+                            }
+                        },
+                        "sale": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#definitions/OfferSaleComplete"
+                            }
                         }
                     },
                     "type": "object"

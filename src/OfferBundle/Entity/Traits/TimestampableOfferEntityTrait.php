@@ -4,7 +4,12 @@ namespace OfferBundle\Entity\Traits;
 
 use DateTime;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 
+/**
+ * Trait TimestampableOfferEntityTrait
+ * @package OfferBundle\Entity\Traits
+ */
 trait TimestampableOfferEntityTrait
 {
     /**
@@ -16,6 +21,8 @@ trait TimestampableOfferEntityTrait
      * )
      *
      * @ORM\Column(name="start_date", type="date")
+     *
+     * @Groups({"rest", "myaudi"})
      */
     protected $startDate;
 
@@ -28,6 +35,8 @@ trait TimestampableOfferEntityTrait
      * )
      *
      * @ORM\Column(name="end_date", type="date")
+     *
+     * @Groups({"rest", "myaudi"})
      */
     protected $endDate;
 

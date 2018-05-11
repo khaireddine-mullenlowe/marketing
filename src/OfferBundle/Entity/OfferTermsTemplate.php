@@ -4,6 +4,7 @@ namespace OfferBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * OfferTerms
@@ -26,6 +27,8 @@ class OfferTermsTemplate
      * @var string
      *
      * @ORM\Column(name="template", type="text")
+     *
+     * @Groups({"rest", "myaudi"})
      */
     protected $template;
 

@@ -7,7 +7,6 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 use Mullenlowe\CommonBundle\Exception\NotFoundHttpException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Swagger\Annotations as SWG;
-use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class OfferTypeController

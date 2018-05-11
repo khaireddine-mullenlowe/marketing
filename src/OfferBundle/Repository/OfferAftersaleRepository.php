@@ -2,10 +2,12 @@
 
 namespace OfferBundle\Repository;
 
+use Doctrine\ORM\EntityRepository;
+
 /**
  * OfferAftersaleRepository
  */
-class OfferAftersaleRepository extends \Doctrine\ORM\EntityRepository
+class OfferAftersaleRepository extends EntityRepository
 {
     /**
      * @param string|null $partnerIds
@@ -29,5 +31,27 @@ class OfferAftersaleRepository extends \Doctrine\ORM\EntityRepository
         }
 
         return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * @param int $myaudiUserId
+     * @return array
+     */
+    public function findByMyaudiUser(int $myaudiUserId)
+    {
+        $date = date('y-m-d');
+
+        return $this->createQueryBuilder('offer')
+            ->innerJoin('offer.myaudiUsers', 'myaudiUsers')
+            ->leftJoin('offer.termsProperty', 'terms')
+            ->where('offer.agreements = 1')
+            ->andWhere('offer.status = 1')
+            ->andWhere('myaudiUsers.myaudiUserId = :myaudiUserId')
+            ->andWhere(':date BETWEEN offer.startDate AND offer.endDate')
+            ->setParameter('myaudiUserId', $myaudiUserId)
+            ->setParameter('date', $date)
+            ->orderBy('offer.createdAt', 'DESC')
+            ->getQuery()
+            ->getResult();
     }
 }

@@ -4,6 +4,7 @@ namespace OfferBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * OfferFormTypeName
@@ -49,6 +50,8 @@ class OfferFormType
      * The type is used to identify how many discount must be filled
      *
      * @ORM\Column(name="type", type="string")
+     *
+     * @Groups({"rest"})
      */
     protected $type;
 

@@ -364,4 +364,57 @@ class OfferController extends MullenloweRestController
 
         return $this->createView(['userExists' => $userExist]);
     }
+
+    /**
+     * @Rest\Get("/myaudi")
+     * @Rest\View(serializerGroups={"myaudi"})
+     *
+     * @SWG\Get(
+     *     path="/offer/partner/myaudi",
+     *     summary="Get offers for a myAudi User",
+     *     operationId="getOffersForMyaudiUser",
+     *     tags={"Offer"},
+     *     @SWG\Parameter(
+     *         name="myaudiUserId",
+     *         in="query",
+     *         type="integer",
+     *         required=true,
+     *         description="ID myAudi User"
+     *     ),
+     *     @SWG\Response(
+     *         response="200",
+     *         description="Offers aftersale and sale",
+     *         @SWG\Definition(ref="#/definitions/MyaudiUserOffers"),
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="not found",
+     *         @SWG\Schema(ref="#/definitions/Error")
+     *     )
+     * )
+     *
+     * @param Request $request
+     * @return View
+     */
+    public function cgetForMyaudiUserAction(Request $request)
+    {
+        $myaudiUserId = $request->query->get('myaudiUserId');
+
+        if (empty($myaudiUserId)) {
+            throw new InvalidArgumentException('Invalid myAudi user ID');
+        }
+
+        $doctrine = $this->getDoctrine();
+        $aftersaleOffers = $doctrine
+            ->getRepository(OfferEnum::OFFERTYPE['aftersale']['repository'])
+            ->findByMyaudiUser($myaudiUserId);
+
+        $saleOffers = $doctrine
+            ->getRepository(OfferEnum::OFFERTYPE['newcar']['repository'])
+            ->findByMyaudiUser($myaudiUserId);
+
+        $offers = ['aftersale' => $aftersaleOffers, 'sale' => $saleOffers];
+
+        return $this->createView($offers);
+    }
 }

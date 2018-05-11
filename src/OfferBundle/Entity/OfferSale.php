@@ -23,7 +23,7 @@ class OfferSale extends BaseOffer
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      *
-     * @Groups({"rest"})
+     * @Groups({"rest", "myaudi"})
      */
     protected $id;
 
@@ -41,7 +41,7 @@ class OfferSale extends BaseOffer
      *     nullable=false
      * )
      *
-     * @Groups({"rest"})
+     * @Groups({"rest", "myaudi"})
      */
     protected $subtype;
 
@@ -54,7 +54,7 @@ class OfferSale extends BaseOffer
      *
      * @ORM\Column(name="x_position", type="float")
      *
-     * @Groups({"rest"})
+     * @Groups({"rest", "myaudi"})
      */
     protected $xPosition;
 
@@ -67,7 +67,7 @@ class OfferSale extends BaseOffer
      *
      * @ORM\Column(name="y_position", type="float")
      *
-     * @Groups({"rest"})
+     * @Groups({"rest", "myaudi"})
      */
     protected $yPosition;
 
@@ -76,7 +76,7 @@ class OfferSale extends BaseOffer
      *
      * @ORM\Column(name="monthly", type="float")
      *
-     * @Groups({"rest"})
+     * @Groups({"rest", "myaudi"})
      */
     protected $monthly;
 
@@ -100,7 +100,7 @@ class OfferSale extends BaseOffer
      *     cascade={"persist", "remove"}
      * )
      *
-     * @Groups({"rest"})
+     * @Groups({"rest", "myaudi"})
      */
     protected $termsPropertySecondhandCar;
 
@@ -113,7 +113,7 @@ class OfferSale extends BaseOffer
      *     cascade={"persist", "remove"}
      * )
      *
-     * @Groups({"rest"})
+     * @Groups({"rest", "myaudi"})
      */
     protected $termsPropertyNewCar;
 
@@ -339,7 +339,7 @@ class OfferSale extends BaseOffer
     /**
      * @param ArrayCollection $myaudiUsers
      *
-     * @return OfferAftersale
+     * @return OfferSale
      */
     public function setMyaudiUsers(ArrayCollection $myaudiUsers)
     {

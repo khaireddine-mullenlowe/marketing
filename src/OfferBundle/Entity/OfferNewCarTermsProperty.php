@@ -5,6 +5,7 @@ namespace OfferBundle\Entity;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * OfferNewCarTermsProperty
@@ -31,6 +32,8 @@ class OfferNewCarTermsProperty
      *     inversedBy="termsPropertyNewCar"
      * )
      * @ORM\JoinColumn(referencedColumnName="id")
+     *
+     * @Groups({"rest", "myaudi"})
      */
     protected $offer;
 
@@ -40,6 +43,8 @@ class OfferNewCarTermsProperty
      * @ORM\Column(name="month_number", type="integer")
      *
      * @Assert\Range(min= 1, max= 999)
+     *
+     * @Groups({"rest", "myaudi"})
      */
     protected $monthNumber;
 
@@ -47,6 +52,8 @@ class OfferNewCarTermsProperty
      * @var float
      *
      * @ORM\Column(name="advance_payment", type="float")
+     *
+     * @Groups({"rest", "myaudi"})
      */
     protected $advancePayment;
 
@@ -56,6 +63,8 @@ class OfferNewCarTermsProperty
      * @ORM\Column(name="month_rental_number", type="integer")
      *
      * @Assert\Range(min= 1, max= 999)
+     *
+     * @Groups({"rest", "myaudi"})
      */
     protected $monthRentalNumber;
 
@@ -63,6 +72,8 @@ class OfferNewCarTermsProperty
      * @var float
      *
      * @ORM\Column(name="monthly", type="float")
+     *
+     * @Groups({"rest", "myaudi"})
      */
     protected $monthly;
 
@@ -70,6 +81,8 @@ class OfferNewCarTermsProperty
      * @var DateTime
      *
      * @ORM\Column(name="price_date", type="date")
+     *
+     * @Groups({"rest", "myaudi"})
      */
     protected $priceDate;
 
@@ -77,6 +90,8 @@ class OfferNewCarTermsProperty
      * @var string
      *
      * @ORM\Column(name="model_name", type="string")
+     *
+     * @Groups({"rest", "myaudi"})
      */
     protected $modelName;
 
@@ -84,6 +99,8 @@ class OfferNewCarTermsProperty
      * @var string
      *
      * @ORM\Column(name="engine", type="string")
+     *
+     * @Groups({"rest", "myaudi"})
      */
     protected $engine;
 
@@ -91,6 +108,8 @@ class OfferNewCarTermsProperty
      * @var string
      *
      * @ORM\Column(name="options", type="string")
+     *
+     * @Groups({"rest", "myaudi"})
      */
     protected $options;
 
@@ -98,6 +117,8 @@ class OfferNewCarTermsProperty
      * @var string
      *
      * @ORM\Column(name="range_name", type="string")
+     *
+     * @Groups({"rest", "myaudi"})
      */
     protected $rangeName;
 
@@ -105,6 +126,8 @@ class OfferNewCarTermsProperty
      * @var float
      *
      * @ORM\Column(name="mgp_min", type="float")
+     *
+     * @Groups({"rest", "myaudi"})
      */
     protected $mgpMin;
 
@@ -112,6 +135,8 @@ class OfferNewCarTermsProperty
      * @var float
      *
      * @ORM\Column(name="mgp_max", type="float")
+     *
+     * @Groups({"rest", "myaudi"})
      */
     protected $mgpMax;
 
@@ -119,6 +144,8 @@ class OfferNewCarTermsProperty
      * @var float
      *
      * @ORM\Column(name="co2emission_min", type="float")
+     *
+     * @Groups({"rest", "myaudi"})
      */
     protected $co2EmissionMin;
 
@@ -126,6 +153,8 @@ class OfferNewCarTermsProperty
      * @var float
      *
      * @ORM\Column(name="co2emission_max", type="float")
+     *
+     * @Groups({"rest", "myaudi"})
      */
     protected $co2EmissionMax;
 
@@ -133,6 +162,8 @@ class OfferNewCarTermsProperty
      * @var int
      *
      * @ORM\Column(name="maximum_km", type="integer")
+     *
+     * @Groups({"rest", "myaudi"})
      */
     protected $maximumKm;
 
@@ -140,6 +171,8 @@ class OfferNewCarTermsProperty
      * @var string
      *
      * @ORM\Column(name="partner_name", type="string")
+     *
+     * @Groups({"rest", "myaudi"})
      */
     protected $partnerName;
 
