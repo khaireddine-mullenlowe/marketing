@@ -45,7 +45,7 @@ class OfferAftersaleTermsProperty
      *
      * @Assert\Range(min=1, max=100000)
      *
-     * @Groups({"rest"})
+     * @Groups({"rest", "myaudi"})
      */
     protected $km;
 

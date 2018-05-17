@@ -4,6 +4,7 @@ namespace OfferBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * OfferSecondhandCarTermsProperty
@@ -19,6 +20,8 @@ class OfferSecondhandCarTermsProperty
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     *
+     * @Groups({"rest", "myaudi"})
      */
     protected $id;
 
@@ -37,6 +40,8 @@ class OfferSecondhandCarTermsProperty
      * @var string
      *
      * @ORM\Column(name="model_name", type="string", length=255)
+     *
+     * @Groups({"rest", "myaudi"})
      */
     protected $modelName;
 
@@ -44,6 +49,8 @@ class OfferSecondhandCarTermsProperty
      * @var string
      *
      * @ORM\Column(name="engine", type="string", length=255)
+     *
+     * @Groups({"rest", "myaudi"})
      */
     protected $engine;
 
@@ -51,6 +58,8 @@ class OfferSecondhandCarTermsProperty
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=255)
+     *
+     * @Groups({"rest", "myaudi"})
      *
      * @Assert\Email()
      */
@@ -60,6 +69,8 @@ class OfferSecondhandCarTermsProperty
      * @var string
      *
      * @ORM\Column(name="address", type="string", length=255)
+     *
+     * @Groups({"rest", "myaudi"})
      */
     protected $address;
 

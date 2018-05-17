@@ -55,7 +55,7 @@ class OfferSubtype
      * )
      * @ORM\JoinColumn(referencedColumnName="id")
      *
-     * @Groups({"rest"})
+     * @Groups({"rest", "myaudi"})
      */
     protected $type;
 

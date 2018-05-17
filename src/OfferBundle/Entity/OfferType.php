@@ -40,7 +40,7 @@ class OfferType
      *     length=255
      * )
      *
-     * @Groups({"rest"})
+     * @Groups({"rest", "myaudi"})
      */
     protected $category;
 
@@ -58,7 +58,7 @@ class OfferType
      *
      * @ORM\Column(name="subtitle", type="text", nullable=true)
      *
-     * @Groups({"rest"})
+     * @Groups({"rest", "myaudi"})
      */
     protected $subtitle;
 

@@ -15,6 +15,10 @@ use OfferBundle\Entity\OfferAftersaleTermsProperty;
 use OfferBundle\Entity\OfferSale;
 use OfferBundle\Entity\OfferAftersale;
 
+/**
+ * Class OfferEnum
+ * @package OfferBundle\Enum
+ */
 class OfferEnum
 {
     const OFFERTYPE = [
@@ -50,6 +54,9 @@ class OfferEnum
         ],
     ];
 
+    /**
+     * @return array
+     */
     public static function getData()
     {
         return self::OFFERTYPE;

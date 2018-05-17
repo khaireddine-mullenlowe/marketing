@@ -25,7 +25,7 @@ abstract class BaseOffer
      *
      * @ORM\Column(name="partner_id", type="integer")
      *
-     * @Groups({"rest"})
+     * @Groups({"rest", "myaudi"})
      */
     protected $partnerId;
 
@@ -34,7 +34,7 @@ abstract class BaseOffer
      *
      * @ORM\Column(name="visual", type="string", length=255)
      *
-     * @Groups({"rest"})
+     * @Groups({"rest", "myaudi"})
      */
     protected $visual;
 
@@ -45,7 +45,7 @@ abstract class BaseOffer
      *
      * @ORM\Column(name="title", type="string", length=255)
      *
-     * @Groups({"rest"})
+     * @Groups({"rest", "myaudi"})
      */
     protected $title;
 
@@ -56,7 +56,7 @@ abstract class BaseOffer
      *
      * @ORM\Column(name="description", type="text")
      *
-     * @Groups({"rest"})
+     * @Groups({"rest", "myaudi"})
      */
     protected $description;
 

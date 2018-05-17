@@ -25,7 +25,7 @@ class OfferAftersale extends BaseOffer
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      *
-     * @Groups({"rest"})
+     * @Groups({"rest", "myaudi"})
      */
     protected $id;
 
@@ -43,7 +43,7 @@ class OfferAftersale extends BaseOffer
      *     nullable=false
      * )
      *
-     * @Groups({"rest"})
+     * @Groups({"rest", "myaudi"})
      */
     protected $subtype;
 
@@ -54,7 +54,7 @@ class OfferAftersale extends BaseOffer
      *
      * @ORM\Column(name="details", type="text")
      *
-     * @Groups({"rest"})
+     * @Groups({"rest", "myaudi"})
      */
     protected $details;
 
@@ -69,7 +69,7 @@ class OfferAftersale extends BaseOffer
      *
      * @ORM\Column(name="discount_simple", type="float", nullable=true)
      *
-     * @Groups({"rest"})
+     * @Groups({"rest", "myaudi"})
      */
     protected $discountSimple;
 
@@ -84,7 +84,7 @@ class OfferAftersale extends BaseOffer
      *
      * @ORM\Column(name="discount_double", type="float", nullable=true)
      *
-     * @Groups({"rest"})
+     * @Groups({"rest", "myaudi"})
      */
     protected $discountDouble;
 
@@ -99,7 +99,7 @@ class OfferAftersale extends BaseOffer
      *
      * @ORM\Column(name="discount_triple", type="float", nullable=true)
      *
-     * @Groups({"rest"})
+     * @Groups({"rest", "myaudi"})
      */
     protected $discountTriple;
 
@@ -112,7 +112,7 @@ class OfferAftersale extends BaseOffer
      *     cascade={"persist", "remove"}
      * )
      *
-     * @Groups({"rest"})
+     * @Groups({"rest", "myaudi"})
      */
     protected $termsProperty;
 
