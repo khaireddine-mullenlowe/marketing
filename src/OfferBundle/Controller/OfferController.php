@@ -38,11 +38,18 @@ class OfferController extends MullenloweRestController
      *     operationId="getOffers",
      *     tags={"Offer"},
      *     @SWG\Parameter(
+     *         name="myaudiUserId",
+     *         in="query",
+     *         type="string",
+     *         required=false,
+     *         description="Myaudi User ID"
+     *     ),
+     *     @SWG\Parameter(
      *         name="category",
      *         in="query",
      *         type="string",
-     *         required=true,
-     *         description="newcar or aftersale"
+     *         required=false,
+     *         description="newcar or aftersale - Required if myaudiUserId is null"
      *     ),
      *     @SWG\Parameter(
      *         name="partnerIds",
@@ -54,7 +61,12 @@ class OfferController extends MullenloweRestController
      *     @SWG\Response(
      *         response="200",
      *         description="Offers - Example for aftersale",
-     *         @SWG\Definition(ref="#/definitions/OfferAftersaleContextMulti"),
+     *         @SWG\Definition(ref="#/definitions/OfferAftersaleContextMulti")
+     *     ),
+     *     @SWG\Response(
+     *         response="500",
+     *         description="Empty category for a request by partner",
+     *         @SWG\Schema(ref="#/definitions/Error")
      *     ),
      *     @SWG\Response(
      *         response=404,
@@ -65,16 +77,30 @@ class OfferController extends MullenloweRestController
      */
     public function cgetAction(Request $request)
     {
-        $category = $request->query->get('category');
+        $myaudiUserId = $request->query->get('myaudiUserId');
+        if (!empty($myaudiUserId)) {
+            $doctrine = $this->getDoctrine();
+            $aftersaleOffers = $doctrine
+                ->getRepository(OfferEnum::OFFERTYPE['aftersale']['repository'])
+                ->findByMyaudiUser($myaudiUserId);
 
-        if (empty($category)) {
-            throw new BadRequestHttpException(self::CONTEXT, 'Empty category');
+            $saleOffers = $doctrine
+                ->getRepository(OfferEnum::OFFERTYPE['newcar']['repository'])
+                ->findByMyaudiUser($myaudiUserId);
+
+            $offers = array_merge($aftersaleOffers, $saleOffers);
+        } else {
+            $category = $request->query->get('category');
+
+            if (empty($category)) {
+                throw new BadRequestHttpException(self::CONTEXT, 'Empty category');
+            }
+
+            $type = OfferEnum::OFFERTYPE[$category];
+
+            $em = $this->getDoctrine();
+            $offers = $em->getRepository($type['repository'])->findOffersSinceAYear($request->query->get('partnerIds'));
         }
-
-        $type = OfferEnum::OFFERTYPE[$category];
-
-        $em = $this->getDoctrine();
-        $offers = $em->getRepository($type['repository'])->findOffersSinceAYear($request->query->get('partnerIds'));
 
         return $this->createView($offers);
     }
@@ -363,63 +389,5 @@ class OfferController extends MullenloweRestController
         }
 
         return $this->createView(['userExists' => $userExist]);
-    }
-
-    /**
-     * @Rest\Get("/myaudi")
-     * @Rest\View(serializerGroups={"myaudi"})
-     *
-     * @SWG\Get(
-     *     path="/offer/partner/myaudi",
-     *     summary="Get offers for a myAudi User",
-     *     operationId="getOffersForMyaudiUser",
-     *     tags={"Offer"},
-     *     @SWG\Parameter(
-     *         name="myaudiUserId",
-     *         in="query",
-     *         type="integer",
-     *         required=true,
-     *         description="ID myAudi User"
-     *     ),
-     *     @SWG\Response(
-     *         response="200",
-     *         description="Offers aftersale and sale",
-     *         @SWG\Definition(ref="#/definitions/MyaudiUserOffers"),
-     *     ),
-     *     @SWG\Response(
-     *         response="500",
-     *         description="Empty myaudiUserId",
-     *         @SWG\Definition(ref="#/definitions/Error"),
-     *     ),
-     *     @SWG\Response(
-     *         response=404,
-     *         description="not found",
-     *         @SWG\Schema(ref="#/definitions/Error")
-     *     )
-     * )
-     *
-     * @param Request $request
-     * @return View
-     */
-    public function cgetForMyaudiUserAction(Request $request)
-    {
-        $myaudiUserId = $request->query->get('myaudiUserId');
-
-        if (empty($myaudiUserId)) {
-            throw new BadRequestHttpException(static::CONTEXT, "Invalid myAudi user ID");
-        }
-
-        $doctrine = $this->getDoctrine();
-        $aftersaleOffers = $doctrine
-            ->getRepository(OfferEnum::OFFERTYPE['aftersale']['repository'])
-            ->findByMyaudiUser($myaudiUserId);
-
-        $saleOffers = $doctrine
-            ->getRepository(OfferEnum::OFFERTYPE['newcar']['repository'])
-            ->findByMyaudiUser($myaudiUserId);
-
-        $offers = array_merge($aftersaleOffers, $saleOffers);
-
-        return $this->createView($offers);
     }
 }

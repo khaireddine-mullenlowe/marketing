@@ -22,10 +22,17 @@
                 "operationId": "getOffers",
                 "parameters": [
                     {
+                        "name": "myaudiUserId",
+                        "in": "query",
+                        "description": "Myaudi User ID",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
                         "name": "category",
                         "in": "query",
-                        "description": "newcar or aftersale",
-                        "required": true,
+                        "description": "newcar or aftersale - Required if myaudiUserId is null",
+                        "required": false,
                         "type": "string"
                     },
                     {
@@ -41,6 +48,12 @@
                         "description": "Offers - Example for aftersale",
                         "schema": {
                             "$ref": "#/definitions/OfferAftersaleContextMulti"
+                        }
+                    },
+                    "500": {
+                        "description": "Empty category for a request by partner",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
                         }
                     },
                     "404": {
@@ -179,44 +192,6 @@
                     },
                     "500": {
                         "description": "Bad Subtype or Invalid offer",
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }
-        },
-        "/offer/partner/myaudi": {
-            "get": {
-                "tags": [
-                    "Offer"
-                ],
-                "summary": "Get offers for a myAudi User",
-                "operationId": "getOffersForMyaudiUser",
-                "parameters": [
-                    {
-                        "name": "myaudiUserId",
-                        "in": "query",
-                        "description": "ID myAudi User",
-                        "required": true,
-                        "type": "integer"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Offers aftersale and sale",
-                        "schema": {
-                            "$ref": "#/definitions/MyaudiUserOffers"
-                        }
-                    },
-                    "500": {
-                        "description": "Empty myaudiUserId",
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    },
-                    "404": {
-                        "description": "not found",
                         "schema": {
                             "$ref": "#/definitions/Error"
                         }
@@ -1214,21 +1189,6 @@
                         }
                     },
                     "type": "object"
-                }
-            },
-            "allOf": [
-                {
-                    "$ref": "#definitions/Context"
-                }
-            ]
-        },
-        "MyaudiUserOffers": {
-            "properties": {
-                "data": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#definitions/OfferAftersaleComplete"
-                    }
                 }
             },
             "allOf": [
