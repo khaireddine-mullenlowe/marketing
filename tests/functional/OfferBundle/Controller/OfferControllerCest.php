@@ -12,10 +12,22 @@ class OfferControllerCest
     /**
      * @param FunctionalTester $I
      */
-    public function tryCGetOffer(FunctionalTester $I) {
+    public function tryCGetOfferForPartner(FunctionalTester $I) {
         $I->haveHttpHeader('Content-Type', 'application/json');
 
         $I->sendGET('/offer/partner?category=aftersale&partnersIds=1');
+        $I->seeResponseCodeIs(Response::HTTP_OK);
+        $I->seeResponseIsJson();
+        $I->seeResponseContains('Offer');
+    }
+
+    /**
+     * @param FunctionalTester $I
+     */
+    public function tryCGetOfferForMyaudiUser(FunctionalTester $I) {
+        $I->haveHttpHeader('Content-Type', 'application/json');
+
+        $I->sendGET('/offer/partner?myaudiUserId=1');
         $I->seeResponseCodeIs(Response::HTTP_OK);
         $I->seeResponseIsJson();
         $I->seeResponseContains('Offer');
@@ -33,7 +45,6 @@ class OfferControllerCest
         $I->seeResponseIsJson();
         $I->seeResponseContains('Empty category');
     }
-
 
     /**
      * @param FunctionalTester $I
@@ -274,29 +285,5 @@ class OfferControllerCest
         $I->seeResponseCodeIs(Response::HTTP_OK);
         $I->seeResponseIsJson();
         $I->seeResponseContains('userExists":1');
-    }
-
-    /**
-     * @param FunctionalTester $I
-     */
-    public function tryCGetForMyaudiUserOk(FunctionalTester $I)
-    {
-        $I->haveHttpHeader('Content-Type', 'application/json');
-        $I->sendGET('/offer/partner/myaudi?myaudiUserId=1');
-        $I->seeResponseCodeIs(Response::HTTP_OK);
-        $I->seeResponseIsJson();
-        $I->seeResponseContains('data');
-    }
-
-    /**
-     * @param FunctionalTester $I
-     */
-    public function tryCGetForMyaudiUserKo(FunctionalTester $I)
-    {
-        $I->haveHttpHeader('Content-Type', 'application/json');
-        $I->sendGET('/offer/partner/myaudi');
-        $I->seeResponseCodeIs(Response::HTTP_BAD_REQUEST);
-        $I->seeResponseIsJson();
-        $I->seeResponseContains('Invalid myAudi user ID');
     }
 }
