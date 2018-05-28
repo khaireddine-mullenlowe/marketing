@@ -25,7 +25,6 @@ class OfferNewCarTermsPropertyType extends AbstractType
         $builder
             ->add('monthNumber', IntegerType::class)
             ->add('advancePayment', MoneyType::class)
-            ->add('monthly', MoneyType::class)
             ->add('priceDate', TextType::class)
             ->add('modelName', TextType::class)
             ->add('engine', TextType::class)

@@ -69,15 +69,6 @@ class OfferNewCarTermsProperty
     protected $monthRentalNumber;
 
     /**
-     * @var float
-     *
-     * @ORM\Column(name="monthly", type="float")
-     *
-     * @Groups({"rest", "myaudi"})
-     */
-    protected $monthly;
-
-    /**
      * @var DateTime
      *
      * @ORM\Column(name="price_date", type="date")
@@ -270,39 +261,19 @@ class OfferNewCarTermsProperty
     }
 
     /**
-     * Set monthly
-     *
-     * @param float $monthly
-     *
-     * @return OfferNewCarTermsProperty
-     */
-    public function setMonthly(float $monthly)
-    {
-        $this->monthly = $monthly;
-
-        return $this;
-    }
-
-    /**
-     * Get monthly
-     *
-     * @return float
-     */
-    public function getMonthly()
-    {
-        return $this->monthly;
-    }
-
-    /**
      * Set priceDate
      *
-     * @param string $priceDate
+     * @param string|DateTime $priceDate
      *
      * @return OfferNewCarTermsProperty
      */
-    public function setPriceDate(string $priceDate)
+    public function setPriceDate($priceDate)
     {
-        $this->priceDate = new DateTime($priceDate);
+        if ($priceDate instanceof DateTime) {
+            $this->priceDate = $priceDate;
+        } else {
+            $this->priceDate = new DateTime($priceDate);
+        }
 
         return $this;
     }

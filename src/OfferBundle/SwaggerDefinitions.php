@@ -178,11 +178,6 @@ class SwaggerDefinitions
      *              type="number",
      *              format="float"
      *          ),
-     *          @SWG\Property(
-     *              property="monthly",
-     *              type="number",
-     *              format="float"
-     *          ),
      *          @SWG\Property(property="priceDate", type="string", format="y-m-d"),
      *          @SWG\Property(property="modelName", type="string"),
      *          @SWG\Property(property="engine", type="string"),
