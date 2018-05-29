@@ -22,7 +22,7 @@ class OfferSalePreTransformer implements TransformerInterface
      */
     const QUERY_PARTNER = 'SELECT id FROM partner WHERE legacy_id = :legacyId';
 
-    const RANGE = [
+    const RANGES = [
         'A1',
         'A3',
         'A4',
@@ -120,7 +120,7 @@ class OfferSalePreTransformer implements TransformerInterface
         $subtypeColumn = $row->getColumn('offer_subtype');
         $subtype = explode('-', $subtypeColumn->getValue());
 
-        $pos = array_search($subtype[1], static::RANGE);
+        $pos = array_search($subtype[1], static::RANGES);
 
         $isSecondCarType = $subtype[0] === 'VO'; //VN or VO
 

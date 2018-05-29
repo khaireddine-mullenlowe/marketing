@@ -102,10 +102,6 @@ class OfferNewCarTermsPropertyPreTransformer implements TransformerInterface
         foreach ($dynamicInputs as $key => $val) {
             preg_match($val['regex'], $termsValue, $res);
 
-            if (empty($res)) {
-                var_dump($val['regex']);
-            }
-
             $value = substr($res[0], $val['start'], -$val['end']);
 
             if (!empty($val['type'])) {

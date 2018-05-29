@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jobs>
-    <!--<job name="Offer Aftersale Terms Property Migration">
+    <job name="Offer Aftersale Terms Property Migration">
         <extractor>
             <connection>agcv4</connection>
             <query>
@@ -129,7 +129,7 @@
                 <targetProperty>partnerName</targetProperty>
             </mapping>
         </mappings>
-    </job>-->
+    </job>
     <job name="Offer SecondhandCar Terms Property Migration">
         <extractor>
             <connection>agcv4</connection>
