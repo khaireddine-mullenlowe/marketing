@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jobs>
+    <job name="Offer Aftersale MyaudiUser Migration">
+        <extractor>
+            <connection>agcv4</connection>
+            <query>
+                <![CDATA[
+                    SELECT contact_id, offer_apv_id FROM offer_apv_contact
+                ]]>
+            </query>
+        </extractor>
+
+        <transformer>
+            <preTransformerClass>OfferBundle\ETL\Transformer\MyaudiUserPreTransformer</preTransformerClass>
+        </transformer>
+
+        <loader>
+            <connection>migration</connection>
+            <entity>OfferBundle\Entity\OfferAftersaleMyaudiUser</entity>
+        </loader>
+
+        <mappings>
+            <mapping>
+                <name>contact_id</name>
+                <targetProperty>myaudiUserId</targetProperty>
+            </mapping>
+            <mapping>
+                <name>offer_apv_id</name>
+                <targetProperty>offer</targetProperty>
+                <type>entity</type>
+                <entityClass>OfferBundle\Entity\OfferAftersale</entityClass>
+                <referecedBy>legacy_id</referecedBy>
+            </mapping>
+        </mappings>
+    </job>
+    <job name="Offer Sale MyaudiUser Migration">
+        <extractor>
+            <connection>agcv4</connection>
+            <query>
+                <![CDATA[
+                    SELECT contact_id, offer_vnvo_id FROM offer_vnvo_contact
+                ]]>
+            </query>
+        </extractor>
+
+        <transformer>
+            <preTransformerClass>OfferBundle\ETL\Transformer\MyaudiUserPreTransformer</preTransformerClass>
+        </transformer>
+
+        <loader>
+            <connection>migration</connection>
+            <entity>OfferBundle\Entity\OfferSaleMyaudiUser</entity>
+        </loader>
+
+        <mappings>
+            <mapping>
+                <name>contact_id</name>
+                <targetProperty>myaudiUserId</targetProperty>
+            </mapping>
+            <mapping>
+                <name>offer_vnvo_id</name>
+                <targetProperty>offer</targetProperty>
+                <type>entity</type>
+                <entityClass>OfferBundle\Entity\OfferSale</entityClass>
+                <referecedBy>legacy_id</referecedBy>
+            </mapping>
+        </mappings>
+    </job>
+</jobs>

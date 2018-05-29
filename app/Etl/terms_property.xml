@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jobs>
+    <job name="Offer Aftersale Terms Property Migration">
+        <extractor>
+            <connection>agcv4</connection>
+            <query>
+                <![CDATA[
+                    SELECT id_offer_apv, terms
+                    FROM offer_apv a
+                    INNER JOIN buss_item b ON a.offer_discount_type_id = b.id_item
+                    WHERE b.id_item between 8863 AND 8865
+                ]]>
+            </query>
+        </extractor>
+
+        <transformer>
+            <preTransformerClass>OfferBundle\ETL\Transformer\OfferAftersaleTermsPropertyPreTransformer</preTransformerClass>
+        </transformer>
+
+        <loader>
+            <connection>migration</connection>
+            <entity>OfferBundle\Entity\OfferAftersaleTermsProperty</entity>
+        </loader>
+
+        <mappings>
+            <mapping>
+                <name>terms</name>
+                <targetProperty>km</targetProperty>
+            </mapping>
+            <mapping>
+                <name>id_offer_apv</name>
+                <targetProperty>offer</targetProperty>
+                <type>entity</type>
+                <entityClass>OfferBundle\Entity\OfferAftersale</entityClass>
+                <referecedBy>legacy_id</referecedBy>
+            </mapping>
+        </mappings>
+    </job>
+    <job name="Offer NewCar Terms Property Migration">
+        <extractor>
+            <connection>agcv4</connection>
+            <query>
+                <![CDATA[
+                    SELECT
+                        id_offer_vnvo,
+                        terms,
+                        '' as 'nombre_de_mois',
+                        '' as 'premier_loyer',
+                        '' as 'date_du_tarif',
+                        '' as 'modele',
+                        '' as 'motorisation',
+                        '' as 'options',
+                        '' as 'gamme',
+                        '' as 'consommation1',
+                        '' as 'consommation2',
+                        '' as 'co2_emission1',
+                        '' as 'co2_emission2',
+                        '' as 'km_maximum',
+                        '' as 'partenaire'
+                    FROM offer_vnvo
+                    WHERE terms like 'Location%'
+                ]]>
+            </query>
+        </extractor>
+
+        <transformer>
+            <preTransformerClass>OfferBundle\ETL\Transformer\OfferNewCarTermsPropertyPreTransformer</preTransformerClass>
+        </transformer>
+
+        <loader>
+            <connection>migration</connection>
+            <entity>OfferBundle\Entity\OfferNewCarTermsProperty</entity>
+        </loader>
+
+        <mappings>
+            <mapping>
+                <name>id_offer_vnvo</name>
+                <targetProperty>offer</targetProperty>
+                <type>entity</type>
+                <entityClass>OfferBundle\Entity\OfferSale</entityClass>
+                <referecedBy>legacy_id</referecedBy>
+            </mapping>
+            <mapping>
+                <name>premier_loyer</name>
+                <targetProperty>advancePayment</targetProperty>
+            </mapping>
+            <mapping>
+                <name>nombre_de_mois</name>
+                <targetProperty>monthNumber</targetProperty>
+            </mapping>
+            <mapping>
+                <name>date_du_tarif</name>
+                <targetProperty>priceDate</targetProperty>
+            </mapping>
+            <mapping>
+                <name>modele</name>
+                <targetProperty>modelName</targetProperty>
+            </mapping>
+            <mapping>
+                <name>motorisation</name>
+                <targetProperty>engine</targetProperty>
+            </mapping>
+            <mapping>
+                <name>gamme</name>
+                <targetProperty>rangeName</targetProperty>
+            </mapping>
+            <mapping>
+                <name>consommation1</name>
+                <targetProperty>mgpMin</targetProperty>
+            </mapping>
+            <mapping>
+                <name>consommation2</name>
+                <targetProperty>mgpMax</targetProperty>
+            </mapping>
+            <mapping>
+                <name>co2_emission1</name>
+                <targetProperty>co2EmissionMin</targetProperty>
+            </mapping>
+            <mapping>
+                <name>co2_emission2</name>
+                <targetProperty>co2EmissionMax</targetProperty>
+            </mapping>
+            <mapping>
+                <name>km_maximum</name>
+                <targetProperty>maximumKm</targetProperty>
+            </mapping>
+            <mapping>
+                <name>partenaire</name>
+                <targetProperty>partnerName</targetProperty>
+            </mapping>
+        </mappings>
+    </job>
+    <job name="Offer SecondhandCar Terms Property Migration">
+        <extractor>
+            <connection>agcv4</connection>
+            <query>
+                <![CDATA[
+                    SELECT
+                        id_offer_vnvo,
+                        terms,
+                        '' as 'adresse',
+                        '' as 'email',
+                        '' as 'modele',
+                        '' as 'motorisation'
+                    FROM offer_vnvo
+                    WHERE terms like '<b>Offre%'
+                ]]>
+            </query>
+        </extractor>
+
+        <transformer>
+            <preTransformerClass>OfferBundle\ETL\Transformer\OfferSecondhandCarTermsPropertyPreTransformer</preTransformerClass>
+        </transformer>
+
+        <loader>
+            <connection>migration</connection>
+            <entity>OfferBundle\Entity\OfferSecondhandCarTermsProperty</entity>
+        </loader>
+
+        <mappings>
+            <mapping>
+                <name>id_offer_vnvo</name>
+                <targetProperty>offer</targetProperty>
+                <type>entity</type>
+                <entityClass>OfferBundle\Entity\OfferSale</entityClass>
+                <referecedBy>legacy_id</referecedBy>
+            </mapping>
+            <mapping>
+                <name>adresse</name>
+                <targetProperty>address</targetProperty>
+            </mapping>
+            <mapping>
+                <name>motorisation</name>
+                <targetProperty>engine</targetProperty>
+            </mapping>
+            <mapping>
+                <name>engine</name>
+                <targetProperty>priceDate</targetProperty>
+            </mapping>
+            <mapping>
+                <name>modele</name>
+                <targetProperty>modelName</targetProperty>
+            </mapping>
+        </mappings>
+    </job>
+</jobs>

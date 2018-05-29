@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jobs>
+    <job name="Offer Sale Migration">
+        <extractor>
+            <connection>agcv4</connection>
+            <query>
+                <![CDATA[
+                    SELECT
+                        offer.id_offer_vnvo 'id',
+                        offer.partner_id,
+                        offerType.name + '-' + range.name 'offer_subtype',
+                        offer.start_date, offer.end_date, offer.creation_date 'created_at',
+                        offer.image 'visual', offer.imageX 'x_position', offer.imageY 'y_position',
+                        offer.title, offer.description,
+                        offer.status, offer.agreements,
+                        offer.monthly, offer.model 'model_id'
+                    FROM offer_vnvo offer
+                    INNER JOIN buss_item offerType ON offer.type = offerType.id_item
+                    INNER JOIN buss_item model ON offer.model = model.id_item
+                    INNER JOIN buss_item range ON model.parent_id = range.id_item
+                ]]>
+            </query>
+        </extractor>
+
+        <transformer>
+            <preTransformerClass>OfferBundle\ETL\Transformer\OfferSalePreTransformer</preTransformerClass>
+        </transformer>
+
+        <loader>
+            <connection>migration</connection>
+            <entity>OfferBundle\Entity\OfferSale</entity>
+        </loader>
+
+        <mappings>
+            <mapping>
+                <name>offer_subtype</name>
+                <targetProperty>subtype</targetProperty>
+                <type>entity</type>
+                <entityClass>OfferBundle\Entity\OfferSubtype</entityClass>
+                <referencedBy>id</referencedBy>
+            </mapping>
+            <mapping>
+                <name>imageX</name>
+                <targetProperty>discountSimple</targetProperty>
+            </mapping>
+            <mapping>
+                <name>imageY</name>
+                <targetProperty>discountDouble</targetProperty>
+            </mapping>
+            <mapping>
+                <name>start_date</name>
+                <targetProperty>startDate</targetProperty>
+            </mapping>
+            <mapping>
+                <name>end_date</name>
+                <targetProperty>endDate</targetProperty>
+            </mapping>
+            <mapping>
+                <name>created_at</name>
+                <targetProperty>createdAt</targetProperty>
+            </mapping>
+            <mapping>
+                <name>partner_id</name>
+                <targetProperty>partnerId</targetProperty>
+            </mapping>
+            <mapping>
+                <name>id</name>
+                <targetProperty>legacyId</targetProperty>
+            </mapping>
+        </mappings>
+    </job>
+</jobs>
