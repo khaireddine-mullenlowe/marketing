@@ -318,7 +318,7 @@ class OfferController extends MullenloweRestController
      *         in="body",
      *         required=true,
      *         description="List of ID Myaudi User, ID Subtype, ID Offer",
-     *         @SWG\Schema(ref="#/definitions/MyaudiUsers")
+     *         @SWG\Schema(ref="#/definitions/MyaudiUsersOffer")
      *     ),
      *     @SWG\Response(
      *         response="200",

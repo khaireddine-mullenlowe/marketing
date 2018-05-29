@@ -435,13 +435,13 @@ class SwaggerDefinitions
      *     ),
      *
      *     @SWG\Definition(
-     *         definition="MyaudiUsers",
+     *         definition="MyaudiUsersOffer",
      *         @SWG\Property(property="myaudiUserIds", type="array",
      *             @SWG\Items(type="integer")
      *         ),
      *         @SWG\Property(property="id", type="integer"),
      *         @SWG\Property(property="subtype", type="integer"),
-     *         required={"myaudiUserId", "id", "subtype"}
+     *         required={"myaudiUserIds", "id", "subtype"}
      *     ),
      *
      *     @SWG\Definition(

@@ -253,7 +253,7 @@ class OfferControllerCest
     {
         $data = '
             {
-                "myaudiUserId": 2,
+                "myaudiUserIds": [2],
                 "id": 1,
                 "subtype": 1
             }
@@ -263,7 +263,7 @@ class OfferControllerCest
         $I->sendPOST('/offer/partner/contact', $data);
         $I->seeResponseCodeIs(Response::HTTP_OK);
         $I->seeResponseIsJson();
-        $I->seeResponseContains('userExists":0');
+        $I->seeResponseContains('status":"ok"');
     }
 
     /**
@@ -273,7 +273,7 @@ class OfferControllerCest
     {
         $data = '
             {
-                "myaudiUserId": 1,
+                "myaudiUserIds": [1],
                 "id": 1,
                 "subtype": 1
             }
@@ -283,6 +283,6 @@ class OfferControllerCest
         $I->sendPOST('/offer/partner/contact', $data);
         $I->seeResponseCodeIs(Response::HTTP_OK);
         $I->seeResponseIsJson();
-        $I->seeResponseContains('userExists":1');
+        $I->seeResponseContains('status":"ok"');
     }
 }

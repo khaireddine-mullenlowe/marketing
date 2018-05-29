@@ -173,7 +173,7 @@
                         "description": "List of ID Myaudi User, ID Subtype, ID Offer",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/MyaudiUsers"
+                            "$ref": "#/definitions/MyaudiUsersOffer"
                         }
                     }
                 ],
@@ -1158,9 +1158,9 @@
                 }
             ]
         },
-        "MyaudiUsers": {
+        "MyaudiUsersOffer": {
             "required": [
-                "myaudiUserId",
+                "myaudiUserIds",
                 "id",
                 "subtype"
             ],
