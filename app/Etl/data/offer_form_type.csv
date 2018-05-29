@@ -1,0 +1,9 @@
+name;description;type
+basic;Sans prix ni pourcentage;BASIC
+percent;Pour un champ pourcentage;SIMPLE
+price;Pour un champ prix;SIMPLE
+percent_calculated;Pour un champ prix, un champ pourcentage et un champ prix final, calculé;TRIPLE
+price_and_percent;Pour un champ prix et un champ pourcentage;DOUBLE
+price_twice;Pour deux champs prix;DOUBLE
+vn;Pour les champs propres au mentions légales des offres VN;BASIC
+vo;Pour les champs propres au mentions légales des offres VO;BASIC

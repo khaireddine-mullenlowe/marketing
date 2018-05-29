@@ -74,7 +74,7 @@ class OfferSale extends BaseOffer
     /**
      * @var float
      *
-     * @ORM\Column(name="monthly", type="float")
+     * @ORM\Column(name="monthly", type="integer")
      *
      * @Groups({"rest", "myaudi"})
      */
@@ -132,7 +132,7 @@ class OfferSale extends BaseOffer
      * OfferSale constructor.
      * @param OfferSubtype $subtype
      */
-    public function __construct(OfferSubtype $subtype)
+    public function __construct(OfferSubtype $subtype = null)
     {
         parent::__construct();
         $this->subtype = $subtype;

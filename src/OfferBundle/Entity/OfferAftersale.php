@@ -131,7 +131,7 @@ class OfferAftersale extends BaseOffer
      * OfferAftersale constructor.
      * @param OfferSubtype $subtype
      */
-    public function __construct(OfferSubtype $subtype)
+    public function __construct(OfferSubtype $subtype = null)
     {
         parent::__construct();
         $this->subtype = $subtype;

@@ -85,6 +85,13 @@ abstract class BaseOffer
     protected $agreements;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="legacy_id", type="integer", nullable=true)
+     */
+    protected $legacyId;
+
+    /**
      * BaseOffer constructor.
      */
     public function __construct()
@@ -234,5 +241,21 @@ abstract class BaseOffer
     public function getAgreements()
     {
         return (int) $this->agreements;
+    }
+
+    /**
+     * @param int $legacyId
+     */
+    public function setLegacyId(int $legacyId)
+    {
+        $this->legacyId = $legacyId;
+    }
+
+    /**
+     * @return int
+     */
+    public function getLegacyId()
+    {
+        return $this->legacyId;
     }
 }

@@ -43,13 +43,17 @@ trait TimestampableOfferEntityTrait
     /**
      * Set startDate
      *
-     * @param string $startDate
+     * @param $startDate
      *
      * @return $this
      */
-    public function setStartDate(string $startDate)
+    public function setStartDate($startDate)
     {
-        $this->startDate = new DateTime($startDate);
+        if ($startDate instanceof DateTime) {
+            $this->startDate = $startDate;
+        } else {
+            $this->startDate = new DateTime($startDate);
+        }
 
         return $this;
     }
@@ -67,13 +71,17 @@ trait TimestampableOfferEntityTrait
     /**
      * Set endDate
      *
-     * @param string $endDate
+     * @param string|DateTime$endDate
      *
      * @return $this
      */
-    public function setEndDate(string $endDate)
+    public function setEndDate($endDate)
     {
-        $this->endDate = new DateTime($endDate);
+        if ($endDate instanceof DateTime) {
+            $this->endDate = $endDate;
+        } else {
+            $this->endDate = new DateTime($endDate);
+        }
 
         return $this;
     }
