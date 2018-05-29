@@ -40,6 +40,7 @@ class OfferSalePreTransformer implements TransformerInterface
      * @var Connection
      */
     private $connPartner;
+
     /**
      * @var Connection
      */
@@ -49,6 +50,7 @@ class OfferSalePreTransformer implements TransformerInterface
      * @var \PDOStatement
      */
     private $stmtPartner = null;
+
     /**
      * @var \PDOStatement
      */
@@ -107,6 +109,7 @@ class OfferSalePreTransformer implements TransformerInterface
             $error = $this->stmtVehicle->errorInfo();
             throw new TransformerException(sprintf('SQL query failed : %s', $error[2]));
         }
+
         $model = $this->stmtVehicle->fetch(\PDO::FETCH_ASSOC);
 
         if ($model['id']) {

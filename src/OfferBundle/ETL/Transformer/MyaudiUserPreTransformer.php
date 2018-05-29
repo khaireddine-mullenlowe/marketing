@@ -20,10 +20,12 @@ class MyaudiUserPreTransformer implements TransformerInterface
     /**
      * @var Connection
      */
+
     private $conn;
     /**
      * @var \PDOStatement
      */
+
     private $stmt = null;
     /**
      * @param Connection $conn
