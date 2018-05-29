@@ -1,1 +1,23 @@
 services:
+    OfferBundle\ETL\Transformer\OfferAftersalePreTransformer:
+        public: true
+        calls:
+            -
+                method: setConnection
+                arguments:
+                    - '@doctrine.dbal.partner_connection'
+    OfferBundle\ETL\Transformer\MyaudiUserPreTransformer:
+        public: true
+        calls:
+            -
+                method: setConnection
+                arguments:
+                    - '@doctrine.dbal.user_connection'
+    OfferBundle\ETL\Transformer\OfferSalePreTransformer:
+        public: true
+        calls:
+            -
+                method: setConnection
+                arguments:
+                    - '@doctrine.dbal.partner_connection'
+                    - '@doctrine.dbal.vehicle_connection'
