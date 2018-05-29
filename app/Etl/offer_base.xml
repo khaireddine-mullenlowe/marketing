@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jobs>
+    <job name="Offer Form Type migration">
+        <extractor>
+            <file>/apps/dev/api/marketing/current/app/Etl/data/offer_form_type.csv</file>
+        </extractor>
+
+        <transformer />
+
+        <loader>
+            <connection>migration</connection>
+            <entity>OfferBundle\Entity\OfferFormType</entity>
+        </loader>
+
+        <mappings/>
+    </job>
+    <job name="Offer Type migration">
+        <extractor>
+            <file>/apps/dev/api/marketing/current/app/Etl/data/offer_type.csv</file>
+        </extractor>
+
+        <transformer />
+
+        <loader>
+            <connection>migration</connection>
+            <entity>OfferBundle\Entity\OfferType</entity>
+        </loader>
+
+        <mappings/>
+    </job>
+    <job name="Offer Terms Template migration">
+        <extractor>
+            <file>/apps/dev/api/marketing/current/app/Etl/data/offer_terms_template.csv</file>
+        </extractor>
+
+        <transformer />
+
+        <loader>
+            <connection>migration</connection>
+            <entity>OfferBundle\Entity\OfferTermsTemplate</entity>
+        </loader>
+
+        <mappings/>
+    </job>
+    <job name="Offer Subtype migration">
+        <extractor>
+            <file>/apps/dev/api/marketing/current/app/Etl/data/offer_subtype.csv</file>
+        </extractor>
+
+        <transformer />
+
+        <loader>
+            <connection>migration</connection>
+            <entity>OfferBundle\Entity\OfferSubtype</entity>
+        </loader>
+
+        <mappings>
+            <mapping>
+                <name>type_id</name>
+                <targetProperty>type</targetProperty>
+                <type>entity</type>
+                <entityClass>OfferBundle\Entity\OfferType</entityClass>
+                <referencedBy>id</referencedBy>
+            </mapping>
+            <mapping>
+                <name>form_type_id</name>
+                <targetProperty>formType</targetProperty>
+                <type>entity</type>
+                <entityClass>OfferBundle\Entity\OfferFormType</entityClass>
+                <referencedBy>id</referencedBy>
+            </mapping>
+            <mapping>
+                <name>terms_template_id</name>
+                <targetProperty>termsTemplate</targetProperty>
+                <type>entity</type>
+                <entityClass>OfferBundle\Entity\OfferTermsTemplate</entityClass>
+                <referencedBy>id</referencedBy>
+            </mapping>
+        </mappings>
+    </job>
+</jobs>

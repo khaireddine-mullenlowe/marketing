@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jobs>
+    <job name="Offer Aftersale Migration">
+        <extractor>
+            <connection>agcv4</connection>
+            <query>
+                <![CDATA[
+                    SELECT
+                        offer.id_offer_apv 'id',
+                        offerSubType.id_item - 8862 'subtype_id',
+                        offer.details,
+                        D1.value 'discount_simple', D2.value 'discount_double', D3.value 'discount_triple',
+                        offer.partner_id,
+                        offer.start_date 'start_date', offer.end_date, offer.creation_date 'created_at',
+                        offer.image 'visual', offer.title, offer.description,
+                        offer.status, offer.agreements
+                    FROM offer_apv offer
+                    INNER JOIN buss_item offerType on offer.offer_apv_type_id = offerType.id_item
+                    INNER JOIN buss_item offerSubType on offer.offer_discount_type_id = offerSubType.id_item
+                    LEFT JOIN offer_discount_apv D1 on offer.id_offer_apv = D1.offer_apv_id
+                        AND (
+                            (offerSubType.id_item IN (8863, 8865, 8867, 8870, 8873)) or
+                            (offerSubType.id_item IN (8868, 8876, 8864, 8871) AND D1.discount_type IN ('price', 'firstPrice')))
+                    LEFT JOIN offer_discount_apv D2 on offer.id_offer_apv = D2.offer_apv_id
+                        AND (
+                            (offerSubType.id_item IN (8868, 8876) AND (D2.discount_type IN ('secondPrice', 'percent'))) or
+                            (offerSubType.id_item IN (8864, 8871) AND D2.discount_type = 'percent'))
+                    LEFT JOIN offer_discount_apv D3 on offer.id_offer_apv = D3.offer_apv_id
+                        AND offerSubType.id_item IN (8864, 8871) AND D3.discount_type = 'secondPrice'
+                ]]>
+            </query>
+        </extractor>
+
+        <transformer>
+            <preTransformerClass>OfferBundle\ETL\Transformer\OfferAftersalePreTransformer</preTransformerClass>
+        </transformer>
+
+        <loader>
+            <connection>migration</connection>
+            <entity>OfferBundle\Entity\OfferAftersale</entity>
+        </loader>
+
+        <mappings>
+            <mapping>
+                <name>subtype_id</name>
+                <targetProperty>subtype</targetProperty>
+                <type>entity</type>
+                <entityClass>OfferBundle\Entity\OfferSubtype</entityClass>
+                <referencedBy>id</referencedBy>
+            </mapping>
+            <mapping>
+                <name>discount_simple</name>
+                <targetProperty>discountSimple</targetProperty>
+            </mapping>
+            <mapping>
+                <name>discount_double</name>
+                <targetProperty>discountDouble</targetProperty>
+            </mapping>
+            <mapping>
+                <name>discount_Triple</name>
+                <targetProperty>discountTtriple</targetProperty>
+            </mapping>
+            <mapping>
+                <name>start_date</name>
+                <targetProperty>startDate</targetProperty>
+            </mapping>
+            <mapping>
+                <name>end_date</name>
+                <targetProperty>endDate</targetProperty>
+            </mapping>
+            <mapping>
+                <name>created_at</name>
+                <targetProperty>createdAt</targetProperty>
+            </mapping>
+            <mapping>
+                <name>partner_id</name>
+                <targetProperty>partnerId</targetProperty>
+            </mapping>
+            <mapping>
+                <name>id</name>
+                <targetProperty>legacyId</targetProperty>
+            </mapping>
+        </mappings>
+    </job>
+</jobs>
