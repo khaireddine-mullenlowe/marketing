@@ -435,8 +435,10 @@ class SwaggerDefinitions
      *     ),
      *
      *     @SWG\Definition(
-     *         definition="MyaudiUser",
-     *         @SWG\Property(property="myaudiUserId", type="integer"),
+     *         definition="MyaudiUsers",
+     *         @SWG\Property(property="myaudiUserIds", type="array",
+     *             @SWG\Items(type="integer")
+     *         ),
      *         @SWG\Property(property="id", type="integer"),
      *         @SWG\Property(property="subtype", type="integer"),
      *         required={"myaudiUserId", "id", "subtype"}
@@ -448,7 +450,7 @@ class SwaggerDefinitions
      *             @SWG\Definition(ref="#definitions/Context")
      *         },
      *         @SWG\Property(property="data", type="object",
-     *             @SWG\Property(property="myaudiUserId", type="integer")
+     *             @SWG\Property(property="status", type="string")
      *         )
      *     ),
      *
