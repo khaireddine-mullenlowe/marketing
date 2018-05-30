@@ -321,7 +321,7 @@ class OfferController extends MullenloweRestController
      *         @SWG\Schema(ref="#/definitions/MyaudiUsersOffer")
      *     ),
      *     @SWG\Response(
-     *         response="200",
+     *         response="201",
      *         description="Ok",
      *         @SWG\Definition(ref="#definitions/OfferAftersaleMyaudiUserContext")
      *     ),
@@ -386,6 +386,6 @@ class OfferController extends MullenloweRestController
 
         $doctrine->getManager()->flush();
 
-        return $this->createView(['status' => 'ok']);
+        return $this->createView('', Response::HTTP_CREATED);
     }
 }
