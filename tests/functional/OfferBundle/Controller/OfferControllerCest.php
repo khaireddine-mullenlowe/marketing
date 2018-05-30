@@ -261,9 +261,9 @@ class OfferControllerCest
 
         $I->haveHttpHeader('Content-Type', 'application/json');
         $I->sendPOST('/offer/partner/contact', $data);
-        $I->seeResponseCodeIs(Response::HTTP_OK);
+        $I->seeResponseCodeIs(Response::HTTP_CREATED);
         $I->seeResponseIsJson();
-        $I->seeResponseContains('status":"ok"');
+        $I->seeResponseContains('');
     }
 
     /**
@@ -281,8 +281,8 @@ class OfferControllerCest
 
         $I->haveHttpHeader('Content-Type', 'application/json');
         $I->sendPOST('/offer/partner/contact', $data);
-        $I->seeResponseCodeIs(Response::HTTP_OK);
+        $I->seeResponseCodeIs(Response::HTTP_CREATED);
         $I->seeResponseIsJson();
-        $I->seeResponseContains('status":"ok"');
+        $I->seeResponseContains('');
     }
 }
