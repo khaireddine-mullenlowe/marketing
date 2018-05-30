@@ -164,22 +164,22 @@
                 "tags": [
                     "Offer"
                 ],
-                "summary": "Add a contact to an offer",
-                "operationId": "addContactToOffer",
+                "summary": "Add contacts to an offer",
+                "operationId": "addContactsToOffer",
                 "parameters": [
                     {
                         "name": "myaudiUser",
                         "in": "body",
-                        "description": "ID User Myaudi, ID Subtype, ID Offer",
+                        "description": "List of ID Myaudi User, ID Subtype, ID Offer",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/MyaudiUser"
+                            "$ref": "#/definitions/MyaudiUsersOffer"
                         }
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "Contact added or not - return a bool for existing user with this offer or not",
+                    "201": {
+                        "description": "Ok",
                         "schema": {
                             "$ref": "#definitions/OfferAftersaleMyaudiUserContext"
                         }
@@ -737,10 +737,6 @@
                     "type": "number",
                     "format": "float"
                 },
-                "monthly": {
-                    "type": "number",
-                    "format": "float"
-                },
                 "priceDate": {
                     "type": "string",
                     "format": "y-m-d"
@@ -1162,15 +1158,18 @@
                 }
             ]
         },
-        "MyaudiUser": {
+        "MyaudiUsersOffer": {
             "required": [
-                "myaudiUserId",
+                "myaudiUserIds",
                 "id",
                 "subtype"
             ],
             "properties": {
-                "myaudiUserId": {
-                    "type": "integer"
+                "myaudiUserIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
                 },
                 "id": {
                     "type": "integer"
@@ -1184,8 +1183,8 @@
             "properties": {
                 "data": {
                     "properties": {
-                        "myaudiUserId": {
-                            "type": "integer"
+                        "status": {
+                            "type": "string"
                         }
                     },
                     "type": "object"

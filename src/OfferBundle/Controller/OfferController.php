@@ -310,19 +310,19 @@ class OfferController extends MullenloweRestController
      *
      * @SWG\Post(
      *     path="/offer/partner/contact",
-     *     summary="Add a contact to an offer",
-     *     operationId="addContactToOffer",
+     *     summary="Add contacts to an offer",
+     *     operationId="addContactsToOffer",
      *     tags={"Offer"},
      *     @SWG\Parameter(
      *         name="myaudiUser",
      *         in="body",
      *         required=true,
-     *         description="ID User Myaudi, ID Subtype, ID Offer",
-     *         @SWG\Schema(ref="#/definitions/MyaudiUser")
+     *         description="List of ID Myaudi User, ID Subtype, ID Offer",
+     *         @SWG\Schema(ref="#/definitions/MyaudiUsersOffer")
      *     ),
      *     @SWG\Response(
-     *         response="200",
-     *         description="Contact added or not - return a bool for existing user with this offer or not",
+     *         response="201",
+     *         description="Ok",
      *         @SWG\Definition(ref="#definitions/OfferAftersaleMyaudiUserContext")
      *     ),
      *     @SWG\Response(
@@ -361,33 +361,31 @@ class OfferController extends MullenloweRestController
 
         $type = OfferEnum::OFFERTYPE[$category];
 
-        $myaudiUser = $doctrine
-            ->getRepository($type['myaudiUserRepository'])
-            ->findBy(['offer' => $data['id'], 'myaudiUserId' => $data['myaudiUserId']]);
-        $userExist = 1;
+        $offer = $doctrine->getRepository($type['repository'])->findOneBy([
+            'id' => $data['id'],
+            'subtype' => $data['subtype'],
+        ]);
 
-        if (empty($myaudiUser)) {
-            $offer = $doctrine->getRepository($type['repository'])->findOneBy([
-                'id' => $data['id'],
-                'subtype' => $data['subtype'],
-            ]);
-
-            if (empty($offer)) {
-                throw new InvalidArgumentException('Invalid Offer');
-            }
-
-            /** @var OfferAftersaleMyaudiUser|OfferSaleMyaudiUser $myaudiUser */
-            $myaudiUser = new $type['myaudiUser']();
-
-            $myaudiUser->setOffer($offer);
-            $myaudiUser->setMyaudiUserId($data['myaudiUserId']);
-
-            $doctrine->getManager()->persist($myaudiUser);
-            $doctrine->getManager()->flush();
-
-            $userExist = 0;
+        if (empty($offer)) {
+            throw new InvalidArgumentException('Invalid Offer');
         }
 
-        return $this->createView(['userExists' => $userExist]);
+        foreach ($data['myaudiUserIds'] as $val) {
+            $myaudiUser = $doctrine
+                ->getRepository($type['myaudiUserRepository'])
+                ->findBy(['offer' => $data['id'], 'myaudiUserId' => $val]);
+
+            if (empty($myaudiUser)) {
+                /** @var OfferAftersaleMyaudiUser|OfferSaleMyaudiUser $myaudiUser */
+                $myaudiUser = new $type['myaudiUser']();
+                $myaudiUser->setOffer($offer);
+                $myaudiUser->setMyaudiUserId($val);
+                $doctrine->getManager()->persist($myaudiUser);
+            }
+        }
+
+        $doctrine->getManager()->flush();
+
+        return $this->createView('', Response::HTTP_CREATED);
     }
 }
