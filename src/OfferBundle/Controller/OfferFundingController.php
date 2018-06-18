@@ -2,6 +2,7 @@
 
 namespace OfferBundle\Controller;
 
+use FOS\RestBundle\View\View;
 use Knp\Component\Pager\Pagination\SlidingPagination;
 use Mullenlowe\CommonBundle\Controller\MullenloweRestController;
 use Mullenlowe\CommonBundle\Exception\BadRequestHttpException;
@@ -180,11 +181,11 @@ class OfferFundingController extends MullenloweRestController
     /**
      * @Rest\Get("/funding/search")
      * @param Request $request
-     * @return array
+     * @return View
      *
      * @SWG\Get(
      *     path="/offer/funding/search",
-     *     summary="Get a funding offers by label.",
+     *     summary="Get a funding offers by name.",
      *     operationId="searchOfferFunding",
      *     tags={"Offer Funding"},
      *     @SWG\Parameter(
@@ -192,7 +193,7 @@ class OfferFundingController extends MullenloweRestController
      *         in="query",
      *         type="string",
      *         required=false,
-     *         description="OfferFunding label to search"
+     *         description="OfferFunding name to search"
      *     ),
      *     @SWG\Response(
      *         response="200",
@@ -217,12 +218,13 @@ class OfferFundingController extends MullenloweRestController
             throw new BadRequestHttpException(self::CONTEXT, 'Input data are empty.');
         }
 
-        $label = $request->query->get('q');
+        $name = $request->query->get('q');
         /** @var OfferFundingRepository $repository */
         $repository = $this->get('fos_elastica.manager')->getRepository('OfferBundle:OfferFunding');
 
         $paginator = $this->get('knp_paginator');
-        $results = $repository->findByLabel($label);
+        $results = $repository->findByName($name);
+        /** @var \Knp\Bundle\PaginatorBundle\Pagination\SlidingPagination $pager */
         $pager = $paginator->paginate($results, $request->query->getInt('page', 1), $request->query->getInt('limit', 1));
 
         return $this->createPaginatedView($pager);

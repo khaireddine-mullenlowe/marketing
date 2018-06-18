@@ -6,6 +6,7 @@ services:
                 method: setConnection
                 arguments:
                     - '@doctrine.dbal.partner_connection'
+
     OfferBundle\ETL\Transformer\MyaudiUserPreTransformer:
         public: true
         calls:
@@ -13,6 +14,7 @@ services:
                 method: setConnection
                 arguments:
                     - '@doctrine.dbal.user_connection'
+
     OfferBundle\ETL\Transformer\OfferSalePreTransformer:
         public: true
         calls:
@@ -20,4 +22,12 @@ services:
                 method: setConnection
                 arguments:
                     - '@doctrine.dbal.partner_connection'
+                    - '@doctrine.dbal.vehicle_connection'
+
+    OfferBundle\ETL\Transformer\OfferFundingPreTransformer:
+        public: true
+        calls:
+            -
+                method: setConnection
+                arguments:
                     - '@doctrine.dbal.vehicle_connection'

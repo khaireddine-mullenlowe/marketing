@@ -6,6 +6,7 @@ namespace OfferBundle\Form;
 use OfferBundle\Entity\OfferFunding;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -18,19 +19,19 @@ class OfferFundingType extends AbstractType
     {
         $builder
             ->add('type', TextType::class)
-            ->add('label', TextType::class)
+            ->add('name', TextType::class)
             ->add('modelId', TextType::class)
             ->add('rangeId', TextType::class)
             ->add('price', TextType::class)
-            ->add('withContribution', ChoiceType::class, ['choices' => [true, false]])
-            ->add('guaranteed', ChoiceType::class, ['choices' => [true, false]])
-            ->add('maintained', ChoiceType::class, ['choices' => [true, false]])
+            ->add('withContribution', IntegerType::class)
+            ->add('guaranteed', IntegerType::class)
+            ->add('maintained', IntegerType::class)
             ->add('details', TextareaType::class)
             ->add('legalNotice', TextareaType::class)
             ->add('startDate', TextType::class)
             ->add('endDate', TextType::class)
             ->add('visual', TextareaType::class)
-            ->add('active', ChoiceType::class, ['choices' => [true, false]]);
+            ->add('status', IntegerType::class);
     }
 
     /**

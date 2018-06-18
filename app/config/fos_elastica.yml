@@ -30,7 +30,7 @@ fos_elastica:
                             type: string
                         visual:
                             type: string
-                        label:
+                        name:
                             type: string
                     persistence:
                         driver: orm

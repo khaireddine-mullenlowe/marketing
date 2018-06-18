@@ -3,6 +3,7 @@
 namespace Tests\unit\OfferBundle\Service;
 
 use OfferBundle\Entity\OfferFunding;
+use OfferBundle\Enum\OfferFundingTypeEnum;
 use OfferBundle\Repository\OfferFundingRepository;
 use OfferBundle\Validator\Constraints\OfferFundingUnique;
 use OfferBundle\Validator\Constraints\OfferFundingUniqueValidator;
@@ -18,8 +19,8 @@ class OfferFundingUniqueValidatorTest extends ConstraintValidatorTestCase
     {
         $this->offerFunding = new OfferFunding();
         $this->offerFunding
-            ->setLabel('test')
-            ->setActive(true)
+            ->setName('test')
+            ->setStatus(true)
             ->setDetails('Lorem ipsum')
             ->setGuaranteed(false)
             ->setLegalNotice('dolor sit amet')
@@ -27,7 +28,7 @@ class OfferFundingUniqueValidatorTest extends ConstraintValidatorTestCase
             ->setPrice('15000')
             ->setModelId('1320')
             ->setRangeId('325')
-            ->setType(OfferFunding::TYPES[0])
+            ->setType(OfferFundingTypeEnum::TYPE_NATIONAL)
             ->setStartDate((new \DateTime())->add(new \DateInterval('P20D'))->format('Y-m-d'))
             ->setEndDate((new \DateTime())->add(new \DateInterval('P40D'))->format('Y-m-d'))
         ;
@@ -81,7 +82,7 @@ class OfferFundingUniqueValidatorTest extends ConstraintValidatorTestCase
         $this->validator->validate($funding, new OfferFundingUnique(['message' => 'My Message']));
 
         $this->buildViolation('My Message')
-            ->setParameter('{{ value }}', $funding->getLabel())
+            ->setParameter('{{ value }}', $funding->getName())
             ->assertRaised();
     }
 
@@ -97,7 +98,7 @@ class OfferFundingUniqueValidatorTest extends ConstraintValidatorTestCase
         $this->validator->validate($funding, new OfferFundingUnique(['message' => 'My Message']));
 
         $this->buildViolation('My Message')
-            ->setParameter('{{ value }}', $funding->getLabel())
+            ->setParameter('{{ value }}', $funding->getName())
             ->assertRaised();
     }
 
@@ -113,7 +114,7 @@ class OfferFundingUniqueValidatorTest extends ConstraintValidatorTestCase
         $this->validator->validate($funding, new OfferFundingUnique(['message' => 'My Message']));
 
         $this->buildViolation('My Message')
-            ->setParameter('{{ value }}', $funding->getLabel())
+            ->setParameter('{{ value }}', $funding->getName())
             ->assertRaised();
     }
 

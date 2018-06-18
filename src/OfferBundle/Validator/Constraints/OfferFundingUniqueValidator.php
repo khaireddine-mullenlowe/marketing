@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 class OfferFundingUniqueValidator extends ConstraintValidator
 {
     /** @var OfferFundingRepository */
-    protected $repository;
+    protected $entityRepository;
 
     public function __construct(OfferFundingRepository $repository)
     {
@@ -34,7 +34,7 @@ class OfferFundingUniqueValidator extends ConstraintValidator
             throw new UnexpectedTypeException($value, 'OfferFunding');
         }
 
-        $offer = $this->entityRepository->findOneBy(['label' => $value->getLabel()]);
+        $offer = $this->entityRepository->findOneBy(['name' => $value->getName()]);
         if (null === $offer || (null !== $value->getId() && $value->getId() === $offer->getId())) {
             return;
         }
@@ -50,7 +50,7 @@ class OfferFundingUniqueValidator extends ConstraintValidator
             $this->between($actualEndDate, $newStartDate, $newEndDate)) {
 
             $this->context->buildViolation($constraint->message)
-                ->setParameter('{{ value }}', $value->getLabel())
+                ->setParameter('{{ value }}', $value->getName())
                 ->addViolation();
         }
     }

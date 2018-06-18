@@ -3,10 +3,14 @@
 namespace OfferBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Timestampable\Traits\Timestampable;
+use Mullenlowe\CommonBundle\Entity\Traits\LegacyTrait;
 use OfferBundle\Entity\Traits\TimestampableOfferEntityTrait;
 use OfferBundle\Validator\Constraints\OfferFundingUnique;
-use Swagger\Annotations as SWG;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
+use OfferBundle\Enum\OfferFundingTypeEnum;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * OfferFunding
@@ -18,11 +22,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 class OfferFunding
 {
     use TimestampableOfferEntityTrait;
-
-    Const TYPES = [
-        'NATIONAL',
-        'LOCAL',
-    ];
+    use Timestampable;
+    use LegacyTrait;
 
     /**
      * @var int
@@ -30,6 +31,7 @@ class OfferFunding
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Groups({"rest"})
      */
     private $id;
 
@@ -38,8 +40,10 @@ class OfferFunding
      * @var string
      *
      * @Assert\NotBlank()
+     * @Assert\Choice({OfferFundingTypeEnum::TYPE_NATIONAL, OfferFundingTypeEnum::TYPE_LOCAL}, strict=true)
      *
      * @ORM\Column(name="type", type="string", length=255, nullable=true)
+     * @Groups({"rest"})
      */
     private $type;
 
@@ -49,6 +53,7 @@ class OfferFunding
      * @Assert\NotBlank()
      *
      * @ORM\Column(name="model_id", type="integer")
+     * @Groups({"rest"})
      */
     private $modelId;
 
@@ -58,6 +63,7 @@ class OfferFunding
      * @Assert\NotBlank()
      *
      * @ORM\Column(name="range_id", type="integer")
+     * @Groups({"rest"})
      */
     private $rangeId;
 
@@ -66,36 +72,20 @@ class OfferFunding
      *
      * @Assert\NotBlank()
      *
+     * @ORM\Column(name="name", type="string", length=255)
+     * @Groups({"rest"})
+     */
+    private $name;
+
+    /**
+     * @var string
+     *
+     * @Assert\NotBlank()
+     *
      * @ORM\Column(name="price", type="string", length=255)
+     * @Groups({"rest"})
      */
     private $price;
-
-    /**
-     * @var bool
-     *
-     * @Assert\NotNull()
-     *
-     * @ORM\Column(name="with_contribution", type="boolean")
-     */
-    private $withContribution = false;
-
-    /**
-     * @var bool
-     *
-     * @Assert\NotNull()
-     *
-     * @ORM\Column(name="guaranteed", type="boolean")
-     */
-    private $guaranteed = false;
-
-    /**
-     * @var bool
-     *
-     * @Assert\NotNull()
-     *
-     * @ORM\Column(name="maintained", type="boolean")
-     */
-    private $maintained = false;
 
     /**
      * @var string
@@ -103,6 +93,7 @@ class OfferFunding
      * @Assert\NotBlank()
      *
      * @ORM\Column(name="details", type="text")
+     * @Groups({"rest"})
      */
     private $details;
 
@@ -112,6 +103,7 @@ class OfferFunding
      * @Assert\NotBlank()
      *
      * @ORM\Column(name="legalNotice", type="text")
+     * @Groups({"rest"})
      */
     private $legalNotice;
 
@@ -121,26 +113,103 @@ class OfferFunding
      * @Assert\NotBlank()
      *
      * @ORM\Column(name="visual", type="text")
+     * @Groups({"rest"})
      */
     private $visual;
 
     /**
-     * @var bool
+     * @var int
      *
      * @Assert\NotNull()
      *
-     * @ORM\Column(name="active", type="boolean")
+     * @ORM\Column(name="with_contribution", type="smallint")
+     * @Groups({"rest"})
      */
-    private $active = false;
+    private $withContribution = 0;
 
     /**
-     * @var string
+     * @var int
      *
-     * @Assert\NotBlank()
+     * @Assert\NotNull()
      *
-     * @ORM\Column(name="label", type="string", length=255)
+     * @ORM\Column(name="guaranteed", type="smallint")
+     * @Groups({"rest"})
      */
-    private $label;
+    private $guaranteed = 0;
+
+    /**
+     * @var int
+     *
+     * @Assert\NotNull()
+     *
+     * @ORM\Column(name="maintained", type="smallint")
+     * @Groups({"rest"})
+     */
+    private $maintained = 0;
+
+    /**
+     * @var \DateTime
+     *
+     * @Assert\GreaterThan(
+     *     "today",
+     *     message="StartDate must be higher than today"
+     * )
+     *
+     * @ORM\Column(name="start_date", type="date")
+     *
+     * @Groups({"rest", "myaudi"})
+     */
+    protected $startDate;
+
+    /**
+     * @var \DateTime
+     *
+     * @Assert\Expression(
+     *     "value > this.getStartDate()",
+     *     message="EndDate must be higher than StartDate"
+     * )
+     *
+     * @ORM\Column(name="end_date", type="date")
+     *
+     * @Groups({"rest", "myaudi"})
+     */
+    protected $endDate;
+
+    /**
+     * @var \DateTime
+     *
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
+     * @Groups({"rest"})
+     */
+     protected $createdAt;
+
+    /**
+     * @var \DateTime
+     *
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
+     * @Groups({"rest"})
+     */
+    protected $updatedAt;
+
+    /**
+     * @var int
+     *
+     * @Assert\Range(min = 0, max = 1)
+     *
+     * @ORM\Column(name="status", type="smallint")
+     * @Groups({"rest"})
+     */
+    private $status = 1;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"rest"})
+     */
+    protected $legacyId;
 
 
     /**
@@ -162,10 +231,6 @@ class OfferFunding
      */
     public function setType($type)
     {
-        if (!in_array($type, self::TYPES)) {
-            throw new \InvalidArgumentException('Invalid type value.');
-        }
-
         $this->type = $type;
 
         return $this;
@@ -256,7 +321,7 @@ class OfferFunding
     /**
      * Set withContribution
      *
-     * @param boolean $withContribution
+     * @param int $withContribution
      *
      * @return $this
      */
@@ -270,7 +335,7 @@ class OfferFunding
     /**
      * Get withContribution
      *
-     * @return bool
+     * @return int
      */
     public function isWithContribution()
     {
@@ -280,7 +345,7 @@ class OfferFunding
     /**
      * Set guaranteed
      *
-     * @param boolean $guaranteed
+     * @param int $guaranteed
      *
      * @return $this
      */
@@ -294,7 +359,7 @@ class OfferFunding
     /**
      * Get guaranteed
      *
-     * @return bool
+     * @return int
      */
     public function isGuaranteed()
     {
@@ -304,7 +369,7 @@ class OfferFunding
     /**
      * Set maintained
      *
-     * @param boolean $maintained
+     * @param int $maintained
      *
      * @return $this
      */
@@ -318,7 +383,7 @@ class OfferFunding
     /**
      * Get maintained
      *
-     * @return bool
+     * @return int
      */
     public function isMaintained()
     {
@@ -398,51 +463,51 @@ class OfferFunding
     }
 
     /**
-     * Set active
+     * Set status
      *
-     * @param boolean $active
+     * @param int $status
      *
      * @return $this
      */
-    public function setActive($active)
+    public function setStatus($status)
     {
-        $this->active = $active;
+        $this->status = $status;
 
         return $this;
     }
 
     /**
-     * Get active
+     * Get status
      *
-     * @return bool
+     * @return int
      */
-    public function isActive()
+    public function getStatus()
     {
-        return $this->active;
+        return $this->status;
     }
 
     /**
-     * Set label
+     * Set Name
      *
-     * @param string $label
+     * @param string $name
      *
      * @return $this
      */
-    public function setLabel($label)
+    public function setName($name)
     {
-        $this->label = $label;
+        $this->name = $name;
 
         return $this;
     }
 
     /**
-     * Get label
+     * Get Name
      *
      * @return string
      */
-    public function getLabel()
+    public function getName()
     {
-        return $this->label;
+        return $this->name;
     }
 
     public function __clone()
