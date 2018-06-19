@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job name="Offer Funding migration">
+    <extractor>
+        <connection>agcv4</connection>
+        <query>
+            <![CDATA[
+                SELECT  t1.id_financial_offer
+                       , t1.financial_offer_type_id
+                       , t1.range_id
+                       , t1.model_id
+                       , t1.name
+                       , t1.price
+                       , t1.with_contribution
+                       , t1.[3_years_warranty_included] as three_years_warranty_included
+                       , t1.service_package_included
+                       , t1.details
+                       , t1.terms_and_conditions
+                       , t1.start_date
+                       , t1.end_date
+                       , t1.image_url
+                       , t1.status
+                       , t2.hist_change_date as created_at
+                FROM buss_financial_offer t1
+                INNER JOIN HIST_AUDIV3.dbo.hist_buss_financial_offer t2
+                    ON t2.id_financial_offer = t1.id_financial_offer
+                    AND t2.hist_action = 'INSERT'
+            ]]>
+        </query>
+    </extractor>
+
+    <transformer>
+        <preTransformerClass>OfferBundle\ETL\Transformer\OfferFundingPreTransformer</preTransformerClass>
+    </transformer>
+
+    <loader>
+        <connection>migration</connection>
+        <entity>OfferBundle\Entity\OfferFunding</entity>
+    </loader>
+
+    <mappings>
+        <mapping>
+            <name>id_financial_offer</name>
+            <targetProperty>legacyId</targetProperty>
+        </mapping>
+        <mapping>
+            <name>financial_offer_type_id</name>
+            <targetProperty>type</targetProperty>
+            <constraints>
+                <class>OfferBundle\ETL\Constraint\OfferFundingTypeConstraint</class>
+            </constraints>
+        </mapping>
+        <mapping>
+            <name>terms_and_conditions</name>
+            <targetProperty>legalNotice</targetProperty>
+        </mapping>
+        <mapping>
+            <name>three_years_warranty_included</name>
+            <targetProperty>guaranteed</targetProperty>
+        </mapping>
+        <mapping>
+            <name>service_package_included</name>
+            <targetProperty>maintained</targetProperty>
+        </mapping>
+        <mapping>
+            <name>image_url</name>
+            <targetProperty>visual</targetProperty>
+        </mapping>
+        <mapping>
+            <name>start_date</name>
+            <constraints>
+                <class>Mullenlowe\EtlBundle\Constraint\DateTime</class>
+            </constraints>
+        </mapping>
+        <mapping>
+            <name>end_date</name>
+            <constraints>
+                <class>Mullenlowe\EtlBundle\Constraint\DateTime</class>
+            </constraints>
+        </mapping>
+    </mappings>
+</job>

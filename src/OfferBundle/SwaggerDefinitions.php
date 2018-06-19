@@ -65,8 +65,8 @@ class SwaggerDefinitions
      *
      *     @SWG\Definition(
      *         definition="TimestampableOfferEntity",
-     *         @SWG\Property(property="startDate", type="string", format="y-m-d"),
-     *         @SWG\Property(property="endDate", type="string", format="y-m-d"),
+     *         @SWG\Property(property="startDate", type="string", format="date"),
+     *         @SWG\Property(property="endDate", type="string", format="date"),
      *         required={"startDate", "endDate"}
      *     ),
      *
@@ -459,8 +459,8 @@ class SwaggerDefinitions
      *         @SWG\Property(
      *             property="funding",
      *             allOf={
-     *                  @SWG\Definition(ref="#definitions/TimestampableOfferEntity"),
-     *                  @SWG\Definition(ref="#definitions/OfferFundingAttributes")
+     *                  @SWG\Definition(ref="#definitions/OfferFundingAttributes"),
+     *                  @SWG\Definition(ref="#definitions/TimestampableOfferEntity")
      *             }
      *         )
      *
@@ -470,10 +470,14 @@ class SwaggerDefinitions
      *         definition="OfferFundingAttributes",
      *         @SWG\Property(
      *             property="type",
-     *             type="string"
+     *             type="string",
+     *             enum={
+     *                 OfferBundle\Enum\OfferFundingTypeEnum::TYPE_NATIONAL,
+     *                 OfferBundle\Enum\OfferFundingTypeEnum::TYPE_LOCAL
+     *             }
      *         ),
      *         @SWG\Property(
-     *             property="label",
+     *             property="name",
      *             type="string"
      *         ),
      *         @SWG\Property(
@@ -490,15 +494,18 @@ class SwaggerDefinitions
      *         ),
      *         @SWG\Property(
      *             property="withContribution",
-     *             type="boolean"
+     *             type="integer",
+     *             enum={0, 1}
      *         ),
      *         @SWG\Property(
      *             property="guaranteed",
-     *             type="boolean"
+     *             type="integer",
+     *             enum={0, 1}
      *         ),
      *         @SWG\Property(
      *             property="maintained",
-     *             type="boolean"
+     *             type="integer",
+     *             enum={0, 1}
      *         ),
      *         @SWG\Property(
      *             property="details",
@@ -513,8 +520,9 @@ class SwaggerDefinitions
      *             type="string"
      *         ),
      *         @SWG\Property(
-     *             property="active",
-     *             type="boolean"
+     *             property="status",
+     *             type="integer",
+     *             enum={0, 1}
      *         )
      *     ),
      *

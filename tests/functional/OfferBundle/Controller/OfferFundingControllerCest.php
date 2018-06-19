@@ -18,9 +18,9 @@ class OfferFundingControllerCest
         $data = '
             {
                 "funding": {
-                    "type": "NATIONAL",
+                    "type": "national",
                     "modelId": "10",
-                    "label": "Label de test",
+                    "name": "Label de test",
                     "rangeId": 10,
                     "price": 100,
                     "withContribution": 1,
@@ -31,7 +31,7 @@ class OfferFundingControllerCest
                     "startDate": "' . (new DateTime())->add(new DateInterval('P1D'))->format('Y-m-d') . '",
                     "endDate": "' . (new DateTime())->add(new DateInterval('P10D'))->format('Y-m-d') . '",
                     "visual": "Visuel de test",
-                    "active": 1
+                    "status": 1
                 }
             }
         ';
@@ -48,15 +48,15 @@ class OfferFundingControllerCest
         $data = '
             {
                 "funding": {
-                    "type": "NATIONAL",
+                    "type": "national",
                     "modelId": "10",
-                    "label": "Label de test",
+                    "name": "Label de test",
                     "rangeId": 10,
                     "price": 100,
                     "withContribution": 1,
                     "guaranteed": 0,
                     "maintained": 0,
-                    "active": 1
+                    "status": 1
                 }
             }
         ';
@@ -73,9 +73,9 @@ class OfferFundingControllerCest
         $data = '
             {
                 "funding": {
-                    "type": "NATIONAL",
+                    "type": "national",
                     "modelId": "10",
-                    "label": "Label de test",
+                    "name": "Label de test",
                     "rangeId": 10,
                     "price": 100,
                     "withContribution": 1,
@@ -86,7 +86,7 @@ class OfferFundingControllerCest
                     "startDate": "' . (new DateTime())->sub(new DateInterval('P1D'))->format('Y-m-d') . '",
                     "endDate": "' . (new DateTime())->add(new DateInterval('P10D'))->format('Y-m-d') . '",
                     "visual": "Visuel de test",
-                    "active": 1
+                    "status": 1
                 }
             }
         ';
@@ -137,7 +137,7 @@ class OfferFundingControllerCest
         $data = '
             {
                 "funding": {
-                    "type": "LOCAL"
+                    "type": "local"
                 }
             }
         ';
@@ -153,7 +153,7 @@ class OfferFundingControllerCest
         $data = '
             {
                 "funding": {
-                    "type": "LOCAL"
+                    "type": "local"
                 }
             }
         ';
@@ -161,7 +161,7 @@ class OfferFundingControllerCest
         $I->sendPATCH('/offer/funding/1', $data);
         $I->seeResponseCodeIs(Response::HTTP_OK);
         $I->seeResponseIsJson();
-        $I->seeResponseContains('"LOCAL"');
+        $I->seeResponseContains('"local"');
     }
 
     public function tryCgetOfferFundingOk(FunctionalTester $I)

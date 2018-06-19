@@ -1,12 +1,12 @@
 OfferBundle\Entity\OfferFunding:
-  offer_funding1:
-    startDate: '<((new \DateTime("now"))->add(new DateInterval("P20D"))->format("Y-m-d"))>'
-    endDate: '<((new \DateTime("now"))->add(new DateInterval("P40D"))->format("Y-m-d"))>'
-    visual: 'Visual test'
-    label: 'myFundingOffer'
-    type: 'NATIONAL'
-    modelId: '201'
-    rangeId: '205'
-    price: '1200.15'
-    details: 'details test'
-    legalNotice: 'Legal notice test'
+    offer_funding1:
+        startDate: '<((new \DateTime("now"))->add(new DateInterval("P20D"))->format("Y-m-d"))>'
+        endDate: '<((new \DateTime("now"))->add(new DateInterval("P40D"))->format("Y-m-d"))>'
+        visual: 'Visual test'
+        name: 'myFundingOffer'
+        type: 'national'
+        modelId: '201'
+        rangeId: '205'
+        price: '1200.15'
+        details: 'details test'
+        legalNotice: 'Legal notice test'

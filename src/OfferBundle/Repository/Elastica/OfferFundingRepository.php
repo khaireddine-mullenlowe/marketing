@@ -12,13 +12,18 @@ use FOS\ElasticaBundle\Repository;
  */
 class OfferFundingRepository extends Repository
 {
-    public function findByLabel($label)
+    /**
+     * @param $name
+     * @return array
+     */
+    public function findByName($name)
     {
         $match = new Match();
-        $match->setField('label', $label);
+        $match->setField('name', $name);
 
         $query = new BoolQuery();
         $query->addMust($match);
+
         return $this->find($query);
     }
 }

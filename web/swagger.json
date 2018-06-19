@@ -342,13 +342,13 @@
                 "tags": [
                     "Offer Funding"
                 ],
-                "summary": "Get a funding offers by label.",
+                "summary": "Get a funding offers by name.",
                 "operationId": "searchOfferFunding",
                 "parameters": [
                     {
                         "name": "q",
                         "in": "query",
-                        "description": "OfferFunding label to search",
+                        "description": "OfferFunding name to search",
                         "required": false,
                         "type": "string"
                     }
@@ -560,11 +560,11 @@
             "properties": {
                 "startDate": {
                     "type": "string",
-                    "format": "y-m-d"
+                    "format": "date"
                 },
                 "endDate": {
                     "type": "string",
-                    "format": "y-m-d"
+                    "format": "date"
                 }
             }
         },
@@ -1201,10 +1201,10 @@
                 "funding": {
                     "allOf": [
                         {
-                            "$ref": "#definitions/TimestampableOfferEntity"
+                            "$ref": "#definitions/OfferFundingAttributes"
                         },
                         {
-                            "$ref": "#definitions/OfferFundingAttributes"
+                            "$ref": "#definitions/TimestampableOfferEntity"
                         }
                     ]
                 }
@@ -1213,9 +1213,13 @@
         "OfferFundingAttributes": {
             "properties": {
                 "type": {
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                        "national",
+                        "local"
+                    ]
                 },
-                "label": {
+                "name": {
                     "type": "string"
                 },
                 "modelId": {
@@ -1228,13 +1232,25 @@
                     "type": "string"
                 },
                 "withContribution": {
-                    "type": "boolean"
+                    "type": "integer",
+                    "enum": [
+                        0,
+                        1
+                    ]
                 },
                 "guaranteed": {
-                    "type": "boolean"
+                    "type": "integer",
+                    "enum": [
+                        0,
+                        1
+                    ]
                 },
                 "maintained": {
-                    "type": "boolean"
+                    "type": "integer",
+                    "enum": [
+                        0,
+                        1
+                    ]
                 },
                 "details": {
                     "type": "string"
@@ -1245,8 +1261,12 @@
                 "visual": {
                     "type": "string"
                 },
-                "active": {
-                    "type": "boolean"
+                "status": {
+                    "type": "integer",
+                    "enum": [
+                        0,
+                        1
+                    ]
                 }
             }
         },

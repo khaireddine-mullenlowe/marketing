@@ -19,7 +19,7 @@ use OfferBundle\Entity\OfferAftersale;
  * Class OfferEnum
  * @package OfferBundle\Enum
  */
-class OfferEnum
+class OfferEnum extends BaseEnum
 {
     const OFFERTYPE = [
         'aftersale'     => [
