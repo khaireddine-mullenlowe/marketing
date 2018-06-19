@@ -90,7 +90,7 @@ class OfferFundingPreTransformer implements TransformerInterface
 
         if ($result['id']) {
             $modelIdColumn->setValue($result['id']);
-        } else {dump($result);exit;
+        } else {
             $row->setSkipFlag(true)
                 ->setSkipComment(sprintf('No Model matching with legacyId %d', $legacyId));
         }
