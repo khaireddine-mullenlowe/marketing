@@ -61,7 +61,8 @@ class OfferFundingPreTransformer implements TransformerInterface
             $error = $this->stmt->errorInfo();
             throw new TransformerException(sprintf('SQL query failed : %s', $error[2]));
         }
-        $result = $this->stmt->fetch(\PDO::FETCH_ASSOC);
+
+	$result = $this->stmt->fetch(\PDO::FETCH_ASSOC);
 
         if ($result['id']) {
             $rangeIdColumn->setValue($result['id']);
@@ -86,7 +87,8 @@ class OfferFundingPreTransformer implements TransformerInterface
             $error = $this->stmt->errorInfo();
             throw new TransformerException(sprintf('SQL query failed : %s', $error[2]));
         }
-        $result = $this->stmt->fetch(\PDO::FETCH_ASSOC);
+
+	$result = $this->stmt->fetch(\PDO::FETCH_ASSOC);
 
         if ($result['id']) {
             $modelIdColumn->setValue($result['id']);
@@ -96,3 +98,4 @@ class OfferFundingPreTransformer implements TransformerInterface
         }
     }
 }
+
