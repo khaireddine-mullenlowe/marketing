@@ -4,8 +4,8 @@
 parameters:
     database_host: 127.0.0.1
     database_port: ~
-    database_name: DEV_DB_MARKETING
-    database_user: dev_u_marketing
+    database_name: DEV_DB_MARKETINGS
+    database_user: dev_u_marketings
     database_name_user: DEV_DB_USERS
     database_user_user: dev_u_users
     database_name_partner: DEV_DB_PARTNERS
