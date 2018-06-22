@@ -206,6 +206,22 @@
                 ],
                 "summary": "Get a funding offers.",
                 "operationId": "getOfferFundings",
+                "parameters": [
+                    {
+                        "name": "model",
+                        "in": "query",
+                        "description": "ID model",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "range",
+                        "in": "query",
+                        "description": "ID range",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OfferFundings returned",
