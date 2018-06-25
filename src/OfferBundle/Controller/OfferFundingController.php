@@ -139,6 +139,20 @@ class OfferFundingController extends MullenloweRestController
      *     summary="Get a funding offers.",
      *     operationId="getOfferFundings",
      *     tags={"Offer Funding"},
+     *     @SWG\Parameter(
+     *         name="model",
+     *         in="query",
+     *         type="integer",
+     *         required=false,
+     *         description="ID model"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="range",
+     *         in="query",
+     *         type="integer",
+     *         required=false,
+     *         description="ID range"
+     *     ),
      *     @SWG\Response(
      *         response="200",
      *         description="OfferFundings returned",
@@ -154,28 +168,16 @@ class OfferFundingController extends MullenloweRestController
     public function cgetAction(Request $request)
     {
         $repository = $this->getDoctrine()->getRepository('OfferBundle:OfferFunding');
-
-        $paginator = $this->get('knp_paginator');
-
-        $queryBuilder = $repository->createQueryBuilder('funding');
+        $queryBuilder = $repository->findByCustomFilters($request->query->all());
 
         /** @var SlidingPagination $pager */
-        $pager = $paginator->paginate(
+        $pager = $this->get('knp_paginator')->paginate(
             $queryBuilder,
             $request->query->getInt('page', 1),
             $request->query->getInt('limit', 10)
         );
 
-        return [
-            'pagination' => [
-                'total' => $pager->getTotalItemCount(),
-                'count' => $pager->count(),
-                'per_page' => $pager->getItemNumberPerPage(),
-                'current_page' => $pager->getCurrentPageNumber(),
-                'total_pages' => $pager->getPageCount(),
-            ],
-            'data' => $pager->getItems(),
-        ];
+        return $this->createPaginatedView($pager);
     }
 
     /**
