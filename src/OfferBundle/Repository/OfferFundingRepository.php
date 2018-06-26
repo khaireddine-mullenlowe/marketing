@@ -42,6 +42,6 @@ class OfferFundingRepository extends EntityRepository
                 ->setParameter('today', new \DateTime());
         }
 
-        return $queryBuilder;
+        return $queryBuilder->orderBy('funding.createdAt', 'desc');
     }
 }
