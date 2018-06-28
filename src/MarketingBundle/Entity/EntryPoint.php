@@ -9,7 +9,7 @@ use MarketingBundle\Entity\Base\BaseEntity;
  * EntryPoint
  *
  * @ORM\Table(name="entry_point")
- * @ORM\Entity(repositoryClass="MarketingBundle\Repository\EntryPointRepository")
+ * @ORM\Entity()
  */
 class EntryPoint extends BaseEntity
 {

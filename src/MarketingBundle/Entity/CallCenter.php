@@ -9,7 +9,7 @@ use MarketingBundle\Entity\Base\BaseEntity;
  * CallCenter
  *
  * @ORM\Table(name="call_center")
- * @ORM\Entity(repositoryClass="MarketingBundle\Repository\CallCenterRepository")
+ * @ORM\Entity()
  */
 class CallCenter extends BaseEntity
 {

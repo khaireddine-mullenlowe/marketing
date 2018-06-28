@@ -9,7 +9,7 @@ use MarketingBundle\Entity\Base\BaseEntity;
  * LeadProvider
  *
  * @ORM\Table(name="lead_provider")
- * @ORM\Entity(repositoryClass="MarketingBundle\Repository\LeadProviderRepository")
+ * @ORM\Entity()
  */
 class LeadProvider extends BaseEntity
 {
