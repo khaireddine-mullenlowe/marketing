@@ -101,16 +101,19 @@ doctrine:
                 naming_strategy: doctrine.orm.naming_strategy.underscore
                 mappings:
                     OfferBundle: ~
+                    MarketingBundle: ~
             migration:
                 connection: default
                 naming_strategy: doctrine.orm.naming_strategy.underscore
                 mappings:
                     OfferBundle: ~
+                    MarketingBundle: ~
             agcv4:
                 connection: agcv4
                 naming_strategy: doctrine.orm.naming_strategy.underscore
                 mappings:
                     OfferBundle: ~
+                    MarketingBundle: ~
 
 fos_rest:
     format_listener: true
