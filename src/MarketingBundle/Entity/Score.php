@@ -21,133 +21,133 @@ class Score
      * @ORM\Column(name="userId", type="integer")
      * @ORM\Id()
      */
-    private $userId;
+    protected $userId;
 
     /**
      * @var int
      *
      * @ORM\Column(name="ccp", type="integer")
      */
-    private $ccp;
+    protected $ccp;
 
     /**
      * @var int
      *
      * @ORM\Column(name="pft", type="integer")
      */
-    private $pft;
+    protected $pft;
 
     /**
      * @var int
      *
      * @ORM\Column(name="pu", type="integer")
      */
-    private $pu;
+    protected $pu;
 
     /**
      * @var int
      *
      * @ORM\Column(name="top", type="integer")
      */
-    private $top;
+    protected $top;
 
     /**
      * @var int
      *
      * @ORM\Column(name="aam1", type="integer")
      */
-    private $aam1;
+    protected $aam1;
 
     /**
      * @var int
      *
      * @ORM\Column(name="acc", type="integer")
      */
-    private $acc;
+    protected $acc;
 
     /**
      * @var int
      *
      * @ORM\Column(name="b", type="integer")
      */
-    private $b;
+    protected $b;
 
     /**
      * @var int
      *
      * @ORM\Column(name="g", type="integer")
      */
-    private $g;
+    protected $g;
 
     /**
      * @var int
      *
      * @ORM\Column(name="ac", type="integer")
      */
-    private $ac;
+    protected $ac;
 
     /**
      * @var int
      *
      * @ORM\Column(name="pp", type="integer")
      */
-    private $pp;
+    protected $pp;
 
     /**
      * @var int
      *
      * @ORM\Column(name="pf", type="integer")
      */
-    private $pf;
+    protected $pf;
 
     /**
      * @var int
      *
      * @ORM\Column(name="ta", type="integer")
      */
-    private $ta;
+    protected $ta;
 
     /**
      * @var int
      *
      * @ORM\Column(name="pum", type="integer")
      */
-    private $pum;
+    protected $pum;
 
     /**
      * @var int
      *
      * @ORM\Column(name="aam2", type="integer")
      */
-    private $aam2;
+    protected $aam2;
 
     /**
      * @var int
      *
      * @ORM\Column(name="ppm", type="integer")
      */
-    private $ppm;
+    protected $ppm;
 
     /**
      * @var float
      *
-     * @ORM\Column(name="interestAverage", type="float")
+     * @ORM\Column(name="interest_average", type="float")
      */
-    private $interestAverage;
+    protected $interestAverage;
 
     /**
      * @var float
      *
-     * @ORM\Column(name="seriousnessAverage", type="float")
+     * @ORM\Column(name="seriousness_average", type="float")
      */
-    private $seriousnessAverage;
+    protected $seriousnessAverage;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="contactType", type="string", length=255)
+     * @ORM\Column(name="contact_type", type="string", length=255)
      */
-    private $contactType;
+    protected $contactType;
 
     /**
      * Set userId
