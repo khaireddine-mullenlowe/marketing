@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jobs>
+    <job name="CallCenter Migration">
+        <extractor>
+            <connection>agcv4</connection>
+            <query>
+                <![CDATA[
+                    SELECT name, status
+                    FROM buss_item
+                    WHERE list_id = 111
+                ]]>
+            </query>
+        </extractor>
+
+        <transformer/>
+
+        <loader>
+            <connection>migration</connection>
+            <entity>MarketingBundle\Entity\CallCenter</entity>
+        </loader>
+
+        <mappings/>
+    </job>
+    <job name="EntryPoint Migration">
+        <extractor>
+            <connection>agcv4</connection>
+            <query>
+                <![CDATA[
+                    SELECT name, status
+                    FROM buss_item
+                    WHERE list_id = 108
+                ]]>
+            </query>
+        </extractor>
+
+        <transformer/>
+
+        <loader>
+            <connection>migration</connection>
+            <entity>MarketingBundle\Entity\EntryPoint</entity>
+        </loader>
+
+        <mappings/>
+    </job>
+    <job name="LeadProvider Migration">
+        <extractor>
+            <connection>agcv4</connection>
+            <query>
+                <![CDATA[
+                    SELECT name, status
+                    FROM buss_item
+                    WHERE list_id = 110
+                ]]>
+            </query>
+        </extractor>
+
+        <transformer/>
+
+        <loader>
+            <connection>migration</connection>
+            <entity>MarketingBundle\Entity\LeadProvider</entity>
+        </loader>
+
+        <mappings/>
+    </job>
+    <job name="LeadType Migration">
+        <extractor>
+            <connection>agcv4</connection>
+            <query>
+                <![CDATA[
+                    SELECT name, status
+                    FROM buss_item
+                    WHERE list_id = 112
+                ]]>
+            </query>
+        </extractor>
+
+        <transformer/>
+
+        <loader>
+            <connection>migration</connection>
+            <entity>MarketingBundle\Entity\LeadType</entity>
+        </loader>
+
+        <mappings/>
+    </job>
+    <job name="Subscription Migration">
+        <extractor>
+            <connection>agcv4</connection>
+            <query>
+                <![CDATA[
+                    SELECT name, status
+                    FROM buss_item
+                    WHERE list_id = 23
+                ]]>
+            </query>
+        </extractor>
+
+        <transformer/>
+
+        <loader>
+            <connection>migration</connection>
+            <entity>MarketingBundle\Entity\Subscription</entity>
+        </loader>
+
+        <mappings/>
+    </job>
+    <job name="UserRegistration Migration">
+        <extractor>
+            <connection>agcv4</connection>
+            <query>
+                <![CDATA[
+                    SELECT name, status
+                    FROM buss_item
+                    WHERE list_id = 77
+                ]]>
+            </query>
+        </extractor>
+
+        <transformer/>
+
+        <loader>
+            <connection>migration</connection>
+            <entity>MarketingBundle\Entity\UserRegistration</entity>
+        </loader>
+
+        <mappings/>
+    </job>
+</jobs>

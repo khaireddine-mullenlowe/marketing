@@ -34,3 +34,8 @@ services:
         arguments:
             - OfferBundle\Entity\OfferFunding
 
+    MarketingBundle\:
+        resource: '../../src/MarketingBundle/*'
+        # you can exclude directories or files
+        # but if a service is unused, it's removed anyway
+        exclude: '../../src/MarketingBundle/{Entity,Repository,Tests}'
