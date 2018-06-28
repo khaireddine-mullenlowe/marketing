@@ -126,4 +126,73 @@
 
         <mappings/>
     </job>
+    <job name="Interest Migration">
+        <extractor>
+            <connection>agcv4</connection>
+            <query>
+                <![CDATA[
+                    SELECT name, status
+                    FROM buss_item
+                    WHERE list_id = 24
+                ]]>
+            </query>
+        </extractor>
+
+        <transformer/>
+
+        <loader>
+            <connection>migration</connection>
+            <entity>MarketingBundle\Entity\Interest</entity>
+        </loader>
+
+        <mappings/>
+    </job>
+    <job name="ObjectiveMarketing Migration">
+        <extractor>
+            <connection>agcv4</connection>
+            <query>
+                <![CDATA[
+                    SELECT name, status
+                    FROM buss_item
+                    WHERE list_id = 109
+                ]]>
+            </query>
+        </extractor>
+
+        <transformer/>
+
+        <loader>
+            <connection>migration</connection>
+            <entity>MarketingBundle\Entity\ObjectiveMarketing</entity>
+        </loader>
+
+        <mappings/>
+    </job>
+    <job name="Score Migration">
+        <extractor>
+            <connection>agcv4</connection>
+            <query>
+                <![CDATA[
+                    SELECT TOP 10 contact_id as 'user_id', ccp, pft, pu, [top], aam1, acc, b, g, ac, pp, pf, ta, pum, aam2, ppm, interest_average, seriousness_average, contact_type, last_update
+                    FROM ctc_contact_score
+                ]]>
+            </query>
+        </extractor>
+
+        <transformer>
+            <preTransformerClass>MarketingBundle\ETL\Transformer\ScoreUserPreTransformer</preTransformerClass>
+        </transformer>
+
+        <loader>
+            <connection>migration</connection>
+            <entity>MarketingBundle\Entity\Score</entity>
+        </loader>
+
+        <mappings>
+            <mapping>
+                <name>last_update</name>
+                <targetProperty>updatedAt</targetProperty>
+            </mapping>
+        </mappings>
+    </job>
 </jobs>
