@@ -9,7 +9,7 @@ use MarketingBundle\Entity\Base\BaseEntity;
  * UserRegistration
  *
  * @ORM\Table(name="user_registration")
- * @ORM\Entity(repositoryClass="MarketingBundle\Repository\UserRegistrationRepository")
+ * @ORM\Entity()
  */
 class UserRegistration extends BaseEntity
 {

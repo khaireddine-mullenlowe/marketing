@@ -9,7 +9,7 @@ use MarketingBundle\Entity\Base\BaseEntity;
  * Subscription
  *
  * @ORM\Table(name="subscription")
- * @ORM\Entity(repositoryClass="MarketingBundle\Repository\SubscriptionRepository")
+ * @ORM\Entity()
  */
 class Subscription extends BaseEntity
 {

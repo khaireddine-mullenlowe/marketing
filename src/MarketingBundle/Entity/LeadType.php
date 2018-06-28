@@ -9,7 +9,7 @@ use MarketingBundle\Entity\Base\BaseEntity;
  * LeadType
  *
  * @ORM\Table(name="lead_type")
- * @ORM\Entity(repositoryClass="MarketingBundle\Repository\LeadTypeRepository")
+ * @ORM\Entity()
  */
 class LeadType extends BaseEntity
 {
