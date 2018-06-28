@@ -168,12 +168,13 @@
 
         <mappings/>
     </job>
+    
     <job name="Score Migration">
         <extractor>
             <connection>agcv4</connection>
             <query>
                 <![CDATA[
-                    SELECT TOP 10 contact_id as 'user_id', ccp, pft, pu, [top], aam1, acc, b, g, ac, pp, pf, ta, pum, aam2, ppm, interest_average, seriousness_average, contact_type, last_update
+                    SELECT contact_id as 'user_id', ccp, pft, pu, [top], aam1, acc, b, g, ac, pp, pf, ta, pum, aam2, ppm, interest_average, seriousness_average, contact_type, last_update
                     FROM ctc_contact_score
                 ]]>
             </query>
