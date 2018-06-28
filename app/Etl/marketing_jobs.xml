@@ -5,7 +5,7 @@
             <connection>agcv4</connection>
             <query>
                 <![CDATA[
-                    SELECT name, status
+                    SELECT id_item as 'legacy_id', name, status
                     FROM buss_item
                     WHERE list_id = 111
                 ]]>
@@ -26,7 +26,7 @@
             <connection>agcv4</connection>
             <query>
                 <![CDATA[
-                    SELECT name, status
+                    SELECT id_item as 'legacy_id', name, status
                     FROM buss_item
                     WHERE list_id = 108
                 ]]>
@@ -47,7 +47,7 @@
             <connection>agcv4</connection>
             <query>
                 <![CDATA[
-                    SELECT name, status
+                    SELECT id_item as 'legacy_id', name, status
                     FROM buss_item
                     WHERE list_id = 110
                 ]]>
@@ -89,7 +89,7 @@
             <connection>agcv4</connection>
             <query>
                 <![CDATA[
-                    SELECT name, status
+                    SELECT id_item as 'legacy_id', name, status
                     FROM buss_item
                     WHERE list_id = 23
                 ]]>
@@ -168,12 +168,147 @@
 
         <mappings/>
     </job>
+    <job name="ContactFormType Migration">
+        <extractor>
+            <connection>agcv4</connection>
+            <query>
+                <![CDATA[
+                    SELECT id_item as 'legacy_id', name, status
+                    FROM buss_item
+                    WHERE list_id = 120
+                ]]>
+            </query>
+        </extractor>
+
+        <transformer/>
+
+        <loader>
+            <connection>migration</connection>
+            <entity>MarketingBundle\Entity\ContactFormType</entity>
+        </loader>
+
+        <mappings/>
+    </job>
+    <job name="EventType Migration">
+        <extractor>
+            <file>/apps/dev/api/marketing/current/app/Etl/data/event_type.csv</file>
+        </extractor>
+
+        <transformer/>
+
+        <loader>
+            <connection>migration</connection>
+            <entity>MarketingBundle\Entity\EventType</entity>
+        </loader>
+
+        <mappings/>
+    </job>
+    <job name="CampaignEvent Migration">
+        <extractor>
+            <connection>agcv4</connection>
+            <query>
+                <![CDATA[
+                    SELECT id_event as 'legacy_id',
+                    CASE
+                        WHEN is_myaudi = 1 THEN 'Evènement MyAudi'
+                        WHEN partner_event = 1 THEN 'Evènement Partenaire'
+                        WHEN event_type_id = 2590 THEN 'Campagne' ELSE 'Evènement'
+                    END as 'event_type', isNull(name, ' ') as 'name', description, isNull(waiting_list,0) as 'waiting_list',
+                    start_time as 'start_date', end_time as 'end_date', description_event,
+                    description_ciblage as 'description_target'
+                    FROM buss_event
+                ]]>
+            </query>
+        </extractor>
+
+        <transformer>
+            <preTransformerClass>MarketingBundle\ETL\Transformer\EventTypePreTransformer</preTransformerClass>
+        </transformer>
+
+        <loader>
+            <connection>migration</connection>
+            <entity>MarketingBundle\Entity\CampaignEvent</entity>
+        </loader>
+
+        <mappings>
+            <mapping>
+                <name>event_type</name>
+                <targetProperty>eventType</targetProperty>
+                <type>entity</type>
+                <entityClass>MarketingBundle\Entity\EventType</entityClass>
+                <referencedBy>id</referencedBy>
+            </mapping>
+        </mappings>
+    </job>
+    <job name="ContactForm Migration">
+        <extractor>
+            <connection>agcv4</connection>
+            <query>
+                <![CDATA[
+                    SELECT event_id, subscription_type_id, entry_point_id, form.name, description, isNull(create_prospect_account, 1) as 'create_prospect_account',
+                    CASE WHEN tracking_code_init not like '%a%' THEN ' ' END as 'tracking_code_init',
+                    tracking_code_validation, isNull(send_email_to_crm, 1) as 'send_email_to_crm', isNull(send_email_to_cdv, 0) as 'send_email_to_cdv',
+                    lead_provider_id, contact_form_type_id as 'contact_form_type'
+                    FROM buss_contact_form form
+                ]]>
+            </query>
+        </extractor>
+
+        <transformer/>
+
+        <loader>
+            <connection>migration</connection>
+            <entity>MarketingBundle\Entity\ContactForm</entity>
+        </loader>
+
+        <mappings>
+            <mapping>
+                <name>event_id</name>
+                <targetProperty>event</targetProperty>
+                <type>entity</type>
+                <entityClass>MarketingBundle\Entity\CampaignEvent</entityClass>
+                <referencedBy>legacyId</referencedBy>
+            </mapping>
+            <mapping>
+                <name>subscription_type_id</name>
+                <targetProperty>subscription</targetProperty>
+                <type>entity</type>
+                <entityClass>MarketingBundle\Entity\Subscription</entityClass>
+                <referencedBy>legacyId</referencedBy>
+            </mapping>
+            <mapping>
+                <name>entry_point_id</name>
+                <targetProperty>entryPoint</targetProperty>
+                <type>entity</type>
+                <entityClass>MarketingBundle\Entity\EntryPoint</entityClass>
+                <referencedBy>legacyId</referencedBy>
+            </mapping>
+            <mapping>
+                <name>creation_time</name>
+                <targetProperty>createdAt</targetProperty>
+            </mapping>
+            <mapping>
+                <name>lead_provider_id</name>
+                <targetProperty>leadProvider</targetProperty>
+                <type>entity</type>
+                <entityClass>MarketingBundle\Entity\LeadProvider</entityClass>
+                <referencedBy>legacyId</referencedBy>
+            </mapping>
+            <mapping>
+                <name>contact_form_type</name>
+                <targetProperty>contactFormType</targetProperty>
+                <type>entity</type>
+                <entityClass>MarketingBundle\Entity\ContactFormType</entityClass>
+                <referencedBy>legacyId</referencedBy>
+            </mapping>
+        </mappings>
+    </job>
     <job name="Score Migration">
         <extractor>
             <connection>agcv4</connection>
             <query>
                 <![CDATA[
-                    SELECT TOP 10 contact_id as 'user_id', ccp, pft, pu, [top], aam1, acc, b, g, ac, pp, pf, ta, pum, aam2, ppm, interest_average, seriousness_average, contact_type, last_update
+                    SELECT contact_id as 'user_id', ccp, pft, pu, [top], aam1, acc, b, g, ac, pp, pf, ta, pum, aam2, ppm, interest_average, seriousness_average, contact_type, last_update
                     FROM ctc_contact_score
                 ]]>
             </query>
