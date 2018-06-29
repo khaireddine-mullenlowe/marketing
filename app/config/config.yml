@@ -56,6 +56,16 @@ doctrine:
                 user: '%database_user%'
                 password: '%database_password%'
                 charset: UTF8
+            migration:
+                driver: pdo_mysql
+                host: '%database_host%'
+                port: '%database_port%'
+                dbname: '%database_name%'
+                user: '%database_user%'
+                password: '%database_password%'
+                charset: UTF8
+                logging: false
+                profiling: false
             agcv4:
                 driver: pdo_sqlsrv
                 host: '%v4_database_host%'
@@ -103,7 +113,7 @@ doctrine:
                     OfferBundle: ~
                     MarketingBundle: ~
             migration:
-                connection: default
+                connection: migration
                 naming_strategy: doctrine.orm.naming_strategy.underscore
                 mappings:
                     OfferBundle: ~

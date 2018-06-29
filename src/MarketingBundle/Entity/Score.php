@@ -4,6 +4,8 @@ namespace MarketingBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Mullenlowe\CommonBundle\Entity\Traits\IdableEntityTrait;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Score
@@ -13,134 +15,38 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
  */
 class Score
 {
+    use IdableEntityTrait;
     use TimestampableEntity;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="userId", type="integer")
-     * @ORM\Id()
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected $userId;
+    protected $id;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="ccp", type="integer")
+     * @ORM\Column(name="myaudi_user_id", type="integer")
      */
-    protected $ccp;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="pft", type="integer")
-     */
-    protected $pft;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="pu", type="integer")
-     */
-    protected $pu;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="top", type="integer")
-     */
-    protected $top;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="aam1", type="integer")
-     */
-    protected $aam1;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="acc", type="integer")
-     */
-    protected $acc;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="b", type="integer")
-     */
-    protected $b;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="g", type="integer")
-     */
-    protected $g;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="ac", type="integer")
-     */
-    protected $ac;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="pp", type="integer")
-     */
-    protected $pp;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="pf", type="integer")
-     */
-    protected $pf;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="ta", type="integer")
-     */
-    protected $ta;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="pum", type="integer")
-     */
-    protected $pum;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="aam2", type="integer")
-     */
-    protected $aam2;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="ppm", type="integer")
-     */
-    protected $ppm;
+    protected $myaudiUserId;
 
     /**
      * @var float
      *
-     * @ORM\Column(name="interest_average", type="float")
+     * @ORM\Column(name="interest", type="float")
      */
-    protected $interestAverage;
+    protected $interest;
 
     /**
      * @var float
      *
-     * @ORM\Column(name="seriousness_average", type="float")
+     * @ORM\Column(name="seriousness", type="float")
      */
-    protected $seriousnessAverage;
+    protected $seriousness;
 
     /**
      * @var string
@@ -150,15 +56,31 @@ class Score
     protected $contactType;
 
     /**
+     * @var \DateTime
+     *
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
+     */
+    protected $createdAt;
+
+    /**
+     * @var \DateTime
+     *
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
+     */
+    protected $updatedAt;
+
+    /**
      * Set userId
      *
      * @param integer $userId
      *
      * @return Score
      */
-    public function setUserId($userId)
+    public function setMyaudiUserId($userId)
     {
-        $this->userId = $userId;
+        $this->myaudiUserId = $userId;
 
         return $this;
     }
@@ -168,417 +90,77 @@ class Score
      *
      * @return int
      */
-    public function getUserId()
+    public function getMyaudiUserId()
     {
-        return $this->userId;
+        return $this->myaudiUserId;
     }
 
     /**
-     * Set ccp
-     *
-     * @param integer $ccp
-     *
-     * @return Score
-     */
-    public function setCcp($ccp)
-    {
-        $this->ccp = $ccp;
-
-        return $this;
-    }
-
-    /**
-     * Get ccp
-     *
      * @return int
      */
-    public function getCcp()
+    public function getLeadId()
     {
-        return $this->ccp;
+        return $this->leadId;
     }
 
     /**
-     * Set pft
-     *
-     * @param integer $pft
+     * @param int $leadId
      *
      * @return Score
      */
-    public function setPft($pft)
+    public function setLeadId($leadId): Score
     {
-        $this->pft = $pft;
+        $this->leadId = $leadId;
 
         return $this;
     }
 
     /**
-     * Get pft
+     * Set interest
      *
-     * @return int
-     */
-    public function getPft()
-    {
-        return $this->pft;
-    }
-
-    /**
-     * Set pu
-     *
-     * @param integer $pu
+     * @param float $interest
      *
      * @return Score
      */
-    public function setPu($pu)
+    public function setInterest($interest)
     {
-        $this->pu = $pu;
+        $this->interest = $interest;
 
         return $this;
     }
 
     /**
-     * Get pu
-     *
-     * @return int
-     */
-    public function getPu()
-    {
-        return $this->pu;
-    }
-
-    /**
-     * Set top
-     *
-     * @param integer $top
-     *
-     * @return Score
-     */
-    public function setTop($top)
-    {
-        $this->top = $top;
-
-        return $this;
-    }
-
-    /**
-     * Get top
-     *
-     * @return int
-     */
-    public function getTop()
-    {
-        return $this->top;
-    }
-
-    /**
-     * Set aam1
-     *
-     * @param integer $aam1
-     *
-     * @return Score
-     */
-    public function setAam1($aam1)
-    {
-        $this->aam1 = $aam1;
-
-        return $this;
-    }
-
-    /**
-     * Get aam1
-     *
-     * @return int
-     */
-    public function getAam1()
-    {
-        return $this->aam1;
-    }
-
-    /**
-     * Set acc
-     *
-     * @param integer $acc
-     *
-     * @return Score
-     */
-    public function setAcc($acc)
-    {
-        $this->acc = $acc;
-
-        return $this;
-    }
-
-    /**
-     * Get acc
-     *
-     * @return int
-     */
-    public function getAcc()
-    {
-        return $this->acc;
-    }
-
-    /**
-     * Set b
-     *
-     * @param integer $b
-     *
-     * @return Score
-     */
-    public function setB($b)
-    {
-        $this->b = $b;
-
-        return $this;
-    }
-
-    /**
-     * Get b
-     *
-     * @return int
-     */
-    public function getB()
-    {
-        return $this->b;
-    }
-
-    /**
-     * Set g
-     *
-     * @param integer $g
-     *
-     * @return Score
-     */
-    public function setG($g)
-    {
-        $this->g = $g;
-
-        return $this;
-    }
-
-    /**
-     * Get g
-     *
-     * @return int
-     */
-    public function getG()
-    {
-        return $this->g;
-    }
-
-    /**
-     * Set ac
-     *
-     * @param integer $ac
-     *
-     * @return Score
-     */
-    public function setAc($ac)
-    {
-        $this->ac = $ac;
-
-        return $this;
-    }
-
-    /**
-     * Get ac
-     *
-     * @return int
-     */
-    public function getAc()
-    {
-        return $this->ac;
-    }
-
-    /**
-     * Set pp
-     *
-     * @param integer $pp
-     *
-     * @return Score
-     */
-    public function setPp($pp)
-    {
-        $this->pp = $pp;
-
-        return $this;
-    }
-
-    /**
-     * Get pp
-     *
-     * @return int
-     */
-    public function getPp()
-    {
-        return $this->pp;
-    }
-
-    /**
-     * Set pf
-     *
-     * @param integer $pf
-     *
-     * @return Score
-     */
-    public function setPf($pf)
-    {
-        $this->pf = $pf;
-
-        return $this;
-    }
-
-    /**
-     * Get pf
-     *
-     * @return int
-     */
-    public function getPf()
-    {
-        return $this->pf;
-    }
-
-    /**
-     * Set ta
-     *
-     * @param integer $ta
-     *
-     * @return Score
-     */
-    public function setTa($ta)
-    {
-        $this->ta = $ta;
-
-        return $this;
-    }
-
-    /**
-     * Get ta
-     *
-     * @return int
-     */
-    public function getTa()
-    {
-        return $this->ta;
-    }
-
-    /**
-     * Set pum
-     *
-     * @param integer $pum
-     *
-     * @return Score
-     */
-    public function setPum($pum)
-    {
-        $this->pum = $pum;
-
-        return $this;
-    }
-
-    /**
-     * Get pum
-     *
-     * @return int
-     */
-    public function getPum()
-    {
-        return $this->pum;
-    }
-
-    /**
-     * Set aam2
-     *
-     * @param integer $aam2
-     *
-     * @return Score
-     */
-    public function setAam2($aam2)
-    {
-        $this->aam2 = $aam2;
-
-        return $this;
-    }
-
-    /**
-     * Get aam2
-     *
-     * @return int
-     */
-    public function getAam2()
-    {
-        return $this->aam2;
-    }
-
-    /**
-     * Set ppm
-     *
-     * @param integer $ppm
-     *
-     * @return Score
-     */
-    public function setPpm($ppm)
-    {
-        $this->ppm = $ppm;
-
-        return $this;
-    }
-
-    /**
-     * Get ppm
-     *
-     * @return int
-     */
-    public function getPpm()
-    {
-        return $this->ppm;
-    }
-
-    /**
-     * Set interestAverage
-     *
-     * @param float $interestAverage
-     *
-     * @return Score
-     */
-    public function setInterestAverage($interestAverage)
-    {
-        $this->interestAverage = $interestAverage;
-
-        return $this;
-    }
-
-    /**
-     * Get interestAverage
+     * Get interest
      *
      * @return float
      */
-    public function getInterestAverage()
+    public function getInterest()
     {
-        return $this->interestAverage;
+        return $this->interest;
     }
 
     /**
-     * Set seriousnessAverage
+     * Set seriousness
      *
-     * @param float $seriousnessAverage
+     * @param float $seriousness
      *
      * @return Score
      */
-    public function setSeriousnessAverage($seriousnessAverage)
+    public function setSeriousness($seriousness)
     {
-        $this->seriousnessAverage = $seriousnessAverage;
+        $this->seriousness = $seriousness;
 
         return $this;
     }
 
     /**
-     * Get seriousnessAverage
+     * Get seriousness
      *
      * @return float
      */
-    public function getSeriousnessAverage()
+    public function getSeriousness()
     {
-        return $this->seriousnessAverage;
+        return $this->seriousness;
     }
 
     /**

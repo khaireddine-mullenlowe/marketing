@@ -21,13 +21,18 @@ class ScoreUserPreTransformer implements TransformerInterface
     /**
      * @var Connection
      */
-
     private $conn;
+
     /**
      * @var \PDOStatement
      */
-
     private $stmt = null;
+
+    /**
+     * @var array
+     */
+    private static $cache = [];
+
     /**
      * @param Connection $conn
      */
@@ -49,8 +54,15 @@ class ScoreUserPreTransformer implements TransformerInterface
             $this->stmt = $this->conn->prepare(static::QUERY);
         }
 
-        $userIdColumn = $row->getColumn('user_id');
+        $userIdColumn = $row->getColumn('myaudi_user_id');
         $legacyId = $userIdColumn->getValue();
+
+        if (isset(self::$cache[$legacyId])) {
+            $userIdColumn->setValue(self::$cache[$legacyId]);
+
+            return $row;
+        }
+
         $this->stmt->bindParam(':legacyId', $legacyId, \PDO::PARAM_INT);
 
         if (!$this->stmt->execute()) {
@@ -60,6 +72,7 @@ class ScoreUserPreTransformer implements TransformerInterface
         $result = $this->stmt->fetch(\PDO::FETCH_ASSOC);
 
         if ($result['id']) {
+            self::$cache[$legacyId] = $result['id'];
             $userIdColumn->setValue($result['id']);
         } else {
             $row->setSkipFlag(true)

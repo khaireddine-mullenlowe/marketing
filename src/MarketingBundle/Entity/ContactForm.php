@@ -3,6 +3,9 @@
 namespace MarketingBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Mullenlowe\CommonBundle\Entity\Traits\LegacyTrait;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * ContactForm
@@ -12,6 +15,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class ContactForm
 {
+    use LegacyTrait;
+    use TimestampableEntity;
+
     /**
      * @var int
      *
@@ -54,6 +60,13 @@ class ContactForm
     /**
      * @var string
      *
+     * @ORM\Column(name="name", type="string")
+     */
+    private $name;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="description", type="text")
      */
     private $description;
@@ -64,6 +77,20 @@ class ContactForm
      * @ORM\Column(name="create_prospect_account", type="boolean")
      */
     private $createProspectAccount;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="tracking_code_init", type="text", nullable=true)
+     */
+    private $trackingCodeInit;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="tracking_code_validation", type="text", nullable=true)
+     */
+    private $trackingCodeValidation;
 
     /**
      * @var bool
@@ -98,6 +125,29 @@ class ContactForm
      * @ORM\JoinColumn(referencedColumnName="id")
      */
     private $contactFormType;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    protected $legacyId;
+
+    /**
+     * @var \DateTime
+     *
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
+     */
+    protected $createdAt;
+
+    /**
+     * @var \DateTime
+     *
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
+     */
+    protected $updatedAt;
 
 
     /**
@@ -183,6 +233,26 @@ class ContactForm
     }
 
     /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return ContactForm
+     */
+    public function setName($name): ContactForm
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
      * Set description
      *
      * @param string $description
@@ -228,6 +298,46 @@ class ContactForm
     public function getCreateProspectAccount()
     {
         return $this->createProspectAccount;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTrackingCodeInit()
+    {
+        return $this->trackingCodeInit;
+    }
+
+    /**
+     * @param string $trackingCodeInit
+     *
+     * @return ContactForm
+     */
+    public function setTrackingCodeInit($trackingCodeInit): ContactForm
+    {
+        $this->trackingCodeInit = $trackingCodeInit;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTrackingCodeValidation()
+    {
+        return $this->trackingCodeValidation;
+    }
+
+    /**
+     * @param string $trackingCodeValidation
+     *
+     * @return ContactForm
+     */
+    public function setTrackingCodeValidation($trackingCodeValidation): ContactForm
+    {
+        $this->trackingCodeValidation = $trackingCodeValidation;
+
+        return $this;
     }
 
     /**

@@ -5,9 +5,12 @@
             <connection>agcv4</connection>
             <query>
                 <![CDATA[
-                    SELECT id_item as 'legacy_id', name, status
-                    FROM buss_item
-                    WHERE list_id = 111
+                    SELECT t1.id_item as 'legacy_id', t1.name, t1.status, t2.hist_change_date as created_at
+                    FROM buss_item t1
+                    INNER JOIN HIST_AUDIV3.dbo.hist_buss_item t2
+                        ON t2.id_item = t1.id_item
+                        AND t2.hist_action = 'INSERT'
+                    WHERE t1.list_id = 111
                 ]]>
             </query>
         </extractor>
@@ -26,9 +29,12 @@
             <connection>agcv4</connection>
             <query>
                 <![CDATA[
-                    SELECT id_item as 'legacy_id', name, status
-                    FROM buss_item
-                    WHERE list_id = 108
+                    SELECT t1.id_item as 'legacy_id', t1.name, t1.status, t2.hist_change_date as created_at
+                    FROM buss_item t1
+                    INNER JOIN HIST_AUDIV3.dbo.hist_buss_item t2
+                        ON t2.id_item = t1.id_item
+                        AND t2.hist_action = 'INSERT'
+                    WHERE t1.list_id = 108
                 ]]>
             </query>
         </extractor>
@@ -47,9 +53,12 @@
             <connection>agcv4</connection>
             <query>
                 <![CDATA[
-                    SELECT id_item as 'legacy_id', name, status
-                    FROM buss_item
-                    WHERE list_id = 110
+                    SELECT t1.id_item as 'legacy_id', t1.name, t1.status, t2.hist_change_date as created_at
+                    FROM buss_item t1
+                    INNER JOIN HIST_AUDIV3.dbo.hist_buss_item t2
+                        ON t2.id_item = t1.id_item
+                        AND t2.hist_action = 'INSERT'
+                    WHERE t1.list_id = 110
                 ]]>
             </query>
         </extractor>
@@ -68,9 +77,12 @@
             <connection>agcv4</connection>
             <query>
                 <![CDATA[
-                    SELECT name, status
-                    FROM buss_item
-                    WHERE list_id = 112
+                    SELECT t1.id_item as 'legacy_id', t1.name, t1.status, t2.hist_change_date as created_at
+                    FROM buss_item t1
+                    INNER JOIN HIST_AUDIV3.dbo.hist_buss_item t2
+                        ON t2.id_item = t1.id_item
+                        AND t2.hist_action = 'INSERT'
+                    WHERE t1.list_id = 112
                 ]]>
             </query>
         </extractor>
@@ -89,9 +101,12 @@
             <connection>agcv4</connection>
             <query>
                 <![CDATA[
-                    SELECT id_item as 'legacy_id', name, status
-                    FROM buss_item
-                    WHERE list_id = 23
+                    SELECT t1.id_item as 'legacy_id', t1.name, t1.status, t2.hist_change_date as created_at
+                    FROM buss_item t1
+                    INNER JOIN HIST_AUDIV3.dbo.hist_buss_item t2
+                        ON t2.id_item = t1.id_item
+                        AND t2.hist_action = 'INSERT'
+                    WHERE t1.list_id = 23
                 ]]>
             </query>
         </extractor>
@@ -110,9 +125,12 @@
             <connection>agcv4</connection>
             <query>
                 <![CDATA[
-                    SELECT name, status
-                    FROM buss_item
-                    WHERE list_id = 77
+                    SELECT t1.id_item as 'legacy_id', t1.name, t1.status, t2.hist_change_date as created_at
+                    FROM buss_item t1
+                    INNER JOIN HIST_AUDIV3.dbo.hist_buss_item t2
+                        ON t2.id_item = t1.id_item
+                        AND t2.hist_action = 'INSERT'
+                    WHERE t1.list_id = 77
                 ]]>
             </query>
         </extractor>
@@ -131,9 +149,12 @@
             <connection>agcv4</connection>
             <query>
                 <![CDATA[
-                    SELECT name, status
-                    FROM buss_item
-                    WHERE list_id = 24
+                    SELECT t1.id_item as 'legacy_id', t1.name, t1.status, t2.hist_change_date as created_at
+                    FROM buss_item t1
+                    INNER JOIN HIST_AUDIV3.dbo.hist_buss_item t2
+                        ON t2.id_item = t1.id_item
+                        AND t2.hist_action = 'INSERT'
+                    WHERE t1.list_id = 24
                 ]]>
             </query>
         </extractor>
@@ -152,9 +173,12 @@
             <connection>agcv4</connection>
             <query>
                 <![CDATA[
-                    SELECT name, status
-                    FROM buss_item
-                    WHERE list_id = 109
+                    SELECT t1.id_item as 'legacy_id', t1.name, t1.status, t2.hist_change_date as created_at
+                    FROM buss_item t1
+                    INNER JOIN HIST_AUDIV3.dbo.hist_buss_item t2
+                        ON t2.id_item = t1.id_item
+                        AND t2.hist_action = 'INSERT'
+                    WHERE t1.list_id = 109
                 ]]>
             </query>
         </extractor>
@@ -173,9 +197,12 @@
             <connection>agcv4</connection>
             <query>
                 <![CDATA[
-                    SELECT id_item as 'legacy_id', name, status
-                    FROM buss_item
-                    WHERE list_id = 120
+                    SELECT t1.id_item as 'legacy_id', t1.name, t1.status, t2.hist_change_date as created_at
+                    FROM buss_item t1
+                    INNER JOIN HIST_AUDIV3.dbo.hist_buss_item t2
+                        ON t2.id_item = t1.id_item
+                        AND t2.hist_action = 'INSERT'
+                    WHERE t1.list_id = 120
                 ]]>
             </query>
         </extractor>
@@ -189,9 +216,9 @@
 
         <mappings/>
     </job>
-    <job name="EventType Migration">
+    <job name="EventType Migration Part 1">
         <extractor>
-            <file>/apps/dev/api/marketing/current/app/Etl/data/event_type.csv</file>
+            <file>./data/event_type1.csv</file>
         </extractor>
 
         <transformer/>
@@ -201,29 +228,74 @@
             <entity>MarketingBundle\Entity\EventType</entity>
         </loader>
 
-        <mappings/>
+        <mappings>
+            <mapping>
+                <name>parent_id</name>
+                <targetProperty>parentEventType</targetProperty>
+                <type>entity</type>
+                <entityClass>MarketingBundle\Entity\EventType</entityClass>
+                <referencedBy>legacyId</referencedBy>
+                <constraints>
+                    <class>Mullenlowe\EtlBundle\Constraint\EmptyToNull</class>
+                </constraints>
+            </mapping>
+        </mappings>
+    </job>
+    <job name="EventType Migration Part 2">
+        <extractor>
+            <file>./data/event_type2.csv</file>
+        </extractor>
+
+        <transformer/>
+
+        <loader>
+            <connection>migration</connection>
+            <entity>MarketingBundle\Entity\EventType</entity>
+        </loader>
+
+        <mappings>
+            <mapping>
+                <name>parent_id</name>
+                <targetProperty>parentEventType</targetProperty>
+                <type>entity</type>
+                <entityClass>MarketingBundle\Entity\EventType</entityClass>
+                <referencedBy>legacyId</referencedBy>
+                <constraints>
+                    <class>Mullenlowe\EtlBundle\Constraint\EmptyToNull</class>
+                </constraints>
+            </mapping>
+            <mapping>
+                <name>legacy_id</name>
+                <constraints>
+                    <class>Mullenlowe\EtlBundle\Constraint\EmptyToNull</class>
+                </constraints>
+            </mapping>
+        </mappings>
     </job>
     <job name="CampaignEvent Migration">
         <extractor>
             <connection>agcv4</connection>
             <query>
                 <![CDATA[
-                    SELECT id_event as 'legacy_id',
+                    SELECT t1.id_event as 'legacy_id',
                     CASE
-                        WHEN is_myaudi = 1 THEN 'Evènement MyAudi'
-                        WHEN partner_event = 1 THEN 'Evènement Partenaire'
-                        WHEN event_type_id = 2590 THEN 'Campagne' ELSE 'Evènement'
-                    END as 'event_type', isNull(name, ' ') as 'name', description, isNull(waiting_list,0) as 'waiting_list',
-                    start_time as 'start_date', end_time as 'end_date', description_event,
-                    description_ciblage as 'description_target'
-                    FROM buss_event
+                        WHEN t1.is_myaudi = 1 THEN 'Evénement MyAudi'
+                        WHEN t1.partner_event = 1 THEN 'Evénement Partenaire'
+                        WHEN t1.event_type_id = 2590 THEN 'Campagne'
+                        ELSE 'Evénement'
+                    END as 'event_type', isNull(t1.name, ' ') as 'name', t1.description,
+                    isNull(t1.waiting_list,0) as 'waiting_list', t1.start_time as 'start_date', t1.end_time as 'end_date',
+                    t1.description_event, t1.description_ciblage as 'description_target',
+                    t2.hist_change_date as created_at
+                    FROM buss_event t1
+                    INNER JOIN HIST_AUDIV3.dbo.hist_buss_event t2
+                        ON t2.id_event = t1.id_event
+                        AND t2.hist_action = 'INSERT'
                 ]]>
             </query>
         </extractor>
 
-        <transformer>
-            <preTransformerClass>MarketingBundle\ETL\Transformer\EventTypePreTransformer</preTransformerClass>
-        </transformer>
+        <transformer/>
 
         <loader>
             <connection>migration</connection>
@@ -236,7 +308,7 @@
                 <targetProperty>eventType</targetProperty>
                 <type>entity</type>
                 <entityClass>MarketingBundle\Entity\EventType</entityClass>
-                <referencedBy>id</referencedBy>
+                <referencedBy>name</referencedBy>
             </mapping>
         </mappings>
     </job>
@@ -245,11 +317,26 @@
             <connection>agcv4</connection>
             <query>
                 <![CDATA[
-                    SELECT event_id, subscription_type_id, entry_point_id, form.name, description, isNull(create_prospect_account, 1) as 'create_prospect_account',
-                    CASE WHEN tracking_code_init not like '%a%' THEN ' ' END as 'tracking_code_init',
-                    tracking_code_validation, isNull(send_email_to_crm, 1) as 'send_email_to_crm', isNull(send_email_to_cdv, 0) as 'send_email_to_cdv',
-                    lead_provider_id, contact_form_type_id as 'contact_form_type'
+                    SELECT form.id_contact_form,
+                           form.event_id,
+                           form.subscription_type_id,
+                           form.entry_point_id,
+                           form.name,
+                           form.description,
+                           ISNULL(form.create_prospect_account, 1) as 'create_prospect_account',
+                           CASE
+                               WHEN form.tracking_code_init not like '%a%' THEN ' '
+                           END as 'tracking_code_init',
+                           form.tracking_code_validation,
+                           ISNULL(form.send_email_to_crm, 1) as 'send_email_to_crm',
+                           ISNULL(form.send_email_to_cdv, 0) as 'send_email_to_cdv',
+                           form.lead_provider_id,
+                           form.contact_form_type_id as 'contact_form_type',
+                           t2.hist_change_date as created_at
                     FROM buss_contact_form form
+                    INNER JOIN HIST_AUDIV3.dbo.hist_buss_contact_form t2
+                        ON t2.id_contact_form = form.id_contact_form
+                        AND t2.hist_action = 'INSERT'
                 ]]>
             </query>
         </extractor>
@@ -262,6 +349,10 @@
         </loader>
 
         <mappings>
+            <mapping>
+                <name>id_contact_form</name>
+                <targetProperty>legacyId</targetProperty>
+            </mapping>
             <mapping>
                 <name>event_id</name>
                 <targetProperty>event</targetProperty>
@@ -308,8 +399,15 @@
             <connection>agcv4</connection>
             <query>
                 <![CDATA[
-                    SELECT contact_id as 'user_id', ccp, pft, pu, [top], aam1, acc, b, g, ac, pp, pf, ta, pum, aam2, ppm, interest_average, seriousness_average, contact_type, last_update
-                    FROM ctc_contact_score
+                    SELECT contact_id as myaudi_user_id,
+                           interest_average as interest,
+                           seriousness_average as seriousness,
+                           contact_type,
+                           hist_change_date as created_at,
+                           GETDATE() as updated_at
+                    FROM HIST_AUDIV3.dbo.hist_ctc_contact_score
+                    WHERE hist_action != 'DELETE'
+                    ORDER BY contact_id, hist_change_date
                 ]]>
             </query>
         </extractor>
@@ -323,11 +421,6 @@
             <entity>MarketingBundle\Entity\Score</entity>
         </loader>
 
-        <mappings>
-            <mapping>
-                <name>last_update</name>
-                <targetProperty>updatedAt</targetProperty>
-            </mapping>
-        </mappings>
+        <mappings/>
     </job>
 </jobs>
