@@ -10,7 +10,7 @@ use Mullenlowe\CommonBundle\Entity\Traits\LegacyTrait;
  * Interest
  *
  * @ORM\Table(name="interest")
- * @ORM\Entity(repositoryClass="MarketingBundle\Repository\InterestRepository")
+ * @ORM\Entity()
  */
 class Interest extends BaseEntity
 {
