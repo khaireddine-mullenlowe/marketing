@@ -5,7 +5,7 @@
             <connection>agcv4</connection>
             <query>
                 <![CDATA[
-                    SELECT t1.id_item as 'legacy_id', t1.name, t1.status, t2.hist_change_date as created_at
+                    SELECT t1.id_item as 'legacy_id', t1.name, t1.status, t2.hist_change_date as created_at, GETDATE() as 'updated_at'
                     FROM buss_item t1
                     INNER JOIN HIST_AUDIV3.dbo.hist_buss_item t2
                         ON t2.id_item = t1.id_item
@@ -29,7 +29,7 @@
             <connection>agcv4</connection>
             <query>
                 <![CDATA[
-                    SELECT t1.id_item as 'legacy_id', t1.name, t1.status, t2.hist_change_date as created_at
+                    SELECT t1.id_item as 'legacy_id', t1.name, t1.status, t2.hist_change_date as created_at, GETDATE() as 'updated_at'
                     FROM buss_item t1
                     INNER JOIN HIST_AUDIV3.dbo.hist_buss_item t2
                         ON t2.id_item = t1.id_item
@@ -53,7 +53,7 @@
             <connection>agcv4</connection>
             <query>
                 <![CDATA[
-                    SELECT t1.id_item as 'legacy_id', t1.name, t1.status, t2.hist_change_date as created_at
+                    SELECT t1.id_item as 'legacy_id', t1.name, t1.status, t2.hist_change_date as created_at, GETDATE() as 'updated_at'
                     FROM buss_item t1
                     INNER JOIN HIST_AUDIV3.dbo.hist_buss_item t2
                         ON t2.id_item = t1.id_item
@@ -77,7 +77,7 @@
             <connection>agcv4</connection>
             <query>
                 <![CDATA[
-                    SELECT t1.id_item as 'legacy_id', t1.name, t1.status, t2.hist_change_date as created_at
+                    SELECT t1.id_item as 'legacy_id', t1.name, t1.status, t2.hist_change_date as created_at, GETDATE() as 'updated_at'
                     FROM buss_item t1
                     INNER JOIN HIST_AUDIV3.dbo.hist_buss_item t2
                         ON t2.id_item = t1.id_item
@@ -101,7 +101,7 @@
             <connection>agcv4</connection>
             <query>
                 <![CDATA[
-                    SELECT t1.id_item as 'legacy_id', t1.name, t1.status, t2.hist_change_date as created_at
+                    SELECT t1.id_item as 'legacy_id', t1.name, t1.status, t2.hist_change_date as created_at, GETDATE() as 'updated_at'
                     FROM buss_item t1
                     INNER JOIN HIST_AUDIV3.dbo.hist_buss_item t2
                         ON t2.id_item = t1.id_item
@@ -125,7 +125,7 @@
             <connection>agcv4</connection>
             <query>
                 <![CDATA[
-                    SELECT t1.id_item as 'legacy_id', t1.name, t1.status, t2.hist_change_date as created_at
+                    SELECT t1.id_item as 'legacy_id', t1.name, t1.status, t2.hist_change_date as created_at, GETDATE() as 'updated_at'
                     FROM buss_item t1
                     INNER JOIN HIST_AUDIV3.dbo.hist_buss_item t2
                         ON t2.id_item = t1.id_item
@@ -149,7 +149,7 @@
             <connection>agcv4</connection>
             <query>
                 <![CDATA[
-                    SELECT t1.id_item as 'legacy_id', t1.name, t1.status, t2.hist_change_date as created_at
+                    SELECT t1.id_item as 'legacy_id', t1.name, t1.status, t2.hist_change_date as created_at, GETDATE() as 'updated_at'
                     FROM buss_item t1
                     INNER JOIN HIST_AUDIV3.dbo.hist_buss_item t2
                         ON t2.id_item = t1.id_item
@@ -173,7 +173,7 @@
             <connection>agcv4</connection>
             <query>
                 <![CDATA[
-                    SELECT t1.id_item as 'legacy_id', t1.name, t1.status, t2.hist_change_date as created_at
+                    SELECT t1.id_item as 'legacy_id', t1.name, t1.status, t2.hist_change_date as created_at, GETDATE() as 'updated_at'
                     FROM buss_item t1
                     INNER JOIN HIST_AUDIV3.dbo.hist_buss_item t2
                         ON t2.id_item = t1.id_item
@@ -197,7 +197,7 @@
             <connection>agcv4</connection>
             <query>
                 <![CDATA[
-                    SELECT t1.id_item as 'legacy_id', t1.name, t1.status, t2.hist_change_date as created_at
+                    SELECT t1.id_item as 'legacy_id', t1.name, t1.status, t2.hist_change_date as created_at, GETDATE() as 'updated_at'
                     FROM buss_item t1
                     INNER JOIN HIST_AUDIV3.dbo.hist_buss_item t2
                         ON t2.id_item = t1.id_item
@@ -286,7 +286,8 @@
                     END as 'event_type', isNull(t1.name, ' ') as 'name', t1.description,
                     isNull(t1.waiting_list,0) as 'waiting_list', t1.start_time as 'start_date', t1.end_time as 'end_date',
                     t1.description_event, t1.description_ciblage as 'description_target',
-                    t2.hist_change_date as created_at
+                    t2.hist_change_date as created_at,
+                    GETDATE() as updated_at
                     FROM buss_event t1
                     INNER JOIN HIST_AUDIV3.dbo.hist_buss_event t2
                         ON t2.id_event = t1.id_event
@@ -311,7 +312,7 @@
                 <referencedBy>name</referencedBy>
             </mapping>
         </mappings>
-    </job>
+    </job
     <job name="ContactForm Migration">
         <extractor>
             <connection>agcv4</connection>
@@ -325,14 +326,15 @@
                            form.description,
                            ISNULL(form.create_prospect_account, 1) as 'create_prospect_account',
                            CASE
-                               WHEN form.tracking_code_init not like '%a%' THEN ' '
+                               WHEN form.tracking_code_init not like '%a%' THEN ' ' ELSE form.tracking_code_init
                            END as 'tracking_code_init',
                            form.tracking_code_validation,
                            ISNULL(form.send_email_to_crm, 1) as 'send_email_to_crm',
                            ISNULL(form.send_email_to_cdv, 0) as 'send_email_to_cdv',
                            form.lead_provider_id,
                            form.contact_form_type_id as 'contact_form_type',
-                           t2.hist_change_date as created_at
+                           t2.hist_change_date as created_at,
+                           GETDATE() as updated_at
                     FROM buss_contact_form form
                     INNER JOIN HIST_AUDIV3.dbo.hist_buss_contact_form t2
                         ON t2.id_contact_form = form.id_contact_form
@@ -422,5 +424,43 @@
         </loader>
 
         <mappings/>
+    </job>
+    <job name="ContactFormDesiredModel Migration">
+        <extractor>
+            <connection>agcv4</connection>
+            <query>
+                <![CDATA[
+                SELECT id_contact_form  as 'contact_form_id', isnull(desired_model_id, 0) 'desired_model_id' FROM
+                (
+                    SELECT id_contact_form,
+                    LTRIM(RTRIM(m.n.value('.[1]','varchar(8000)'))) AS desired_model_id
+                    FROM
+                    (
+                    SELECT id_contact_form,CAST('<XMLRoot><RowData>' + REPLACE(desired_product_models,',','</RowData><RowData>') + '</RowData></XMLRoot>' AS XML) AS x
+                    FROM   buss_contact_form
+                    WHERE desired_product_models != ''
+                    )t
+                    CROSS APPLY x.nodes('/XMLRoot/RowData')m(n)
+                ) tbl
+                ]]>
+            </query>
+        </extractor>
+
+        <transformer/>
+
+        <loader>
+            <connection>migration</connection>
+            <entity>MarketingBundle\Entity\ContactFormDesiredModel</entity>
+        </loader>
+
+        <mappings>
+            <mapping>
+                <name>contact_form_id</name>
+                <targetProperty>contactForm</targetProperty>
+                <type>entity</type>
+                <entityClass>MarketingBundle\Entity\ContactForm</entityClass>
+                <referencedBy>legacyId</referencedBy>
+            </mapping>
+        </mappings>
     </job>
 </jobs>
