@@ -4,6 +4,7 @@ namespace MarketingBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use MarketingBundle\Entity\Base\BaseEntity;
+use Mullenlowe\CommonBundle\Entity\Traits\LegacyTrait;
 
 /**
  * CallCenter
@@ -13,4 +14,5 @@ use MarketingBundle\Entity\Base\BaseEntity;
  */
 class CallCenter extends BaseEntity
 {
+    use LegacyTrait;
 }

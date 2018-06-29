@@ -7,12 +7,12 @@ use MarketingBundle\Entity\Base\BaseEntity;
 use Mullenlowe\CommonBundle\Entity\Traits\LegacyTrait;
 
 /**
- * LeadProvider
+ * ContactFormType
  *
- * @ORM\Table(name="lead_provider")
+ * @ORM\Table(name="contact_form_type")
  * @ORM\Entity()
  */
-class LeadProvider extends BaseEntity
+class ContactFormType extends BaseEntity
 {
     use LegacyTrait;
 

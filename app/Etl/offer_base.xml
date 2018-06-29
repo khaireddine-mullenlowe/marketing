@@ -2,7 +2,7 @@
 <jobs>
     <job name="Offer Form Type migration">
         <extractor>
-            <file>/apps/dev/api/marketing/current/app/Etl/data/offer_form_type.csv</file>
+            <file>./data/offer_form_type.csv</file>
         </extractor>
 
         <transformer />
@@ -16,7 +16,7 @@
     </job>
     <job name="Offer Type migration">
         <extractor>
-            <file>/apps/dev/api/marketing/current/app/Etl/data/offer_type.csv</file>
+            <file>./data/offer_type.csv</file>
         </extractor>
 
         <transformer />
@@ -30,7 +30,7 @@
     </job>
     <job name="Offer Terms Template migration">
         <extractor>
-            <file>/apps/dev/api/marketing/current/app/Etl/data/offer_terms_template.csv</file>
+            <file>./data/offer_terms_template.csv</file>
         </extractor>
 
         <transformer />
@@ -44,7 +44,7 @@
     </job>
     <job name="Offer Subtype migration">
         <extractor>
-            <file>/apps/dev/api/marketing/current/app/Etl/data/offer_subtype.csv</file>
+            <file>./data/offer_subtype.csv</file>
         </extractor>
 
         <transformer />
