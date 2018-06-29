@@ -1,1 +1,8 @@
 services:
+    MarketingBundle\ETL\Transformer\ScoreUserPreTransformer:
+        public: true
+        calls:
+            -
+                method: setConnection
+                arguments:
+                    - '@doctrine.dbal.user_connection'
