@@ -10,7 +10,7 @@ use Mullenlowe\CommonBundle\Entity\Traits\LegacyTrait;
  * ObjectiveMarketing
  *
  * @ORM\Table(name="objective_marketing")
- * @ORM\Entity(repositoryClass="MarketingBundle\Repository\ObjectiveMarketingRepository")
+ * @ORM\Entity()
  */
 class ObjectiveMarketing extends BaseEntity
 {

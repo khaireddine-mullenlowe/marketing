@@ -1,5 +1,5 @@
 services:
-    MarketingBundle\ETL\Transformer\ScoreUserPreTransformer:
+    MarketingBundle\ETL\Transformer\UserPreTransformer:
         public: true
         calls:
             -

@@ -5,7 +5,7 @@
             <connection>agcv4</connection>
             <query>
                 <![CDATA[
-                    SELECT t1.id_item as 'legacy_id', t1.name, t1.status, t2.hist_change_date as created_at, GETDATE() as 'updated_at'
+                    SELECT t1.id_item as 'legacy_id', t1.name, t1.status, t2.hist_change_date as created_at
                     FROM buss_item t1
                     INNER JOIN HIST_AUDIV3.dbo.hist_buss_item t2
                         ON t2.id_item = t1.id_item
@@ -29,7 +29,7 @@
             <connection>agcv4</connection>
             <query>
                 <![CDATA[
-                    SELECT t1.id_item as 'legacy_id', t1.name, t1.status, t2.hist_change_date as created_at, GETDATE() as 'updated_at'
+                    SELECT t1.id_item as 'legacy_id', t1.name, t1.status, t2.hist_change_date as created_at
                     FROM buss_item t1
                     INNER JOIN HIST_AUDIV3.dbo.hist_buss_item t2
                         ON t2.id_item = t1.id_item
@@ -53,7 +53,7 @@
             <connection>agcv4</connection>
             <query>
                 <![CDATA[
-                    SELECT t1.id_item as 'legacy_id', t1.name, t1.status, t2.hist_change_date as created_at, GETDATE() as 'updated_at'
+                    SELECT t1.id_item as 'legacy_id', t1.name, t1.status, t2.hist_change_date as created_at
                     FROM buss_item t1
                     INNER JOIN HIST_AUDIV3.dbo.hist_buss_item t2
                         ON t2.id_item = t1.id_item
@@ -77,7 +77,7 @@
             <connection>agcv4</connection>
             <query>
                 <![CDATA[
-                    SELECT t1.id_item as 'legacy_id', t1.name, t1.status, t2.hist_change_date as created_at, GETDATE() as 'updated_at'
+                    SELECT t1.id_item as 'legacy_id', t1.name, t1.status, t2.hist_change_date as created_at
                     FROM buss_item t1
                     INNER JOIN HIST_AUDIV3.dbo.hist_buss_item t2
                         ON t2.id_item = t1.id_item
@@ -101,7 +101,7 @@
             <connection>agcv4</connection>
             <query>
                 <![CDATA[
-                    SELECT t1.id_item as 'legacy_id', t1.name, t1.status, t2.hist_change_date as created_at, GETDATE() as 'updated_at'
+                    SELECT t1.id_item as 'legacy_id', t1.name, t1.status, t2.hist_change_date as created_at
                     FROM buss_item t1
                     INNER JOIN HIST_AUDIV3.dbo.hist_buss_item t2
                         ON t2.id_item = t1.id_item
@@ -120,36 +120,12 @@
 
         <mappings/>
     </job>
-    <job name="UserRegistration Migration">
-        <extractor>
-            <connection>agcv4</connection>
-            <query>
-                <![CDATA[
-                    SELECT t1.id_item as 'legacy_id', t1.name, t1.status, t2.hist_change_date as created_at, GETDATE() as 'updated_at'
-                    FROM buss_item t1
-                    INNER JOIN HIST_AUDIV3.dbo.hist_buss_item t2
-                        ON t2.id_item = t1.id_item
-                        AND t2.hist_action = 'INSERT'
-                    WHERE t1.list_id = 77
-                ]]>
-            </query>
-        </extractor>
-
-        <transformer/>
-
-        <loader>
-            <connection>migration</connection>
-            <entity>MarketingBundle\Entity\UserRegistration</entity>
-        </loader>
-
-        <mappings/>
-    </job>
     <job name="Interest Migration">
         <extractor>
             <connection>agcv4</connection>
             <query>
                 <![CDATA[
-                    SELECT t1.id_item as 'legacy_id', t1.name, t1.status, t2.hist_change_date as created_at, GETDATE() as 'updated_at'
+                    SELECT t1.id_item as 'legacy_id', t1.name, t1.status, t2.hist_change_date as created_at
                     FROM buss_item t1
                     INNER JOIN HIST_AUDIV3.dbo.hist_buss_item t2
                         ON t2.id_item = t1.id_item
@@ -173,7 +149,7 @@
             <connection>agcv4</connection>
             <query>
                 <![CDATA[
-                    SELECT t1.id_item as 'legacy_id', t1.name, t1.status, t2.hist_change_date as created_at, GETDATE() as 'updated_at'
+                    SELECT t1.id_item as 'legacy_id', t1.name, t1.status, t2.hist_change_date as created_at
                     FROM buss_item t1
                     INNER JOIN HIST_AUDIV3.dbo.hist_buss_item t2
                         ON t2.id_item = t1.id_item
@@ -197,7 +173,7 @@
             <connection>agcv4</connection>
             <query>
                 <![CDATA[
-                    SELECT t1.id_item as 'legacy_id', t1.name, t1.status, t2.hist_change_date as created_at, GETDATE() as 'updated_at'
+                    SELECT t1.id_item as 'legacy_id', t1.name, t1.status, t2.hist_change_date as created_at
                     FROM buss_item t1
                     INNER JOIN HIST_AUDIV3.dbo.hist_buss_item t2
                         ON t2.id_item = t1.id_item
@@ -286,8 +262,7 @@
                     END as 'event_type', isNull(t1.name, ' ') as 'name', t1.description,
                     isNull(t1.waiting_list,0) as 'waiting_list', t1.start_time as 'start_date', t1.end_time as 'end_date',
                     t1.description_event, t1.description_ciblage as 'description_target',
-                    t2.hist_change_date as created_at,
-                    GETDATE() as updated_at
+                    t2.hist_change_date as created_at
                     FROM buss_event t1
                     INNER JOIN HIST_AUDIV3.dbo.hist_buss_event t2
                         ON t2.id_event = t1.id_event
@@ -312,7 +287,7 @@
                 <referencedBy>name</referencedBy>
             </mapping>
         </mappings>
-    </job
+    </job>
     <job name="ContactForm Migration">
         <extractor>
             <connection>agcv4</connection>
@@ -326,15 +301,14 @@
                            form.description,
                            ISNULL(form.create_prospect_account, 1) as 'create_prospect_account',
                            CASE
-                               WHEN form.tracking_code_init not like '%a%' THEN ' ' ELSE form.tracking_code_init
+                               WHEN form.tracking_code_init not like '%a%' THEN ' '
                            END as 'tracking_code_init',
                            form.tracking_code_validation,
                            ISNULL(form.send_email_to_crm, 1) as 'send_email_to_crm',
                            ISNULL(form.send_email_to_cdv, 0) as 'send_email_to_cdv',
                            form.lead_provider_id,
                            form.contact_form_type_id as 'contact_form_type',
-                           t2.hist_change_date as created_at,
-                           GETDATE() as updated_at
+                           t2.hist_change_date as created_at
                     FROM buss_contact_form form
                     INNER JOIN HIST_AUDIV3.dbo.hist_buss_contact_form t2
                         ON t2.id_contact_form = form.id_contact_form
@@ -415,7 +389,7 @@
         </extractor>
 
         <transformer>
-            <preTransformerClass>MarketingBundle\ETL\Transformer\ScoreUserPreTransformer</preTransformerClass>
+            <preTransformerClass>MarketingBundle\ETL\Transformer\UserPreTransformer</preTransformerClass>
         </transformer>
 
         <loader>
@@ -425,23 +399,58 @@
 
         <mappings/>
     </job>
-    <job name="ContactFormDesiredModel Migration">
+    <job name="ObjectiveMarketingUser Migration">
         <extractor>
             <connection>agcv4</connection>
             <query>
                 <![CDATA[
-                SELECT id_contact_form  as 'contact_form_id', isnull(desired_model_id, 0) 'desired_model_id' FROM
-                (
-                    SELECT id_contact_form,
-                    LTRIM(RTRIM(m.n.value('.[1]','varchar(8000)'))) AS desired_model_id
-                    FROM
-                    (
-                    SELECT id_contact_form,CAST('<XMLRoot><RowData>' + REPLACE(desired_product_models,',','</RowData><RowData>') + '</RowData></XMLRoot>' AS XML) AS x
-                    FROM   buss_contact_form
-                    WHERE desired_product_models != ''
-                    )t
-                    CROSS APPLY x.nodes('/XMLRoot/RowData')m(n)
-                ) tbl
+                    SELECT
+                        contact_id as 'myaudi_user_id', objective_marketing_id,
+                        MAX(CASE WHEN unsubscribe_time > '1900-01-01' THEN 1 ELSE 0 END) as is_unsubscribe,
+                        CASE WHEN MAX(ISNULL(subscribe_time, '1900-01-01')) >  MAX(ISNULL(unsubscribe_time, '1900-01-01')) THEN MAX(ISNULL(subscribe_time, '1900-01-01')) ELSE MAX(ISNULL(unsubscribe_time, '1900-01-01')) END as 'created_at',
+                        GETDATE() as updated_at
+                    FROM (
+                        SELECT contact_id, objective_marketing_id, MAX(subscribe_time) as subscribe_time, '' as unsubscribe_time FROM ctc_contact_objective_marketing GROUP BY contact_id, objective_marketing_id
+                        UNION
+                        SELECT contact_id, objective_marketing_id, '' as subscribe_time, MAX(unsubscribe_time) as unsubscribe_time FROM ctc_contact_objective_marketing_unsubscribe GROUP BY contact_id, objective_marketing_id
+                    ) tbl
+                    GROUP BY contact_id, objective_marketing_id
+                ]]>
+            </query>
+        </extractor>
+
+        <transformer>
+            <preTransformerClass>MarketingBundle\ETL\Transformer\UserPreTransformer</preTransformerClass>
+        </transformer>
+
+        <loader>
+            <connection>migration</connection>
+            <entity>MarketingBundle\Entity\ObjectiveMarketingUser</entity>
+        </loader>
+
+        <mappings>
+            <mapping>
+                <name>myaudi_user_id</name>
+                <targetProperty>userId</targetProperty>
+            </mapping>
+            <mapping>
+                <name>objective_marketing_id</name>
+                <targetProperty>objectiveMarketing</targetProperty>
+                <type>entity</type>
+                <entityClass>MarketingBundle\Entity\ObjectiveMarketing</entityClass>
+                <referencedBy>legacyId</referencedBy>
+            </mapping>
+        </mappings>
+    </job>
+    <job name="InterestUser Migration">
+        <extractor>
+            <connection>agcv4</connection>
+            <query>
+                <![CDATA[
+                    SELECT contact_id as myaudi_user_id,
+                           subscribe_time as subscription_date,
+                           interest_id
+                    FROM ctc_contact_interest
                 ]]>
             </query>
         </extractor>
@@ -450,16 +459,55 @@
 
         <loader>
             <connection>migration</connection>
-            <entity>MarketingBundle\Entity\ContactFormDesiredModel</entity>
+            <entity>MarketingBundle\Entity\InterestUser</entity>
         </loader>
 
         <mappings>
             <mapping>
-                <name>contact_form_id</name>
-                <targetProperty>contactForm</targetProperty>
+                <name>interest_id</name>
+                <targetProperty>interest</targetProperty>
                 <type>entity</type>
-                <entityClass>MarketingBundle\Entity\ContactForm</entityClass>
+                <entityClass>MarketingBundle\Entity\Interest</entityClass>
                 <referencedBy>legacyId</referencedBy>
+            </mapping>
+            <mapping>
+                <name>myaudi_user_id</name>
+                <targetProperty>userId</targetProperty>
+            </mapping>
+        </mappings>
+    </job>
+    <job name="EntryPointUser Migration">
+        <extractor>
+            <connection>agcv4</connection>
+            <query>
+                <![CDATA[
+                    SELECT contact_id as myaudi_user_id,
+                           entry_point_id,
+                           ISNULL(entered_at_time, GETDATE()) as created_at,
+                           GETDATE() as updated_at
+                    FROM ctc_contact_entry_point
+                ]]>
+            </query>
+        </extractor>
+
+        <transformer/>
+
+        <loader>
+            <connection>migration</connection>
+            <entity>MarketingBundle\Entity\EntryPointUser</entity>
+        </loader>
+
+        <mappings>
+            <mapping>
+                <name>entry_point_id</name>
+                <targetProperty>entryPoint</targetProperty>
+                <type>entity</type>
+                <entityClass>MarketingBundle\Entity\EntryPoint</entityClass>
+                <referencedBy>legacyId</referencedBy>
+            </mapping>
+            <mapping>
+                <name>myaudi_user_id</name>
+                <targetProperty>userId</targetProperty>
             </mapping>
         </mappings>
     </job>

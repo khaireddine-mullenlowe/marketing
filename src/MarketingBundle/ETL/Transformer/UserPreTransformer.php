@@ -11,7 +11,7 @@ use Mullenlowe\EtlBundle\Transformer\TransformerInterface;
  * Class ScoreUserPreTransformer
  * @package MarketingBundle\ETL\Transformer
  */
-class ScoreUserPreTransformer implements TransformerInterface
+class UserPreTransformer implements TransformerInterface
 {
     /**
      * @var string
