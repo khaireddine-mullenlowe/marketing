@@ -436,4 +436,3 @@ class ContactForm
         return $this->contactFormType;
     }
 }
-

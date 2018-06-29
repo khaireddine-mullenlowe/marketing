@@ -96,26 +96,6 @@ class Score
     }
 
     /**
-     * @return int
-     */
-    public function getLeadId()
-    {
-        return $this->leadId;
-    }
-
-    /**
-     * @param int $leadId
-     *
-     * @return Score
-     */
-    public function setLeadId($leadId): Score
-    {
-        $this->leadId = $leadId;
-
-        return $this;
-    }
-
-    /**
      * Set interest
      *
      * @param float $interest
