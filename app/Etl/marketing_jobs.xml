@@ -370,78 +370,6 @@
             </mapping>
         </mappings>
     </job>
-    <job name="Score Migration">
-        <extractor>
-            <connection>agcv4</connection>
-            <query>
-                <![CDATA[
-                    SELECT contact_id as myaudi_user_id,
-                           interest_average as interest,
-                           seriousness_average as seriousness,
-                           contact_type,
-                           hist_change_date as created_at,
-                           GETDATE() as updated_at
-                    FROM HIST_AUDIV3.dbo.hist_ctc_contact_score
-                    WHERE hist_action != 'DELETE'
-                    ORDER BY contact_id, hist_change_date
-                ]]>
-            </query>
-        </extractor>
-
-        <transformer>
-            <preTransformerClass>MarketingBundle\ETL\Transformer\UserPreTransformer</preTransformerClass>
-        </transformer>
-
-        <loader>
-            <connection>migration</connection>
-            <entity>MarketingBundle\Entity\Score</entity>
-        </loader>
-
-        <mappings/>
-    </job>
-    <job name="ObjectiveMarketingUser Migration">
-        <extractor>
-            <connection>agcv4</connection>
-            <query>
-                <![CDATA[
-                    SELECT
-                        contact_id as 'myaudi_user_id', objective_marketing_id,
-                        MAX(CASE WHEN unsubscribe_time > '1900-01-01' THEN 1 ELSE 0 END) as is_unsubscribe,
-                        CASE WHEN MAX(ISNULL(subscribe_time, '1900-01-01')) >  MAX(ISNULL(unsubscribe_time, '1900-01-01')) THEN MAX(ISNULL(subscribe_time, '1900-01-01')) ELSE MAX(ISNULL(unsubscribe_time, '1900-01-01')) END as 'created_at',
-                        GETDATE() as updated_at
-                    FROM (
-                        SELECT contact_id, objective_marketing_id, MAX(subscribe_time) as subscribe_time, '' as unsubscribe_time FROM ctc_contact_objective_marketing GROUP BY contact_id, objective_marketing_id
-                        UNION
-                        SELECT contact_id, objective_marketing_id, '' as subscribe_time, MAX(unsubscribe_time) as unsubscribe_time FROM ctc_contact_objective_marketing_unsubscribe GROUP BY contact_id, objective_marketing_id
-                    ) tbl
-                    GROUP BY contact_id, objective_marketing_id
-                ]]>
-            </query>
-        </extractor>
-
-        <transformer>
-            <preTransformerClass>MarketingBundle\ETL\Transformer\UserPreTransformer</preTransformerClass>
-        </transformer>
-
-        <loader>
-            <connection>migration</connection>
-            <entity>MarketingBundle\Entity\ObjectiveMarketingUser</entity>
-        </loader>
-
-        <mappings>
-            <mapping>
-                <name>myaudi_user_id</name>
-                <targetProperty>userId</targetProperty>
-            </mapping>
-            <mapping>
-                <name>objective_marketing_id</name>
-                <targetProperty>objectiveMarketing</targetProperty>
-                <type>entity</type>
-                <entityClass>MarketingBundle\Entity\ObjectiveMarketing</entityClass>
-                <referencedBy>legacyId</referencedBy>
-            </mapping>
-        </mappings>
-    </job>
     <job name="InterestUser Migration">
         <extractor>
             <connection>agcv4</connection>
@@ -508,6 +436,38 @@
             <mapping>
                 <name>myaudi_user_id</name>
                 <targetProperty>userId</targetProperty>
+            </mapping>
+        </mappings>
+    </job>
+    <job name="Marketing Permission Migration">
+        <extractor>
+            <connection>agcv4</connection>
+            <query>
+                <![CDATA[
+                    SELECT contact_id,
+                           data_use_agreement,
+                           email_permission AS email,
+                           tel_permission AS phone,
+                           post_permission AS postal,
+                           [datetime] as created_at
+                    FROM ctc_marketing_permission
+                ]]>
+            </query>
+        </extractor>
+
+        <transformer>
+            <preTransformerClass>OfferBundle\ETL\Transformer\MyaudiUserPreTransformer</preTransformerClass>
+        </transformer>
+
+        <loader>
+            <connection>migration</connection>
+            <entity>MarketingBundle\Entity\MarketingPermission</entity>
+        </loader>
+
+        <mappings>
+            <mapping>
+                <name>contact_id</name>
+                <targetProperty>myaudiUserId</targetProperty>
             </mapping>
         </mappings>
     </job>

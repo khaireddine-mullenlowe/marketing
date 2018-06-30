@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job name="MyaudiUserMarketingObjective Migration">
+    <extractor>
+        <connection>agcv4</connection>
+        <query>
+            <![CDATA[
+                    SELECT
+                        contact_id as 'myaudi_user_id', objective_marketing_id,
+                        MAX(CASE WHEN unsubscribe_time > '1900-01-01' THEN 1 ELSE 0 END) as is_unsubscribe,
+                        CASE WHEN MAX(ISNULL(subscribe_time, '1900-01-01')) >  MAX(ISNULL(unsubscribe_time, '1900-01-01')) THEN MAX(ISNULL(subscribe_time, '1900-01-01')) ELSE MAX(ISNULL(unsubscribe_time, '1900-01-01')) END as 'created_at',
+                        GETDATE() as updated_at
+                    FROM (
+                        SELECT contact_id, objective_marketing_id, MAX(subscribe_time) as subscribe_time, '' as unsubscribe_time FROM ctc_contact_objective_marketing GROUP BY contact_id, objective_marketing_id
+                        UNION
+                        SELECT contact_id, objective_marketing_id, '' as subscribe_time, MAX(unsubscribe_time) as unsubscribe_time FROM ctc_contact_objective_marketing_unsubscribe GROUP BY contact_id, objective_marketing_id
+                    ) tbl
+                    GROUP BY contact_id, objective_marketing_id
+                ]]>
+        </query>
+    </extractor>
+
+    <transformer>
+        <preTransformerClass>MarketingBundle\ETL\Transformer\UserPreTransformer</preTransformerClass>
+    </transformer>
+
+    <loader>
+        <connection>migration</connection>
+        <entity>MarketingBundle\Entity\MyaudiUserMarketingObjective</entity>
+    </loader>
+
+    <mappings>
+        <mapping>
+            <name>objective_marketing_id</name>
+            <targetProperty>marketingObjective</targetProperty>
+            <type>entity</type>
+            <entityClass>MarketingBundle\Entity\MarketingObjective</entityClass>
+            <referencedBy>legacyId</referencedBy>
+        </mapping>
+    </mappings>
+</job>

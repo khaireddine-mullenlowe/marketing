@@ -1,6 +1,19 @@
 services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    migration.marketing_objective.repository:
+        class: Doctrine\ORM\EntityRepository
+        factory: 'doctrine.orm.migration_entity_manager:getRepository'
+        arguments:
+            - 'MarketingBundle\Entity\MarketingObjective'
+
     MarketingBundle\ETL\Transformer\UserPreTransformer:
         public: true
+        arguments:
+            - '@migration.marketing_objective.repository'
         calls:
             -
                 method: setConnection
