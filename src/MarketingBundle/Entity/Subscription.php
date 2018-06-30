@@ -9,7 +9,7 @@ use Mullenlowe\CommonBundle\Entity\Traits\LegacyTrait;
 /**
  * Subscription
  *
- * @ORM\Table(name="subscription")
+ * @ORM\Table(name="subscription", indexes={@ORM\Index(name="Subscription_LegacyId_idx", columns={"legacy_id"})})
  * @ORM\Entity()
  */
 class Subscription extends BaseEntity

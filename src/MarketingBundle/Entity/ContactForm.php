@@ -10,7 +10,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * ContactForm
  *
- * @ORM\Table(name="contact_form")
+ * @ORM\Table(name="contact_form", indexes={@ORM\Index(name="ContactForm_LegacyId_idx", columns={"legacy_id"})})
  * @ORM\Entity()
  */
 class ContactForm

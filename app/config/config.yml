@@ -2,7 +2,6 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
-    - { resource: doctrine_extension.yml }
     - { resource: old_sound_rabbit_mq.yml }
     - { resource: fos_elastica.yml }
     - { resource: "@OfferBundle/Resources/config/services.yml" }
@@ -124,6 +123,14 @@ doctrine:
                 mappings:
                     OfferBundle: ~
                     MarketingBundle: ~
+
+stof_doctrine_extensions:
+    default_locale: fr_FR
+    orm:
+        default:
+            timestampable: true
+        migration:
+            timestampable: true
 
 fos_rest:
     format_listener: true

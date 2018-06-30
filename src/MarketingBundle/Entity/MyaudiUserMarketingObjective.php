@@ -6,33 +6,33 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 /**
- * ObjectiveMarketingUser
+ * MyaudiUserMarketingObjective
  *
- * @ORM\Table(name="objective_marketing_user")
+ * @ORM\Table(name="myaudi_user_marketing_objective")
  * @ORM\Entity()
  */
-class ObjectiveMarketingUser
+class MyaudiUserMarketingObjective
 {
     use TimestampableEntity;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="user_id", type="integer")
+     * @ORM\Column(name="myaudi_user_id", type="integer")
      * @ORM\Id
      */
-    protected $userId;
+    protected $myaudiUserId;
 
     /**
      * @var string
      *
      * @ORM\ManyToOne(
-     *     targetEntity="ObjectiveMarketing"
+     *     targetEntity="MarketingObjective"
      * )
      * @ORM\JoinColumn(referencedColumnName="id")
      * @ORM\Id
      */
-    protected $objectiveMarketing;
+    protected $marketingObjective;
 
     /**
      * @var bool
@@ -46,11 +46,11 @@ class ObjectiveMarketingUser
      *
      * @param integer $userId
      *
-     * @return ObjectiveMarketingUser
+     * @return MyaudiUserMarketingObjective
      */
-    public function setUserId($userId)
+    public function setMyaudiUserId($userId)
     {
-        $this->userId = $userId;
+        $this->myaudiUserId = $userId;
 
         return $this;
     }
@@ -60,33 +60,33 @@ class ObjectiveMarketingUser
      *
      * @return int
      */
-    public function getUserId()
+    public function getMyaudiUserId()
     {
-        return $this->userId;
+        return $this->myaudiUserId;
     }
 
     /**
-     * Set objectiveMarketing
+     * Set marketingObjective
      *
-     * @param string $objectiveMarketing
+     * @param string $marketingObjective
      *
-     * @return ObjectiveMarketingUser
+     * @return MyaudiUserMarketingObjective
      */
-    public function setObjectiveMarketing($objectiveMarketing)
+    public function setMarketingObjective($marketingObjective)
     {
-        $this->objectiveMarketing = $objectiveMarketing;
+        $this->marketingObjective = $marketingObjective;
 
         return $this;
     }
 
     /**
-     * Get objectiveMarketing
+     * Get marketingObjective
      *
      * @return string
      */
-    public function getObjectiveMarketing()
+    public function getMarketingObjective()
     {
-        return $this->objectiveMarketing;
+        return $this->marketingObjective;
     }
 
     /**
@@ -94,7 +94,7 @@ class ObjectiveMarketingUser
      *
      * @param boolean $isUnsubscribe
      *
-     * @return ObjectiveMarketingUser
+     * @return MyaudiUserMarketingObjective
      */
     public function setIsUnsubscribe($isUnsubscribe)
     {
