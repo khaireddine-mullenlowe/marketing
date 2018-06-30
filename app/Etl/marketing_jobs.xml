@@ -144,7 +144,7 @@
 
         <mappings/>
     </job>
-    <job name="ObjectiveMarketing Migration">
+    <job name="MarketingObjective Migration">
         <extractor>
             <connection>agcv4</connection>
             <query>
@@ -163,7 +163,7 @@
 
         <loader>
             <connection>migration</connection>
-            <entity>MarketingBundle\Entity\ObjectiveMarketing</entity>
+            <entity>MarketingBundle\Entity\MarketingObjective</entity>
         </loader>
 
         <mappings/>
@@ -399,7 +399,7 @@
 
         <mappings/>
     </job>
-    <job name="ObjectiveMarketingUser Migration">
+    <job name="MyaudiUserMarketingObjective Migration">
         <extractor>
             <connection>agcv4</connection>
             <query>
@@ -425,19 +425,15 @@
 
         <loader>
             <connection>migration</connection>
-            <entity>MarketingBundle\Entity\ObjectiveMarketingUser</entity>
+            <entity>MarketingBundle\Entity\MyaudiUserMarketingObjective</entity>
         </loader>
 
         <mappings>
             <mapping>
-                <name>myaudi_user_id</name>
-                <targetProperty>userId</targetProperty>
-            </mapping>
-            <mapping>
                 <name>objective_marketing_id</name>
-                <targetProperty>objectiveMarketing</targetProperty>
+                <targetProperty>marketingObjective</targetProperty>
                 <type>entity</type>
-                <entityClass>MarketingBundle\Entity\ObjectiveMarketing</entityClass>
+                <entityClass>MarketingBundle\Entity\MarketingObjective</entityClass>
                 <referencedBy>legacyId</referencedBy>
             </mapping>
         </mappings>
