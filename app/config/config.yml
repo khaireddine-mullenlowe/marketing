@@ -78,7 +78,7 @@ doctrine:
                 port: '%database_port%'
                 dbname: '%database_name_user%'
                 user: '%database_user_user%'
-                password: '%database_password%'
+                password: '%database_password_user%'
                 charset: UTF8
                 logging: false
                 profiling: false
@@ -88,7 +88,7 @@ doctrine:
                 port: '%database_port%'
                 dbname: '%database_name_partner%'
                 user: '%database_user_partner%'
-                password: '%database_password%'
+                password: '%database_password_partner%'
                 charset: UTF8
                 logging: false
                 profiling: false
@@ -98,7 +98,7 @@ doctrine:
                 port: '%database_port%'
                 dbname: '%database_name_vehicle%'
                 user: '%database_user_vehicle%'
-                password: '%database_password%'
+                password: '%database_password_vehicle%'
                 charset: UTF8
                 logging: false
                 profiling: false
