@@ -10,7 +10,7 @@ use Mullenlowe\CommonBundle\Entity\Traits\LegacyTrait;
 /**
  * EventType
  *
- * @ORM\Table(name="event_type")
+ * @ORM\Table(name="event_type", indexes={@ORM\Index(name="EventType_LegacyId_idx", columns={"legacy_id"})})
  * @ORM\Entity()
  */
 class EventType extends BaseEntity

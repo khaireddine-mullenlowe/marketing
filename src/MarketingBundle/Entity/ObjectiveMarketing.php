@@ -9,7 +9,7 @@ use Mullenlowe\CommonBundle\Entity\Traits\LegacyTrait;
 /**
  * ObjectiveMarketing
  *
- * @ORM\Table(name="objective_marketing")
+ * @ORM\Table(name="objective_marketing", indexes={@ORM\Index(name="ObjectiveMarketing_LegacyId_idx", columns={"legacy_id"})})
  * @ORM\Entity()
  */
 class ObjectiveMarketing extends BaseEntity

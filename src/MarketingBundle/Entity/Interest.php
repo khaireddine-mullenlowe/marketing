@@ -9,7 +9,7 @@ use Mullenlowe\CommonBundle\Entity\Traits\LegacyTrait;
 /**
  * Interest
  *
- * @ORM\Table(name="interest")
+ * @ORM\Table(name="interest", indexes={@ORM\Index(name="Interest_LegacyId_idx", columns={"legacy_id"})})
  * @ORM\Entity()
  */
 class Interest extends BaseEntity
