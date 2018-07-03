@@ -3,6 +3,7 @@
 namespace MarketingBundle\ETL\Transformer;
 
 use Doctrine\DBAL\Driver\Connection;
+use Doctrine\ORM\EntityRepository;
 use Mullenlowe\EtlBundle\Exception\TransformerException;
 use Mullenlowe\EtlBundle\Row;
 use Mullenlowe\EtlBundle\Transformer\TransformerInterface;
@@ -19,6 +20,11 @@ class UserPreTransformer implements TransformerInterface
     const QUERY = 'SELECT id FROM myaudi_user WHERE legacy_id = :legacyId';
 
     /**
+     * @var EntityRepository
+     */
+    private $marketingObjectiveRepo;
+
+    /**
      * @var Connection
      */
     private $conn;
@@ -32,6 +38,15 @@ class UserPreTransformer implements TransformerInterface
      * @var array
      */
     private static $cache = [];
+
+    /**
+     * UserPreTransformer constructor.
+     * @param EntityRepository $marketingObjectiveRepo
+     */
+    public function __construct(EntityRepository $marketingObjectiveRepo)
+    {
+        $this->marketingObjectiveRepo = $marketingObjectiveRepo;
+    }
 
     /**
      * @param Connection $conn
@@ -50,6 +65,14 @@ class UserPreTransformer implements TransformerInterface
      */
     public function transform(Row $row): Row
     {
+        if ($row->hasColumn('objective_marketing_id')) {
+            $leadLegacyId = $row->getColumn('objective_marketing_id')->getValue();
+            if (null === $this->marketingObjectiveRepo->findOneBy(['legacyId' => $leadLegacyId])) {
+                return $row->setSkipFlag(true)
+                    ->setSkipComment(sprintf('No MarketingObjective matching with legacyId %d', $leadLegacyId));
+            }
+        }
+
         if (is_null($this->stmt)) {
             $this->stmt = $this->conn->prepare(static::QUERY);
         }

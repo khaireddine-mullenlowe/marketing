@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job name="Score Migration">
+    <extractor>
+        <connection>agcv4</connection>
+        <query>
+            <![CDATA[
+                    SELECT contact_id as myaudi_user_id,
+                           interest_average as interest,
+                           seriousness_average as seriousness,
+                           contact_type,
+                           hist_change_date as created_at,
+                           GETDATE() as updated_at
+                    FROM HIST_AUDIV3.dbo.hist_ctc_contact_score
+                    WHERE hist_action != 'DELETE'
+                    ORDER BY contact_id, hist_change_date
+                ]]>
+        </query>
+    </extractor>
+
+    <transformer>
+        <preTransformerClass>MarketingBundle\ETL\Transformer\UserPreTransformer</preTransformerClass>
+    </transformer>
+
+    <loader>
+        <connection>migration</connection>
+        <entity>MarketingBundle\Entity\Score</entity>
+    </loader>
+
+    <mappings/>
+</job>
