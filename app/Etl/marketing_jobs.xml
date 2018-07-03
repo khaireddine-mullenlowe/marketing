@@ -144,7 +144,7 @@
 
         <mappings/>
     </job>
-    <job name="ObjectiveMarketing Migration">
+    <job name="MarketingObjective Migration">
         <extractor>
             <connection>agcv4</connection>
             <query>
@@ -163,7 +163,7 @@
 
         <loader>
             <connection>migration</connection>
-            <entity>MarketingBundle\Entity\ObjectiveMarketing</entity>
+            <entity>MarketingBundle\Entity\MarketingObjective</entity>
         </loader>
 
         <mappings/>

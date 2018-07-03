@@ -7,12 +7,12 @@ use MarketingBundle\Entity\Base\BaseEntity;
 use Mullenlowe\CommonBundle\Entity\Traits\LegacyTrait;
 
 /**
- * ObjectiveMarketing
+ * MarketingObjective
  *
- * @ORM\Table(name="objective_marketing")
+ * @ORM\Table(name="marketing_objective", indexes={@ORM\Index(name="MarketingObjective_LegacyId_idx", columns={"legacy_id"})})
  * @ORM\Entity()
  */
-class ObjectiveMarketing extends BaseEntity
+class MarketingObjective extends BaseEntity
 {
     use LegacyTrait;
 

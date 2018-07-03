@@ -11,7 +11,7 @@ use Mullenlowe\CommonBundle\Entity\Traits\LegacyTrait;
 /**
  * Campaign
  *
- * @ORM\Table(name="campaign_event")
+ * @ORM\Table(name="campaign_event", indexes={@ORM\Index(name="CampaignEvent_LegacyId_idx", columns={"legacy_id"})})
  * @ORM\Entity()
  */
 class CampaignEvent extends BaseEntity

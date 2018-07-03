@@ -9,7 +9,7 @@ use Mullenlowe\CommonBundle\Entity\Traits\LegacyTrait;
 /**
  * LeadProvider
  *
- * @ORM\Table(name="lead_provider")
+ * @ORM\Table(name="lead_provider", indexes={@ORM\Index(name="LeadProvider_LegacyId_idx", columns={"legacy_id"})})
  * @ORM\Entity()
  */
 class LeadProvider extends BaseEntity
