@@ -12,11 +12,11 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 /**
  * Class EntryPointUserController
  * @package MarketingBundle\Controller
- * @Route("entryPointUser")
+ * @Route("entry-point-user")
  */
 class EntryPointUserController extends MullenloweRestController
 {
-    const CONTEXT = 'entryPointUser';
+    const CONTEXT = 'EntryPointUser';
 
     /**
      * @Rest\Get("/{userId}", requirements={"id"="\d+"})

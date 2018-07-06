@@ -12,11 +12,11 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 /**
  * Class CampaignEventController
  * @package MarketingBundle\Controller
- * @Route("campaignEvent")
+ * @Route("campaign-event")
  */
 class CampaignEventController extends MullenloweRestController
 {
-    const CONTEXT = 'campaignEvent';
+    const CONTEXT = 'CampaignEvent';
 
     /**
      * @Rest\Get("/{id}", requirements={"id"="\d+"})
@@ -30,6 +30,10 @@ class CampaignEventController extends MullenloweRestController
         $event = $this->getDoctrine()
             ->getRepository('MarketingBundle:CampaignEvent')
             ->find($id);
+
+        if (empty($event)) {
+            throw $this->createNotFoundException('Event not found');
+        }
 
         return $this->createView($event);
     }

@@ -12,11 +12,11 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 /**
  * Class ContactFormController
  * @package MarketingBundle\Controller
- * @Route("contactForm")
+ * @Route("contact-form")
  */
 class ContactFormController extends MullenloweRestController
 {
-    const CONTEXT = 'contactForm';
+    const CONTEXT = 'ContactForm';
 
     /**
      * @Rest\Get("/{id}", requirements={"id"="\d+"})
@@ -30,6 +30,10 @@ class ContactFormController extends MullenloweRestController
         $contactForm = $this->getDoctrine()
             ->getRepository('MarketingBundle:ContactForm')
             ->find($id);
+
+        if (empty($contactForm)) {
+            throw $this->createNotFoundException('ContactForm not found');
+        }
 
         return $this->createView($contactForm);
     }

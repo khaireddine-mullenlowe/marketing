@@ -12,11 +12,11 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 /**
  * Class EntryPointController
  * @package MarketingBundle\Controller
- * @Route("entryPoint")
+ * @Route("entry-point")
  */
 class EntryPointController extends MullenloweRestController
 {
-    const CONTEXT = 'entryPoint';
+    const CONTEXT = 'EntryPoint';
 
     /**
      * @Rest\Get("/{id}", requirements={"id"="\d+"})
@@ -30,6 +30,10 @@ class EntryPointController extends MullenloweRestController
         $entryPoint = $this->getDoctrine()
             ->getRepository('MarketingBundle:EntryPoint')
             ->find($id);
+
+        if (empty($entryPoint)) {
+            throw $this->createNotFoundException('EntryPoint not found');
+        }
 
         return $this->createView($entryPoint);
     }

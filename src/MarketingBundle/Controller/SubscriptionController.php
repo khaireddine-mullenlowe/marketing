@@ -16,7 +16,7 @@ use FOS\RestBundle\Controller\Annotations as Rest;
  */
 class SubscriptionController extends MullenloweRestController
 {
-    const CONTEXT = 'subscription';
+    const CONTEXT = 'Subscription';
 
     /**
      * @Rest\Get("/{id}", requirements={"id"="\d+"})
@@ -30,6 +30,10 @@ class SubscriptionController extends MullenloweRestController
         $subscription = $this->getDoctrine()
             ->getRepository('MarketingBundle:Subscription')
             ->find($id);
+
+        if (empty($subscription)) {
+            throw $this->createNotFoundException('Subscription not found');
+        }
 
         return $this->createView($subscription);
     }

@@ -12,11 +12,11 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 /**
  * Class LeadTypeController
  * @package MarketingBundle\Controller
- * @Route("leadType")
+ * @Route("lead-type")
  */
 class LeadTypeController extends MullenloweRestController
 {
-    const CONTEXT = 'leadType';
+    const CONTEXT = 'LeadType';
 
     /**
      * @Rest\Get("/{id}", requirements={"id"="\d+"})
@@ -30,6 +30,10 @@ class LeadTypeController extends MullenloweRestController
         $leadType = $this->getDoctrine()
             ->getRepository('MarketingBundle:LeadType')
             ->find($id);
+
+        if (empty($leadType)) {
+            throw $this->createNotFoundException('LeadType not found');
+        }
 
         return $this->createView($leadType);
     }

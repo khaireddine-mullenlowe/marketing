@@ -12,11 +12,11 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 /**
  * Class LeadProviderController
  * @package MarketingBundle\Controller
- * @Route("leadProvider")
+ * @Route("lead-provider")
  */
 class LeadProviderController extends MullenloweRestController
 {
-    const CONTEXT = 'leadProvider';
+    const CONTEXT = 'LeadProvider';
 
     /**
      * @Rest\Get("/{id}", requirements={"id"="\d+"})
@@ -30,6 +30,10 @@ class LeadProviderController extends MullenloweRestController
         $leadProvider = $this->getDoctrine()
             ->getRepository('MarketingBundle:LeadProvider')
             ->find($id);
+
+        if (empty($leadProvider)) {
+            throw $this->createNotFoundException('LeadProvider not found');
+        }
 
         return $this->createView($leadProvider);
     }

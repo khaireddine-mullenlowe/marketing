@@ -16,7 +16,7 @@ use FOS\RestBundle\Controller\Annotations as Rest;
  */
 class ScoreController extends MullenloweRestController
 {
-    const CONTEXT = 'score';
+    const CONTEXT = 'Score';
 
     /**
      * @Rest\Get("/{myaudiUserId}", requirements={"id"="\d+"})
@@ -30,6 +30,10 @@ class ScoreController extends MullenloweRestController
         $score = $this->getDoctrine()
             ->getRepository('MarketingBundle:Score')
             ->findBy(['myaudiUserId' => $myaudiUserId]);
+
+        if (empty($score)) {
+            throw $this->createNotFoundException('Score not found');
+        }
 
         return $this->createView($score);
     }

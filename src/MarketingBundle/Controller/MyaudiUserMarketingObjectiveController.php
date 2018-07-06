@@ -12,11 +12,11 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 /**
  * Class MyaudiUserMarketingObjectiveController
  * @package MarketingBundle\Controller
- * @Route("myaudiUserMarketingObjective")
+ * @Route("myaudi-user-marketing-objective")
  */
 class MyaudiUserMarketingObjectiveController extends MullenloweRestController
 {
-    const CONTEXT = 'myaudiUserMarketingObjective';
+    const CONTEXT = 'MyaudiUserMarketingObjective';
 
     /**
      * @Rest\Get("/{userId}", requirements={"id"="\d+"})

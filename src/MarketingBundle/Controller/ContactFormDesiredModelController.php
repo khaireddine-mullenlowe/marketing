@@ -12,11 +12,11 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 /**
  * Class ContactFormDesiredModelController
  * @package MarketingBundle\Controller
- * @Route("contactFormDesiredModel")
+ * @Route("contact-form-desired-model")
  */
 class ContactFormDesiredModelController extends MullenloweRestController
 {
-    const CONTEXT = 'contactFormDesiredModel';
+    const CONTEXT = 'ContactFormDesiredModel';
 
     /**
      * @Rest\Get("/{contactFormId}", requirements={"id"="\d+"})

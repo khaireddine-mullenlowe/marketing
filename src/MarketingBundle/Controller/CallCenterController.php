@@ -12,11 +12,11 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 /**
  * Class CallCenterController
  * @package MarketingBundle\Controller
- * @Route("callCenter")
+ * @Route("call-center")
  */
 class CallCenterController extends MullenloweRestController
 {
-    const CONTEXT = 'callCenter';
+    const CONTEXT = 'CallCenter';
 
     /**
      * @Rest\Get("/{id}", requirements={"id"="\d+"})
@@ -30,6 +30,10 @@ class CallCenterController extends MullenloweRestController
         $callCenter = $this->getDoctrine()
             ->getRepository('MarketingBundle:CallCenter')
             ->find($id);
+
+        if (empty($callCenter)) {
+            throw $this->createNotFoundException('CallCenter not found');
+        }
 
         return $this->createView($callCenter);
     }

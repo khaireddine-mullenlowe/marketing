@@ -16,7 +16,7 @@ use FOS\RestBundle\Controller\Annotations as Rest;
  */
 class InterestController extends MullenloweRestController
 {
-    const CONTEXT = 'interest';
+    const CONTEXT = 'Interest';
 
     /**
      * @Rest\Get("/{id}", requirements={"id"="\d+"})
@@ -30,6 +30,10 @@ class InterestController extends MullenloweRestController
         $interest = $this->getDoctrine()
             ->getRepository('MarketingBundle:Interest')
             ->find($id);
+
+        if (empty($interest)) {
+            throw $this->createNotFoundException('Interest not found');
+        }
 
         return $this->createView($interest);
     }

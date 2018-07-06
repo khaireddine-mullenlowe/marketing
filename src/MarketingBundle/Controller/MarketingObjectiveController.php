@@ -12,11 +12,11 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 /**
  * Class MarketingObjectiveController
  * @package MarketingBundle\Controller
- * @Route("marketingObjective")
+ * @Route("marketing-objective")
  */
 class MarketingObjectiveController extends MullenloweRestController
 {
-    const CONTEXT = 'marketingObjective';
+    const CONTEXT = 'MarketingObjective';
 
     /**
      * @Rest\Get("/{id}", requirements={"id"="\d+"})
@@ -30,6 +30,10 @@ class MarketingObjectiveController extends MullenloweRestController
         $marketingObjective = $this->getDoctrine()
             ->getRepository('MarketingBundle:MarketingObjective')
             ->find($id);
+
+        if (empty($marketingObjective)) {
+            throw $this->createNotFoundException('MarketingObjective not found');
+        }
 
         return $this->createView($marketingObjective);
     }
