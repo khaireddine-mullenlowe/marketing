@@ -261,4 +261,3 @@ class BasicEvent
         return $this->confirmProspectOnCreation;
     }
 }
-

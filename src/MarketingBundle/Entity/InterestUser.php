@@ -129,4 +129,3 @@ class InterestUser
         return $this->subscriptionDate;
     }
 }
-
