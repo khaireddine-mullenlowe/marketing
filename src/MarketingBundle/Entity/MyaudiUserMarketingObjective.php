@@ -47,7 +47,7 @@ class MyaudiUserMarketingObjective
      *
      * @Assert\NotNull()
      */
-    protected $isUnsubscribe;
+    protected $isUnsubscribe = false;
 
     /**
      * Set userId

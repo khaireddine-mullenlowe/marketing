@@ -226,6 +226,18 @@ class SwaggerDefinitions
      * ),
      *
      * @SWG\Definition(
+     *     definition="MyaudiUserMarketingObjectiveContext",
+     *     allOf={
+     *         @SWG\Definition(ref="#definitions/Context")
+     *     },
+     *     @SWG\Property(property="data", type="object",
+     *         allOf={
+     *              @SWG\Definition(ref="#definitions/MarketingObjective")
+     *         },
+     *     )
+     * ),
+     *
+     * @SWG\Definition(
      *     definition="MyaudiUserMarketingObjectiveContextMulti",
      *     allOf={
      *         @SWG\Definition(ref="#definitions/Context")

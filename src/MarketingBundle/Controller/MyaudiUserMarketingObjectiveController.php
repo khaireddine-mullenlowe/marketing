@@ -5,8 +5,11 @@ namespace MarketingBundle\Controller;
 use FOS\RestBundle\Controller\Annotations\Route;
 use FOS\RestBundle\View\View;
 use Knp\Bundle\PaginatorBundle\Pagination\SlidingPagination;
+use MarketingBundle\Entity\MyaudiUserMarketingObjective;
 use MarketingBundle\Enum\PaginateEnum;
+use MarketingBundle\Form\MyaudiUserMarketingObjectiveType;
 use Mullenlowe\CommonBundle\Controller\MullenloweRestController;
+use Mullenlowe\CommonBundle\Exception\BadRequestHttpException;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Swagger\Annotations as SWG;
@@ -71,6 +74,31 @@ class MyaudiUserMarketingObjectiveController extends MullenloweRestController
      * @Rest\Post("/")
      * @Rest\View()
      *
+     * @SWG\Post(
+     *     path="/myaudi-user-marketing-objective/",
+     *     summary="Subscribe a user to a Marketing Objective",
+     *     operationId="postMarketingObjectiveUser",
+     *     tags={"MarketingObjective"},
+     *     @SWG\Parameter(
+     *         name="myaudiUserMarketingObjective",
+     *         in="body",
+     *         type="integer",
+     *         required=true,
+     *         description="",
+     *         @SWG\Schema(ref="#/definitions/MyaudiUserMarketingObjective")
+     *     ),
+     *     @SWG\Response(
+     *         response="200",
+     *         description="Subscription",
+     *         @SWG\Definition(ref="#/definitions/MyaudiUserMarketingObjectiveContext")
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="not found",
+     *         @SWG\Schema(ref="#/definitions/Error")
+     *     )
+     * )
+     *
      * @param Request $request
      * @return View
      */
@@ -100,6 +128,31 @@ class MyaudiUserMarketingObjectiveController extends MullenloweRestController
     /**
      * @Rest\Put("/")
      * @Rest\View()
+     *
+     * @SWG\Put(
+     *     path="/myaudi-user-marketing-objective/",
+     *     summary="Update subscription for user to a Marketing Objective",
+     *     operationId="putMarketingObjectiveUser",
+     *     tags={"MarketingObjective"},
+     *     @SWG\Parameter(
+     *         name="myaudiUserMarketingObjective",
+     *         in="body",
+     *         type="integer",
+     *         required=true,
+     *         description="",
+     *         @SWG\Schema(ref="#/definitions/MyaudiUserMarketingObjective")
+     *     ),
+     *     @SWG\Response(
+     *         response="200",
+     *         description="Subscription",
+     *         @SWG\Definition(ref="#/definitions/MyaudiUserMarketingObjectiveContext")
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="not found",
+     *         @SWG\Schema(ref="#/definitions/Error")
+     *     )
+     * )
      *
      * @param Request $request
      * @return View

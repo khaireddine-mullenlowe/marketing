@@ -682,6 +682,74 @@
                 }
             }
         },
+        "/myaudi-user-marketing-objective/": {
+            "put": {
+                "tags": [
+                    "MarketingObjective"
+                ],
+                "summary": "Update subscription for user to a Marketing Objective",
+                "operationId": "putMarketingObjectiveUser",
+                "parameters": [
+                    {
+                        "name": "myaudiUserMarketingObjective",
+                        "in": "body",
+                        "description": "",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/MyaudiUserMarketingObjective"
+                        },
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Subscription",
+                        "schema": {
+                            "$ref": "#/definitions/MyaudiUserMarketingObjectiveContext"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "MarketingObjective"
+                ],
+                "summary": "Update subscription for user to a Marketing Objective",
+                "operationId": "putMarketingObjectiveUser",
+                "parameters": [
+                    {
+                        "name": "myaudiUserMarketingObjective",
+                        "in": "body",
+                        "description": "",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/MyaudiUserMarketingObjective"
+                        },
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Subscription",
+                        "schema": {
+                            "$ref": "#/definitions/MyaudiUserMarketingObjectiveContext"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
         "/score/{myaudiUserId}": {
             "get": {
                 "tags": [
@@ -2441,6 +2509,23 @@
                     "type": "boolean"
                 }
             }
+        },
+        "MyaudiUserMarketingObjectiveContext": {
+            "properties": {
+                "data": {
+                    "type": "object",
+                    "allOf": [
+                        {
+                            "$ref": "#definitions/MarketingObjective"
+                        }
+                    ]
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#definitions/Context"
+                }
+            ]
         },
         "MyaudiUserMarketingObjectiveContextMulti": {
             "properties": {
