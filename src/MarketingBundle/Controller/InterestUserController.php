@@ -22,6 +22,23 @@ class InterestUserController extends MullenloweRestController
      * @Rest\Get("/{userId}", requirements={"id"="\d+"})
      * @Rest\View()
      *
+     * @SWG\Get(
+     *     path="/interest-user",
+     *     summary="Get Interests for a user",
+     *     operationId="getInterestsUser",
+     *     tags={"Interest"},
+     *     @SWG\Response(
+     *         response="200",
+     *         description="Interests for a user",
+     *         @SWG\Definition(ref="#/definitions/InterestUserContextMulti")
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="not found",
+     *         @SWG\Schema(ref="#/definitions/Error")
+     *     )
+     * )
+     *
      * @param Request $request
      * @param int     $userId
      * @return View

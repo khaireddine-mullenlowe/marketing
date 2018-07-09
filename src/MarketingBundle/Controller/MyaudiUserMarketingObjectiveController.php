@@ -22,6 +22,30 @@ class MyaudiUserMarketingObjectiveController extends MullenloweRestController
      * @Rest\Get("/{userId}", requirements={"id"="\d+"})
      * @Rest\View()
      *
+     * @SWG\Get(
+     *     path="/myaudi-user-marketing-objective/{userId}",
+     *     summary="Get Marketing Objective for a User",
+     *     operationId="getMarketingObjectiveUser",
+     *     tags={"MarketingObjective"},
+     *     @SWG\Parameter(
+     *         name="userId",
+     *         in="query",
+     *         type="integer",
+     *         required=false,
+     *         description="UserId ID"
+     *     ),
+     *     @SWG\Response(
+     *         response="200",
+     *         description="MarketingObjectives for a User",
+     *         @SWG\Definition(ref="#/definitions/MyaudiUserMarketingObjectiveContextMulti")
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="not found",
+     *         @SWG\Schema(ref="#/definitions/Error")
+     *     )
+     * )
+     *
      * @param Request $request
      * @param int     $userId
      * @return View

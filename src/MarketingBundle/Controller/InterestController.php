@@ -22,6 +22,30 @@ class InterestController extends MullenloweRestController
      * @Rest\Get("/{id}", requirements={"id"="\d+"})
      * @Rest\View()
      *
+     * @SWG\Get(
+     *     path="/interest/{id}",
+     *     summary="Get Interest",
+     *     operationId="getInterest",
+     *     tags={"Interest"},
+     *     @SWG\Parameter(
+     *         name="id",
+     *         in="query",
+     *         type="integer",
+     *         required=false,
+     *         description="Interest ID"
+     *     ),
+     *     @SWG\Response(
+     *         response="200",
+     *         description="An Interest",
+     *         @SWG\Definition(ref="#/definitions/BasicEntityContext")
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="not found",
+     *         @SWG\Schema(ref="#/definitions/Error")
+     *     )
+     * )
+     *
      * @param int $id
      * @return View
      */
@@ -41,6 +65,23 @@ class InterestController extends MullenloweRestController
     /**
      * @Rest\Get("/")
      * @Rest\View()
+     *
+     * @SWG\Get(
+     *     path="/interest",
+     *     summary="Get Interests",
+     *     operationId="getInterests",
+     *     tags={"Interest"},
+     *     @SWG\Response(
+     *         response="200",
+     *         description="Interests",
+     *         @SWG\Definition(ref="#/definitions/BasicEntityContextMulti")
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="not found",
+     *         @SWG\Schema(ref="#/definitions/Error")
+     *     )
+     * )
      *
      * @param Request $request
      * @return View

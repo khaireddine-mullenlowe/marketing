@@ -22,6 +22,30 @@ class ContactFormController extends MullenloweRestController
      * @Rest\Get("/{id}", requirements={"id"="\d+"})
      * @Rest\View()
      *
+     * @SWG\Get(
+     *     path="/contact-form/{id}",
+     *     summary="Get ContactForm",
+     *     operationId="getContactForm",
+     *     tags={"ContactForm"},
+     *     @SWG\Parameter(
+     *         name="id",
+     *         in="query",
+     *         type="integer",
+     *         required=false,
+     *         description="ContactForm ID"
+     *     ),
+     *     @SWG\Response(
+     *         response="200",
+     *         description="A ContactForm",
+     *         @SWG\Definition(ref="#/definitions/ContactFormContext")
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="not found",
+     *         @SWG\Schema(ref="#/definitions/Error")
+     *     )
+     * )
+     *
      * @param int $id
      * @return View
      */
@@ -41,6 +65,23 @@ class ContactFormController extends MullenloweRestController
     /**
      * @Rest\Get("/")
      * @Rest\View()
+     *
+     * @SWG\Get(
+     *     path="/contact-form",
+     *     summary="Get ContactForms",
+     *     operationId="getContactForms",
+     *     tags={"ContactForm"},
+     *     @SWG\Response(
+     *         response="200",
+     *         description="ContactForms",
+     *         @SWG\Definition(ref="#/definitions/ContactFormContextMulti")
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="not found",
+     *         @SWG\Schema(ref="#/definitions/Error")
+     *     )
+     * )
      *
      * @param Request $request
      * @return View

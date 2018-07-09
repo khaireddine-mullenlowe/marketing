@@ -22,6 +22,30 @@ class MarketingObjectiveController extends MullenloweRestController
      * @Rest\Get("/{id}", requirements={"id"="\d+"})
      * @Rest\View()
      *
+     * @SWG\Get(
+     *     path="/marketing-objective/{id}",
+     *     summary="Get Marketing Objective",
+     *     operationId="getMarketingObjective",
+     *     tags={"MarketingObjective"},
+     *     @SWG\Parameter(
+     *         name="id",
+     *         in="query",
+     *         type="integer",
+     *         required=false,
+     *         description="MarketingObjective ID"
+     *     ),
+     *     @SWG\Response(
+     *         response="200",
+     *         description="A MarketingObjective",
+     *         @SWG\Definition(ref="#/definitions/BasicEntityContext")
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="not found",
+     *         @SWG\Schema(ref="#/definitions/Error")
+     *     )
+     * )
+     *
      * @param int $id
      * @return View
      */
@@ -41,6 +65,23 @@ class MarketingObjectiveController extends MullenloweRestController
     /**
      * @Rest\Get("/")
      * @Rest\View()
+     *
+     * @SWG\Get(
+     *     path="/marketing-objective",
+     *     summary="Get MarketingObjectives",
+     *     operationId="getMarketingObjectives",
+     *     tags={"MarketingObjective"},
+     *     @SWG\Response(
+     *         response="200",
+     *         description="MarketingObjectives",
+     *         @SWG\Definition(ref="#/definitions/BasicEntityContextMulti")
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="not found",
+     *         @SWG\Schema(ref="#/definitions/Error")
+     *     )
+     * )
      *
      * @param Request $request
      * @return View

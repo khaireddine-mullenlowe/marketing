@@ -78,13 +78,6 @@ class CampaignEvent extends BaseEntity
      */
     protected $contactForms;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    protected $legacyId;
-
 
     /**
      * Set description

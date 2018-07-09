@@ -22,6 +22,31 @@ class ContactFormDesiredModelController extends MullenloweRestController
      * @Rest\Get("/{contactFormId}", requirements={"id"="\d+"})
      * @Rest\View()
      *
+     * @SWG\Get(
+     *     path="/contact-form-desired-model/{contactFormId}",
+     *     summary="Get Desired Models for a contactForm",
+     *     operationId="getContactFormDesiredModel",
+     *     tags={"ContactFormDesiredModel"},
+     *     @SWG\Parameter(
+     *         name="contactFormId",
+     *         in="query",
+     *         type="integer",
+     *         required=false,
+     *         description="Desired Model ID"
+     *     ),
+     *     @SWG\Response(
+     *         response="200",
+     *         description="ContactFormDesiredModels",
+     *         @SWG\Definition(ref="#/definitions/ContactFormDesiredModelContextMulti")
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="not found",
+     *         @SWG\Schema(ref="#/definitions/Error")
+     *     )
+     * )
+     *
+     *
      * @param Request $request
      * @param int     $contactFormId
      * @return View

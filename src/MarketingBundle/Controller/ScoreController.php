@@ -22,6 +22,30 @@ class ScoreController extends MullenloweRestController
      * @Rest\Get("/{myaudiUserId}", requirements={"id"="\d+"})
      * @Rest\View()
      *
+     * @SWG\Get(
+     *     path="/score/{myaudiUserId}",
+     *     summary="Get Score for a myaudiUser",
+     *     operationId="getScore",
+     *     tags={"Score"},
+     *     @SWG\Parameter(
+     *         name="myaudiUserId",
+     *         in="query",
+     *         type="integer",
+     *         required=false,
+     *         description="MyaudiUser ID"
+     *     ),
+     *     @SWG\Response(
+     *         response="200",
+     *         description="A Score",
+     *         @SWG\Definition(ref="#/definitions/ScoreContext")
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="not found",
+     *         @SWG\Schema(ref="#/definitions/Error")
+     *     )
+     * )
+     *
      * @param int $myaudiUserId
      * @return View
      */
@@ -41,6 +65,23 @@ class ScoreController extends MullenloweRestController
     /**
      * @Rest\Get("/")
      * @Rest\View()
+     *
+     * @SWG\Get(
+     *     path="/score",
+     *     summary="Get Scores",
+     *     operationId="getScores",
+     *     tags={"Score"},
+     *     @SWG\Response(
+     *         response="200",
+     *         description="Scores",
+     *         @SWG\Definition(ref="#/definitions/ScoreContextMulti")
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="not found",
+     *         @SWG\Schema(ref="#/definitions/Error")
+     *     )
+     * )
      *
      * @param Request $request
      * @return View

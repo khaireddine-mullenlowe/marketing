@@ -22,6 +22,30 @@ class CallCenterController extends MullenloweRestController
      * @Rest\Get("/{id}", requirements={"id"="\d+"})
      * @Rest\View()
      *
+     * @SWG\Get(
+     *     path="/call-center/{id}",
+     *     summary="Get Call Center",
+     *     operationId="getCallCenter",
+     *     tags={"CallCenter"},
+     *     @SWG\Parameter(
+     *         name="id",
+     *         in="query",
+     *         type="integer",
+     *         required=false,
+     *         description="Call Center ID"
+     *     ),
+     *     @SWG\Response(
+     *         response="200",
+     *         description="A CallCenter",
+     *         @SWG\Definition(ref="#/definitions/BasicEntityContext")
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="not found",
+     *         @SWG\Schema(ref="#/definitions/Error")
+     *     )
+     * )
+     *
      * @param int $id
      * @return View
      */
@@ -41,6 +65,23 @@ class CallCenterController extends MullenloweRestController
     /**
      * @Rest\Get("/")
      * @Rest\View()
+     *
+     * @SWG\Get(
+     *     path="/call-center",
+     *     summary="Get Call Centers",
+     *     operationId="getCallCenters",
+     *     tags={"CallCenter"},
+     *     @SWG\Response(
+     *         response="200",
+     *         description="CallCenters",
+     *         @SWG\Definition(ref="#/definitions/BasicEntityContextMulti")
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="not found",
+     *         @SWG\Schema(ref="#/definitions/Error")
+     *     )
+     * )
      *
      * @param Request $request
      * @return View

@@ -22,6 +22,30 @@ class EventTypeController extends MullenloweRestController
      * @Rest\Get("/{id}", requirements={"id"="\d+"})
      * @Rest\View()
      *
+     * @SWG\Get(
+     *     path="/event-type/{id}",
+     *     summary="Get EventType",
+     *     operationId="getEventType",
+     *     tags={"EventType"},
+     *     @SWG\Parameter(
+     *         name="id",
+     *         in="query",
+     *         type="integer",
+     *         required=false,
+     *         description="EventType ID"
+     *     ),
+     *     @SWG\Response(
+     *         response="200",
+     *         description="An EventType",
+     *         @SWG\Definition(ref="#/definitions/EventTypeContext")
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="not found",
+     *         @SWG\Schema(ref="#/definitions/Error")
+     *     )
+     * )
+     *
      * @param int $id
      * @return View
      */
@@ -41,6 +65,23 @@ class EventTypeController extends MullenloweRestController
     /**
      * @Rest\Get("/")
      * @Rest\View()
+     *
+     * @SWG\Get(
+     *     path="/event-type",
+     *     summary="Get EventTypes",
+     *     operationId="getEventTypes",
+     *     tags={"EventType"},
+     *     @SWG\Response(
+     *         response="200",
+     *         description="EventTypes",
+     *         @SWG\Definition(ref="#/definitions/EventTypeContextMulti")
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="not found",
+     *         @SWG\Schema(ref="#/definitions/Error")
+     *     )
+     * )
      *
      * @param Request $request
      * @return View

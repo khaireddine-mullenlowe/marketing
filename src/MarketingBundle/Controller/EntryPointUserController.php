@@ -22,6 +22,30 @@ class EntryPointUserController extends MullenloweRestController
      * @Rest\Get("/{userId}", requirements={"id"="\d+"})
      * @Rest\View()
      *
+     * @SWG\Get(
+     *     path="/entry-point-user/{userId}",
+     *     summary="Get EntryPoint for a user",
+     *     operationId="getEntryPoint",
+     *     tags={"EntryPoint"},
+     *     @SWG\Parameter(
+     *         name="userId",
+     *         in="query",
+     *         type="integer",
+     *         required=false,
+     *         description="User ID"
+     *     ),
+     *     @SWG\Response(
+     *         response="200",
+     *         description="EntryPoint for a User",
+     *         @SWG\Definition(ref="#/definitions/EntryPointUserContextMulti")
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="not found",
+     *         @SWG\Schema(ref="#/definitions/Error")
+     *     )
+     * )
+     *
      * @param Request $request
      * @param int     $userId
      * @return View

@@ -22,6 +22,30 @@ class EntryPointController extends MullenloweRestController
      * @Rest\Get("/{id}", requirements={"id"="\d+"})
      * @Rest\View()
      *
+     * @SWG\Get(
+     *     path="/entry-point/{id}",
+     *     summary="Get Entry Point",
+     *     operationId="getEntryPoint",
+     *     tags={"EntryPoint"},
+     *     @SWG\Parameter(
+     *         name="id",
+     *         in="query",
+     *         type="integer",
+     *         required=false,
+     *         description="Entry Point ID"
+     *     ),
+     *     @SWG\Response(
+     *         response="200",
+     *         description="An Entry Point",
+     *         @SWG\Definition(ref="#/definitions/BasicEntityContext")
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="not found",
+     *         @SWG\Schema(ref="#/definitions/Error")
+     *     )
+     * )
+     *
      * @param int $id
      * @return View
      */
@@ -41,6 +65,23 @@ class EntryPointController extends MullenloweRestController
     /**
      * @Rest\Get("/")
      * @Rest\View()
+     *
+     * @SWG\Get(
+     *     path="/entry-point",
+     *     summary="Get EntryPoints",
+     *     operationId="getEntryPoints",
+     *     tags={"EntryPoint"},
+     *     @SWG\Response(
+     *         response="200",
+     *         description="Entry Points",
+     *         @SWG\Definition(ref="#/definitions/BasicEntityContextMulti")
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="not found",
+     *         @SWG\Schema(ref="#/definitions/Error")
+     *     )
+     * )
      *
      * @param Request $request
      * @return View
