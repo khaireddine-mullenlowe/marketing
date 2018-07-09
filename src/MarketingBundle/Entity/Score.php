@@ -11,7 +11,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * Score
  *
  * @ORM\Table(name="score")
- * @ORM\Entity(repositoryClass="MarketingBundle\Repository\ScoreRepository")
+ * @ORM\Entity()
  */
 class Score
 {

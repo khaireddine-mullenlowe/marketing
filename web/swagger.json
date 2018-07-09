@@ -13,6 +13,785 @@
         "application/json"
     ],
     "paths": {
+        "/call-center/{id}": {
+            "get": {
+                "tags": [
+                    "CallCenter"
+                ],
+                "summary": "Get Call Center",
+                "operationId": "getCallCenter",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Call Center ID",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A CallCenter",
+                        "schema": {
+                            "$ref": "#/definitions/BasicEntityContext"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/call-center": {
+            "get": {
+                "tags": [
+                    "CallCenter"
+                ],
+                "summary": "Get Call Centers",
+                "operationId": "getCallCenters",
+                "responses": {
+                    "200": {
+                        "description": "CallCenters",
+                        "schema": {
+                            "$ref": "#/definitions/BasicEntityContextMulti"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/campaign-event/{id}": {
+            "get": {
+                "tags": [
+                    "CampaignEvent"
+                ],
+                "summary": "Get CampaignEvent",
+                "operationId": "getCampaignEvent",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "CampaignEvent ID",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A CampaignEvent",
+                        "schema": {
+                            "$ref": "#/definitions/CampaignEventContext"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/campaign-event": {
+            "get": {
+                "tags": [
+                    "CampaignEvent"
+                ],
+                "summary": "Get CampaignEvents",
+                "operationId": "getCampaignEvents",
+                "responses": {
+                    "200": {
+                        "description": "CampaignEvents",
+                        "schema": {
+                            "$ref": "#/definitions/CampaignEventContextMulti"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/contact-form/{id}": {
+            "get": {
+                "tags": [
+                    "ContactForm"
+                ],
+                "summary": "Get ContactForm",
+                "operationId": "getContactForm",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "ContactForm ID",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A ContactForm",
+                        "schema": {
+                            "$ref": "#/definitions/ContactFormContext"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/contact-form": {
+            "get": {
+                "tags": [
+                    "ContactForm"
+                ],
+                "summary": "Get ContactForms",
+                "operationId": "getContactForms",
+                "responses": {
+                    "200": {
+                        "description": "ContactForms",
+                        "schema": {
+                            "$ref": "#/definitions/ContactFormContextMulti"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/contact-form-desired-model/{contactFormId}": {
+            "get": {
+                "tags": [
+                    "ContactFormDesiredModel"
+                ],
+                "summary": "Get Desired Models for a contactForm",
+                "operationId": "getContactFormDesiredModel",
+                "parameters": [
+                    {
+                        "name": "contactFormId",
+                        "in": "query",
+                        "description": "Desired Model ID",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ContactFormDesiredModels",
+                        "schema": {
+                            "$ref": "#/definitions/ContactFormDesiredModelContextMulti"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/contact-form-type/{id}": {
+            "get": {
+                "tags": [
+                    "ContactFormType"
+                ],
+                "summary": "Get ContactFormType",
+                "operationId": "getContactFormType",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "ContactFormType ID",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A ContactFormType",
+                        "schema": {
+                            "$ref": "#/definitions/BasicEntityContext"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/contact-form-type": {
+            "get": {
+                "tags": [
+                    "ContactFormType"
+                ],
+                "summary": "Get ContactFormTypes",
+                "operationId": "getContactFormTypes",
+                "responses": {
+                    "200": {
+                        "description": "ContactFormTypes",
+                        "schema": {
+                            "$ref": "#/definitions/BasicEntityContextMulti"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/entry-point/{id}": {
+            "get": {
+                "tags": [
+                    "EntryPoint"
+                ],
+                "summary": "Get Entry Point",
+                "operationId": "getEntryPoint",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Entry Point ID",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An Entry Point",
+                        "schema": {
+                            "$ref": "#/definitions/BasicEntityContext"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/entry-point": {
+            "get": {
+                "tags": [
+                    "EntryPoint"
+                ],
+                "summary": "Get EntryPoints",
+                "operationId": "getEntryPoints",
+                "responses": {
+                    "200": {
+                        "description": "Entry Points",
+                        "schema": {
+                            "$ref": "#/definitions/BasicEntityContextMulti"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/entry-point-user/{userId}": {
+            "get": {
+                "tags": [
+                    "EntryPoint"
+                ],
+                "summary": "Get EntryPoint for a user",
+                "operationId": "getEntryPoint",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "query",
+                        "description": "User ID",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "EntryPoint for a User",
+                        "schema": {
+                            "$ref": "#/definitions/EntryPointUserContextMulti"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/event-type/{id}": {
+            "get": {
+                "tags": [
+                    "EventType"
+                ],
+                "summary": "Get EventType",
+                "operationId": "getEventType",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "EventType ID",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An EventType",
+                        "schema": {
+                            "$ref": "#/definitions/EventTypeContext"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/event-type": {
+            "get": {
+                "tags": [
+                    "EventType"
+                ],
+                "summary": "Get EventTypes",
+                "operationId": "getEventTypes",
+                "responses": {
+                    "200": {
+                        "description": "EventTypes",
+                        "schema": {
+                            "$ref": "#/definitions/EventTypeContextMulti"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/interest/{id}": {
+            "get": {
+                "tags": [
+                    "Interest"
+                ],
+                "summary": "Get Interest",
+                "operationId": "getInterest",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Interest ID",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An Interest",
+                        "schema": {
+                            "$ref": "#/definitions/BasicEntityContext"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/interest": {
+            "get": {
+                "tags": [
+                    "Interest"
+                ],
+                "summary": "Get Interests",
+                "operationId": "getInterests",
+                "responses": {
+                    "200": {
+                        "description": "Interests",
+                        "schema": {
+                            "$ref": "#/definitions/BasicEntityContextMulti"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/interest-user": {
+            "get": {
+                "tags": [
+                    "Interest"
+                ],
+                "summary": "Get Interests for a user",
+                "operationId": "getInterestsUser",
+                "responses": {
+                    "200": {
+                        "description": "Interests for a user",
+                        "schema": {
+                            "$ref": "#/definitions/InterestUserContextMulti"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/lead-provider/{id}": {
+            "get": {
+                "tags": [
+                    "LeadProvider"
+                ],
+                "summary": "Get Lead Provider",
+                "operationId": "getLeadProvider",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Lead Provider ID",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A LeadProvider",
+                        "schema": {
+                            "$ref": "#/definitions/BasicEntityContext"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/lead-provider": {
+            "get": {
+                "tags": [
+                    "LeadProvider"
+                ],
+                "summary": "Get Lead Providers",
+                "operationId": "getLeadProviders",
+                "responses": {
+                    "200": {
+                        "description": "LeadProviders",
+                        "schema": {
+                            "$ref": "#/definitions/BasicEntityContextMulti"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/lead-type/{id}": {
+            "get": {
+                "tags": [
+                    "LeadType"
+                ],
+                "summary": "Get Lead Type",
+                "operationId": "getLeadType",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Lead Type ID",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A LeadType",
+                        "schema": {
+                            "$ref": "#/definitions/BasicEntityContext"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/lead-type": {
+            "get": {
+                "tags": [
+                    "LeadType"
+                ],
+                "summary": "Get LeadTypes",
+                "operationId": "getLeadTypes",
+                "responses": {
+                    "200": {
+                        "description": "LeadTypes",
+                        "schema": {
+                            "$ref": "#/definitions/BasicEntityContextMulti"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/marketing-objective/{id}": {
+            "get": {
+                "tags": [
+                    "MarketingObjective"
+                ],
+                "summary": "Get Marketing Objective",
+                "operationId": "getMarketingObjective",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "MarketingObjective ID",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A MarketingObjective",
+                        "schema": {
+                            "$ref": "#/definitions/BasicEntityContext"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/marketing-objective": {
+            "get": {
+                "tags": [
+                    "MarketingObjective"
+                ],
+                "summary": "Get MarketingObjectives",
+                "operationId": "getMarketingObjectives",
+                "responses": {
+                    "200": {
+                        "description": "MarketingObjectives",
+                        "schema": {
+                            "$ref": "#/definitions/BasicEntityContextMulti"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/myaudi-user-marketing-objective/{userId}": {
+            "get": {
+                "tags": [
+                    "MarketingObjective"
+                ],
+                "summary": "Get Marketing Objective for a User",
+                "operationId": "getMarketingObjectiveUser",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "query",
+                        "description": "UserId ID",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "MarketingObjectives for a User",
+                        "schema": {
+                            "$ref": "#/definitions/MyaudiUserMarketingObjectiveContextMulti"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/score/{myaudiUserId}": {
+            "get": {
+                "tags": [
+                    "Score"
+                ],
+                "summary": "Get Score for a myaudiUser",
+                "operationId": "getScore",
+                "parameters": [
+                    {
+                        "name": "myaudiUserId",
+                        "in": "query",
+                        "description": "MyaudiUser ID",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A Score",
+                        "schema": {
+                            "$ref": "#/definitions/ScoreContext"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/score": {
+            "get": {
+                "tags": [
+                    "Score"
+                ],
+                "summary": "Get Scores",
+                "operationId": "getScores",
+                "responses": {
+                    "200": {
+                        "description": "Scores",
+                        "schema": {
+                            "$ref": "#/definitions/ScoreContextMulti"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscription/{id}": {
+            "get": {
+                "tags": [
+                    "Subscription"
+                ],
+                "summary": "Get Subscription",
+                "operationId": "getSubscription",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Subscription ID",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A Subscription",
+                        "schema": {
+                            "$ref": "#/definitions/BasicEntityContext"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscription": {
+            "get": {
+                "tags": [
+                    "Subscription"
+                ],
+                "summary": "Get Subscriptions",
+                "operationId": "getSubscriptions",
+                "responses": {
+                    "200": {
+                        "description": "Subscriptions",
+                        "schema": {
+                            "$ref": "#/definitions/BasicEntityContextMulti"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
         "/offer/partner": {
             "get": {
                 "tags": [
@@ -1302,6 +2081,465 @@
                 },
                 {
                     "$ref": "#definitions/OfferFundingAttributes"
+                }
+            ]
+        },
+        "BasicEntity": {
+            "required": [
+                "id",
+                "status",
+                "name"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "status": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "integer"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#definitions/TimestampableEntity"
+                }
+            ]
+        },
+        "BasicEntityContext": {
+            "properties": {
+                "data": {
+                    "type": "object",
+                    "allOf": [
+                        {
+                            "$ref": "#definitions/BasicEntity"
+                        }
+                    ]
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#definitions/Context"
+                }
+            ]
+        },
+        "BasicEntityContextMulti": {
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#definitions/BasicEntity"
+                    }
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#definitions/Context"
+                }
+            ]
+        },
+        "Score": {
+            "properties": {
+                "myaudiUserId": {
+                    "type": "integer"
+                },
+                "interest": {
+                    "type": "number",
+                    "format": "float"
+                },
+                "seriousness": {
+                    "type": "number",
+                    "format": "float"
+                },
+                "contactType": {
+                    "type": "string",
+                    "format": "INIT, E, D, C, B, S1, S2, S3"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#definitions/TimestampableEntity"
+                }
+            ]
+        },
+        "ScoreContext": {
+            "properties": {
+                "data": {
+                    "type": "object",
+                    "allOf": [
+                        {
+                            "$ref": "#definitions/Score"
+                        }
+                    ]
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#definitions/Context"
+                }
+            ]
+        },
+        "ScoreContextMulti": {
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#definitions/Score"
+                    }
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#definitions/Context"
+                }
+            ]
+        },
+        "CampaignEvent": {
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "descriptionEvent": {
+                    "type": "string"
+                },
+                "descriptionTarget": {
+                    "type": "string"
+                },
+                "waitingList": {
+                    "type": "boolean"
+                },
+                "eventTypeId": {
+                    "type": "integer"
+                },
+                "startDate": {
+                    "type": "string",
+                    "format": "date"
+                },
+                "endDate": {
+                    "type": "string",
+                    "format": "date"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#definitions/BasicEntity"
+                }
+            ]
+        },
+        "CampaignEventContext": {
+            "properties": {
+                "data": {
+                    "type": "object",
+                    "allOf": [
+                        {
+                            "$ref": "#definitions/CampaignEvent"
+                        }
+                    ]
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#definitions/Context"
+                }
+            ]
+        },
+        "CampaignEventContextMulti": {
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#definitions/CampaignEvent"
+                    }
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#definitions/Context"
+                }
+            ]
+        },
+        "ContactForm": {
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "event": {
+                    "type": "object",
+                    "allOf": [
+                        {
+                            "$ref": "#definitions/CampaignEvent"
+                        }
+                    ]
+                },
+                "subscription": {
+                    "type": "object",
+                    "allOf": [
+                        {
+                            "$ref": "#definitions/BasicEntity"
+                        }
+                    ]
+                },
+                "entryPoint": {
+                    "type": "object",
+                    "allOf": [
+                        {
+                            "$ref": "#definitions/BasicEntity"
+                        }
+                    ]
+                },
+                "name": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "createProspectAccount": {
+                    "type": "boolean"
+                },
+                "trackingCodeInit": {
+                    "type": "string",
+                    "format": "url"
+                },
+                "trackingCodeValidation": {
+                    "type": "sting",
+                    "format": "url"
+                },
+                "sendEmailToCrm": {
+                    "type": "boolean"
+                },
+                "sendEmailToCdv": {
+                    "type": "boolean"
+                },
+                "leadProvider": {
+                    "type": "object",
+                    "allOf": [
+                        {
+                            "$ref": "#definitions/BasicEntity"
+                        }
+                    ]
+                },
+                "contactFormType": {
+                    "type": "object",
+                    "allOf": [
+                        {
+                            "$ref": "#definitions/BasicEntity"
+                        }
+                    ]
+                }
+            }
+        },
+        "ContactFormContext": {
+            "properties": {
+                "data": {
+                    "type": "object",
+                    "allOf": [
+                        {
+                            "$ref": "#definitions/ContactForm"
+                        }
+                    ]
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#definitions/Context"
+                }
+            ]
+        },
+        "ContactFormContextMulti": {
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#definitions/ContactForm"
+                    }
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#definitions/Context"
+                }
+            ]
+        },
+        "ContactFormDesiredModel": {
+            "properties": {
+                "desiredModelId": {
+                    "type": "integer"
+                },
+                "contactForm": {
+                    "type": "object",
+                    "allOf": [
+                        {
+                            "$ref": "#definitions/ContactForm"
+                        }
+                    ]
+                }
+            }
+        },
+        "ContactFormDesiredModelContextMulti": {
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#definitions/ContactFormDesiredModel"
+                    }
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#definitions/Context"
+                }
+            ]
+        },
+        "EntryPointUser": {
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "userId": {
+                    "type": "integer"
+                },
+                "entryPoint": {
+                    "type": "object",
+                    "allOf": [
+                        {
+                            "$ref": "#definitions/BasicEntity"
+                        }
+                    ]
+                }
+            }
+        },
+        "EntryPointUserContextMulti": {
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#definitions/EntryPointUser"
+                    }
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#definitions/Context"
+                }
+            ]
+        },
+        "MyaudiUserMarketingObjective": {
+            "properties": {
+                "myaudiUserId": {
+                    "type": "integer"
+                },
+                "marketingObjective": {
+                    "type": "object",
+                    "allOf": [
+                        {
+                            "$ref": "#definitions/MarketingObjective"
+                        }
+                    ]
+                },
+                "isUnsubcribe": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "MyaudiUserMarketingObjectiveContextMulti": {
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#definitions/MyaudiUserMarketingObjective"
+                    }
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#definitions/Context"
+                }
+            ]
+        },
+        "InterestUser": {
+            "properties": {
+                "myaudiUserId": {
+                    "type": "integer"
+                },
+                "marketingObjective": {
+                    "type": "object",
+                    "allOf": [
+                        {
+                            "$ref": "#definitions/MarketingObjective"
+                        }
+                    ]
+                },
+                "isUnsubcribe": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "InterestUserContextMulti": {
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#definitions/InterestUser"
+                    }
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#definitions/Context"
+                }
+            ]
+        },
+        "EventType": {
+            "properties": {
+                "parentEventType": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#definitions/EventType"
+                    }
+                },
+                "subEventType": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#definitions/EventType"
+                    }
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#definitions/BasicEntity"
+                }
+            ]
+        },
+        "EventTypeContext": {
+            "properties": {
+                "data": {
+                    "type": "object",
+                    "allOf": [
+                        {
+                            "$ref": "#definitions/EventType"
+                        }
+                    ]
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#definitions/Context"
+                }
+            ]
+        },
+        "EventTypeContextMulti": {
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#definitions/EventType"
+                    }
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#definitions/Context"
                 }
             ]
         }
