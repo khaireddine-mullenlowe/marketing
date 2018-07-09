@@ -54,7 +54,7 @@ class CampaignEventController extends MullenloweRestController
     public function getAction(int $id)
     {
         $event = $this->getDoctrine()
-            ->getRepository('MarketingBundle:CampaignEventContext')
+            ->getRepository('MarketingBundle:CampaignEvent')
             ->find($id);
 
         if (empty($event)) {

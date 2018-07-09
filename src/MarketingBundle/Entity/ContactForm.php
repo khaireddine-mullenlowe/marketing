@@ -25,7 +25,7 @@ class ContactForm
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var CampaignEvent
@@ -35,7 +35,7 @@ class ContactForm
      *     inversedBy="contactForms"
      * )
      */
-    private $event;
+    protected $event;
 
     /**
      * @var Subscription
@@ -45,7 +45,7 @@ class ContactForm
      * )
      * @ORM\JoinColumn(referencedColumnName="id")
      */
-    private $subscription;
+    protected $subscription;
 
     /**
      * @var EntryPoint
@@ -55,56 +55,56 @@ class ContactForm
      * )
      * @ORM\JoinColumn(referencedColumnName="id")
      */
-    private $entryPoint;
+    protected $entryPoint;
 
     /**
      * @var string
      *
      * @ORM\Column(name="name", type="string")
      */
-    private $name;
+    protected $name;
 
     /**
      * @var string
      *
      * @ORM\Column(name="description", type="text")
      */
-    private $description;
+    protected $description;
 
     /**
      * @var bool
      *
      * @ORM\Column(name="create_prospect_account", type="boolean")
      */
-    private $createProspectAccount;
+    protected $createProspectAccount = 1;
 
     /**
      * @var string
      *
      * @ORM\Column(name="tracking_code_init", type="text", nullable=true)
      */
-    private $trackingCodeInit;
+    protected $trackingCodeInit;
 
     /**
      * @var string
      *
      * @ORM\Column(name="tracking_code_validation", type="text", nullable=true)
      */
-    private $trackingCodeValidation;
+    protected $trackingCodeValidation;
 
     /**
      * @var bool
      *
      * @ORM\Column(name="send_email_to_crm", type="boolean")
      */
-    private $sendEmailToCrm;
+    protected $sendEmailToCrm = 1;
 
     /**
      * @var bool
      *
      * @ORM\Column(name="send_email_to_cdv", type="boolean")
      */
-    private $sendEmailToCdv;
+    protected $sendEmailToCdv = 0;
 
     /**
      * @var string
@@ -114,7 +114,7 @@ class ContactForm
      * )
      * @ORM\JoinColumn(referencedColumnName="id")
      */
-    private $leadProvider;
+    protected $leadProvider;
 
     /**
      * @var ContactFormType
@@ -124,7 +124,7 @@ class ContactForm
      * )
      * @ORM\JoinColumn(referencedColumnName="id")
      */
-    private $contactFormType;
+    protected $contactFormType;
 
     /**
      * @var int
