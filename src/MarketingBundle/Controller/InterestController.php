@@ -5,6 +5,7 @@ namespace MarketingBundle\Controller;
 use FOS\RestBundle\Controller\Annotations\Route;
 use FOS\RestBundle\View\View;
 use Knp\Bundle\PaginatorBundle\Pagination\SlidingPagination;
+use MarketingBundle\Enum\PaginateEnum;
 use Mullenlowe\CommonBundle\Controller\MullenloweRestController;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations as Rest;
@@ -94,8 +95,8 @@ class InterestController extends MullenloweRestController
         /** @var SlidingPagination $pager */
         $pager = $paginator->paginate(
             $repository->createQueryBuilder('interest'),
-            $request->query->getInt('page', 1),
-            $request->query->getInt('limit', 10)
+            $request->query->getInt('page', PaginateEnum::CURRENT_PAGE),
+            $request->query->getInt('limit', PaginateEnum::LIMIT)
         );
 
         return $this->createPaginatedView($pager);
