@@ -9,6 +9,7 @@ use Mullenlowe\CommonBundle\Controller\MullenloweRestController;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use MarketingBundle\Enum\PaginateEnum;
+use Swagger\Annotations as SWG;
 
 /**
  * Class CallCenterController
