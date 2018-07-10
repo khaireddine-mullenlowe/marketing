@@ -720,8 +720,8 @@
                 "tags": [
                     "MarketingObjective"
                 ],
-                "summary": "Update subscription for user to a Marketing Objective",
-                "operationId": "putMarketingObjectiveUser",
+                "summary": "Subscribe a user to a Marketing Objective",
+                "operationId": "postMarketingObjectiveUser",
                 "parameters": [
                     {
                         "name": "myaudiUserMarketingObjective",

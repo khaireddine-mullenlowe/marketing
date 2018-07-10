@@ -13,6 +13,7 @@ use Mullenlowe\CommonBundle\Exception\BadRequestHttpException;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Swagger\Annotations as SWG;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class MyaudiUserMarketingObjectiveController
@@ -113,7 +114,7 @@ class MyaudiUserMarketingObjectiveController extends MullenloweRestController
         $form->submit($data);
 
         if (!$form->isSubmitted()) {
-            throw new BadRequestHttpException(static::CONTEXT, "Form fields are not valid for offer");
+            throw new BadRequestHttpException(static::CONTEXT, "Form fields are not valid for myaudiUserMarketingObjective");
         } elseif (!$form->isValid()) {
             return $this->view($form);
         }
@@ -122,7 +123,7 @@ class MyaudiUserMarketingObjectiveController extends MullenloweRestController
         $em->persist($myaudiUserMarketingObjective);
         $em->flush();
 
-        return $this->createView($myaudiUserMarketingObjective);
+        return $this->createView($myaudiUserMarketingObjective, Response::HTTP_CREATED);
     }
 
     /**
@@ -164,12 +165,16 @@ class MyaudiUserMarketingObjectiveController extends MullenloweRestController
         $myaudiUserMarketingObjective = $this->getDoctrine()->getRepository('MarketingBundle:MyaudiUserMarketingObjective')
                 ->findOneBy(['myaudiUserId' => $data['myaudiUserId'], 'marketingObjective' => $data['marketingObjective']]);
 
+        if (empty($myaudiUserMarketingObjective)) {
+            throw new \InvalidArgumentException('myaudiUserMarketingObjective Not Found');
+        }
+
         $form = $this->createForm(MyaudiUserMarketingObjectiveType::class, $myaudiUserMarketingObjective);
 
         $form->submit($data);
 
         if (!$form->isSubmitted()) {
-            throw new BadRequestHttpException(static::CONTEXT, "Form fields are not valid for offer");
+            throw new BadRequestHttpException(static::CONTEXT, "Form fields are not valid for myaudiUserMarketingObjective");
         } elseif (!$form->isValid()) {
             return $this->view($form);
         }
