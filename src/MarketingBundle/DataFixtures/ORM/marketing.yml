@@ -1,0 +1,87 @@
+MarketingBundle\Entity\CallCenter:
+  call_center1:
+    name: 'callCenter'
+    status: 1
+
+MarketingBundle\Entity\EntryPoint:
+  entry_point1:
+    name: 'entryPoint'
+    status: 1
+
+MarketingBundle\Entity\ContactFormType:
+  contact_form_type1:
+    name: 'contactFormType'
+    status: 1
+
+MarketingBundle\Entity\EventType:
+  event_type1:
+    name: 'eventType'
+    status: 1
+
+MarketingBundle\Entity\Interest:
+  interest1:
+    name: 'interest'
+    status: 1
+
+MarketingBundle\Entity\LeadProvider:
+  lead_provider1:
+    name: 'leadProvider'
+    status: 1
+
+MarketingBundle\Entity\LeadType:
+  lead_type1:
+    name: 'leadType'
+    status: 1
+
+MarketingBundle\Entity\MarketingObjective:
+  marketing_objective1:
+    name: 'marketingObjective'
+    status: 1
+
+MarketingBundle\Entity\Subscription:
+   subscription1:
+     name: 'subscription'
+     status: 1
+
+MarketingBundle\Entity\EntryPointUser:
+  entry_point_user1:
+    entry_point: '@entry_point1'
+    userId: 1
+
+MarketingBundle\Entity\InterestUser:
+  interest_user1:
+    interest: '@interest1'
+    userId: 1
+    subscription_date: '<(new \DateTime("now"))>'
+
+MarketingBundle\Entity\MyaudiUserMarketingObjective:
+  myaudi_user_marketing_objective1:
+    marketing_objective: '@marketing_objective1'
+    myaudiUserId: 1
+    is_unsubscribe: 0
+
+MarketingBundle\Entity\Score:
+  score1:
+    myaudiUserId: 1
+    interest: 50.80
+    seriousness: 80.64
+    contactType: 'B'
+
+MarketingBundle\Entity\CampaignEvent:
+  campaign_event1:
+    name: 'campaignEvent'
+    status: 1
+    eventType: '@event_type1'
+
+MarketingBundle\Entity\ContactForm:
+  contact_form1:
+    name: 'contactForm'
+    event: '@campaign_event1'
+    subscription: '@subscription1'
+    entryPoint: '@entry_point1'
+    description: 'Description'
+
+MarketingBundle\Entity\ContactFormDesiredModel:
+  contact_form_desired_model1:
+    contactForm: '@contact_form1'
+    desiredModelId: 1
