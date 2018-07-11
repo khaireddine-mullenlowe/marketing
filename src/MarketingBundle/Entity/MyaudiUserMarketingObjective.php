@@ -4,6 +4,7 @@ namespace MarketingBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * MyaudiUserMarketingObjective
@@ -20,6 +21,8 @@ class MyaudiUserMarketingObjective
      *
      * @ORM\Column(name="myaudi_user_id", type="integer")
      * @ORM\Id
+     *
+     * @Assert\NotNull()
      */
     protected $myaudiUserId;
 
@@ -31,6 +34,8 @@ class MyaudiUserMarketingObjective
      * )
      * @ORM\JoinColumn(referencedColumnName="id")
      * @ORM\Id
+     *
+     * @Assert\NotNull()
      */
     protected $marketingObjective;
 
@@ -38,8 +43,10 @@ class MyaudiUserMarketingObjective
      * @var bool
      *
      * @ORM\Column(name="is_unsubscribe", type="boolean")
+     *
+     * @Assert\NotNull()
      */
-    protected $isUnsubscribe;
+    protected $isUnsubscribe = false;
 
     /**
      * Set userId

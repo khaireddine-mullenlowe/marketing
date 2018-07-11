@@ -5,6 +5,7 @@ namespace MarketingBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use MarketingBundle\Entity\Base\BaseEntity;
 use Mullenlowe\CommonBundle\Entity\Traits\LegacyTrait;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * MarketingObjective
@@ -15,11 +16,4 @@ use Mullenlowe\CommonBundle\Entity\Traits\LegacyTrait;
 class MarketingObjective extends BaseEntity
 {
     use LegacyTrait;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    protected $legacyId;
 }
