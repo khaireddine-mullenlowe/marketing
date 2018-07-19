@@ -1,6 +1,9 @@
 imports:
     - { resource: config_dev.yml }
 
+parameters:
+    marketing_index_name: marketing_test
+
 framework:
     test: ~
     session:
@@ -24,54 +27,3 @@ doctrine:
 hautelook_alice:
     locale: 'fr_FR'
     seed: 1
-
-fos_elastica:
-    clients:
-        default:
-            host: localhost
-            port: 9200
-    indexes:
-        marketing:
-            types:
-                offer_funding:
-                    persistence:
-                        listener:
-                            insert: false
-                            update: false
-                            delete: false
-                            enabled: false
-                            flush: false
-        test_marketing:
-            client: default
-            types:
-                test_offer_funding:
-                    properties:
-                        id:
-                            type: integer
-                        type:
-                            type: string
-                        modelId:
-                            type: integer
-                        rangeId:
-                            type: integer
-                        price:
-                            type: string
-                        start_date:
-                            type: date
-                        end_date:
-                            type: date
-                        details:
-                            type: string
-                        legalNotice:
-                            type: string
-                        visual:
-                            type: string
-                        name:
-                            type: string
-                    persistence:
-                        driver: orm
-                        model: OfferBundle\Entity\OfferFunding
-                        finder: ~
-                        provider: ~
-                        listener: ~
-                        repository: OfferBundle\Repository\Elastica\OfferFundingRepository

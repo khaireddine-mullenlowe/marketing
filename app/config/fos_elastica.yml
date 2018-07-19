@@ -7,6 +7,7 @@ fos_elastica:
     indexes:
         marketing:
             client: default
+            index_name: '%marketing_index_name%'
             types:
                 offer_funding:
                     properties:
@@ -39,3 +40,25 @@ fos_elastica:
                         provider: ~
                         listener: ~
                         repository: OfferBundle\Repository\Elastica\OfferFundingRepository
+
+                marketing_objective:
+                    properties:
+                        id:
+                            type: integer
+                        status:
+                            type: string
+                        name:
+                            type: string
+                        legacyId:
+                            type: string
+                        createdAt:
+                            type: date
+                        updatedAt:
+                            type: date
+                    persistence:
+                        driver: orm
+                        model: MarketingBundle\Entity\MarketingObjective
+                        finder: ~
+                        provider: ~
+                        listener: ~
+                        repository: MarketingBundle\Repository\Elastica\MarketingObjectiveRepository
