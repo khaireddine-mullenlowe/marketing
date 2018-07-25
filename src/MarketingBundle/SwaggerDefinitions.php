@@ -116,7 +116,7 @@ class SwaggerDefinitions
      * @SWG\Definition(
      *     definition="ContactForm",
      *     @SWG\Property(property="id", type="integer"),
-     *     @SWG\Property(property="event", type="object",
+     *     @SWG\Property(property="campaignEvent", type="object",
      *         allOf={
      *             @SWG\Definition(ref="#definitions/CampaignEvent")
      *         }

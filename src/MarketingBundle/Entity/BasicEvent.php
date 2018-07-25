@@ -21,7 +21,7 @@ class BasicEvent
      * @ORM\JoinColumn(referencedColumnName="id")
      * @ORM\Id()
      */
-    protected $event;
+    protected $campaignEvent;
 
     /**
      * @var bool
@@ -73,24 +73,24 @@ class BasicEvent
     protected $confirmProspectOnCreation;
 
     /**
-     * @param CampaignEvent $event
+     * @param CampaignEvent $campaignEvent
      * @return BasicEvent
      */
-    public function setEvent(CampaignEvent $event)
+    public function setCampaignEvent($campaignEvent)
     {
-        $this->event = $event;
+        $this->campaignEvent = $campaignEvent;
 
         return $this;
     }
 
     /**
-     * Get event
+     * Get campaignEvent
      *
      * @return CampaignEvent
      */
-    public function getEvent()
+    public function getCampaignEvent()
     {
-        return $this->event;
+        return $this->campaignEvent;
     }
 
     /**

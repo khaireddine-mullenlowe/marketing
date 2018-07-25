@@ -53,15 +53,15 @@ class CampaignEventController extends MullenloweRestController
      */
     public function getAction(int $id)
     {
-        $event = $this->getDoctrine()
+        $campaignEvent = $this->getDoctrine()
             ->getRepository('MarketingBundle:CampaignEvent')
             ->find($id);
 
-        if (empty($event)) {
-            throw $this->createNotFoundException('Event not found');
+        if (empty($campaignEvent)) {
+            throw $this->createNotFoundException('Compain Event not found');
         }
 
-        return $this->createView($event);
+        return $this->createView($campaignEvent);
     }
 
     /**

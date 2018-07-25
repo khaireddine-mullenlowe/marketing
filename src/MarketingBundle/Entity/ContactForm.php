@@ -35,7 +35,7 @@ class ContactForm
      *     inversedBy="contactForms"
      * )
      */
-    protected $event;
+    protected $campaignEvent;
 
     /**
      * @var Subscription
@@ -107,7 +107,7 @@ class ContactForm
     protected $sendEmailToCdv = 0;
 
     /**
-     * @var string
+     * @var LeadProvider
      *
      * @ORM\ManyToOne(
      *     targetEntity="LeadProvider"
@@ -163,25 +163,25 @@ class ContactForm
     /**
      * Set event
      *
-     * @param string $event
+     * @param string campaignEvent
      *
      * @return ContactForm
      */
-    public function setEvent($event)
+    public function setCampaignEvent($campaignEvent)
     {
-        $this->event = $event;
+        $this->campaignEvent = $campaignEvent;
 
         return $this;
     }
 
     /**
-     * Get event
+     * Get campaignEvent
      *
      * @return string
      */
-    public function getEvent()
+    public function getCampaignEvent()
     {
-        return $this->event;
+        return $this->campaignEvent;
     }
 
     /**
@@ -391,11 +391,11 @@ class ContactForm
     /**
      * Set leadProvider
      *
-     * @param string $leadProvider
+     * @param LeadProvider $leadProvider
      *
      * @return ContactForm
      */
-    public function setLeadProvider($leadProvider)
+    public function setLeadProvider(LeadProvider $leadProvider)
     {
         $this->leadProvider = $leadProvider;
 
@@ -405,7 +405,7 @@ class ContactForm
     /**
      * Get leadProvider
      *
-     * @return string
+     * @return LeadProvider
      */
     public function getLeadProvider()
     {
