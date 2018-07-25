@@ -62,3 +62,102 @@ fos_elastica:
                         provider: ~
                         listener: ~
                         repository: MarketingBundle\Repository\Elastica\MarketingObjectiveRepository
+
+                contact_form:
+                    properties:
+                        id:
+                            type: integer
+                        legacyId:
+                            type: string
+                        name:
+                            type: string
+                        description:
+                            type: text
+                        createProspectAccount:
+                            type: boolean
+                        trackingCodeInit:
+                            type: text
+                        trackingCodeValidation:
+                            type: text
+                        sendEmailToCrm:
+                            type: boolean
+                        sendEmailToCdv:
+                            type: boolean
+                        campaignEvent:
+                            type: object
+                            properties:
+                                name:
+                                    type: string
+                                status:
+                                    type: string
+                                legacyId:
+                                    type: string
+                                description:
+                                    type: text
+                                waitingList:
+                                    type: boolean
+                                descriptionEvent:
+                                    type: text
+                                descriptionTarget:
+                                    type: text
+                                startDate:
+                                    type: date
+                                endDate:
+                                    type: date
+                                eventType:
+                                    type: object
+                                    properties:
+                                        legacyId:
+                                            type: string
+                                        name:
+                                            type: string
+                                        status:
+                                            type: string
+                        subscription:
+                            type: object
+                            properties:
+                                name:
+                                    type: string
+                                status:
+                                    type: string
+                                legacyId:
+                                    type: string
+                        entryPoint:
+                            type: object
+                            properties:
+                                name:
+                                    type: string
+                                status:
+                                    type: string
+                                legacyId:
+                                    type: string
+                        leadProvider:
+                            type: object
+                            properties:
+                                name:
+                                    type: string
+                                status:
+                                    type: string
+                                legacyId:
+                                    type: string
+                        contactFormType:
+                            type: object
+                            properties:
+                                name:
+                                    type: string
+                                status:
+                                    type: string
+                                legacyId:
+                                    type: string
+                        createdAt:
+                            type: date
+                        updatedAt:
+                            type: date
+                    persistence:
+                        driver: orm
+                        model: MarketingBundle\Entity\ContactForm
+                        finder: ~
+                        provider: ~
+                        listener: ~
+                        repository: MarketingBundle\Repository\Elastica\ContactFormRepository
+

@@ -21,7 +21,7 @@ class PartnerEvent
      * @ORM\JoinColumn(referencedColumnName="id")
      * @ORM\Id()
      */
-    protected $event;
+    protected $campaignEvent;
 
     /**
      * @var bool
@@ -54,25 +54,25 @@ class PartnerEvent
     /**
      * Set event
      *
-     * @param CampaignEvent $event
+     * @param CampaignEvent $campaignEvent
      *
      * @return PartnerEvent
      */
-    public function setEvent($event)
+    public function setCampaignEvent($campaignEvent)
     {
-        $this->event = $event;
+        $this->campaignEvent = $campaignEvent;
 
         return $this;
     }
 
     /**
-     * Get event
+     * Get campaignEvent
      *
      * @return CampaignEvent
      */
-    public function getEvent()
+    public function getCampaignEvent()
     {
-        return $this->event;
+        return $this->campaignEvent;
     }
 
     /**

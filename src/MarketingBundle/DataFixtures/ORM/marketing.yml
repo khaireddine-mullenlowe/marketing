@@ -76,7 +76,7 @@ MarketingBundle\Entity\CampaignEvent:
 MarketingBundle\Entity\ContactForm:
   contact_form1:
     name: 'contactForm'
-    event: '@campaign_event1'
+    campaignEvent: '@campaign_event1'
     subscription: '@subscription1'
     entryPoint: '@entry_point1'
     description: 'Description'
