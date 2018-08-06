@@ -7,6 +7,7 @@ use FOS\RestBundle\View\View;
 use Knp\Bundle\PaginatorBundle\Pagination\SlidingPagination;
 use MarketingBundle\Enum\PaginateEnum;
 use Mullenlowe\CommonBundle\Controller\MullenloweRestController;
+use Mullenlowe\CommonBundle\Exception\BadRequestHttpException;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Swagger\Annotations as SWG;
@@ -62,6 +63,59 @@ class ContactFormController extends MullenloweRestController
         }
 
         return $this->createView($contactForm);
+    }
+
+    /**
+     * @Rest\Get("/search/")
+     * @Rest\View()
+     *
+     * @SWG\Get(
+     *     path="/contact-form/search/",
+     *     summary="Get ContactForm by criteria",
+     *     operationId="getContactFormByCriteria",
+     *     tags={"ContactForm"},
+     *     @SWG\Parameter(
+     *         name="name",
+     *         in="query",
+     *         type="string",
+     *         required=false,
+     *         description="ContactForm Name"
+     *     ),
+     *     @SWG\Response(
+     *         response="200",
+     *         description="A ContactForm",
+     *         @SWG\Definition(ref="#/definitions/ContactFormContext")
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="not found",
+     *         @SWG\Schema(ref="#/definitions/Error")
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="System error"
+     *     )
+     * )
+     *
+     * @param int $id
+     * @return View
+     */
+    public function getByCriteriaAction(Request $request)
+    {
+        try {
+            $repositoryManager = $this->get('fos_elastica.manager');
+            $repository = $repositoryManager->getRepository('MarketingBundle:ContactForm');
+
+            $criterias = [];
+            if ($request->query->get("name")) {
+                $criterias["name"] = $request->query->get("name");
+            }
+
+            return $this->createView($repository->findOneBy($criterias));
+        } catch (\Exception $e) {
+            throw new BadRequestHttpException(self::CONTEXT, $e->getMessage());
+        }
+
     }
 
     /**
