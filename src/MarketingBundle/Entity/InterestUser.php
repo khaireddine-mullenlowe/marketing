@@ -4,12 +4,18 @@ namespace MarketingBundle\Entity;
 
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * InterestUser
  *
  * @ORM\Table(name="interest_user")
  * @ORM\Entity()
+ * @UniqueEntity(
+ *     fields={"userId", "interest"},
+ *     message="A subscription already exist for this user and interest."
+ * )
  */
 class InterestUser
 {
@@ -24,6 +30,7 @@ class InterestUser
 
     /**
      * @var int
+     * @Assert\NotNull
      *
      * @ORM\Column(name="user_id", type="integer")
      */
@@ -31,6 +38,7 @@ class InterestUser
 
     /**
      * @var string
+     * @Assert\NotNull
      *
      * @ORM\ManyToOne(
      *     targetEntity="Interest"

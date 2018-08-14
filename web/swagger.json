@@ -183,6 +183,9 @@
                         "schema": {
                             "$ref": "#/definitions/Error"
                         }
+                    },
+                    "500": {
+                        "description": "System error"
                     }
                 }
             }
@@ -515,6 +518,83 @@
                         }
                     }
                 }
+            }
+        },
+        "/interest-user/": {
+            "post": {
+                "tags": [
+                    "Interest"
+                ],
+                "summary": "Subscribe a user to an Interest",
+                "operationId": "postInterestUser",
+                "parameters": [
+                    {
+                        "name": "interestUserPayload",
+                        "in": "body",
+                        "description": "",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/InterestUserPayload"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Subscription",
+                        "schema": {
+                            "$ref": "#/definitions/InterestUser"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/interest-user/{id}": {
+            "delete": {
+                "tags": [
+                    "Interest"
+                ],
+                "summary": "Delete InterestUser by id",
+                "operationId": "deleteInterestUserById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "InterestUser Id to delete",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "delete status",
+                        "schema": {
+                            "$ref": "#/definitions/Success"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "internal error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
             }
         },
         "/lead-provider/{id}": {
@@ -2589,6 +2669,16 @@
                 },
                 "isUnsubcribe": {
                     "type": "boolean"
+                }
+            }
+        },
+        "InterestUserPayload": {
+            "properties": {
+                "userId": {
+                    "type": "integer"
+                },
+                "interest": {
+                    "type": "integer"
                 }
             }
         },

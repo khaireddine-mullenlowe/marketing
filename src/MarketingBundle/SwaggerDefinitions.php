@@ -259,6 +259,12 @@ class SwaggerDefinitions
      * ),
      *
      * @SWG\Definition(
+     *     definition="InterestUserPayload",
+     *     @SWG\Property(property="userId", type="integer"),
+     *     @SWG\Property(property="interest", type="integer"),
+     * ),
+     *
+     * @SWG\Definition(
      *     definition="InterestUserContextMulti",
      *     allOf={
      *         @SWG\Definition(ref="#definitions/Context")
