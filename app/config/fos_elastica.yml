@@ -7,7 +7,7 @@ fos_elastica:
     indexes:
         marketing:
             client: default
-            index_name: '%marketing_index_name%'
+            index_name: '%marketing_index_name%_%env%'
             types:
                 offer_funding:
                     properties:
@@ -160,4 +160,3 @@ fos_elastica:
                         provider: ~
                         listener: ~
                         repository: MarketingBundle\Repository\Elastica\ContactFormRepository
-
