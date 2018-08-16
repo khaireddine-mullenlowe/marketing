@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "e724d1a25596c800488f18fe5bba9394",
+    "content-hash": "d1629af27e046424d37f11203b0c6749",
     "packages": [
         {
             "name": "analog/analog",
@@ -7132,8 +7132,8 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "mullenlowe/audi-agc5-common-bundle": 20,
-        "mullenlowe/etl-bundle": 20,
-        "mullenlowe/component": 20
+        "mullenlowe/component": 20,
+        "mullenlowe/etl-bundle": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
