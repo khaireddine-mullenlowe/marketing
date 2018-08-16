@@ -18,4 +18,26 @@ class InterestUserControlerCest
         $I->seeResponseIsJson();
         $I->seeResponseContains('{"total":1');
     }
+
+    public function tryPostInterestUserOk(FunctionalTester $I)
+    {
+        $I->haveHttpHeader('Content-Type', 'application/json');
+
+        $data = '{"userId":2, "interest": 1}';
+
+        $I->sendPOST('/interest-user/', $data);
+        $I->seeResponseCodeIs(Response::HTTP_CREATED);
+        $I->seeResponseIsJson();
+    }
+
+    public function tryDeleteInterestUserObjectiveOk(FunctionalTester $I)
+    {
+        $I->haveHttpHeader('Content-Type', 'application/json');
+
+        $I->sendDELETE('/interest-user/1');
+        $I->seeResponseCodeIs(Response::HTTP_OK);
+        $I->seeResponseIsJson();
+        $I->seeResponseContainsJson(['context' => 'InterestUser']);
+        $I->seeResponseContains('The resource has been deleted');
+    }
 }

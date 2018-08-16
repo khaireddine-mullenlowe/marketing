@@ -66,4 +66,15 @@ class MyaudiUserMarketingObjectiveControlerCest
         $I->seeResponseIsJson();
         $I->seeResponseContains('myaudiUserMarketingObjective Not Found');
     }
+
+    public function tryDeleteMyaudiUserMarketingObjectiveOk(FunctionalTester $I)
+    {
+        $I->haveHttpHeader('Content-Type', 'application/json');
+
+        $I->sendDELETE('/myaudi-user-marketing-objective/1');
+        $I->seeResponseCodeIs(Response::HTTP_OK);
+        $I->seeResponseIsJson();
+        $I->seeResponseContainsJson(['context' => 'MyaudiUserMarketingObjective']);
+        $I->seeResponseContains('The resource has been deleted');
+    }
 }
