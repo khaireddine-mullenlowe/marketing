@@ -10,6 +10,7 @@ use MarketingBundle\Enum\PaginateEnum;
 use MarketingBundle\Form\MyaudiUserMarketingObjectiveType;
 use Mullenlowe\CommonBundle\Controller\MullenloweRestController;
 use Mullenlowe\CommonBundle\Exception\BadRequestHttpException;
+use Mullenlowe\CommonBundle\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Swagger\Annotations as SWG;
@@ -184,5 +185,58 @@ class MyaudiUserMarketingObjectiveController extends MullenloweRestController
         $em->flush();
 
         return  $this->createView($myaudiUserMarketingObjective);
+    }
+
+    /**
+     * @Rest\Delete("/{id}", requirements={"id"="\d+"})
+     *
+     * @SWG\Delete(
+     *      path="/myaudi-user-marketing-objective/{id}",
+     *      summary="Delete MyaudiUserMarketingObjective by id",
+     *      operationId="deleteMyaudiUserMarketingObjectiveById",
+     *     tags={"MarketingObjective"},
+     *     @SWG\Parameter(
+     *         name="id",
+     *         in="path",
+     *         type="integer",
+     *         required=true,
+     *         description="MyaudiUserMarketingObjective Id to delete"
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="delete status",
+     *         @SWG\Schema(ref="#/definitions/Success")
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="not found",
+     *         @SWG\Schema(ref="#/definitions/Error")
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="internal error",
+     *         @SWG\Schema(ref="#/definitions/Error")
+     *     ),
+     *     security={{ "bearer":{} }}
+     * )
+     *
+     * @Rest\View()
+     *
+     * @param int $id
+     * @return View
+     */
+    public function deleteAction(int $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $myaudiUserMarketingObjective = $em->getRepository('MarketingBundle:MyaudiUserMarketingObjective')->find($id);
+
+        if (!$myaudiUserMarketingObjective) {
+            throw new NotFoundHttpException(self::CONTEXT, 'MyaudiUserMarketingObjective entity not found.');
+        }
+
+        $em->remove($myaudiUserMarketingObjective);
+        $em->flush();
+
+        return $this->deleteView();
     }
 }
