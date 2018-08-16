@@ -22,7 +22,6 @@
 !tests/_data
 tests/_data/*
 !tests/_data/.gitkeep
-/app/DoctrineMigrations
 !/var/jwtcertificates/
 /var/jwtcertificates/*
 !/var/jwtcertificates/public.pem

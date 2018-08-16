@@ -5,12 +5,20 @@ namespace MarketingBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * MyaudiUserMarketingObjective
  *
- * @ORM\Table(name="myaudi_user_marketing_objective")
+ * @ORM\Table(
+ *     name="myaudi_user_marketing_objective",
+ *     uniqueConstraints={@ORM\UniqueConstraint(name="UNIQ_myaudi_user_marketing_objective", columns={"myaudi_user_id", "marketing_objective_id"})}
+ * )
  * @ORM\Entity()
+ * @UniqueEntity(
+ *     fields={"myaudiUserId", "marketingObjective"},
+ *     message="A subscription already exist for this user and marketing objective."
+ * )
  */
 class MyaudiUserMarketingObjective
 {
@@ -19,8 +27,16 @@ class MyaudiUserMarketingObjective
     /**
      * @var int
      *
-     * @ORM\Column(name="myaudi_user_id", type="integer")
      * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="myaudi_user_id", type="integer")
      *
      * @Assert\NotNull()
      */
@@ -32,8 +48,7 @@ class MyaudiUserMarketingObjective
      * @ORM\ManyToOne(
      *     targetEntity="MarketingObjective"
      * )
-     * @ORM\JoinColumn(referencedColumnName="id")
-     * @ORM\Id
+     * @ORM\JoinColumn(referencedColumnName="id", nullable=false)
      *
      * @Assert\NotNull()
      */
