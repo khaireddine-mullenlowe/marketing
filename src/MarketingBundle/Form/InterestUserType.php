@@ -27,13 +27,6 @@ class InterestUserType extends AbstractType
         $builder
             ->add('userId', IntegerType::class)
             ->add('interest', EntityType::class, ['class' => Interest::class]);
-
-        $builder->addEventListener(FormEvents::SUBMIT, function(FormEvent $event) {
-            /** @var InterestUser $data */
-            $data = $event->getData();
-
-            $data->setSubscriptionDate(new \DateTime());
-        });
     }
 
     /**

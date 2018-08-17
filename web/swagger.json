@@ -550,6 +550,12 @@
                         "schema": {
                             "$ref": "#/definitions/Error"
                         }
+                    },
+                    "500": {
+                        "description": "internal error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
                     }
                 }
             }

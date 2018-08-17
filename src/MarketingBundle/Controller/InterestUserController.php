@@ -90,6 +90,11 @@ class InterestUserController extends MullenloweRestController
      *         response=404,
      *         description="not found",
      *         @SWG\Schema(ref="#/definitions/Error")
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="internal error",
+     *         @SWG\Schema(ref="#/definitions/Error")
      *     )
      * )
      *

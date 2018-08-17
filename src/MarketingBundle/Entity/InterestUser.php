@@ -54,6 +54,13 @@ class InterestUser
      */
     private $subscriptionDate;
 
+    /**
+     * InterestUser constructor.
+     */
+    public function __construct()
+    {
+        $this->subscriptionDate = new \DateTime();
+    }
 
     /**
      * Get id
