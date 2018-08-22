@@ -40,3 +40,5 @@ parameters:
     rabbitmq_user: guest
     rabbitmq_password: guest
 
+    env: dev
+
