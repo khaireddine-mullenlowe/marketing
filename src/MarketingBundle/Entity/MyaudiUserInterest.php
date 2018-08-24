@@ -13,7 +13,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\Table(name="interest_user")
  * @ORM\Entity()
  * @UniqueEntity(
- *     fields={"userId", "interest"},
+ *     fields={"myaudiUserId", "interest"},
  *     message="A subscription already exist for this user and interest."
  * )
  */
@@ -32,9 +32,9 @@ class MyaudiUserInterest
      * @var int
      * @Assert\NotNull
      *
-     * @ORM\Column(name="user_id", type="integer")
+     * @ORM\Column(name="myaudi_user_id", type="integer")
      */
-    private $userId;
+    private $myaudiUserId;
 
     /**
      * @var string
@@ -73,27 +73,27 @@ class MyaudiUserInterest
     }
 
     /**
-     * Set userId
+     * Set myaudiUserId
      *
-     * @param integer $userId
+     * @param integer $myaudiUserId
      *
      * @return MyaudiUserInterest
      */
-    public function setUserId($userId)
+    public function setMyaudiUserId($myaudiUserId)
     {
-        $this->userId = $userId;
+        $this->myaudiUserId = $myaudiUserId;
 
         return $this;
     }
 
     /**
-     * Get userId
+     * Get myaudiUserId
      *
      * @return int
      */
-    public function getUserId()
+    public function getMyaudiUserId()
     {
-        return $this->userId;
+        return $this->myaudiUserId;
     }
 
     /**

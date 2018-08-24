@@ -51,7 +51,7 @@ MarketingBundle\Entity\EntryPointUser:
 MarketingBundle\Entity\MyaudiUserInterest:
   interest_user1:
     interest: '@interest1'
-    userId: 1
+    myaudiUserId: 1
     subscription_date: '<(new \DateTime("now"))>'
 
 MarketingBundle\Entity\MyaudiUserMarketingObjective:

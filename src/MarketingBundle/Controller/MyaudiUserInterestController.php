@@ -57,7 +57,7 @@ class MyaudiUserInterestController extends MullenloweRestController
         $paginator = $this->get('knp_paginator');
         /** @var SlidingPagination $pager */
         $pager = $paginator->paginate(
-            $repository->findBy(['userId' => $userId]),
+            $repository->findBy(['myaudiUserId' => $userId]),
             $request->query->getInt('page', PaginateEnum::CURRENT_PAGE),
             $request->query->getInt('limit', PaginateEnum::LIMIT)
         );

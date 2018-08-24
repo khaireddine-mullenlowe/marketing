@@ -35,11 +35,11 @@ class MyaudiUserMarketingObjectiveController extends MullenloweRestController
      *     operationId="getMarketingObjectiveUser",
      *     tags={"MarketingObjective"},
      *     @SWG\Parameter(
-     *         name="userId",
+     *         name="myaudiUserId",
      *         in="query",
      *         type="integer",
      *         required=false,
-     *         description="UserId ID"
+     *         description="myaudiUser ID"
      *     ),
      *     @SWG\Response(
      *         response="200",

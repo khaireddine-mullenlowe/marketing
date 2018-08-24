@@ -497,112 +497,6 @@
                 }
             }
         },
-        "/interest-user": {
-            "get": {
-                "tags": [
-                    "Interest"
-                ],
-                "summary": "Get Interests for a user",
-                "operationId": "getInterestsUser",
-                "responses": {
-                    "200": {
-                        "description": "Interests for a user",
-                        "schema": {
-                            "$ref": "#/definitions/InterestUserContextMulti"
-                        }
-                    },
-                    "404": {
-                        "description": "not found",
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }
-        },
-        "/interest-user/": {
-            "post": {
-                "tags": [
-                    "Interest"
-                ],
-                "summary": "Subscribe a user to an Interest",
-                "operationId": "postInterestUser",
-                "parameters": [
-                    {
-                        "name": "interestUserPayload",
-                        "in": "body",
-                        "description": "",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/InterestUserPayload"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Subscription",
-                        "schema": {
-                            "$ref": "#/definitions/InterestUser"
-                        }
-                    },
-                    "404": {
-                        "description": "not found",
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    },
-                    "500": {
-                        "description": "internal error",
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }
-        },
-        "/interest-user/{id}": {
-            "delete": {
-                "tags": [
-                    "Interest"
-                ],
-                "summary": "Delete InterestUser by id",
-                "operationId": "deleteInterestUserById",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "InterestUser Id to delete",
-                        "required": true,
-                        "type": "integer"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "delete status",
-                        "schema": {
-                            "$ref": "#/definitions/Success"
-                        }
-                    },
-                    "404": {
-                        "description": "not found",
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    },
-                    "500": {
-                        "description": "internal error",
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "bearer": []
-                    }
-                ]
-            }
-        },
         "/lead-provider/{id}": {
             "get": {
                 "tags": [
@@ -768,6 +662,112 @@
                 }
             }
         },
+        "/interest-user": {
+            "get": {
+                "tags": [
+                    "Interest"
+                ],
+                "summary": "Get Interests for a user",
+                "operationId": "getInterestsUser",
+                "responses": {
+                    "200": {
+                        "description": "Interests for a user",
+                        "schema": {
+                            "$ref": "#/definitions/MyaudiUserInterestContextMulti"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/interest-user/": {
+            "post": {
+                "tags": [
+                    "Interest"
+                ],
+                "summary": "Subscribe a user to an Interest",
+                "operationId": "postMyaudiUserInterest",
+                "parameters": [
+                    {
+                        "name": "myaudiUserInterestPayload",
+                        "in": "body",
+                        "description": "",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/MyaudiUserInterestPayload"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Subscription",
+                        "schema": {
+                            "$ref": "#/definitions/MyaudiUserInterest"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "internal error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/interest-user/{id}": {
+            "delete": {
+                "tags": [
+                    "Interest"
+                ],
+                "summary": "Delete MyaudiUserInterest by id",
+                "operationId": "deleteMyaudiUserInterestById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "MyaudiUserInterest Id to delete",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "delete status",
+                        "schema": {
+                            "$ref": "#/definitions/Success"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "internal error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
         "/myaudi-user-marketing-objective/{userId}": {
             "get": {
                 "tags": [
@@ -777,9 +777,9 @@
                 "operationId": "getMarketingObjectiveUser",
                 "parameters": [
                     {
-                        "name": "userId",
+                        "name": "myaudiUserId",
                         "in": "query",
-                        "description": "UserId ID",
+                        "description": "myaudiUser ID",
                         "required": false,
                         "type": "integer"
                     }
@@ -2703,7 +2703,7 @@
                 }
             ]
         },
-        "InterestUser": {
+        "MyaudiUserInterest": {
             "properties": {
                 "myaudiUserId": {
                     "type": "integer"
@@ -2721,9 +2721,9 @@
                 }
             }
         },
-        "InterestUserPayload": {
+        "MyaudiUserInterestPayload": {
             "properties": {
-                "userId": {
+                "myaudiUserId": {
                     "type": "integer"
                 },
                 "interest": {
@@ -2731,12 +2731,12 @@
                 }
             }
         },
-        "InterestUserContextMulti": {
+        "MyaudiUserInterestContextMulti": {
             "properties": {
                 "data": {
                     "type": "array",
                     "items": {
-                        "$ref": "#definitions/InterestUser"
+                        "$ref": "#definitions/MyaudiUserInterest"
                     }
                 }
             },

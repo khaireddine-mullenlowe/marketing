@@ -260,7 +260,7 @@ class SwaggerDefinitions
      *
      * @SWG\Definition(
      *     definition="MyaudiUserInterestPayload",
-     *     @SWG\Property(property="userId", type="integer"),
+     *     @SWG\Property(property="myaudiUserId", type="integer"),
      *     @SWG\Property(property="interest", type="integer"),
      * ),
      *

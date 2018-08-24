@@ -23,7 +23,7 @@ class MyaudiUserInterestControlerCest
     {
         $I->haveHttpHeader('Content-Type', 'application/json');
 
-        $data = '{"userId":2, "interest": 1}';
+        $data = '{"myaudiUserId":2, "interest": 1}';
 
         $I->sendPOST('/interest-user/', $data);
         $I->seeResponseCodeIs(Response::HTTP_CREATED);

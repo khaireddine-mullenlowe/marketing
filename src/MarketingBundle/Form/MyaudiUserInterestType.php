@@ -23,7 +23,7 @@ class MyaudiUserInterestType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('userId', IntegerType::class)
+            ->add('myaudiUserId', IntegerType::class)
             ->add('interest', EntityType::class, ['class' => Interest::class]);
     }
 
