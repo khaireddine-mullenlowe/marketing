@@ -387,7 +387,7 @@
 
         <loader>
             <connection>migration</connection>
-            <entity>MarketingBundle\Entity\InterestUser</entity>
+            <entity>MarketingBundle\Entity\MyaudiUserInterest</entity>
         </loader>
 
         <mappings>

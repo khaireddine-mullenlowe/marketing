@@ -48,7 +48,7 @@ MarketingBundle\Entity\EntryPointUser:
     entry_point: '@entry_point1'
     userId: 1
 
-MarketingBundle\Entity\InterestUser:
+MarketingBundle\Entity\MyaudiUserInterest:
   interest_user1:
     interest: '@interest1'
     userId: 1

@@ -248,7 +248,7 @@ class SwaggerDefinitions
      * ),
      *
      * @SWG\Definition(
-     *     definition="InterestUser",
+     *     definition="MyaudiUserInterest",
      *     @SWG\Property(property="myaudiUserId", type="integer"),
      *     @SWG\Property(property="marketingObjective", type="object",
      *         allOf={
@@ -259,18 +259,18 @@ class SwaggerDefinitions
      * ),
      *
      * @SWG\Definition(
-     *     definition="InterestUserPayload",
+     *     definition="MyaudiUserInterestPayload",
      *     @SWG\Property(property="userId", type="integer"),
      *     @SWG\Property(property="interest", type="integer"),
      * ),
      *
      * @SWG\Definition(
-     *     definition="InterestUserContextMulti",
+     *     definition="MyaudiUserInterestContextMulti",
      *     allOf={
      *         @SWG\Definition(ref="#definitions/Context")
      *     },
      *     @SWG\Property(property="data", type="array",
-     *         @SWG\Items(ref="#definitions/InterestUser")
+     *         @SWG\Items(ref="#definitions/MyaudiUserInterest")
      *     )
      * ),
      * @SWG\Definition(

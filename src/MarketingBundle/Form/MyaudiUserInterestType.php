@@ -3,20 +3,18 @@
 namespace MarketingBundle\Form;
 
 use MarketingBundle\Entity\Interest;
-use MarketingBundle\Entity\InterestUser;
+use MarketingBundle\Entity\MyaudiUserInterest;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class InterestUserType
+ * Class MyaudiUserInterestType
  * @package MarketingBundle\Form
  */
-class InterestUserType extends AbstractType
+class MyaudiUserInterestType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -35,7 +33,7 @@ class InterestUserType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class'         => InterestUser::class,
+            'data_class'         => MyaudiUserInterest::class,
             'csrf_protection'    => false,
             'allow_extra_fields' => true,
         ]);

@@ -5,12 +5,12 @@ namespace MarketingBundle\tests\Controller;
 use FunctionalTester;
 use Symfony\Component\HttpFoundation\Response;
 
-class InterestUserControlerCest
+class MyaudiUserInterestControlerCest
 {
     /**
      * @param FunctionalTester $I
      */
-    public function tryCGetInterestUserOk(FunctionalTester $I) {
+    public function tryCGetMyaudiUserInterestOk(FunctionalTester $I) {
         $I->haveHttpHeader('Content-Type', 'application/json');
 
         $I->sendGET('/interest-user/1');
@@ -19,7 +19,7 @@ class InterestUserControlerCest
         $I->seeResponseContains('{"total":1');
     }
 
-    public function tryPostInterestUserOk(FunctionalTester $I)
+    public function tryPostMyaudiUserInterestOk(FunctionalTester $I)
     {
         $I->haveHttpHeader('Content-Type', 'application/json');
 
@@ -30,14 +30,14 @@ class InterestUserControlerCest
         $I->seeResponseIsJson();
     }
 
-    public function tryDeleteInterestUserObjectiveOk(FunctionalTester $I)
+    public function tryDeleteMyaudiUserInterestObjectiveOk(FunctionalTester $I)
     {
         $I->haveHttpHeader('Content-Type', 'application/json');
 
         $I->sendDELETE('/interest-user/1');
         $I->seeResponseCodeIs(Response::HTTP_OK);
         $I->seeResponseIsJson();
-        $I->seeResponseContainsJson(['context' => 'InterestUser']);
+        $I->seeResponseContainsJson(['context' => 'MyaudiUserInterest']);
         $I->seeResponseContains('The resource has been deleted');
     }
 }

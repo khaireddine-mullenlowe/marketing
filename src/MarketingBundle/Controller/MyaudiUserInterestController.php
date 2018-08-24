@@ -5,9 +5,9 @@ namespace MarketingBundle\Controller;
 use FOS\RestBundle\Controller\Annotations\Route;
 use FOS\RestBundle\View\View;
 use Knp\Bundle\PaginatorBundle\Pagination\SlidingPagination;
-use MarketingBundle\Entity\InterestUser;
+use MarketingBundle\Entity\MyaudiUserInterest;
 use MarketingBundle\Enum\PaginateEnum;
-use MarketingBundle\Form\InterestUserType;
+use MarketingBundle\Form\MyaudiUserInterestType;
 use Mullenlowe\CommonBundle\Controller\MullenloweRestController;
 use Mullenlowe\CommonBundle\Exception\BadRequestHttpException;
 use Mullenlowe\CommonBundle\Exception\NotFoundHttpException;
@@ -17,13 +17,13 @@ use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Class InterestUserController
+ * Class MyaudiUserInterestController
  * @package MarketingBundle\Controller
  * @Route("interest-user")
  */
-class InterestUserController extends MullenloweRestController
+class MyaudiUserInterestController extends MullenloweRestController
 {
-    const CONTEXT = 'InterestUser';
+    const CONTEXT = 'MyaudiUserInterest';
 
     /**
      * @Rest\Get("/{userId}", requirements={"id"="\d+"})
@@ -37,7 +37,7 @@ class InterestUserController extends MullenloweRestController
      *     @SWG\Response(
      *         response="200",
      *         description="Interests for a user",
-     *         @SWG\Definition(ref="#/definitions/InterestUserContextMulti")
+     *         @SWG\Definition(ref="#/definitions/MyaudiUserInterestContextMulti")
      *     ),
      *     @SWG\Response(
      *         response=404,
@@ -52,7 +52,7 @@ class InterestUserController extends MullenloweRestController
      */
     public function cgetAction(Request $request, int $userId)
     {
-        $repository = $this->getDoctrine()->getRepository('MarketingBundle:InterestUser');
+        $repository = $this->getDoctrine()->getRepository('MarketingBundle:MyaudiUserInterest');
 
         $paginator = $this->get('knp_paginator');
         /** @var SlidingPagination $pager */
@@ -72,19 +72,19 @@ class InterestUserController extends MullenloweRestController
      * @SWG\Post(
      *     path="/interest-user/",
      *     summary="Subscribe a user to an Interest",
-     *     operationId="postInterestUser",
+     *     operationId="postMyaudiUserInterest",
      *     tags={"Interest"},
      *     @SWG\Parameter(
-     *         name="interestUserPayload",
+     *         name="myaudiUserInterestPayload",
      *         in="body",
      *         required=true,
      *         description="",
-     *         @SWG\Schema(ref="#/definitions/InterestUserPayload")
+     *         @SWG\Schema(ref="#/definitions/MyaudiUserInterestPayload")
      *     ),
      *     @SWG\Response(
      *         response="200",
      *         description="Subscription",
-     *         @SWG\Definition(ref="#/definitions/InterestUser")
+     *         @SWG\Definition(ref="#/definitions/MyaudiUserInterest")
      *     ),
      *     @SWG\Response(
      *         response=404,
@@ -103,23 +103,23 @@ class InterestUserController extends MullenloweRestController
      */
     public function postAction(Request $request)
     {
-        $interestUser = new InterestUser();
+        $myaudiUserInterest = new MyaudiUserInterest();
 
-        $form = $this->createForm(InterestUserType::class, $interestUser);
+        $form = $this->createForm(MyaudiUserInterestType::class, $myaudiUserInterest);
 
         $form->handleRequest($request);
 
         if (!$form->isSubmitted()) {
-            throw new BadRequestHttpException(static::CONTEXT, "Form fields are not valid for interestUser.");
+            throw new BadRequestHttpException(static::CONTEXT, "Form fields are not valid for MyaudiUserInterest.");
         } elseif (!$form->isValid()) {
             return $this->view($form);
         }
 
         $em = $this->getDoctrine()->getManager();
-        $em->persist($interestUser);
+        $em->persist($myaudiUserInterest);
         $em->flush();
 
-        return $this->createView($interestUser, Response::HTTP_CREATED);
+        return $this->createView($myaudiUserInterest, Response::HTTP_CREATED);
     }
 
     /**
@@ -127,15 +127,15 @@ class InterestUserController extends MullenloweRestController
      *
      * @SWG\Delete(
      *      path="/interest-user/{id}",
-     *      summary="Delete InterestUser by id",
-     *      operationId="deleteInterestUserById",
+     *      summary="Delete MyaudiUserInterest by id",
+     *      operationId="deleteMyaudiUserInterestById",
      *     tags={"Interest"},
      *     @SWG\Parameter(
      *         name="id",
      *         in="path",
      *         type="integer",
      *         required=true,
-     *         description="InterestUser Id to delete"
+     *         description="MyaudiUserInterest Id to delete"
      *     ),
      *     @SWG\Response(
      *         response=200,
@@ -163,13 +163,13 @@ class InterestUserController extends MullenloweRestController
     public function deleteAction(int $id)
     {
         $em = $this->getDoctrine()->getManager();
-        $interestUser = $em->getRepository('MarketingBundle:InterestUser')->find($id);
+        $myaudiUserInterest = $em->getRepository('MarketingBundle:MyaudiUserInterest')->find($id);
 
-        if (!$interestUser) {
-            throw new NotFoundHttpException(self::CONTEXT, 'InterestUser entity not found.');
+        if (!$myaudiUserInterest) {
+            throw new NotFoundHttpException(self::CONTEXT, 'MyaudiUserInterest entity not found.');
         }
 
-        $em->remove($interestUser);
+        $em->remove($myaudiUserInterest);
         $em->flush();
 
         return $this->deleteView();

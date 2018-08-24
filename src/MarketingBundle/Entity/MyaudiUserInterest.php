@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
- * InterestUser
+ * MyaudiUserInterest
  *
  * @ORM\Table(name="interest_user")
  * @ORM\Entity()
@@ -17,7 +17,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *     message="A subscription already exist for this user and interest."
  * )
  */
-class InterestUser
+class MyaudiUserInterest
 {
     /**
      * @var int
@@ -55,7 +55,7 @@ class InterestUser
     private $subscriptionDate;
 
     /**
-     * InterestUser constructor.
+     * MyaudiUserInterest constructor.
      */
     public function __construct()
     {
@@ -77,7 +77,7 @@ class InterestUser
      *
      * @param integer $userId
      *
-     * @return InterestUser
+     * @return MyaudiUserInterest
      */
     public function setUserId($userId)
     {
@@ -101,7 +101,7 @@ class InterestUser
      *
      * @param string $interest
      *
-     * @return InterestUser
+     * @return MyaudiUserInterest
      */
     public function setInterest($interest)
     {
@@ -125,7 +125,7 @@ class InterestUser
      *
      * @param DateTime $subscriptionDate
      *
-     * @return InterestUser
+     * @return MyaudiUserInterest
      */
     public function setSubscriptionDate($subscriptionDate)
     {
