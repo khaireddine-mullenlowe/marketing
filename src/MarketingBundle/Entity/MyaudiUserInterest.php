@@ -4,14 +4,20 @@ namespace MarketingBundle\Entity;
 
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
- * InterestUser
+ * MyaudiUserInterest
  *
  * @ORM\Table(name="interest_user")
  * @ORM\Entity()
+ * @UniqueEntity(
+ *     fields={"myaudiUserId", "interest"},
+ *     message="A subscription already exist for this user and interest."
+ * )
  */
-class InterestUser
+class MyaudiUserInterest
 {
     /**
      * @var int
@@ -24,13 +30,15 @@ class InterestUser
 
     /**
      * @var int
+     * @Assert\NotNull
      *
-     * @ORM\Column(name="user_id", type="integer")
+     * @ORM\Column(name="myaudi_user_id", type="integer")
      */
-    private $userId;
+    private $myaudiUserId;
 
     /**
      * @var string
+     * @Assert\NotNull
      *
      * @ORM\ManyToOne(
      *     targetEntity="Interest"
@@ -46,6 +54,13 @@ class InterestUser
      */
     private $subscriptionDate;
 
+    /**
+     * MyaudiUserInterest constructor.
+     */
+    public function __construct()
+    {
+        $this->subscriptionDate = new \DateTime();
+    }
 
     /**
      * Get id
@@ -58,27 +73,27 @@ class InterestUser
     }
 
     /**
-     * Set userId
+     * Set myaudiUserId
      *
-     * @param integer $userId
+     * @param integer $myaudiUserId
      *
-     * @return InterestUser
+     * @return MyaudiUserInterest
      */
-    public function setUserId($userId)
+    public function setMyaudiUserId($myaudiUserId)
     {
-        $this->userId = $userId;
+        $this->myaudiUserId = $myaudiUserId;
 
         return $this;
     }
 
     /**
-     * Get userId
+     * Get myaudiUserId
      *
      * @return int
      */
-    public function getUserId()
+    public function getMyaudiUserId()
     {
-        return $this->userId;
+        return $this->myaudiUserId;
     }
 
     /**
@@ -86,7 +101,7 @@ class InterestUser
      *
      * @param string $interest
      *
-     * @return InterestUser
+     * @return MyaudiUserInterest
      */
     public function setInterest($interest)
     {
@@ -110,7 +125,7 @@ class InterestUser
      *
      * @param DateTime $subscriptionDate
      *
-     * @return InterestUser
+     * @return MyaudiUserInterest
      */
     public function setSubscriptionDate($subscriptionDate)
     {
