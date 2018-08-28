@@ -5,6 +5,10 @@ namespace MarketingBundle\tests\Controller;
 use FunctionalTester;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Class SubscriptionControlerCest
+ * @package MarketingBundle\tests\Controller
+ */
 class SubscriptionControlerCest
 {
     /**

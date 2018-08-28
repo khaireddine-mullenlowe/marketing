@@ -31,6 +31,7 @@ coverage:
         - src/*Bundle/DataFixtures
         - src/*Bundle/Resources/*
         - vendor/mullenlowe/*/src/Resources/*
+        - src/*Bundle/ETL
     low_limit: 30
     high_limit: 60
 include:

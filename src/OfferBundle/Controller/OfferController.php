@@ -5,7 +5,9 @@ namespace OfferBundle\Controller;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use InvalidArgumentException;
 use Mullenlowe\CommonBundle\Exception\BadRequestHttpException;
+use OfferBundle\Entity\OfferAftersale;
 use OfferBundle\Entity\OfferAftersaleMyaudiUser;
+use OfferBundle\Entity\OfferSale;
 use OfferBundle\Entity\OfferSaleMyaudiUser;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\View\View;
@@ -188,8 +190,7 @@ class OfferController extends MullenloweRestController
             return $this->view($form);
         }
 
-        if (
-            $type['name'] !== OfferEnum::OFFERTYPE['aftersale']['name'] ||
+        if ($type['name'] !== OfferEnum::OFFERTYPE['aftersale']['name'] ||
             (
                 $type['name'] === OfferEnum::OFFERTYPE['aftersale']['name']
                 && $subtype->getType()->getName() === self::SERVICING
@@ -361,6 +362,7 @@ class OfferController extends MullenloweRestController
 
         $type = OfferEnum::OFFERTYPE[$category];
 
+        /** @var OfferAftersale|OfferSale $offer */
         $offer = $doctrine->getRepository($type['repository'])->findOneBy([
             'id' => $data['id'],
             'subtype' => $data['subtype'],

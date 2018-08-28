@@ -43,7 +43,7 @@ trait TimestampableOfferEntityTrait
     /**
      * Set startDate
      *
-     * @param $startDate
+     * @param string|DateTime $startDate
      *
      * @return $this
      */
@@ -71,7 +71,7 @@ trait TimestampableOfferEntityTrait
     /**
      * Set endDate
      *
-     * @param string|DateTime$endDate
+     * @param string|DateTime $endDate
      *
      * @return $this
      */
@@ -95,5 +95,4 @@ trait TimestampableOfferEntityTrait
     {
         return $this->endDate;
     }
-
 }

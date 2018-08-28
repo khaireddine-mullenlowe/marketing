@@ -5,9 +5,12 @@ use Elastica\Query\BoolQuery;
 use Elastica\Query\QueryString;
 use FOS\ElasticaBundle\Repository;
 
+/**
+ * Class ContactFormRepository
+ * @package MarketingBundle\Repository\Elastica
+ */
 class ContactFormRepository extends Repository
 {
-
     /**
      * Find one Contact form by criteria.
      * @param array $criterias
@@ -35,5 +38,4 @@ class ContactFormRepository extends Repository
 
         throw new \LogicException("Bad method call.");
     }
-
 }

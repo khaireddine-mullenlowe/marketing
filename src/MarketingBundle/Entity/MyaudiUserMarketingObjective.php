@@ -135,4 +135,3 @@ class MyaudiUserMarketingObjective
         return $this->isUnsubscribe;
     }
 }
-

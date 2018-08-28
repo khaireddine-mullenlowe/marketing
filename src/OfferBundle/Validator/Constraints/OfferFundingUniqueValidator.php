@@ -8,11 +8,19 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
+/**
+ * Class OfferFundingUniqueValidator
+ * @package OfferBundle\Validator\Constraints
+ */
 class OfferFundingUniqueValidator extends ConstraintValidator
 {
     /** @var OfferFundingRepository */
     protected $entityRepository;
 
+    /**
+     * OfferFundingUniqueValidator constructor.
+     * @param OfferFundingRepository $repository
+     */
     public function __construct(OfferFundingRepository $repository)
     {
         $this->entityRepository = $repository;
@@ -21,7 +29,7 @@ class OfferFundingUniqueValidator extends ConstraintValidator
     /**
      * Checks if the passed value is valid.
      *
-     * @param mixed $value The value that should be validated
+     * @param mixed      $value      The value that should be validated
      * @param Constraint $constraint The constraint for the validation
      */
     public function validate($value, Constraint $constraint)
@@ -47,8 +55,8 @@ class OfferFundingUniqueValidator extends ConstraintValidator
         if ($this->between($newStartDate, $actualStartDate, $actualEndDate) ||
             $this->between($newEndDate, $actualStartDate, $actualEndDate) ||
             $this->between($actualEndDate, $newStartDate, $newEndDate) ||
-            $this->between($actualEndDate, $newStartDate, $newEndDate)) {
-
+            $this->between($actualEndDate, $newStartDate, $newEndDate)
+        ) {
             $this->context->buildViolation($constraint->message)
                 ->setParameter('{{ value }}', $value->getName())
                 ->addViolation();
@@ -60,6 +68,7 @@ class OfferFundingUniqueValidator extends ConstraintValidator
      * @param \DateTime $needleDate
      * @param \DateTime $startDate
      * @param \DateTime $endDate
+     * @param bool $strict
      * @return bool True if $needleDate is between $startDate and $endDate ().
      */
     private function between(\DateTime $needleDate, \DateTime $startDate, \DateTime $endDate, $strict = false) : bool
@@ -72,5 +81,4 @@ class OfferFundingUniqueValidator extends ConstraintValidator
         return $startDate->diff($needleDate)->format('%R%a') >= 0 &&
             $needleDate->diff($endDate)->format('%R%a') >= 0;
     }
-
 }

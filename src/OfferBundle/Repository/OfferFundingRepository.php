@@ -12,8 +12,8 @@ class OfferFundingRepository extends EntityRepository
 {
     /**
      * @param array $params
-     * @param bool $mostRecent
-     * @param bool $isActif
+     * @param bool  $mostRecent
+     * @param bool  $isActif
      * @return \Doctrine\ORM\QueryBuilder
      */
     public function findByCustomFilters(array $params, bool $mostRecent = false, bool $isActif = true)
@@ -24,7 +24,7 @@ class OfferFundingRepository extends EntityRepository
             $queryBuilder
                 ->andWhere('funding.modelId = :modelId')
                 ->setParameter('modelId', $params['model']);
-        } else if (isset($params['range'])) {
+        } elseif (isset($params['range'])) {
             $queryBuilder
                 ->andWhere('funding.rangeId = :rangeId')
                 ->setParameter('rangeId', $params['range']);
