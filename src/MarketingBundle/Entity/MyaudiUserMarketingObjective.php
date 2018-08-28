@@ -12,7 +12,12 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *
  * @ORM\Table(
  *     name="myaudi_user_marketing_objective",
- *     uniqueConstraints={@ORM\UniqueConstraint(name="UNIQ_myaudi_user_marketing_objective", columns={"myaudi_user_id", "marketing_objective_id"})}
+ *     uniqueConstraints={
+ *         @ORM\UniqueConstraint(
+ *             name="UNIQ_myaudi_user_marketing_objective",
+ *             columns={"myaudi_user_id", "marketing_objective_id"}
+ *         )
+ *     }
  * )
  * @ORM\Entity()
  * @UniqueEntity(
