@@ -110,6 +110,9 @@ class ContactFormController extends MullenloweRestController
             if ($request->query->get("name")) {
                 $criterias["name"] = $request->query->get("name");
             }
+            if ($request->query->get("legacyFormId")) {
+                $criterias["legacyId"] = $request->query->get("legacyFormId");
+            }
 
             return $this->createView($repository->findOneBy($criterias));
         } catch (\Exception $e) {
