@@ -83,6 +83,7 @@ class MarketingPermission
     public function setMyaudiUserId($myaudiUserId): MarketingPermission
     {
         $this->myaudiUserId = $myaudiUserId;
+
         return $this;
     }
 
@@ -102,6 +103,7 @@ class MarketingPermission
     public function setDataUseAgreement($dataUseAgreement): MarketingPermission
     {
         $this->dataUseAgreement = $dataUseAgreement;
+
         return $this;
     }
 
@@ -121,6 +123,7 @@ class MarketingPermission
     public function setEmail($email): MarketingPermission
     {
         $this->email = $email;
+
         return $this;
     }
 
@@ -140,6 +143,7 @@ class MarketingPermission
     public function setPhone($phone): MarketingPermission
     {
         $this->phone = $phone;
+
         return $this;
     }
 
@@ -159,6 +163,7 @@ class MarketingPermission
     public function setPostal($postal): MarketingPermission
     {
         $this->postal = $postal;
+
         return $this;
     }
 }

@@ -97,7 +97,7 @@ class ContactFormController extends MullenloweRestController
      *     )
      * )
      *
-     * @param int $id
+     * @param Request $request
      * @return View
      */
     public function getByCriteriaAction(Request $request)
@@ -118,7 +118,6 @@ class ContactFormController extends MullenloweRestController
         } catch (\Exception $e) {
             throw new BadRequestHttpException(self::CONTEXT, $e->getMessage());
         }
-
     }
 
     /**

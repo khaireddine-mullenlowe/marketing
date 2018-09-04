@@ -5,6 +5,10 @@ namespace MarketingBundle\tests\Controller;
 use FunctionalTester;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Class CampaignEventControlerCest
+ * @package MarketingBundle\tests\Controller
+ */
 class CampaignEventControlerCest
 {
     /**

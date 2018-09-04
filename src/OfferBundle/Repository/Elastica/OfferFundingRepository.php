@@ -13,10 +13,10 @@ use FOS\ElasticaBundle\Repository;
 class OfferFundingRepository extends Repository
 {
     /**
-     * @param $name
+     * @param string $name
      * @return array
      */
-    public function findByName($name)
+    public function findByName(string $name)
     {
         $match = new Match();
         $match->setField('name', $name);

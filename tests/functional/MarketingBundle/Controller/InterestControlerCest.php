@@ -5,6 +5,10 @@ namespace MarketingBundle\tests\Controller;
 use FunctionalTester;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Class InterestControlerCest
+ * @package MarketingBundle\tests\Controller
+ */
 class InterestControlerCest
 {
     /**

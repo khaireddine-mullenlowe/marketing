@@ -5,6 +5,10 @@ namespace MarketingBundle\tests\Controller;
 use FunctionalTester;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Class ContactFormControlerCest
+ * @package MarketingBundle\tests\Controller
+ */
 class ContactFormControlerCest
 {
     /**
@@ -22,7 +26,7 @@ class ContactFormControlerCest
     /**
      * @param FunctionalTester $I
      */
-    public function tryGetContactFormeKo(FunctionalTester $I) {
+    public function tryGetContactFormKo(FunctionalTester $I) {
         $I->haveHttpHeader('Content-Type', 'application/json');
 
         $I->sendGET('/contact-form/2');

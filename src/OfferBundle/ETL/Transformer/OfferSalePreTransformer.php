@@ -3,7 +3,6 @@
 namespace OfferBundle\ETL\Transformer;
 
 use Doctrine\DBAL\Driver\Connection;
-use Doctrine\DBAL\Schema\Constraint;
 use Mullenlowe\EtlBundle\Exception\TransformerException;
 use Mullenlowe\EtlBundle\Row;
 use Mullenlowe\EtlBundle\Transformer\TransformerInterface;

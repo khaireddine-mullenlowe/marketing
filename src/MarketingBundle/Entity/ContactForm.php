@@ -163,7 +163,7 @@ class ContactForm
     /**
      * Set event
      *
-     * @param string campaignEvent
+     * @param string $campaignEvent
      *
      * @return ContactForm
      */

@@ -132,7 +132,7 @@ class OfferFundingController extends MullenloweRestController
     /**
      * @Rest\Get("/funding")
      * @param Request $request
-     * @return array
+     * @return View
      *
      * @SWG\Get(
      *     path="/offer/funding",
@@ -227,14 +227,14 @@ class OfferFundingController extends MullenloweRestController
         $paginator = $this->get('knp_paginator');
         $results = $repository->findByName($name);
         /** @var \Knp\Bundle\PaginatorBundle\Pagination\SlidingPagination $pager */
-        $pager = $paginator->paginate($results, $request->query->getInt('page', 1), $request->query->getInt('limit', 1));
+        $pager =
+            $paginator->paginate($results, $request->query->getInt('page', 1), $request->query->getInt('limit', 1));
 
         return $this->createPaginatedView($pager);
     }
 
     /**
      * @Rest\Get("/funding/{id}")
-     * @param Request $request
      * @param integer $id
      * @return \FOS\RestBundle\View\View
      *
@@ -262,7 +262,7 @@ class OfferFundingController extends MullenloweRestController
      *     )
      * )
      */
-    public function getAction(Request $request, int $id)
+    public function getAction(int $id)
     {
         $offerFunding = $this->getDoctrine()->getRepository('OfferBundle:OfferFunding')->find($id);
         if (!$offerFunding instanceof OfferFunding) {
