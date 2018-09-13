@@ -2,7 +2,7 @@ imports:
     - { resource: config_dev.yml }
 
 parameters:
-    marketing_index_name: marketing_test
+    env: test
 
 framework:
     test: ~
