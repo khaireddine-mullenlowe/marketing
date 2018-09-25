@@ -23,7 +23,7 @@ class Version20180924152931 extends AbstractMigration implements ContainerAwareI
     const SUBSCRIPTION_NAME = 'eCommerce';
     const OPERATION_NAME = '2018_MondialAutoParis_ReservationCPL';
     const ENTRYPOINT_NAME = 'Evénement';
-    const CONTACTFORM_TYPE_LABEL = 'contact_form_type_id';
+    const CONTACTFORM_TYPE_LABEL = 'normal_contact_form_type_id';
 
     /**
      * @param Schema $schema
