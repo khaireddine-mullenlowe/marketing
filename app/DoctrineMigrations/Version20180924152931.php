@@ -24,6 +24,7 @@ class Version20180924152931 extends AbstractMigration implements ContainerAwareI
     const OPERATION_NAME = '2018_MondialAutoParis_ReservationCPL';
     const ENTRYPOINT_NAME = 'Evénement';
     const CONTACTFORM_TYPE_LABEL = 'normal_contact_form_type_id';
+    const PMS_LEGACY_ID = 1225;
 
     /**
      * @param Schema $schema
@@ -100,6 +101,7 @@ class Version20180924152931 extends AbstractMigration implements ContainerAwareI
             ->setEntryPoint($entryPoint)
             ->setCampaignEvent($campaignEvent)
             ->setCreateProspectAccount(1)
+            ->setLegacyId(self::PMS_LEGACY_ID)
             ->setSendEmailToCdv(1)
             ->setSendEmailToCrm(1);
         $em->persist($contactForm);
