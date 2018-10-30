@@ -20,6 +20,9 @@ class Version20181025122821 extends AbstractMigration implements ContainerAwareI
 
     const IMPORT_FILENAME = 'id_forms_2018_v3.xlsx';
 
+    /** @var EntityManager */
+    private $em;
+
     /**
      * @param Schema $schema
      * @throws \Doctrine\ORM\OptimisticLockException
@@ -28,13 +31,20 @@ class Version20181025122821 extends AbstractMigration implements ContainerAwareI
      */
     public function up(Schema $schema)
     {
-        $rootDir = $this->container->getParameter('kernel.root_dir');
-        $importPath = $rootDir . '/../src/MarketingBundle/Resources/' . self::IMPORT_FILENAME;
+        $this->initEntityManager();
+        $importPath = $this->getExcelPath();
 
-        $this->parseContactFormExcel($importPath, function($cells) {
+        $this->parseContactFormExcel($importPath, function($cells, $rowKey) {
             $campaignEvent = $this->createCampaignIfNeeded($cells);
             $this->createContactForm($campaignEvent, $cells);
+
+            // Insert per batch of 40 in case of performance issues
+            if ($rowKey % 40 === 0) {
+                $this->em->flush();
+            }
         });
+
+        $this->em->flush();
     }
 
     /**
@@ -45,56 +55,38 @@ class Version20181025122821 extends AbstractMigration implements ContainerAwareI
      */
     public function down(Schema $schema)
     {
-        $rootDir = $this->container->getParameter('kernel.root_dir');
-        $importPath = $rootDir . '/../src/MarketingBundle/Resources/' . self::IMPORT_FILENAME;
+        $this->initEntityManager();
+        $importPath = $this->getExcelPath();
 
-        $this->parseContactFormExcel($importPath, function($cells) {
+        $this->parseContactFormExcel($importPath, function($cells, $rowKey) {
             $this->deleteContactForm($cells);
+
+            // For performance issues
+            if ($rowKey % 40 === 0) {
+                $this->em->flush();
+            }
         });
+        $this->em->flush();
     }
 
     /**
      * @param $importPath
      * @param $callback
-     * @throws \Doctrine\ORM\OptimisticLockException
      * @throws \PhpOffice\PhpSpreadsheet\Exception
      * @throws \PhpOffice\PhpSpreadsheet\Reader\Exception
      */
     private function parseContactFormExcel($importPath, $callback)
     {
         $spreadsheet = IOFactory::load($importPath);
-        $rowIterator = $spreadsheet->getActiveSheet()->getRowIterator();
-        $columnDefinition = [];
-        $em = $this->getEntityManager();
+        $rows = $spreadsheet->getActiveSheet()->rangeToArray('A1:S121');
+        $columnDefinition = array_shift($rows);
 
-        foreach ($rowIterator as $rowKey => $row) {
-            $cellIterator = $row->getCellIterator();
-            $cellIterator->setIterateOnlyExistingCells(true);
-            $cells = [];
+        foreach ($rows as $rowKey => $row) {
+            $reindexedRow = array_combine($columnDefinition, $row);
 
-            foreach ($cellIterator as $keyCell => $cell) {
-                $key = $keyCell;
-                if (!empty($columnDefinition) && isset($columnDefinition[$keyCell])) {
-                    $key = $columnDefinition[$keyCell];
-                }
-                $cells[$key] = $cell->getFormattedValue();
-            }
-
-            // Do not import first row
-            if ($rowKey === 1) {
-                $columnDefinition = $cells;
-            } else {
-                // Call to delete/import rows is made by the parent function
-                $callback($cells);
-            }
-
-            // For performance issues
-            if ($rowKey % 40 === 0) {
-                $em->flush();
-            }
+            // Call to delete/import rows is made by the parent function
+            $callback($reindexedRow, $rowKey);
         }
-
-        $em->flush();
     }
 
     /**
@@ -104,9 +96,7 @@ class Version20181025122821 extends AbstractMigration implements ContainerAwareI
      */
     private function createCampaignIfNeeded($data)
     {
-        $em = $this->getEntityManager();
-
-        $campaignRepo = $em->getRepository('MarketingBundle:CampaignEvent');
+        $campaignRepo = $this->em->getRepository('MarketingBundle:CampaignEvent');
 
         if (isset($data['campaign_legacy_id'])) {
             $campaignByLegacyId = $campaignRepo->findOneBy(['legacyId' => $data['campaign_legacy_id']]);
@@ -122,7 +112,7 @@ class Version20181025122821 extends AbstractMigration implements ContainerAwareI
             }
         }
 
-        $eventTypeRepo = $em->getRepository('MarketingBundle:EventType');
+        $eventTypeRepo = $this->em->getRepository('MarketingBundle:EventType');
         $eventType = $eventTypeRepo->findOneBy(['name' => $data['campaign_type']]);
 
         $campaign = new CampaignEvent();
@@ -130,11 +120,11 @@ class Version20181025122821 extends AbstractMigration implements ContainerAwareI
             ->setName($data['campaign_name'])
             ->setEventType($eventType)
             ->setWaitingList($data['waiting_list'])
-            ->setStartDate(\DateTime::createFromFormat('d/m/Y', '01/01/2018'))
-            ->setEndDate(\DateTime::createFromFormat('d/m/Y', $data['end_date']))
+            ->setStartDate(\DateTime::createFromFormat('m/d/Y', '01/01/2018'))
+            ->setEndDate(\DateTime::createFromFormat('m/d/Y', $data['end_date']))
             ->setStatus(1);
-        $em->persist($campaign);
-        $em->flush();
+        $this->em->persist($campaign);
+        $this->em->flush();
 
         return $campaign;
     }
@@ -145,11 +135,10 @@ class Version20181025122821 extends AbstractMigration implements ContainerAwareI
      */
     private function createContactForm($campaignEvent, $data)
     {
-        $em = $this->getEntityManager();
-        $contactFormTypeRepo = $em->getRepository('MarketingBundle:ContactFormType');
-        $subscriptionRepo = $em->getRepository('MarketingBundle:Subscription');
-        $entryPointRepo = $em->getRepository('MarketingBundle:EntryPoint');
-        $leadProviderRepo = $em->getRepository('MarketingBundle:LeadProvider');
+        $contactFormTypeRepo = $this->em->getRepository('MarketingBundle:ContactFormType');
+        $subscriptionRepo = $this->em->getRepository('MarketingBundle:Subscription');
+        $entryPointRepo = $this->em->getRepository('MarketingBundle:EntryPoint');
+        $leadProviderRepo = $this->em->getRepository('MarketingBundle:LeadProvider');
 
         $contactFormType = $contactFormTypeRepo->findOneBy(['name' => $data['form_type']]);
         $subscription = $subscriptionRepo->findOneBy(['name' => $data['subscription']]);
@@ -169,33 +158,42 @@ class Version20181025122821 extends AbstractMigration implements ContainerAwareI
             ->setSendEmailToCdv($data['email_cdv'])
             ->setSendEmailToCrm($data['email_crm']);
 
-        $em->persist($contactForm);
+        $this->em->persist($contactForm);
     }
 
     /**
      * @param $data
-     * @throws \Doctrine\ORM\OptimisticLockException
      */
     private function deleteContactForm($data)
     {
-        $em = $this->getEntityManager();
-        $contactFormRepo = $em->getRepository('MarketingBundle:ContactForm');
+        $contactFormRepo = $this->em->getRepository('MarketingBundle:ContactForm');
 
-        $contactForm = $contactFormRepo->findOneBy(['name' => $data['operation_details']]);
-        if (!empty($contactForm)) {
-            $em->remove($contactForm);
+        $contactForms = $contactFormRepo->findBy(['name' => $data['operation_details']]);
+        foreach ($contactForms as $contactForm) {
+            $this->em->remove($contactForm);
         }
     }
 
     /**
-     * @return EntityManager
+     * EntityManager setter
      */
-    private function getEntityManager()
+    private function initEntityManager()
     {
         if (!$this->container->has('doctrine')) {
             throw new \LogicException('Doctrine is required for this migration');
         }
 
-        return $this->container->get('doctrine')->getManager();
+        $this->em = $this->container->get('doctrine')->getManager();
+    }
+
+    /**
+     * @return string
+     */
+    private function getExcelPath(): string
+    {
+        $rootDir = $this->container->getParameter('kernel.root_dir');
+        $importPath = $rootDir . '/../src/MarketingBundle/Resources/' . self::IMPORT_FILENAME;
+
+        return $importPath;
     }
 }
