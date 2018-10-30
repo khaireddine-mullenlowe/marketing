@@ -184,7 +184,6 @@ class Version20181025122821 extends AbstractMigration implements ContainerAwareI
         $contactForm = $contactFormRepo->findOneBy(['name' => $data['operation_details']]);
         if (!empty($contactForm)) {
             $em->remove($contactForm);
-            $em->flush();
         }
     }
 
