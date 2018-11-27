@@ -140,3 +140,7 @@ fos_rest:
         include_format: false
     body_converter:
         enabled: true
+
+mullenlowe_common:
+    guzzle:
+        verify_ssl: '%guzzle_verify_ssl%'

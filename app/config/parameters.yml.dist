@@ -42,3 +42,4 @@ parameters:
 
     env: dev
 
+    guzzle_verify_ssl: true
