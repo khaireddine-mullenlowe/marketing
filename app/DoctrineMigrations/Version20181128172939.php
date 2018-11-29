@@ -5,6 +5,7 @@ namespace Application\Migrations;
 use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\ORM\EntityManager;
+use Mullenlowe\CommonBundle\Doctrine\Migration\AbstractMullenloweMigration;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
@@ -14,7 +15,7 @@ use MarketingBundle\Entity\ContactForm;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-class Version20181128172939 extends AbstractMigration implements ContainerAwareInterface
+class Version20181128172939 extends AbstractMullenloweMigration
 {
     use ContainerAwareTrait;
 
@@ -80,7 +81,7 @@ class Version20181128172939 extends AbstractMigration implements ContainerAwareI
         $spreadsheet = IOFactory::load($importPath);
         $rows = $spreadsheet->getActiveSheet()->rangeToArray('A1:S3');
 
-        if (!empty($rows[0])) {
+        if (!empty($rows[1])) {
             $columnDefinition = array_shift($rows);
             foreach ($rows as $rowKey => $row) {
                 $reindexedRow = array_combine($columnDefinition, $row);
