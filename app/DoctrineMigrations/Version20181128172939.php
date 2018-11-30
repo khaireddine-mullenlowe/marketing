@@ -2,12 +2,10 @@
 
 namespace Application\Migrations;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\ORM\EntityManager;
 use Mullenlowe\CommonBundle\Doctrine\Migration\AbstractMullenloweMigration;
 use PhpOffice\PhpSpreadsheet\IOFactory;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use MarketingBundle\Entity\CampaignEvent;
 use MarketingBundle\Entity\ContactForm;
@@ -17,8 +15,6 @@ use MarketingBundle\Entity\ContactForm;
  */
 class Version20181128172939 extends AbstractMullenloweMigration
 {
-    use ContainerAwareTrait;
-
     const IMPORT_FILENAME = 'id_forms_ecom_2018.xlsx';
 
     /** @var EntityManager */
@@ -32,7 +28,7 @@ class Version20181128172939 extends AbstractMullenloweMigration
      */
     public function up(Schema $schema)
     {
-        $this->initEntityManager();
+        $this->em = $this->getEntityManager();
         $importPath = $this->getExcelPath();
 
         $this->parseContactFormExcel($importPath, function($cells, $rowKey) {
@@ -56,7 +52,7 @@ class Version20181128172939 extends AbstractMullenloweMigration
      */
     public function down(Schema $schema)
     {
-        $this->initEntityManager();
+        $this->em = $this->getEntityManager();
         $importPath = $this->getExcelPath();
 
         $this->parseContactFormExcel($importPath, function($cells, $rowKey) {
@@ -116,7 +112,7 @@ class Version20181128172939 extends AbstractMullenloweMigration
         }
 
         $eventTypeRepo = $this->em->getRepository('MarketingBundle:EventType');
-        if (isset($data['campaign_name']) && !is_null($data['campaign_name'])) {
+        if (!empty($data['campaign_name'])) {
             $eventType = $eventTypeRepo->findOneBy(['name' => $data['campaign_type']]);
         }
 
@@ -130,7 +126,6 @@ class Version20181128172939 extends AbstractMullenloweMigration
                 ->setEndDate(\DateTime::createFromFormat('m/d/Y', $data['end_date']))
                 ->setStatus(1);
             $this->em->persist($campaign);
-            $this->em->flush();
         }
 
         return $campaign;
@@ -186,18 +181,6 @@ class Version20181128172939 extends AbstractMullenloweMigration
         foreach ($contactForms as $contactForm) {
             $this->em->remove($contactForm);
         }
-    }
-
-    /**
-     * EntityManager setter
-     */
-    private function initEntityManager()
-    {
-        if (!$this->container->has('doctrine')) {
-            throw new \LogicException('Doctrine is required for this migration');
-        }
-
-        $this->em = $this->container->get('doctrine')->getManager();
     }
 
     /**
