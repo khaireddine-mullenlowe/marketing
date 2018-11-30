@@ -79,7 +79,7 @@ class Version20181128172939 extends AbstractMullenloweMigration
     private function parseContactFormExcel($importPath, $callback)
     {
         $spreadsheet = IOFactory::load($importPath);
-        $rows = $spreadsheet->getActiveSheet()->rangeToArray('A1:S3');
+        $rows = $spreadsheet->getActiveSheet()->rangeToArray('A1:S2');
 
         if (!empty($rows[1])) {
             $columnDefinition = array_shift($rows);
