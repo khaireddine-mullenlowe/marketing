@@ -96,7 +96,6 @@ class Version20181128172939 extends AbstractMullenloweMigration
     private function createCampaignIfNeeded($data)
     {
         $campaignRepo = $this->em->getRepository('MarketingBundle:CampaignEvent');
-
         if (!empty($data['campaign_legacy_id'])) {
             $campaignByLegacyId = $campaignRepo->findOneBy(['legacyId' => $data['campaign_legacy_id']]);
             if (!empty($campaignByLegacyId)) {
@@ -112,10 +111,7 @@ class Version20181128172939 extends AbstractMullenloweMigration
         }
 
         $eventTypeRepo = $this->em->getRepository('MarketingBundle:EventType');
-        if (!empty($data['campaign_name'])) {
-            $eventType = $eventTypeRepo->findOneBy(['name' => $data['campaign_type']]);
-        }
-
+        $eventType = $eventTypeRepo->findOneBy(['name' => $data['campaign_type']]);
         $campaign = new CampaignEvent();
         if (!empty($data['campaign_name'])) {
             $campaign
