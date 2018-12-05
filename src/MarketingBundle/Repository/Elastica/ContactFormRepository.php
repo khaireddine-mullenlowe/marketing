@@ -2,7 +2,9 @@
 namespace MarketingBundle\Repository\Elastica;
 
 use Elastica\Query\BoolQuery;
+use Elastica\Query\Match;
 use Elastica\Query\QueryString;
+use Elastica\Query\Term;
 use FOS\ElasticaBundle\Repository;
 
 /**
@@ -22,16 +24,24 @@ class ContactFormRepository extends Repository
             throw new \InvalidArgumentException("Data not valid.");
         }
 
-        $query = new BoolQuery();
-        $queryString = new QueryString();
+        $boolQuery = new BoolQuery();
         foreach ($criterias as $field => $value) {
-            $queryString
-                ->setQuery(str_replace(" ", " AND ", trim($value)))
-                ->setDefaultField($field);
-            $query->addMust($queryString);
+            if ('name' !== $field) {
+                $query = new QueryString();
+                $query
+                    ->setQuery(str_replace(" ", " AND ", trim($value)))
+                    ->setDefaultField($field);
+            } else {
+                $query = new Match();
+                $query
+                    ->setFieldQuery($field, str_replace('-', ' ', $value))
+                    ->setFieldOperator($field, Match::OPERATOR_AND);
+            }
+
+            $boolQuery->addMust($query);
         }
 
-        $result = $this->find($query);
+        $result = $this->find($boolQuery);
         if (is_array($result) && 1 === count($result)) {
             return $result[0];
         }
