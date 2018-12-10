@@ -1,11 +1,9 @@
 <?php
-
 namespace Application\Migrations;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
-use Doctrine\ORM\EntityManager;
 use MarketingBundle\Entity\EventType;
+use Mullenlowe\CommonBundle\Doctrine\Migration\AbstractMullenloweMigration;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
@@ -13,9 +11,10 @@ use MarketingBundle\Entity\CampaignEvent;
 use MarketingBundle\Entity\ContactForm;
 
 /**
- * Auto-generated Migration: Please modify to your needs!
+ * Class Version20181210102633
+ * @package Application\Migrations
  */
-class Version20181210102633 extends AbstractMigration implements ContainerAwareInterface
+class Version20181210102633 extends AbstractMullenloweMigration implements ContainerAwareInterface
 {
     use ContainerAwareTrait;
 
@@ -235,17 +234,5 @@ class Version20181210102633 extends AbstractMigration implements ContainerAwareI
             $em->remove($eventType);
             $em->flush();
         }
-    }
-
-    /**
-     * @return EntityManager
-     */
-    private function getEntityManager()
-    {
-        if (!$this->container->has('doctrine')) {
-            throw new \LogicException('Doctrine is required for this migration');
-        }
-
-        return $this->container->get('doctrine')->getManager();
     }
 }
