@@ -5,8 +5,6 @@ use Doctrine\DBAL\Schema\Schema;
 use MarketingBundle\Entity\EventType;
 use Mullenlowe\CommonBundle\Doctrine\Migration\AbstractMullenloweMigration;
 use PhpOffice\PhpSpreadsheet\IOFactory;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use MarketingBundle\Entity\CampaignEvent;
 use MarketingBundle\Entity\ContactForm;
 
@@ -14,9 +12,8 @@ use MarketingBundle\Entity\ContactForm;
  * Class Version20181210102633
  * @package Application\Migrations
  */
-class Version20181210102633 extends AbstractMullenloweMigration implements ContainerAwareInterface
+class Version20181210102633 extends AbstractMullenloweMigration
 {
-    use ContainerAwareTrait;
 
     const IMPORT_FILENAME = 'id_forms_20181210.xlsx';
     const CAMPAIGN_TYPE_APV = 'Campagne APV';
