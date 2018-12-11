@@ -2,8 +2,6 @@
 #
 # If DB schema has changed then update DB schema
 
-php bin/console doctrine:migrations:migrate --no-interaction --env=prod
-
 php bin/console doctrine:schema:validate --env=prod --quiet
 
 if [ $? -ne 0 ]; then
