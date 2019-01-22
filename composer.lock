@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1bc46c407c278152be91f7ac5f88597d",
+    "content-hash": "41a4a93ea458b74200334c8d5f15fe74",
     "packages": [
         {
             "name": "analog/analog",
@@ -2464,19 +2464,20 @@
         },
         {
             "name": "lexik/jwt-authentication-bundle",
-            "version": "v2.5.3",
+            "version": "v2.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lexik/LexikJWTAuthenticationBundle.git",
-                "reference": "85b05784fbad7d6435626915edeeb55ed0bcd6a7"
+                "reference": "ba179c2f876b96e5cffe5ee75cac883cfe3f8847"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lexik/LexikJWTAuthenticationBundle/zipball/85b05784fbad7d6435626915edeeb55ed0bcd6a7",
-                "reference": "85b05784fbad7d6435626915edeeb55ed0bcd6a7",
+                "url": "https://api.github.com/repos/lexik/LexikJWTAuthenticationBundle/zipball/ba179c2f876b96e5cffe5ee75cac883cfe3f8847",
+                "reference": "ba179c2f876b96e5cffe5ee75cac883cfe3f8847",
                 "shasum": ""
             },
             "require": {
+                "ext-openssl": "*",
                 "lcobucci/jwt": "^3.2",
                 "namshi/jose": "^7.2",
                 "php": "^5.5|^7.0",
@@ -2556,7 +2557,7 @@
                 "rest",
                 "symfony"
             ],
-            "time": "2018-07-06T10:21:24+00:00"
+            "time": "2018-11-18T21:13:33+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -2642,12 +2643,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:itagenceone/audi-agc5-common-bundle.git",
-                "reference": "d8f0a9411536b78569951c260e4a09685f24bd81"
+                "reference": "cf36bfe740ca841447fea000e8effdb1eb1a828b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/itagenceone/audi-agc5-common-bundle/zipball/d8f0a9411536b78569951c260e4a09685f24bd81",
-                "reference": "d8f0a9411536b78569951c260e4a09685f24bd81",
+                "url": "https://api.github.com/repos/itagenceone/audi-agc5-common-bundle/zipball/cf36bfe740ca841447fea000e8effdb1eb1a828b",
+                "reference": "cf36bfe740ca841447fea000e8effdb1eb1a828b",
                 "shasum": ""
             },
             "require": {
@@ -2702,7 +2703,7 @@
             "keywords": [
                 "bundle"
             ],
-            "time": "2018-11-23T11:28:14+00:00"
+            "time": "2019-01-16T09:35:13+00:00"
         },
         {
             "name": "mullenlowe/component",
