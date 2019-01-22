@@ -113,6 +113,15 @@ fos_elastica:
                                             type: string
                                         status:
                                             type: string
+                        externalCampaignEvent:
+                            type: object
+                            properties:
+                                provider:
+                                    type: string
+                                providerCampaignId:
+                                    type: string
+                                modelId:
+                                    type: string
                         subscription:
                             type: object
                             properties:
