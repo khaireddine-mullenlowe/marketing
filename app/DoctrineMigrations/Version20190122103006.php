@@ -225,7 +225,7 @@ class Version20190122103006 extends AbstractMullenloweMigration
 
         $eventType = $eventTypeRepo->findOneBy(['name' => $name]);
         if (!empty($eventType)) {
-            // Delete campaigns event related to the new "Campagne APV" before trying removing the type himself
+            // Delete campaigns before trying removing the type himself
             $campaignEventRepo = $em->getRepository('MarketingBundle:CampaignEvent');
             $campaignsEventType = $campaignEventRepo->findBy(['eventType' => $eventType]);
             foreach ($campaignsEventType as $campaignEventType) {
