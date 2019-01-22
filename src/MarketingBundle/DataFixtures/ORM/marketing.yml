@@ -73,6 +73,14 @@ MarketingBundle\Entity\CampaignEvent:
     status: 1
     eventType: '@event_type1'
 
+
+MarketingBundle\Entity\ExternalCampaignEvent:
+  external_campaign_event1:
+    provider: 'odity'
+    providerCampaignId: 20190121
+    modelId: 2
+
+
 MarketingBundle\Entity\ContactForm:
   contact_form1:
     name: 'contactForm'
