@@ -449,7 +449,7 @@ class ContactForm
     /**
      * @return CampaignEvent
      */
-    public function getExternalCampaignEvent(): ExternalCampaignEvent
+    public function getExternalCampaignEvent()
     {
         return $this->externalCampaignEvent;
     }
