@@ -38,6 +38,16 @@ class ContactForm
     protected $campaignEvent;
 
     /**
+     * @var CampaignEvent
+     *
+     * @ORM\ManyToOne(
+     *     targetEntity="ExternalCampaignEvent",
+     *     inversedBy="contactForms"
+     * )
+     */
+    protected $externalCampaignEvent;
+
+    /**
      * @var Subscription
      *
      * @ORM\ManyToOne(
@@ -435,4 +445,22 @@ class ContactForm
     {
         return $this->contactFormType;
     }
+
+    /**
+     * @return CampaignEvent
+     */
+    public function getExternalCampaignEvent(): ExternalCampaignEvent
+    {
+        return $this->externalCampaignEvent;
+    }
+
+    /**
+     * @param CampaignEvent $externalCampaignEvent
+     */
+    public function setExternalCampaignEvent(ExternalCampaignEvent $externalCampaignEvent)
+    {
+        $this->externalCampaignEvent = $externalCampaignEvent;
+    }
+
+
 }
