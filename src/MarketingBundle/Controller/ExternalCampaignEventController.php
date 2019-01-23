@@ -55,26 +55,6 @@ class ExternalCampaignEventController extends MullenloweRestController
      */
     public function getAction(int $id)
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $externalCampaignEvent = new ExternalCampaignEvent();
-        $externalCampaignEvent->setModelId(3);
-        $externalCampaignEvent->setProvider("odity");
-        $externalCampaignEvent->setProviderCampaignId("20190117");
-
-        $contactForm = new ContactForm();
-        $contactForm->setExternalCampaignEvent($externalCampaignEvent);
-        $contactForm->setName('test-poc-fil-rouge');
-        $contactForm->setDescription('poc');
-
-        $externalCampaignEvent->addContactForm($contactForm);
-
-        $em->persist($externalCampaignEvent);
-        $em->persist($contactForm);
-        $em->flush();
-
-        die();
-
         $campaignEvent = $this->getDoctrine()
             ->getRepository('MarketingBundle:ExternalCampaignEvent')
             ->find($id);
