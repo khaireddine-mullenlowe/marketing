@@ -31,7 +31,7 @@ class ExternalCampaignEvent extends BaseEntity
      * @Assert\NotNull
      *
      *
-     * @ORM\Column(name="provider", type="text")
+     * @ORM\Column(name="provider", type="text", nullable=false)
      */
     protected $provider;
 
@@ -39,36 +39,28 @@ class ExternalCampaignEvent extends BaseEntity
      * @var string
      * @Assert\NotNull
      *
-     * @ORM\Column(name="provider_campaign_id", type="text")
+     * @ORM\Column(name="provider_campaign_number", type="text", nullable=false)
      */
-    private $providerCampaignId;
+    private $providerCampaignNumber;
 
 
     /**
      * @var string
      * @Assert\NotNull
      *
-     * @ORM\Column(name="model_id", type="text")
+     * @ORM\Column(name="model_id", type="integer", nullable=false)
      */
     private $modelId;
 
     /**
-     * @var ArrayCollection
+     * @var ContactForm
      *
-     * @ORM\OneToMany(
+     * @ORM\ManyToOne(
      *     targetEntity="ContactForm",
-     *     mappedBy="externalMarketingEvent"
+     *     inversedBy="externalMarketingEvents"
      * )
      */
-    protected $contactForms;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->contactForms = new \Doctrine\Common\Collections\ArrayCollection();
-    }
+    protected $contactForm;
 
     /**
      * Set provider
@@ -95,27 +87,35 @@ class ExternalCampaignEvent extends BaseEntity
     }
 
     /**
-     * Set providerCampaignId
-     *
-     * @param string $providerCampaignId
-     *
-     * @return ExternalCampaignEvent
+     * @return string
      */
-    public function setProviderCampaignId($providerCampaignId)
+    public function getProviderCampaignNumber(): string
     {
-        $this->providerCampaignId = $providerCampaignId;
-
-        return $this;
+        return $this->providerCampaignNumber;
     }
 
     /**
-     * Get providerCampaignId
-     *
-     * @return string
+     * @param string $providerCampaignNumber
      */
-    public function getProviderCampaignId()
+    public function setProviderCampaignNumber(string $providerCampaignNumber)
     {
-        return $this->providerCampaignId;
+        $this->providerCampaignNumber = $providerCampaignNumber;
+    }
+
+    /**
+     * @return ContactForm
+     */
+    public function getContactForm(): ContactForm
+    {
+        return $this->contactForm;
+    }
+
+    /**
+     * @param ContactForm $contactForm
+     */
+    public function setContactForm(ContactForm $contactForm)
+    {
+        $this->contactForm = $contactForm;
     }
 
     /**
