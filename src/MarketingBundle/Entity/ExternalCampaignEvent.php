@@ -16,7 +16,6 @@ use Mullenlowe\CommonBundle\Entity\Base\BaseEntity;
  */
 class ExternalCampaignEvent extends BaseEntity
 {
-
     /**
      * @var int
      *
@@ -42,7 +41,6 @@ class ExternalCampaignEvent extends BaseEntity
      * @ORM\Column(name="provider_campaign_number", type="text", nullable=false)
      */
     private $providerCampaignNumber;
-
 
     /**
      * @var string
