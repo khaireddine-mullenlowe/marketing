@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Mullenlowe\CommonBundle\Entity\Traits\LegacyTrait;
 use Gedmo\Mapping\Annotation as Gedmo;
+use OfferBundle\Repository\Elastica\ExternalCampaignEventRepository;
 
 /**
  * ContactForm
@@ -39,7 +40,7 @@ class ContactForm
     protected $campaignEvent;
 
     /**
-     * @var CampaignEvent
+     * @var ExternalCampaignEvent
      *
      * @ORM\OneToMany(
      *     targetEntity="ExternalCampaignEvent",
@@ -463,7 +464,8 @@ class ContactForm
     }
 
     /**
-     * @param CampaignEvent $externalCampaignEvent
+     * @param $externalCampaignEvents
+     * @return $this
      */
     public function setExternalCampaignEvent($externalCampaignEvents)
     {
