@@ -39,7 +39,7 @@ class ContactForm
     protected $campaignEvent;
 
     /**
-     * @var ExternalCampaignEvent
+     * @var ArrayCollection
      *
      * @ORM\OneToMany(
      *     targetEntity="ExternalCampaignEvent",

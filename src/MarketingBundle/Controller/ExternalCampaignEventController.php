@@ -61,7 +61,6 @@ class ExternalCampaignEventController extends MullenloweRestController
             ->find($id);
 
         if (empty($campaignEvent)) {
-
             throw new NotFoundHttpException(self::CONTEXT, 'External Compaing Event not found.');
         }
 

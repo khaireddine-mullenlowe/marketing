@@ -30,7 +30,6 @@ class ExternalCampaignEvent extends BaseEntity
      * @var string
      * @Assert\NotNull
      *
-     *
      * @ORM\Column(name="provider", type="text", nullable=false)
      */
     protected $provider;
@@ -61,14 +60,14 @@ class ExternalCampaignEvent extends BaseEntity
      */
     protected $contactForm;
 
-    /**src/MarketingBundle/Entity/ExternalCampaignEvent.php
+    /**
      * Set provider
      *
      * @param string $provider
      *
      * @return ExternalCampaignEvent
      */
-    public function setProvider(string $provider)
+    public function setProvider($provider)
     {
         $this->provider = $provider;
 
@@ -97,7 +96,7 @@ class ExternalCampaignEvent extends BaseEntity
      * @param string $providerCampaignNumber
      * @return $this
      */
-    public function setProviderCampaignNumber(string $providerCampaignNumber)
+    public function setProviderCampaignNumber($providerCampaignNumber)
     {
         $this->providerCampaignNumber = $providerCampaignNumber;
 
@@ -116,7 +115,7 @@ class ExternalCampaignEvent extends BaseEntity
      * @param ContactForm $contactForm
      * @return $this
      */
-    public function setContactForm(ContactForm $contactForm)
+    public function setContactForm($contactForm)
     {
         $this->contactForm = $contactForm;
 
