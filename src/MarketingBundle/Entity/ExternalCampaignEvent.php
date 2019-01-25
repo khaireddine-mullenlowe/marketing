@@ -4,6 +4,7 @@ namespace MarketingBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use phpDocumentor\Reflection\Types\Integer;
 use Symfony\Component\Validator\Constraints as Assert;
 use Mullenlowe\CommonBundle\Entity\Base\BaseEntity;
 
@@ -43,7 +44,7 @@ class ExternalCampaignEvent extends BaseEntity
     private $providerCampaignNumber;
 
     /**
-     * @var string
+     * @var integer
      * @Assert\NotNull
      *
      * @ORM\Column(name="model_id", type="integer", nullable=false)
@@ -60,14 +61,14 @@ class ExternalCampaignEvent extends BaseEntity
      */
     protected $contactForm;
 
-    /**
+    /**src/MarketingBundle/Entity/ExternalCampaignEvent.php
      * Set provider
      *
      * @param string $provider
      *
      * @return ExternalCampaignEvent
      */
-    public function setProvider($provider)
+    public function setProvider(string $provider)
     {
         $this->provider = $provider;
 
@@ -87,33 +88,39 @@ class ExternalCampaignEvent extends BaseEntity
     /**
      * @return string
      */
-    public function getProviderCampaignNumber(): string
+    public function getProviderCampaignNumber()
     {
         return $this->providerCampaignNumber;
     }
 
     /**
      * @param string $providerCampaignNumber
+     * @return $this
      */
     public function setProviderCampaignNumber(string $providerCampaignNumber)
     {
         $this->providerCampaignNumber = $providerCampaignNumber;
+
+        return $this;
     }
 
     /**
      * @return ContactForm
      */
-    public function getContactForm(): ContactForm
+    public function getContactForm()
     {
         return $this->contactForm;
     }
 
     /**
      * @param ContactForm $contactForm
+     * @return $this
      */
     public function setContactForm(ContactForm $contactForm)
     {
         $this->contactForm = $contactForm;
+
+        return $this;
     }
 
     /**
@@ -123,7 +130,7 @@ class ExternalCampaignEvent extends BaseEntity
      *
      * @return ExternalCampaignEvent
      */
-    public function setModelId($modelId)
+    public function setModelId(Integer $modelId)
     {
         $this->modelId = $modelId;
 
@@ -140,37 +147,4 @@ class ExternalCampaignEvent extends BaseEntity
         return $this->modelId;
     }
 
-    /**
-     * Add contactForm
-     *
-     * @param \MarketingBundle\Entity\ContactForm $contactForm
-     *
-     * @return ExternalCampaignEvent
-     */
-    public function addContactForm(\MarketingBundle\Entity\ContactForm $contactForm)
-    {
-        $this->contactForms[] = $contactForm;
-
-        return $this;
-    }
-
-    /**
-     * Remove contactForm
-     *
-     * @param \MarketingBundle\Entity\ContactForm $contactForm
-     */
-    public function removeContactForm(\MarketingBundle\Entity\ContactForm $contactForm)
-    {
-        $this->contactForms->removeElement($contactForm);
-    }
-
-    /**
-     * Get contactForms
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getContactForms()
-    {
-        return $this->contactForms;
-    }
 }

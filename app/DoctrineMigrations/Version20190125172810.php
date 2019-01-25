@@ -37,7 +37,9 @@ class Version20190125172810 extends AbstractMullenloweMigration
             ->find(SELF::SIMPLE_FORM_ID);
 
         foreach ($csv as $line => $row) {
-            if (!$line) continue;
+            if (!$line) {
+                continue;
+            }
 
             $row = array_combine(SELF::HEADERS, $row);
             echo sprintf("Importing %s into external_campaign event\n", var_export($row, true));
@@ -70,7 +72,9 @@ class Version20190125172810 extends AbstractMullenloweMigration
         $em = $this->getEntityManager();
 
         foreach ($csv as $line => $row) {
-            if (!$line) continue;
+            if (!$line) {
+                continue;
+            }
 
             $row = array_combine(SELF::HEADERS, $row);
             echo sprintf("Deleting external_campaign event with values %s \n", var_export($row, true));

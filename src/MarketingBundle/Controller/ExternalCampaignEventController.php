@@ -10,6 +10,7 @@ use MarketingBundle\Entity\ContactForm;
 use MarketingBundle\Entity\ExternalCampaignEvent;
 use MarketingBundle\Enum\PaginateEnum;
 use Mullenlowe\CommonBundle\Controller\MullenloweRestController;
+use Mullenlowe\CommonBundle\Exception\NotFoundHttpException;
 use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -60,7 +61,8 @@ class ExternalCampaignEventController extends MullenloweRestController
             ->find($id);
 
         if (empty($campaignEvent)) {
-            throw $this->createNotFoundException('Compain Event not found');
+
+            throw new NotFoundHttpException(self::CONTEXT, 'External Compaing Event not found.');
         }
 
         return $this->createView($campaignEvent);
