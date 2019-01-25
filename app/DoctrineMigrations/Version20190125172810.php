@@ -17,7 +17,7 @@ class Version20190125172810 extends AbstractMullenloweMigration
     const CAMPAIGN_TYPE_APV = 'External Campaign Event';
     const CAMPAIGN_TYPE_DEFAULT = 'Campagne Externe';
     const HEADERS = ["provider", "external_campaign_number", "model_id", "contact_form_id"];
-    const SIMPLE_FORM_ID = 1112;
+    const SIMPLE_FORM_NAME = "2019_FilRouge_Display_Desktop";
 
     /**
      * @param Schema $schema
@@ -34,7 +34,7 @@ class Version20190125172810 extends AbstractMullenloweMigration
 
         $em = $this->getEntityManager();
         $simpleContactForm = $em->getRepository("MarketingBundle:ContactForm")
-            ->find(SELF::SIMPLE_FORM_ID);
+            ->findOneBy(['name' => SELF::SIMPLE_FORM_NAME]);
 
         foreach ($csv as $line => $row) {
             if (!$line) {
@@ -82,12 +82,14 @@ class Version20190125172810 extends AbstractMullenloweMigration
             $externalCampaignEvent = $em
                 ->getRepository("MarketingBundle:ExternalCampaignEvent")
                 ->findOneBy([
-                    "provider"                  =>  $row['provider'],
-                    "providerCampaignNumber"    =>  $row['external_campaign_number'],
-                    "modelId"                   =>  $row['model_id'],
+                    "provider"                  => $row['provider'],
+                    "providerCampaignNumber"    => $row['external_campaign_number'],
+                    "modelId"                   => $row['model_id'],
                 ]);
 
-            if ($externalCampaignEvent) $em->remove($externalCampaignEvent);
+            if ($externalCampaignEvent) {
+                $em->remove($externalCampaignEvent);
+            }
         }
 
         $em->flush();
