@@ -126,11 +126,11 @@ class ExternalCampaignEvent extends BaseEntity
     /**
      * Set modelId
      *
-     * @param string $modelId
+     * @param integer $modelId
      *
      * @return ExternalCampaignEvent
      */
-    public function setModelId(Integer $modelId)
+    public function setModelId($modelId)
     {
         $this->modelId = $modelId;
 
