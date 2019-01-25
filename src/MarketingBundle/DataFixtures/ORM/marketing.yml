@@ -1,3 +1,4 @@
+---
 MarketingBundle\Entity\CallCenter:
   call_center1:
     name: 'callCenter'
