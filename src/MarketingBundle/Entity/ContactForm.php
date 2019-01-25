@@ -479,7 +479,6 @@ class ContactForm
     public function addExternalCampaignEvent(ExternalCampaignEvent $externalCampaignEvent)
     {
         if (! $this->externalCampaignEvents->contains($externalCampaignEvent)) {
-
             $this->externalCampaignEvents->add($externalCampaignEvent);
         }
     }
