@@ -40,9 +40,9 @@ MarketingBundle\Entity\MarketingObjective:
     status: 1
 
 MarketingBundle\Entity\Subscription:
-   subscription1:
-     name: 'subscription'
-     status: 1
+  subscription1:
+    name: 'subscription'
+    status: 1
 
 MarketingBundle\Entity\EntryPointUser:
   entry_point_user1:
@@ -92,3 +92,4 @@ MarketingBundle\Entity\ContactFormDesiredModel:
   contact_form_desired_model1:
     contactForm: '@contact_form1'
     desiredModelId: 1
+    
