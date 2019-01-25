@@ -7,7 +7,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Mullenlowe\CommonBundle\Entity\Traits\LegacyTrait;
 use Gedmo\Mapping\Annotation as Gedmo;
-use OfferBundle\Repository\Elastica\ExternalCampaignEventRepository;
 
 /**
  * ContactForm
@@ -166,7 +165,7 @@ class ContactForm
      */
     public function __construct()
     {
-        $this->externalCampaignEvents = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->externalCampaignEvents = new ArrayCollection();
     }
 
     /**
@@ -456,7 +455,7 @@ class ContactForm
     }
 
     /**
-     * @return array
+     * @return ArrayCollection
      */
     public function getExternalCampaignEvents()
     {
@@ -464,10 +463,10 @@ class ContactForm
     }
 
     /**
-     * @param $externalCampaignEvents
+     * @param ArrayCollection $externalCampaignEvents
      * @return $this
      */
-    public function setExternalCampaignEvent($externalCampaignEvents)
+    public function setExternalCampaignEvents($externalCampaignEvents)
     {
         $this->externalCampaignEvents = $externalCampaignEvents;
 
@@ -479,7 +478,10 @@ class ContactForm
      */
     public function addExternalCampaignEvent(ExternalCampaignEvent $externalCampaignEvent)
     {
-        $this->externalCampaignEvents->add($externalCampaignEvent);
+        if (! $this->externalCampaignEvents->contains($externalCampaignEvent)) {
+
+            $this->externalCampaignEvents->add($externalCampaignEvent);
+        }
     }
 
 }
