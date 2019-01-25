@@ -1,3 +1,4 @@
+---
 MarketingBundle\Entity\CallCenter:
   call_center1:
     name: 'callCenter'
@@ -39,9 +40,9 @@ MarketingBundle\Entity\MarketingObjective:
     status: 1
 
 MarketingBundle\Entity\Subscription:
-   subscription1:
-     name: 'subscription'
-     status: 1
+  subscription1:
+    name: 'subscription'
+    status: 1
 
 MarketingBundle\Entity\EntryPointUser:
   entry_point_user1:
@@ -73,6 +74,12 @@ MarketingBundle\Entity\CampaignEvent:
     status: 1
     eventType: '@event_type1'
 
+MarketingBundle\Entity\ExternalCampaignEvent:
+  external_campaign_event1:
+    provider: 'odity'
+    providerCampaignNumber: 20190121
+    modelId: 2
+
 MarketingBundle\Entity\ContactForm:
   contact_form1:
     name: 'contactForm'
@@ -85,3 +92,4 @@ MarketingBundle\Entity\ContactFormDesiredModel:
   contact_form_desired_model1:
     contactForm: '@contact_form1'
     desiredModelId: 1
+    
