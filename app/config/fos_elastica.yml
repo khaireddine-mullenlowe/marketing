@@ -40,7 +40,6 @@ fos_elastica:
                         provider: ~
                         listener: ~
                         repository: OfferBundle\Repository\Elastica\OfferFundingRepository
-
                 marketing_objective:
                     properties:
                         id:
@@ -62,7 +61,28 @@ fos_elastica:
                         provider: ~
                         listener: ~
                         repository: MarketingBundle\Repository\Elastica\MarketingObjectiveRepository
-
+                external_campaign_event:
+                    properties:
+                        id:
+                            type: integer
+                        provider:
+                            type: string
+                        providerCampaignNumber:
+                            type: string
+                        modelId:
+                            type: integer
+                        contactForm:
+                            type: object
+                            properties:
+                                id:
+                                    type: integer
+                    persistence:
+                        driver: orm
+                        model: MarketingBundle\Entity\ExternalCampaignEvent
+                        finder: ~
+                        provider: ~
+                        listener: ~
+                        repository: MarketingBundle\Repository\Elastica\ExternalCampaignEventRepository
                 contact_form:
                     properties:
                         id:

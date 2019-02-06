@@ -2,6 +2,7 @@
 
 namespace MarketingBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Mullenlowe\CommonBundle\Entity\Traits\LegacyTrait;
@@ -36,6 +37,16 @@ class ContactForm
      * )
      */
     protected $campaignEvent;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(
+     *     targetEntity="ExternalCampaignEvent",
+     *     mappedBy="contactForm"
+     * )
+     */
+    protected $externalCampaignEvents;
 
     /**
      * @var Subscription
@@ -149,6 +160,13 @@ class ContactForm
      */
     protected $updatedAt;
 
+    /**
+     * ContactForm constructor.
+     */
+    public function __construct()
+    {
+        $this->externalCampaignEvents = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -435,4 +453,34 @@ class ContactForm
     {
         return $this->contactFormType;
     }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getExternalCampaignEvents()
+    {
+        return $this->externalCampaignEvents;
+    }
+
+    /**
+     * @param ArrayCollection $externalCampaignEvents
+     * @return $this
+     */
+    public function setExternalCampaignEvents($externalCampaignEvents)
+    {
+        $this->externalCampaignEvents = $externalCampaignEvents;
+
+        return $this;
+    }
+
+    /**
+     * @param CampaignEvent $externalCampaignEvent
+     */
+    public function addExternalCampaignEvent(ExternalCampaignEvent $externalCampaignEvent)
+    {
+        if (! $this->externalCampaignEvents->contains($externalCampaignEvent)) {
+            $this->externalCampaignEvents->add($externalCampaignEvent);
+        }
+    }
+
 }
