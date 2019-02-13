@@ -40,8 +40,8 @@ class ContactFormService
             $contactForm = $this->createContactForm($campaignEvent, $cells);
             $contactForms[] = [
                 'id' => $contactForm->getId(),
-                'name' => $contactForm->getName(),
-                'description' => $contactForm->getDescription()
+                'name' => $campaignEvent->getName(),
+                'operation_details' => $contactForm->getName()
             ];
         });
         unlink($file->getPathname());
