@@ -307,6 +307,49 @@ class SwaggerDefinitions
      *     @SWG\Property(property="data", type="array",
      *         @SWG\Items(ref="#definitions/EventType")
      *    )
+     * ),
+     *
+     * @SWG\Definition(
+     *     definition="ExternalCampaignEventContext",
+     *     allOf={
+     *         @SWG\Definition(ref="#definitions/Context")
+     *     },
+     *     @SWG\Property(property="data", type="object",
+     *         allOf={
+     *             @SWG\Definition(ref="#definitions/ExternalCampaignEvent")
+     *
+     *         }
+     *    )
+     * ),
+     *
+     * @SWG\Definition(
+     *     definition="ExternalCampaignEventContextMulti",
+     *     allOf={
+     *         @SWG\Definition(ref="#definitions/Context")
+     *     },
+     *     @SWG\Property(property="data", type="array",
+     *         @SWG\Items(ref="#definitions/ExternalCampaignEvent")
+     *    )
+     * ),
+     *
+     * @SWG\Definition(
+     *     definition="ContactFormImportPayload",
+     *     @SWG\Property(property="file", type="file")
+     * ),
+     *
+     * @SWG\Definition(
+     *     definition="ContactFormImportResponse",
+     *     @SWG\Property(property="id", type="integer"),
+     *     @SWG\Property(property="name", type="string"),
+     *     @SWG\Property(property="operation_details", type="string")
+     * ),
+     *
+     * @SWG\Definition(
+     *     definition="ContactFormImportContextMulti",
+     *     @SWG\Property(property="data", type="array",
+     *         @SWG\Items(ref="#definitions/ContactFormImportResponse")
+     *    )
      * )
+     *
      */
 }

@@ -173,8 +173,9 @@ class ContactFormController extends MullenloweRestController
      *     operationId="importContactForm",
      *     tags={"ContactForm"},
      *     @SWG\Parameter(
-     *         name="myaudiUserInterestPayload",
-     *         in="body",
+     *         name="ContactFormImportPayload",
+     *         in="formData",
+     *         type="file",
      *         required=true,
      *         description="",
      *         @SWG\Schema(ref="#/definitions/ContactFormImportPayload")
@@ -182,7 +183,7 @@ class ContactFormController extends MullenloweRestController
      *     @SWG\Response(
      *         response="200",
      *         description="Subscription",
-     *         @SWG\Definition(ref="#/definitions/ContactFormContextMulti")
+     *         @SWG\Definition(ref="#/definitions/ContactFormImportContextMulti")
      *     ),
      *     @SWG\Response(
      *         response=404,
