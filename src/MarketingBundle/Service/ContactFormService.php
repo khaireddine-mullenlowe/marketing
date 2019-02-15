@@ -14,11 +14,12 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 class ContactFormService
 {
 
+    /** @var EntityManager $em */
     private $em;
 
     /**
      * ContactFormService constructor.
-     * @param $em
+     * @param EntityManager $em
      */
     public function __construct(EntityManager $em)
     {
@@ -26,7 +27,7 @@ class ContactFormService
     }
 
     /**
-     * @param $file
+     * @param UploadedFile $file
      * @return array
      * @throws \PhpOffice\PhpSpreadsheet\Exception
      * @throws \PhpOffice\PhpSpreadsheet\Reader\Exception
@@ -50,8 +51,8 @@ class ContactFormService
     }
 
     /**
-     * @param $importPath
-     * @param $callback
+     * @param string $importPath
+     * @param callable $callback
      * @throws \PhpOffice\PhpSpreadsheet\Exception
      * @throws \PhpOffice\PhpSpreadsheet\Reader\Exception
      */
@@ -71,6 +72,7 @@ class ContactFormService
                 if (!empty($columnDefinition) && isset($columnDefinition[$keyCell])) {
                     $key = $columnDefinition[$keyCell];
                 }
+
                 $cells[$key] = $cell->getFormattedValue();
             }
 
@@ -89,12 +91,13 @@ class ContactFormService
      * @return CampaignEvent|null|object
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    private function createCampaignIfNeeded($data)
+    private function createCampaignIfNeeded(array $data)
     {
         $campaignRepo = $this->em->getRepository('MarketingBundle:CampaignEvent');
 
         if (isset($data['campaign_legacy_id'])) {
             $campaignByLegacyId = $campaignRepo->findOneBy(['legacyId' => $data['campaign_legacy_id']]);
+
             if (!empty($campaignByLegacyId)) {
                 return $campaignByLegacyId;
             }
@@ -102,6 +105,7 @@ class ContactFormService
 
         if (isset($data['campaign_name'])) {
             $campaignByName = $campaignRepo->findOneBy(['name' => $data['campaign_name']]);
+
             if (!empty($campaignByName)) {
                 return $campaignByName;
             }

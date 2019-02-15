@@ -168,7 +168,7 @@ class ContactFormController extends MullenloweRestController
      * @Rest\View()
      *
      * @SWG\Post(
-     *     path="/import/",
+     *     path="/contact-form/import/",
      *     summary="Import contact forms by excel",
      *     operationId="importContactForm",
      *     tags={"ContactForm"},

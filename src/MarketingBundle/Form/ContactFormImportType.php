@@ -28,7 +28,7 @@ class ContactFormImportType extends AbstractType
                     new NotNull(),
                     new File(['mimeTypes' => [
                         'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-                        'application/vnd.ms-excelt',
+                        'application/vnd.ms-excel',
                     ]])
                 ]
             ])
