@@ -32,6 +32,3 @@ coverage:
         - src/*Bundle/ETL
     low_limit: 30
     high_limit: 60
-include:
-    - vendor/mullenlowe/component
-    - vendor/mullenlowe/audi-agc5-common-bundle

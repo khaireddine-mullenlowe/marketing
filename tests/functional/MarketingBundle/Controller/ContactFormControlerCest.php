@@ -45,4 +45,30 @@ class ContactFormControlerCest
         $I->seeResponseIsJson();
         $I->seeResponseContains('{"total":1');
     }
+
+    /**
+     * @param FunctionalTester $I
+     */
+    public function tryImportContactFormKo(FunctionalTester $I) {
+        $I->sendPOST('/contact-form/import/', ['inline' => 0], ['file' => codecept_data_dir('test.sql')]);
+        $I->seeResponseCodeIs(Response::HTTP_BAD_REQUEST);
+        $I->seeResponseIsJson();
+    }
+
+    /**
+     * @param FunctionalTester $I
+     */
+    public function tryImportContactFormOk(FunctionalTester $I) {
+        $source = __DIR__.'/../Resources/template-contactform.xlsx';
+        $dest = codecept_data_dir().'/template-contactform.xlsx';
+        copy($source, $dest);
+
+        $I->sendPOST('/contact-form/import/', ['inline' => 0], ['file' => codecept_data_dir('template-contactform.xlsx')]);
+        $I->seeResponseCodeIs(Response::HTTP_CREATED);
+        $I->seeResponseIsJson();
+        $I->seeResponseContains('"operation_details":"201901_NOUVELLE_Q3_Audi.fr_classique"');
+        $I->seeResponseContains('"operation_details":"201901_NOUVELLE_Q3_display_webcallback"');
+        $I->seeResponseContains('"name":"201901_NOUVELLE_Q3"');
+        $I->seeResponseContains('"name":"202001_NOUVELLE_Q3"');
+    }
 }

@@ -19,3 +19,8 @@ services:
                 method: setConnection
                 arguments:
                     - '@doctrine.dbal.user_connection'
+
+    MarketingBundle\Service\ContactFormService:
+        public: true
+        arguments:
+            - '@doctrine.orm.entity_manager'

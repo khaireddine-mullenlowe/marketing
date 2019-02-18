@@ -213,6 +213,47 @@
                 }
             }
         },
+        "/contact-form/import/": {
+            "post": {
+                "tags": [
+                    "ContactForm"
+                ],
+                "summary": "Import contact forms by excel",
+                "operationId": "importContactForm",
+                "parameters": [
+                    {
+                        "name": "ContactFormImportPayload",
+                        "in": "formData",
+                        "description": "",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ContactFormImportPayload"
+                        },
+                        "type": "file"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Subscription",
+                        "schema": {
+                            "$ref": "#/definitions/ContactFormImportContextMulti"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "internal error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
         "/contact-form-desired-model/{contactFormId}": {
             "get": {
                 "tags": [
@@ -431,6 +472,61 @@
                         "description": "EventTypes",
                         "schema": {
                             "$ref": "#/definitions/EventTypeContextMulti"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/external-campaign-event/{id}": {
+            "get": {
+                "tags": [
+                    "ExternalCampaignEvent"
+                ],
+                "summary": "Get ExternalCampaignEvent",
+                "operationId": "getExternalCampaignEvent",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "ExternalCampaignEvent ID",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A ExternalCampaignEvent",
+                        "schema": {
+                            "$ref": "#/definitions/ExternalCampaignEventContext"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/external-campaign-event": {
+            "get": {
+                "tags": [
+                    "CampaignEvent"
+                ],
+                "summary": "Get ExternalCampaignEvents",
+                "operationId": "getExternalCampaignEvents",
+                "responses": {
+                    "200": {
+                        "description": "ExternalCampaignEvents",
+                        "schema": {
+                            "$ref": "#/definitions/ExternalCampaignEventContextMulti"
                         }
                     },
                     "404": {
@@ -866,49 +962,6 @@
                         }
                     }
                 }
-            }
-        },
-        "/myaudi-user-marketing-objective/{id}": {
-            "delete": {
-                "tags": [
-                    "MarketingObjective"
-                ],
-                "summary": "Delete MyaudiUserMarketingObjective by id",
-                "operationId": "deleteMyaudiUserMarketingObjectiveById",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "MyaudiUserMarketingObjective Id to delete",
-                        "required": true,
-                        "type": "integer"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "delete status",
-                        "schema": {
-                            "$ref": "#/definitions/Success"
-                        }
-                    },
-                    "404": {
-                        "description": "not found",
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    },
-                    "500": {
-                        "description": "internal error",
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "bearer": []
-                    }
-                ]
             }
         },
         "/score/{myaudiUserId}": {
@@ -2798,6 +2851,68 @@
                     "$ref": "#definitions/Context"
                 }
             ]
+        },
+        "ExternalCampaignEventContext": {
+            "properties": {
+                "data": {
+                    "type": "object",
+                    "allOf": [
+                        {
+                            "$ref": "#definitions/ExternalCampaignEvent"
+                        }
+                    ]
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#definitions/Context"
+                }
+            ]
+        },
+        "ExternalCampaignEventContextMulti": {
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#definitions/ExternalCampaignEvent"
+                    }
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#definitions/Context"
+                }
+            ]
+        },
+        "ContactFormImportPayload": {
+            "properties": {
+                "file": {
+                    "type": "file"
+                }
+            }
+        },
+        "ContactFormImportResponse": {
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "operation_details": {
+                    "type": "string"
+                }
+            }
+        },
+        "ContactFormImportContextMulti": {
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#definitions/ContactFormImportResponse"
+                    }
+                }
+            }
         }
     }
 }
