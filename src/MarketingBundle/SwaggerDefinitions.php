@@ -215,14 +215,21 @@ class SwaggerDefinitions
      * ),
      *
      * @SWG\Definition(
+     *     definition="MyaudiUserMarketingObjectiveBasic",
+     *     @SWG\Property(property="myaudiUserId", type="integer"),
+     *     @SWG\Property(property="marketingObjective", type="integer"),
+     *     @SWG\Property(property="isUnsubscribe", type="boolean"),
+     * ),
+     *
+     * @SWG\Definition(
      *     definition="MyaudiUserMarketingObjective",
      *     @SWG\Property(property="myaudiUserId", type="integer"),
-     *     @SWG\Property(property="marketingObjective", type="object",
+     *     @SWG\Property(property="marketingObjective", type="integer",
      *         allOf={
-     *              @SWG\Definition(ref="#definitions/MarketingObjective")
+     *              @SWG\Definition(ref="#definitions/BasicEntity")
      *         },
      *     ),
-     *     @SWG\Property(property="isUnsubcribe", type="boolean"),
+     *     @SWG\Property(property="isUnsubscribe", type="boolean"),
      * ),
      *
      * @SWG\Definition(
@@ -255,7 +262,7 @@ class SwaggerDefinitions
      *              @SWG\Definition(ref="#definitions/MarketingObjective")
      *         },
      *     ),
-     *     @SWG\Property(property="isUnsubcribe", type="boolean"),
+     *     @SWG\Property(property="isUnsubscribe", type="boolean"),
      * ),
      *
      * @SWG\Definition(
