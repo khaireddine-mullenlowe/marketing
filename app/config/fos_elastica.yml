@@ -61,6 +61,34 @@ fos_elastica:
                         provider: ~
                         listener: ~
                         repository: MarketingBundle\Repository\Elastica\MarketingObjectiveRepository
+                myaudi_user_marketing_objective:
+                    properties:
+                        id:
+                            type: integer
+                        myaudiUserId:
+                            type: integer
+                        marketingObjective:
+                            type: object
+                            properties:
+                                id:
+                                    type: integer
+                                status:
+                                    type: string
+                                name:
+                                    type: string
+                        isUnsubscribe:
+                            type: boolean
+                        createdAt:
+                            type: date
+                        updatedAt:
+                            type: date
+                    persistence:
+                        driver: orm
+                        model: MarketingBundle\Entity\MyaudiUserMarketingObjective
+                        finder: ~
+                        provider: ~
+                        listener: ~
+                        repository: MarketingBundle\Repository\Elastica\MyaudiUserMarketingObjectiveRepository
                 external_campaign_event:
                     properties:
                         id:
