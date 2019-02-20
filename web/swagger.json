@@ -864,7 +864,7 @@
                 ]
             }
         },
-        "/myaudi-user-marketing-objective/{userId}": {
+        "/myaudi-user-marketing-objective/{myaudiUserId}": {
             "get": {
                 "tags": [
                     "MarketingObjective"
@@ -874,7 +874,7 @@
                 "parameters": [
                     {
                         "name": "myaudiUserId",
-                        "in": "query",
+                        "in": "path",
                         "description": "myaudiUser ID",
                         "required": false,
                         "type": "integer"
@@ -897,12 +897,12 @@
             }
         },
         "/myaudi-user-marketing-objective/": {
-            "put": {
+            "post": {
                 "tags": [
                     "MarketingObjective"
                 ],
-                "summary": "Update subscription for user to a Marketing Objective",
-                "operationId": "putMarketingObjectiveUser",
+                "summary": "Subscribe a user to a Marketing Objective",
+                "operationId": "postMarketingObjectiveUser",
                 "parameters": [
                     {
                         "name": "myaudiUserMarketingObjective",
@@ -910,9 +910,8 @@
                         "description": "",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/MyaudiUserMarketingObjective"
-                        },
-                        "type": "integer"
+                            "$ref": "#/definitions/MyaudiUserMarketingObjectiveBasic"
+                        }
                     }
                 ],
                 "responses": {
@@ -929,21 +928,30 @@
                         }
                     }
                 }
-            },
-            "post": {
+            }
+        },
+        "/myaudi-user-marketing-objective/{id}": {
+            "put": {
                 "tags": [
                     "MarketingObjective"
                 ],
-                "summary": "Subscribe a user to a Marketing Objective",
-                "operationId": "postMarketingObjectiveUser",
+                "summary": "Update subscription for user to a Marketing Objective",
+                "operationId": "putMarketingObjectiveUser",
                 "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "MyaudiUserMarketingObjective ID to update",
+                        "required": true,
+                        "type": "integer"
+                    },
                     {
                         "name": "myaudiUserMarketingObjective",
                         "in": "body",
                         "description": "",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/MyaudiUserMarketingObjective"
+                            "$ref": "#/definitions/MyaudiUserMarketingObjectiveBasic"
                         },
                         "type": "integer"
                     }
@@ -957,6 +965,58 @@
                     },
                     "404": {
                         "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "updating error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "MarketingObjective"
+                ],
+                "summary": "Patch subscription for user to a Marketing Objective",
+                "operationId": "patchMarketingObjectiveUser",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "MyaudiUserMarketingObjective ID to patch",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "myaudiUserMarketingObjective",
+                        "in": "body",
+                        "description": "",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/MyaudiUserMarketingObjectiveBasic"
+                        },
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Subscription",
+                        "schema": {
+                            "$ref": "#/definitions/MyaudiUserMarketingObjectiveContext"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "updating error",
                         "schema": {
                             "$ref": "#/definitions/Error"
                         }
@@ -2706,20 +2766,33 @@
                 }
             ]
         },
+        "MyaudiUserMarketingObjectiveBasic": {
+            "properties": {
+                "myaudiUserId": {
+                    "type": "integer"
+                },
+                "marketingObjective": {
+                    "type": "integer"
+                },
+                "isUnsubscribe": {
+                    "type": "boolean"
+                }
+            }
+        },
         "MyaudiUserMarketingObjective": {
             "properties": {
                 "myaudiUserId": {
                     "type": "integer"
                 },
                 "marketingObjective": {
-                    "type": "object",
+                    "type": "integer",
                     "allOf": [
                         {
-                            "$ref": "#definitions/MarketingObjective"
+                            "$ref": "#definitions/BasicEntity"
                         }
                     ]
                 },
-                "isUnsubcribe": {
+                "isUnsubscribe": {
                     "type": "boolean"
                 }
             }
@@ -2769,7 +2842,7 @@
                         }
                     ]
                 },
-                "isUnsubcribe": {
+                "isUnsubscribe": {
                     "type": "boolean"
                 }
             }

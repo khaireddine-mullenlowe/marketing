@@ -20,10 +20,6 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *     }
  * )
  * @ORM\Entity()
- * @UniqueEntity(
- *     fields={"myaudiUserId", "marketingObjective"},
- *     message="A subscription already exist for this user and marketing objective."
- * )
  */
 class MyaudiUserMarketingObjective
 {
@@ -67,6 +63,16 @@ class MyaudiUserMarketingObjective
      * @Assert\NotNull()
      */
     protected $isUnsubscribe = false;
+
+    /**
+     * Get ID
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
      * Set userId

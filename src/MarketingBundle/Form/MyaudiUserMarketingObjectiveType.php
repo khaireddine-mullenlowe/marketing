@@ -47,7 +47,7 @@ class MyaudiUserMarketingObjectiveType extends AbstractType
         $resolver->setDefaults([
             'data_class'         => MyaudiUserMarketingObjective::class,
             'csrf_protection'    => false,
-            'allow_extra_fields' => true,
+            'allow_extra_fields' => false,
         ]);
     }
 
