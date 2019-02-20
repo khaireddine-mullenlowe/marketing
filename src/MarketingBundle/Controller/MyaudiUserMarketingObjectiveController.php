@@ -311,19 +311,4 @@ class MyaudiUserMarketingObjectiveController extends MullenloweRestController
 
         return $this->createView($myaudiUserMarketingObjective);
     }
-
-    /**
-     * Clean data from empty elements.
-     * @param array $data
-     */
-    private function cleanData(array &$data)
-    {
-        foreach ($data as $index => $item) {
-            if (is_array($item)) {
-                $this->cleanData($item);
-            } elseif (empty($item)) {
-                unset($data[$index]);
-            }
-        }
-    }
 }

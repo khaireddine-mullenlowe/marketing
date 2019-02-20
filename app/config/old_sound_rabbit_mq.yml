@@ -41,4 +41,5 @@ mullenlowe_common:
     rabbitmq_crud_publisher:
         producer: 'old_sound_rabbit_mq.marketing_crud_producer'
         mapping:
-            - { context: 'ContactForm', routing_key: 'crud.marketing.contactForm' }
+            - { context: 'ContactForm',                     routing_key: 'crud.marketing.contactForm' }
+            - { context: 'MyaudiUserMarketingObjective',    routing_key: 'crud.marketing.MyaudiUserMarketingObjective' }

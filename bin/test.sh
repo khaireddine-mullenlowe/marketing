@@ -48,6 +48,7 @@ codecept build
 php bin/console doctrine:database:drop --force -n --env=test
 php bin/console doctrine:database:create --env=test
 php bin/console doctrine:schema:update --force --env=test
+php bin/console fos:elastica:reset --env=test
 php bin/console fixtures:load --env=test --no-interaction
 
 sqlite3 tests/_data/test.sqlite .dump > tests/_data/test.sql
