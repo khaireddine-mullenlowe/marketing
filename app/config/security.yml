@@ -18,5 +18,6 @@ security:
                     - Mullenlowe\CommonBundle\Security\Guard\JWTTokenAuthenticator
 
     access_control:
+        - { path: ^/myaudi-user-marketing-objective/, role: IS_AUTHENTICATED_ANONYMOUSLY, methods: [POST] }
         - { path: ^/contact-form/, role: IS_AUTHENTICATED_ANONYMOUSLY, methods: [GET] }
         - { path: ^/,              role: IS_AUTHENTICATED_FULLY }
