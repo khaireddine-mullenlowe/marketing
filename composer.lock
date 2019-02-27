@@ -1,7 +1,7 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
     "content-hash": "41a4a93ea458b74200334c8d5f15fe74",
@@ -2643,12 +2643,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:itagenceone/audi-agc5-common-bundle.git",
-                "reference": "cf36bfe740ca841447fea000e8effdb1eb1a828b"
+                "reference": "654aa005f51392b1a8b8929783e0308f3c6628de"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/itagenceone/audi-agc5-common-bundle/zipball/cf36bfe740ca841447fea000e8effdb1eb1a828b",
-                "reference": "cf36bfe740ca841447fea000e8effdb1eb1a828b",
+                "url": "https://api.github.com/repos/itagenceone/audi-agc5-common-bundle/zipball/654aa005f51392b1a8b8929783e0308f3c6628de",
+                "reference": "654aa005f51392b1a8b8929783e0308f3c6628de",
                 "shasum": ""
             },
             "require": {
@@ -2680,6 +2680,10 @@
                 "symfony/symfony": "3.4.*",
                 "symfony/validator": "^3.3"
             },
+            "require-dev": {
+                "codeception/codeception": "^2.5",
+                "symfony/phpunit-bridge": "^3.0"
+            },
             "bin": [
                 "src/bin/swaggerGenerate"
             ],
@@ -2703,7 +2707,7 @@
             "keywords": [
                 "bundle"
             ],
-            "time": "2019-01-16T09:35:13+00:00"
+            "time": "2019-02-27T16:16:49+00:00"
         },
         {
             "name": "mullenlowe/component",
@@ -6600,6 +6604,7 @@
                 "mock",
                 "xunit"
             ],
+            "abandoned": true,
             "time": "2018-07-13T03:27:23+00:00"
         },
         {

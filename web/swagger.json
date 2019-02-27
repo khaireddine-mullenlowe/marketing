@@ -213,6 +213,47 @@
                 }
             }
         },
+        "/contact-form/import/": {
+            "post": {
+                "tags": [
+                    "ContactForm"
+                ],
+                "summary": "Import contact forms by excel",
+                "operationId": "importContactForm",
+                "parameters": [
+                    {
+                        "name": "ContactFormImportPayload",
+                        "in": "formData",
+                        "description": "",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ContactFormImportPayload"
+                        },
+                        "type": "file"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Subscription",
+                        "schema": {
+                            "$ref": "#/definitions/ContactFormImportContextMulti"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "internal error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
         "/contact-form-desired-model/{contactFormId}": {
             "get": {
                 "tags": [
@@ -431,6 +472,61 @@
                         "description": "EventTypes",
                         "schema": {
                             "$ref": "#/definitions/EventTypeContextMulti"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/external-campaign-event/{id}": {
+            "get": {
+                "tags": [
+                    "ExternalCampaignEvent"
+                ],
+                "summary": "Get ExternalCampaignEvent",
+                "operationId": "getExternalCampaignEvent",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "ExternalCampaignEvent ID",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A ExternalCampaignEvent",
+                        "schema": {
+                            "$ref": "#/definitions/ExternalCampaignEventContext"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/external-campaign-event": {
+            "get": {
+                "tags": [
+                    "CampaignEvent"
+                ],
+                "summary": "Get ExternalCampaignEvents",
+                "operationId": "getExternalCampaignEvents",
+                "responses": {
+                    "200": {
+                        "description": "ExternalCampaignEvents",
+                        "schema": {
+                            "$ref": "#/definitions/ExternalCampaignEventContextMulti"
                         }
                     },
                     "404": {
@@ -768,7 +864,7 @@
                 ]
             }
         },
-        "/myaudi-user-marketing-objective/{userId}": {
+        "/myaudi-user-marketing-objective/{myaudiUserId}": {
             "get": {
                 "tags": [
                     "MarketingObjective"
@@ -778,7 +874,7 @@
                 "parameters": [
                     {
                         "name": "myaudiUserId",
-                        "in": "query",
+                        "in": "path",
                         "description": "myaudiUser ID",
                         "required": false,
                         "type": "integer"
@@ -801,39 +897,6 @@
             }
         },
         "/myaudi-user-marketing-objective/": {
-            "put": {
-                "tags": [
-                    "MarketingObjective"
-                ],
-                "summary": "Update subscription for user to a Marketing Objective",
-                "operationId": "putMarketingObjectiveUser",
-                "parameters": [
-                    {
-                        "name": "myaudiUserMarketingObjective",
-                        "in": "body",
-                        "description": "",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/MyaudiUserMarketingObjective"
-                        },
-                        "type": "integer"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Subscription",
-                        "schema": {
-                            "$ref": "#/definitions/MyaudiUserMarketingObjectiveContext"
-                        }
-                    },
-                    "404": {
-                        "description": "not found",
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            },
             "post": {
                 "tags": [
                     "MarketingObjective"
@@ -847,9 +910,8 @@
                         "description": "",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/MyaudiUserMarketingObjective"
-                        },
-                        "type": "integer"
+                            "$ref": "#/definitions/MyaudiUserMarketingObjectiveBasic"
+                        }
                     }
                 ],
                 "responses": {
@@ -869,26 +931,36 @@
             }
         },
         "/myaudi-user-marketing-objective/{id}": {
-            "delete": {
+            "put": {
                 "tags": [
                     "MarketingObjective"
                 ],
-                "summary": "Delete MyaudiUserMarketingObjective by id",
-                "operationId": "deleteMyaudiUserMarketingObjectiveById",
+                "summary": "Update subscription for user to a Marketing Objective",
+                "operationId": "putMarketingObjectiveUser",
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "MyaudiUserMarketingObjective Id to delete",
+                        "description": "MyaudiUserMarketingObjective ID to update",
                         "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "myaudiUserMarketingObjective",
+                        "in": "body",
+                        "description": "",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/MyaudiUserMarketingObjectiveBasic"
+                        },
                         "type": "integer"
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "delete status",
+                        "description": "Subscription",
                         "schema": {
-                            "$ref": "#/definitions/Success"
+                            "$ref": "#/definitions/MyaudiUserMarketingObjectiveContext"
                         }
                     },
                     "404": {
@@ -898,17 +970,58 @@
                         }
                     },
                     "500": {
-                        "description": "internal error",
+                        "description": "updating error",
                         "schema": {
                             "$ref": "#/definitions/Error"
                         }
                     }
-                },
-                "security": [
+                }
+            },
+            "patch": {
+                "tags": [
+                    "MarketingObjective"
+                ],
+                "summary": "Patch subscription for user to a Marketing Objective",
+                "operationId": "patchMarketingObjectiveUser",
+                "parameters": [
                     {
-                        "bearer": []
+                        "name": "id",
+                        "in": "path",
+                        "description": "MyaudiUserMarketingObjective ID to patch",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "myaudiUserMarketingObjective",
+                        "in": "body",
+                        "description": "",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/MyaudiUserMarketingObjectiveBasic"
+                        },
+                        "type": "integer"
                     }
-                ]
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Subscription",
+                        "schema": {
+                            "$ref": "#/definitions/MyaudiUserMarketingObjectiveContext"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "updating error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
             }
         },
         "/score/{myaudiUserId}": {
@@ -2653,20 +2766,33 @@
                 }
             ]
         },
+        "MyaudiUserMarketingObjectiveBasic": {
+            "properties": {
+                "myaudiUserId": {
+                    "type": "integer"
+                },
+                "marketingObjective": {
+                    "type": "integer"
+                },
+                "isUnsubscribe": {
+                    "type": "boolean"
+                }
+            }
+        },
         "MyaudiUserMarketingObjective": {
             "properties": {
                 "myaudiUserId": {
                     "type": "integer"
                 },
                 "marketingObjective": {
-                    "type": "object",
+                    "type": "integer",
                     "allOf": [
                         {
-                            "$ref": "#definitions/MarketingObjective"
+                            "$ref": "#definitions/BasicEntity"
                         }
                     ]
                 },
-                "isUnsubcribe": {
+                "isUnsubscribe": {
                     "type": "boolean"
                 }
             }
@@ -2716,7 +2842,7 @@
                         }
                     ]
                 },
-                "isUnsubcribe": {
+                "isUnsubscribe": {
                     "type": "boolean"
                 }
             }
@@ -2798,6 +2924,68 @@
                     "$ref": "#definitions/Context"
                 }
             ]
+        },
+        "ExternalCampaignEventContext": {
+            "properties": {
+                "data": {
+                    "type": "object",
+                    "allOf": [
+                        {
+                            "$ref": "#definitions/ExternalCampaignEvent"
+                        }
+                    ]
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#definitions/Context"
+                }
+            ]
+        },
+        "ExternalCampaignEventContextMulti": {
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#definitions/ExternalCampaignEvent"
+                    }
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#definitions/Context"
+                }
+            ]
+        },
+        "ContactFormImportPayload": {
+            "properties": {
+                "file": {
+                    "type": "file"
+                }
+            }
+        },
+        "ContactFormImportResponse": {
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "operation_details": {
+                    "type": "string"
+                }
+            }
+        },
+        "ContactFormImportContextMulti": {
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#definitions/ContactFormImportResponse"
+                    }
+                }
+            }
         }
     }
 }
