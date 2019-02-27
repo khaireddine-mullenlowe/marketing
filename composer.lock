@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "fa2b153ff5dec25c5c27ae3b2fff9420",
+    "content-hash": "41a4a93ea458b74200334c8d5f15fe74",
     "packages": [
         {
             "name": "analog/analog",
@@ -2639,16 +2639,16 @@
         },
         {
             "name": "mullenlowe/audi-agc5-common-bundle",
-            "version": "dev-release/2.0.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "git@github.com:itagenceone/audi-agc5-common-bundle.git",
-                "reference": "6bccaa8bab89c52ac17e89226f4d23cd022103b1"
+                "reference": "654aa005f51392b1a8b8929783e0308f3c6628de"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/itagenceone/audi-agc5-common-bundle/zipball/6bccaa8bab89c52ac17e89226f4d23cd022103b1",
-                "reference": "6bccaa8bab89c52ac17e89226f4d23cd022103b1",
+                "url": "https://api.github.com/repos/itagenceone/audi-agc5-common-bundle/zipball/654aa005f51392b1a8b8929783e0308f3c6628de",
+                "reference": "654aa005f51392b1a8b8929783e0308f3c6628de",
                 "shasum": ""
             },
             "require": {
@@ -2707,7 +2707,7 @@
             "keywords": [
                 "bundle"
             ],
-            "time": "2019-02-20T10:04:33+00:00"
+            "time": "2019-02-27T16:16:49+00:00"
         },
         {
             "name": "mullenlowe/component",
