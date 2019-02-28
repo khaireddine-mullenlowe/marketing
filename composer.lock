@@ -2643,12 +2643,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:itagenceone/audi-agc5-common-bundle.git",
-                "reference": "9a07cb7699810c5f44af69d998a5ecdd0d68d905"
+                "reference": "95ad6f449ef1b8df5575618282d05f40c1c27f76"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/itagenceone/audi-agc5-common-bundle/zipball/9a07cb7699810c5f44af69d998a5ecdd0d68d905",
-                "reference": "9a07cb7699810c5f44af69d998a5ecdd0d68d905",
+                "url": "https://api.github.com/repos/itagenceone/audi-agc5-common-bundle/zipball/95ad6f449ef1b8df5575618282d05f40c1c27f76",
+                "reference": "95ad6f449ef1b8df5575618282d05f40c1c27f76",
                 "shasum": ""
             },
             "require": {
@@ -2681,6 +2681,10 @@
                 "symfony/symfony": "3.4.*",
                 "symfony/validator": "^3.3"
             },
+            "require-dev": {
+                "codeception/codeception": "^2.5",
+                "symfony/phpunit-bridge": "^3.0"
+            },
             "bin": [
                 "src/bin/swaggerGenerate"
             ],
@@ -2704,7 +2708,7 @@
             "keywords": [
                 "bundle"
             ],
-            "time": "2019-02-01T11:11:07+00:00"
+            "time": "2019-02-28T14:55:16+00:00"
         },
         {
             "name": "mullenlowe/component",

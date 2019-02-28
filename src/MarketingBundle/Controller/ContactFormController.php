@@ -6,11 +6,14 @@ use FOS\RestBundle\Controller\Annotations\Route;
 use FOS\RestBundle\View\View;
 use Knp\Bundle\PaginatorBundle\Pagination\SlidingPagination;
 use MarketingBundle\Enum\PaginateEnum;
+use MarketingBundle\Form\ContactFormImportType;
+use MarketingBundle\Service\ContactFormService;
 use Mullenlowe\CommonBundle\Controller\MullenloweRestController;
 use Mullenlowe\CommonBundle\Exception\BadRequestHttpException;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Swagger\Annotations as SWG;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class ContactFormController
@@ -159,4 +162,61 @@ class ContactFormController extends MullenloweRestController
 
         return $this->createPaginatedView($pager);
     }
+
+    /**
+     * @Rest\Post("/import/")
+     * @Rest\View()
+     *
+     * @SWG\Post(
+     *     path="/contact-form/import/",
+     *     summary="Import contact forms by excel",
+     *     operationId="importContactForm",
+     *     tags={"ContactForm"},
+     *     @SWG\Parameter(
+     *         name="ContactFormImportPayload",
+     *         in="formData",
+     *         type="file",
+     *         required=true,
+     *         description="",
+     *         @SWG\Schema(ref="#/definitions/ContactFormImportPayload")
+     *     ),
+     *     @SWG\Response(
+     *         response="200",
+     *         description="Subscription",
+     *         @SWG\Definition(ref="#/definitions/ContactFormImportContextMulti")
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="not found",
+     *         @SWG\Schema(ref="#/definitions/Error")
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="internal error",
+     *         @SWG\Schema(ref="#/definitions/Error")
+     *     )
+     * )
+     *
+     * @param Request $request
+     * @param ContactFormService $contactFormService
+     * @return View
+     *
+     * @throws \PhpOffice\PhpSpreadsheet\Exception
+     * @throws \PhpOffice\PhpSpreadsheet\Reader\Exception
+     */
+    public function importAction(ContactFormService $contactFormService, Request $request)
+    {
+        $form = $this->createForm(ContactFormImportType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $contactForms = $contactFormService->importContactFormByXslx($form->get('file')->getData());
+
+            return $this->createView($contactForms, Response::HTTP_CREATED);
+        }
+
+        return $this->view($form, RESPONSE::HTTP_BAD_REQUEST);
+    }
+
+
 }

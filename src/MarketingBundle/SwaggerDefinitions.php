@@ -215,14 +215,21 @@ class SwaggerDefinitions
      * ),
      *
      * @SWG\Definition(
+     *     definition="MyaudiUserMarketingObjectiveBasic",
+     *     @SWG\Property(property="myaudiUserId", type="integer"),
+     *     @SWG\Property(property="marketingObjective", type="integer"),
+     *     @SWG\Property(property="isUnsubscribe", type="boolean"),
+     * ),
+     *
+     * @SWG\Definition(
      *     definition="MyaudiUserMarketingObjective",
      *     @SWG\Property(property="myaudiUserId", type="integer"),
-     *     @SWG\Property(property="marketingObjective", type="object",
+     *     @SWG\Property(property="marketingObjective", type="integer",
      *         allOf={
-     *              @SWG\Definition(ref="#definitions/MarketingObjective")
+     *              @SWG\Definition(ref="#definitions/BasicEntity")
      *         },
      *     ),
-     *     @SWG\Property(property="isUnsubcribe", type="boolean"),
+     *     @SWG\Property(property="isUnsubscribe", type="boolean"),
      * ),
      *
      * @SWG\Definition(
@@ -255,7 +262,7 @@ class SwaggerDefinitions
      *              @SWG\Definition(ref="#definitions/MarketingObjective")
      *         },
      *     ),
-     *     @SWG\Property(property="isUnsubcribe", type="boolean"),
+     *     @SWG\Property(property="isUnsubscribe", type="boolean"),
      * ),
      *
      * @SWG\Definition(
@@ -307,6 +314,49 @@ class SwaggerDefinitions
      *     @SWG\Property(property="data", type="array",
      *         @SWG\Items(ref="#definitions/EventType")
      *    )
+     * ),
+     *
+     * @SWG\Definition(
+     *     definition="ExternalCampaignEventContext",
+     *     allOf={
+     *         @SWG\Definition(ref="#definitions/Context")
+     *     },
+     *     @SWG\Property(property="data", type="object",
+     *         allOf={
+     *             @SWG\Definition(ref="#definitions/ExternalCampaignEvent")
+     *
+     *         }
+     *    )
+     * ),
+     *
+     * @SWG\Definition(
+     *     definition="ExternalCampaignEventContextMulti",
+     *     allOf={
+     *         @SWG\Definition(ref="#definitions/Context")
+     *     },
+     *     @SWG\Property(property="data", type="array",
+     *         @SWG\Items(ref="#definitions/ExternalCampaignEvent")
+     *    )
+     * ),
+     *
+     * @SWG\Definition(
+     *     definition="ContactFormImportPayload",
+     *     @SWG\Property(property="file", type="file")
+     * ),
+     *
+     * @SWG\Definition(
+     *     definition="ContactFormImportResponse",
+     *     @SWG\Property(property="id", type="integer"),
+     *     @SWG\Property(property="name", type="string"),
+     *     @SWG\Property(property="operation_details", type="string")
+     * ),
+     *
+     * @SWG\Definition(
+     *     definition="ContactFormImportContextMulti",
+     *     @SWG\Property(property="data", type="array",
+     *         @SWG\Items(ref="#definitions/ContactFormImportResponse")
+     *    )
      * )
+     *
      */
 }
