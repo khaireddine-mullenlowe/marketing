@@ -24,6 +24,7 @@ class ContactFormRepository extends Repository
 
         $query = new BoolQuery();
         $queryString = new QueryString();
+
         foreach ($criterias as $field => $value) {
             $queryString
                 ->setQuery(str_replace(" ", " AND ", trim($value)))
@@ -32,10 +33,11 @@ class ContactFormRepository extends Repository
         }
 
         $result = $this->find($query);
+
         if (is_array($result) && 1 === count($result)) {
             return $result[0];
         }
 
-        throw new \LogicException("Bad method call.");
+        return [];
     }
 }
