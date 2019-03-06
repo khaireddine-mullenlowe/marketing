@@ -14,8 +14,6 @@ use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Mullenlowe\CommonBundle\Exception\NotFoundHttpException as MullenloweNotFoundHttpException;
 use MarketingBundle\Repository\Elastica\ContactFormRepository;
 
 /**
@@ -122,8 +120,6 @@ class ContactFormController extends MullenloweRestController
             }
 
             return $this->createView($repository->findOneBy($criterias));
-        } catch (NotFoundHttpException $e) {
-            throw new MullenloweNotFoundHttpException(self::CONTEXT, $e->getMessage());
         } catch (\Exception $e) {
             throw new BadRequestHttpException(self::CONTEXT, $e->getMessage());
         }

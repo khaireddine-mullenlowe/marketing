@@ -4,7 +4,6 @@ namespace MarketingBundle\Repository\Elastica;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\QueryString;
 use FOS\ElasticaBundle\Repository;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Class ContactFormRepository
@@ -39,6 +38,6 @@ class ContactFormRepository extends Repository
             return $result[0];
         }
 
-        throw new NotFoundHttpException('No contact form found');
+        return null;
     }
 }
