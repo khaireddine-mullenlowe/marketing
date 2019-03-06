@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4531f6a2606cf649af8f51a2724544d0",
+    "content-hash": "fcb9450ce4fad313e7fee565f2cac75e",
     "packages": [
         {
             "name": "analog/analog",
@@ -2639,7 +2639,7 @@
         },
         {
             "name": "mullenlowe/audi-agc5-common-bundle",
-            "version": "dev-ecom_merged",
+            "version": "dev-release/3.0.0",
             "source": {
                 "type": "git",
                 "url": "git@github.com:itagenceone/audi-agc5-common-bundle.git",
@@ -6605,6 +6605,7 @@
                 "mock",
                 "xunit"
             ],
+            "abandoned": true,
             "time": "2018-07-13T03:27:23+00:00"
         },
         {
