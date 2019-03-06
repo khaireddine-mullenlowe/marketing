@@ -13,18 +13,19 @@ class ContactFormRepository extends Repository
 {
     /**
      * Find one Contact form by criteria.
-     * @param array $criterias
+     * @param array $criteria
      * @return mixed
      */
-    public function findOneBy(array $criterias)
+    public function findOneBy(array $criteria)
     {
-        if (empty($criterias)) {
+        if (empty($criteria)) {
             throw new \InvalidArgumentException("Data not valid.");
         }
 
         $query = new BoolQuery();
         $queryString = new QueryString();
-        foreach ($criterias as $field => $value) {
+
+        foreach ($criteria as $field => $value) {
             $queryString
                 ->setQuery(str_replace(" ", " AND ", trim($value)))
                 ->setDefaultField($field);
@@ -32,10 +33,11 @@ class ContactFormRepository extends Repository
         }
 
         $result = $this->find($query);
+
         if (is_array($result) && 1 === count($result)) {
             return $result[0];
         }
 
-        throw new \LogicException("Bad method call.");
+        return null;
     }
 }
