@@ -4,6 +4,7 @@ namespace MarketingBundle\Repository\Elastica;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\QueryString;
 use FOS\ElasticaBundle\Repository;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Class ContactFormRepository
@@ -13,19 +14,19 @@ class ContactFormRepository extends Repository
 {
     /**
      * Find one Contact form by criteria.
-     * @param array $criterias
+     * @param array $criteria
      * @return mixed
      */
-    public function findOneBy(array $criterias)
+    public function findOneBy(array $criteria)
     {
-        if (empty($criterias)) {
+        if (empty($criteria)) {
             throw new \InvalidArgumentException("Data not valid.");
         }
 
         $query = new BoolQuery();
         $queryString = new QueryString();
 
-        foreach ($criterias as $field => $value) {
+        foreach ($criteria as $field => $value) {
             $queryString
                 ->setQuery(str_replace(" ", " AND ", trim($value)))
                 ->setDefaultField($field);
@@ -38,6 +39,6 @@ class ContactFormRepository extends Repository
             return $result[0];
         }
 
-        return [];
+        throw new NotFoundHttpException('No contact form found');
     }
 }
