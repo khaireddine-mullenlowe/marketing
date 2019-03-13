@@ -1,7 +1,9 @@
 <?php
+
 namespace MarketingBundle\Repository\Elastica;
 
 use Elastica\Query\BoolQuery;
+use Elastica\Query\Match;
 use Elastica\Query\QueryString;
 use FOS\ElasticaBundle\Repository;
 
@@ -13,27 +15,33 @@ class ContactFormRepository extends Repository
 {
     /**
      * Find one Contact form by criteria.
-     * @param array $criteria
+     * @param array $criterias
      * @return mixed
      */
-    public function findOneBy(array $criteria)
+    public function findOneBy(array $criterias)
     {
-        if (empty($criteria)) {
+        if (empty($criterias)) {
             throw new \InvalidArgumentException("Data not valid.");
         }
 
-        $query = new BoolQuery();
-        $queryString = new QueryString();
+        $boolQuery = new BoolQuery();
+        foreach ($criterias as $field => $value) {
+            if ('name' !== $field) {
+                $query = new QueryString();
+                $query
+                    ->setQuery(str_replace(" ", " AND ", trim($value)))
+                    ->setDefaultField($field);
+            } else {
+                $query = new Match();
+                $query
+                    ->setFieldQuery($field, str_replace('-', ' ', $value))
+                    ->setFieldOperator($field, Match::OPERATOR_AND);
+            }
 
-        foreach ($criteria as $field => $value) {
-            $queryString
-                ->setQuery(str_replace(" ", " AND ", trim($value)))
-                ->setDefaultField($field);
-            $query->addMust($queryString);
+            $boolQuery->addMust($query);
         }
 
-        $result = $this->find($query);
-
+        $result = $this->find($boolQuery);
         if (is_array($result) && 1 === count($result)) {
             return $result[0];
         }
