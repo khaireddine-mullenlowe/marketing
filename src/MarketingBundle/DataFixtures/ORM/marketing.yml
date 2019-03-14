@@ -64,7 +64,7 @@ MarketingBundle\Entity\MyaudiUserMarketingObjective:
 MarketingBundle\Entity\Score:
   score1:
     myaudiUserId: 1
-    interest: 50.80
+    interestAverage: 50.80
     seriousness: 80.64
     contactType: 'B'
 
