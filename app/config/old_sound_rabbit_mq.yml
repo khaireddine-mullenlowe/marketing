@@ -42,4 +42,9 @@ mullenlowe_common:
         producer: 'old_sound_rabbit_mq.marketing_crud_producer'
         mapping:
             - { context: 'ContactForm',                     routing_key: 'crud.marketing.contactForm' }
-            - { context: 'MyaudiUserMarketingObjective',    routing_key: 'crud.marketing.MyaudiUserMarketingObjective' }
+            - { context: 'MarketingPermission',             routing_key: 'crud.marketing.marketingPermission' }
+            - { context: 'MyaudiUserInterest',              routing_key: 'crud.marketing.myaudiUserInterest' }
+            - { context: 'MyaudiUserMarketingObjective',    routing_key: 'crud.marketing.myaudiUserMarketingObjective' }
+            - { context: 'Score',                           routing_key: 'crud.marketing.score' }
+            - { context: 'OfferAftersale',                  routing_key: 'crud.marketing.offerAftersale' }
+            - { context: 'OfferSale',                       routing_key: 'crud.marketing.offerSale' }
