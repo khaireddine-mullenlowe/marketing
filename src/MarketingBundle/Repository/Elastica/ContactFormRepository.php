@@ -42,7 +42,7 @@ class ContactFormRepository extends Repository
         }
 
         $result = $this->find($boolQuery);
-        if (is_array($result) && 1 === count($result)) {
+        if (!empty($result[0])) {
             return $result[0];
         }
 
