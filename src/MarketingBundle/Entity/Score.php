@@ -37,9 +37,9 @@ class Score
     /**
      * @var float
      *
-     * @ORM\Column(name="interest", type="float")
+     * @ORM\Column(name="interest_average", type="float")
      */
-    protected $interest;
+    protected $interestAverage;
 
     /**
      * @var float
@@ -96,27 +96,27 @@ class Score
     }
 
     /**
-     * Set interest
+     * Set interestAverage
      *
-     * @param float $interest
+     * @param float $interestAverage
      *
      * @return Score
      */
-    public function setInterest($interest)
+    public function setInterestAverage($interestAverage)
     {
-        $this->interest = $interest;
+        $this->interestAverage = $interestAverage;
 
         return $this;
     }
 
     /**
-     * Get interest
+     * Get interestAverage
      *
      * @return float
      */
-    public function getInterest()
+    public function getInterestAverage()
     {
-        return $this->interest;
+        return $this->interestAverage;
     }
 
     /**

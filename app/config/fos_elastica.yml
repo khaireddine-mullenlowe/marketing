@@ -208,3 +208,303 @@ fos_elastica:
                         provider: ~
                         listener: ~
                         repository: MarketingBundle\Repository\Elastica\ContactFormRepository
+                marketing_permission:
+                    properties:
+                        myaudiUserId:
+                            type: integer
+                        dataUseAgreement:
+                            type: integer
+                        email:
+                            type: integer
+                        phone:
+                            type: integer
+                        postal:
+                            type: integer
+                        createdAt:
+                            type: date
+                        updatedAt:
+                            type: date
+                    persistence:
+                        identifier: myaudiUserId
+                        driver: orm
+                        model: MarketingBundle\Entity\MarketingPermission
+                        finder: ~
+                        provider: ~
+                        listener: ~
+                        repository: ~
+                interest_user:
+                    properties:
+                        id:
+                            type: integer
+                        myaudiUserId:
+                            type: integer
+                        subscriptionDate:
+                            type: date
+                        interest:
+                            type: object
+                            properties:
+                                id:
+                                    type: integer
+                                name:
+                                    type: string
+                                status:
+                                    type: integer
+                                legacyId:
+                                    type: integer
+                                createdAt:
+                                    type: date
+                                updatedAt:
+                                    type: date
+                    persistence:
+                        driver: orm
+                        model: MarketingBundle\Entity\MyaudiUserInterest
+                        finder: ~
+                        provider: ~
+                        listener: ~
+                        repository: ~
+                score:
+                    properties:
+                        id:
+                            type: integer
+                        myaudiUserId:
+                            type: integer
+                        interestAverage:
+                            type: string
+                        seriousness:
+                            type: string
+                        contactType:
+                            type: string
+                        createdAt:
+                            type: date
+                        updatedAt:
+                            type: date
+                    persistence:
+                        driver: orm
+                        model: MarketingBundle\Entity\Score
+                        finder: ~
+                        provider: ~
+                        listener: ~
+                        repository: ~
+                offer_aftersale:
+                    properties:
+                        id:
+                            type: integer
+                        partnerId:
+                            type: integer
+                        details:
+                            type: text
+                        discountSimple:
+                            type: string
+                        discountDouble:
+                            type: string
+                        discountTriple:
+                            type: string
+                        visual:
+                            type: string
+                        title:
+                            type: string
+                        description:
+                            type: text
+                        status:
+                            type: string
+                        legacy_id:
+                            type: integer
+                        agreements:
+                            type: boolean
+                        startDate:
+                            type: date
+                        endDate:
+                            type: date
+                        createdAt:
+                            type: date
+                        updatedAt:
+                            type: date
+                        subtype:
+                            type: object
+                            properties:
+                                id:
+                                    type: integer
+                                name:
+                                    type: string
+                                rank:
+                                    type: string
+
+                                type:
+                                    type: object
+                                    properties:
+                                        id:
+                                            type: integer
+                                        category:
+                                            type: string
+                                        name:
+                                            type: string
+                                        subtitle:
+                                            type: text
+                                formType:
+                                    type: object
+                                    properties:
+                                        id:
+                                            type: integer
+                                        name:
+                                            type: string
+                                        description:
+                                            type: text
+                                        type:
+                                            type: string
+                                termsTemplate:
+                                    type: object
+                                    properties:
+                                        id:
+                                            type: integer
+                                        template:
+                                            type: string
+                        termsProperty:
+                            type: object
+                            properties:
+                                id:
+                                    type: integer
+                                km:
+                                    type: integer
+                        myaudiUsers:
+                            type: nested
+                            properties:
+                                myaudiUserId:
+                                    type: integer
+                    persistence:
+                        driver: orm
+                        model: OfferBundle\Entity\OfferAftersale
+                        finder: ~
+                        provider: ~
+                        listener: ~
+                        repository: ~
+                offer_sale:
+                    properties:
+                        id:
+                            type: integer
+                        partnerId:
+                            type: integer
+                        visual:
+                            type: string
+                        title:
+                            type: string
+                        description:
+                            type: text
+                        status:
+                            type: string
+                        agreements:
+                            type: boolean
+                        legacy_id:
+                            type: integer
+                        startDate:
+                            type: date
+                        endDate:
+                            type: date
+                        createdAt:
+                            type: date
+                        updatedAt:
+                            type: date
+                        xPosition:
+                            type: string
+                        yPosition:
+                            type: string
+                        monthly:
+                            type: integer
+                        modelId:
+                            type: integer
+                        termsPropertySecondhandCar:
+                            type: object
+                            properties:
+                                id:
+                                    type: integer
+                                modelName:
+                                    type: string
+                                engine:
+                                    type: string
+                                email:
+                                    type: string
+                                address:
+                                    type: string
+                        termsPropertyNewCar:
+                            type: object
+                            properties:
+                                id:
+                                    type: integer
+                                monthNumber:
+                                    type: integer
+                                advancePayment:
+                                    type: string
+                                monthRentalNumber:
+                                    type: integer
+                                priceDate:
+                                    type: date
+                                modelName:
+                                    type: string
+                                engine:
+                                    type: string
+                                options:
+                                    type: string
+                                rangeName:
+                                    type: string
+                                mgpMin:
+                                    type: string
+                                mgpMax:
+                                    type: string
+                                co2EmissionMin:
+                                    type: string
+                                co2EmissionMax:
+                                    type: string
+                                maximumKm:
+                                    type: integer
+                                partnerName:
+                                    type: string
+                        subtype:
+                            type: object
+                            properties:
+                                id:
+                                    type: integer
+                                name:
+                                    type: string
+                                rank:
+                                    type: string
+
+                                type:
+                                    type: object
+                                    properties:
+                                        id:
+                                            type: integer
+                                        category:
+                                            type: string
+                                        name:
+                                            type: string
+                                        subtitle:
+                                            type: text
+                                formType:
+                                    type: object
+                                    properties:
+                                        id:
+                                            type: integer
+                                        name:
+                                            type: string
+                                        description:
+                                            type: text
+                                        type:
+                                            type: string
+                                termsTemplate:
+                                    type: object
+                                    properties:
+                                        id:
+                                            type: integer
+                                        template:
+                                            type: string
+                        myaudiUsers:
+                            type: nested
+                            properties:
+                                myaudiUserId:
+                                    type: integer
+                    persistence:
+                        driver: orm
+                        model: OfferBundle\Entity\OfferSale
+                        finder: ~
+                        provider: ~
+                        listener: ~
+                        repository: ~

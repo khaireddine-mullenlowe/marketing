@@ -1,10 +1,10 @@
 <?php
+
 namespace MarketingBundle\Repository\Elastica;
 
 use Elastica\Query\BoolQuery;
 use Elastica\Query\Match;
 use Elastica\Query\QueryString;
-use Elastica\Query\Term;
 use FOS\ElasticaBundle\Repository;
 
 /**
@@ -42,10 +42,10 @@ class ContactFormRepository extends Repository
         }
 
         $result = $this->find($boolQuery);
-        if (is_array($result) && 1 === count($result)) {
+        if (!empty($result[0])) {
             return $result[0];
         }
 
-        throw new \LogicException("Bad method call.");
+        return null;
     }
 }

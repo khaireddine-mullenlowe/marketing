@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Response;
+use MarketingBundle\Repository\Elastica\ContactFormRepository;
 
 /**
  * Class ContactFormController
@@ -107,6 +108,7 @@ class ContactFormController extends MullenloweRestController
     {
         try {
             $repositoryManager = $this->get('fos_elastica.manager');
+            /** @var ContactFormRepository $repository */
             $repository = $repositoryManager->getRepository('MarketingBundle:ContactForm');
 
             $criterias = [];
