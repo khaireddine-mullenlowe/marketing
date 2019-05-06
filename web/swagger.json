@@ -105,8 +105,17 @@
                 "tags": [
                     "CampaignEvent"
                 ],
-                "summary": "Get CampaignEvents",
-                "operationId": "getCampaignEvents",
+                "summary": "Get CampaignEvents collection",
+                "operationId": "getCampaignEventsCollection",
+                "parameters": [
+                    {
+                        "name": "eventType",
+                        "in": "query",
+                        "description": "Find campaign events by eventType",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "CampaignEvents",

@@ -5,6 +5,7 @@ namespace MarketingBundle\Controller;
 use FOS\RestBundle\Controller\Annotations\Route;
 use FOS\RestBundle\View\View;
 use Knp\Bundle\PaginatorBundle\Pagination\SlidingPagination;
+use MarketingBundle\Repository\CampaignEventRepository;
 use Mullenlowe\CommonBundle\Controller\MullenloweRestController;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations as Rest;
@@ -70,9 +71,16 @@ class CampaignEventController extends MullenloweRestController
      *
      * @SWG\Get(
      *     path="/campaign-event",
-     *     summary="Get CampaignEvents",
-     *     operationId="getCampaignEvents",
+     *     summary="Get CampaignEvents collection",
+     *     operationId="getCampaignEventsCollection",
      *     tags={"CampaignEvent"},
+     *     @SWG\Parameter(
+     *         name="eventType",
+     *         in="query",
+     *         type="string",
+     *         required=false,
+     *         description="Find campaign events by eventType"
+     *     ),
      *     @SWG\Response(
      *         response="200",
      *         description="CampaignEvents",
@@ -90,12 +98,13 @@ class CampaignEventController extends MullenloweRestController
      */
     public function cgetAction(Request $request)
     {
+        /** @var CampaignEventRepository $repository */
         $repository = $this->getDoctrine()->getRepository('MarketingBundle:CampaignEvent');
 
         $paginator = $this->get('knp_paginator');
         /** @var SlidingPagination $pager */
         $pager = $paginator->paginate(
-            $repository->createQueryBuilder('campaignEvent'),
+            $repository->findByCustomFilters($request->query->all()),
             $request->query->getInt('page', PaginateEnum::CURRENT_PAGE),
             $request->query->getInt('limit', PaginateEnum::LIMIT)
         );
