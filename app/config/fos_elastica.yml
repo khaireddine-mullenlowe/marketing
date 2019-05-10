@@ -508,3 +508,60 @@ fos_elastica:
                         provider: ~
                         listener: ~
                         repository: ~
+                invitation_user:
+                    properties:
+                        id:
+                            type: integer
+                        myaudiUserId:
+                            type: integer
+                        subscriptionDate:
+                            type: date
+                        invitation:
+                            type: object
+                            properties:
+                                id:
+                                    type: integer
+                                name:
+                                    type: string
+                                status:
+                                    type: integer
+                                campaignEvent:
+                                    type: object
+                                    properties:
+                                        id:
+                                            type: integer
+                                        description:
+                                            type: text
+                                        waitingList:
+                                            type: boolean
+                                        startDate:
+                                            type: date
+                                        endDate:
+                                            type: date
+                                        descriptionEvent:
+                                            type: text
+                                        descriptionTarget:
+                                            type: text
+                                description:
+                                    type: text
+                                teaser:
+                                    type: text
+                                mailto:
+                                    type: text
+                                pathDesktop:
+                                    type: string
+                                pathTablet:
+                                    type: string
+                                pathMobile:
+                                    type: string
+                                createdAt:
+                                    type: date
+                                updatedAt:
+                                    type: date
+                    persistence:
+                        driver: orm
+                        model: MarketingBundle\Entity\MyaudiUserInvitation
+                        finder: ~
+                        provider: ~
+                        listener: ~
+                        repository: ~

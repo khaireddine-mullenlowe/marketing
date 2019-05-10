@@ -593,6 +593,260 @@
                 }
             }
         },
+        "/invitation/{id}": {
+            "get": {
+                "tags": [
+                    "Invitation"
+                ],
+                "summary": "Get invitation",
+                "operationId": "getInvitation",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Invitation ID",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An Invitation",
+                        "schema": {
+                            "$ref": "#/definitions/BasicEntityContext"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Invitation"
+                ],
+                "summary": "update invitation from id",
+                "operationId": "putInvitationById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "invitationId",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "Invitation",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Invitation"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "the updated invitation",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/InvitationComplete"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "Invitation page not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Invitation"
+                ],
+                "summary": "remove invitation from id",
+                "operationId": "removeInvitationById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "invitationId",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "the invitation"
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {}
+                    },
+                    "500": {
+                        "description": "internal error",
+                        "schema": {}
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "Invitation"
+                ],
+                "summary": "patch invitation from id",
+                "operationId": "patchInvitationById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "invitationId",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "invitation",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Invitation"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "the updated invitation",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/InvitationComplete"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "Invitation page not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/invitation": {
+            "get": {
+                "tags": [
+                    "Invitation"
+                ],
+                "summary": "Get Invitations",
+                "operationId": "getInvitations",
+                "responses": {
+                    "200": {
+                        "description": "Invitations",
+                        "schema": {
+                            "$ref": "#/definitions/BasicEntityContextMulti"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/invitation/": {
+            "post": {
+                "tags": [
+                    "Invitation"
+                ],
+                "summary": "create invitation",
+                "operationId": "createInvitation",
+                "parameters": [
+                    {
+                        "name": "invitation",
+                        "in": "body",
+                        "description": "Invitation payload",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Invitation"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "the created invitation",
+                        "schema": {
+                            "$ref": "#/definitions/InvitationComplete"
+                        }
+                    },
+                    "404": {
+                        "description": "Invitation page not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
         "/lead-provider/{id}": {
             "get": {
                 "tags": [
@@ -833,6 +1087,112 @@
                         "name": "id",
                         "in": "path",
                         "description": "MyaudiUserInterest Id to delete",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "delete status",
+                        "schema": {
+                            "$ref": "#/definitions/Success"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "internal error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/invitation-user": {
+            "get": {
+                "tags": [
+                    "Invitation"
+                ],
+                "summary": "Get Invitations for a user",
+                "operationId": "getInvitationsUser",
+                "responses": {
+                    "200": {
+                        "description": "Interests for a user",
+                        "schema": {
+                            "$ref": "#/definitions/MyaudiUserInvitationContextMulti"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/invitation-user/": {
+            "post": {
+                "tags": [
+                    "Invitation"
+                ],
+                "summary": "Subscribe a user to an invitation",
+                "operationId": "postMyaudiUserInvitation",
+                "parameters": [
+                    {
+                        "name": "myaudiUserInvitationPayload",
+                        "in": "body",
+                        "description": "",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/MyaudiUserInvitationPayload"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Subscription",
+                        "schema": {
+                            "$ref": "#/definitions/MyaudiUserInvitation"
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "internal error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/invitation-user/{id}": {
+            "delete": {
+                "tags": [
+                    "Invitation"
+                ],
+                "summary": "Delete MyaudiUserInvitation by id",
+                "operationId": "deleteMyaudiUserInvitationById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "MyaudiUserInvitation Id to delete",
                         "required": true,
                         "type": "integer"
                     }
@@ -2986,6 +3346,94 @@
                     }
                 }
             }
+        },
+        "Invitation": {
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "campaignEvent": {
+                    "type": "object",
+                    "allOf": [
+                        {
+                            "$ref": "#definitions/CampaignEvent"
+                        }
+                    ]
+                },
+                "description": {
+                    "type": "string"
+                },
+                "teaser": {
+                    "type": "string"
+                },
+                "mailto": {
+                    "type": "string"
+                },
+                "pathDesktop": {
+                    "type": "string"
+                },
+                "pathTablet": {
+                    "type": "string"
+                },
+                "pathMobile": {
+                    "type": "string"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#definitions/BasicEntity"
+                }
+            ]
+        },
+        "MyaudiUserInvitation": {
+            "properties": {
+                "myaudiUserId": {
+                    "type": "integer"
+                },
+                "marketingObjective": {
+                    "type": "object",
+                    "allOf": [
+                        {
+                            "$ref": "#definitions/MarketingObjective"
+                        }
+                    ]
+                },
+                "isUnsubscribe": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "MyaudiUserInvitationPayload": {
+            "properties": {
+                "myaudiUserId": {
+                    "type": "integer"
+                },
+                "invitation": {
+                    "type": "integer"
+                }
+            }
+        },
+        "MyaudiUserInvitationContextMulti": {
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#definitions/MyaudiUserInvitation"
+                    }
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#definitions/Context"
+                }
+            ]
+        },
+        "InvitationComplete": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/TimestampableEntity"
+                }
+            ]
         }
     }
 }
