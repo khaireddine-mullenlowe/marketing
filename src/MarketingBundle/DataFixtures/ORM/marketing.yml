@@ -110,4 +110,3 @@ MarketingBundle\Entity\MyaudiUserInvitation:
     invitation: '@invitation1'
     myaudiUserId: 1
     subscription_date: '<(new \DateTime("now"))>'
-    

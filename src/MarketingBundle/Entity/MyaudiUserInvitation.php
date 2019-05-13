@@ -39,7 +39,8 @@ class MyaudiUserInvitation
     protected $myaudiUserId;
 
     /**
-     * @var int
+     * @var Invitation
+     * @Assert\NotNull
      *
      * @ORM\ManyToOne(
      *     targetEntity="Invitation"
@@ -95,10 +96,9 @@ class MyaudiUserInvitation
     }
 
     /**
-     * Set invitation
+     * Set Invitation
      *
-     * @param int $invitation
-     *
+     * @param Invitation $invitation
      * @return MyaudiUserInvitation
      */
     public function setInvitation($invitation)
@@ -109,9 +109,9 @@ class MyaudiUserInvitation
     }
 
     /**
-     * Get invitation
+     * Get Invitation
      *
-     * @return int
+     * @return Invitation
      */
     public function getInvitation()
     {

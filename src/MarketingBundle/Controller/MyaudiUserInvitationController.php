@@ -37,7 +37,7 @@ class MyaudiUserInvitationController extends MullenloweRestController
      *     tags={"Invitation"},
      *     @SWG\Response(
      *         response="200",
-     *         description="Interests for a user",
+     *         description="Invitations for a user",
      *         @SWG\Definition(ref="#/definitions/MyaudiUserInvitationContextMulti")
      *     ),
      *     @SWG\Response(

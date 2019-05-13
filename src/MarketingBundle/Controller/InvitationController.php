@@ -55,7 +55,7 @@ class InvitationController extends MullenloweRestController
      * )
      *
      * @param int $id
-     * @return \FOS\RestBundle\View\View
+     * @return View
      */
     public function getAction(int $id)
     {
@@ -64,7 +64,7 @@ class InvitationController extends MullenloweRestController
             ->find($id);
 
         if (empty($invitation)) {
-            throw $this->createNotFoundException('Invitation not found');
+            throw new NotFoundHttpException(self::CONTEXT, 'Invitation not found');
         }
 
         return $this->createView($invitation);
@@ -82,7 +82,7 @@ class InvitationController extends MullenloweRestController
      *     @SWG\Response(
      *         response="200",
      *         description="Invitations",
-     *         @SWG\Definition(ref="#/definitions/BasicEntityContextMulti")
+     *         @SWG\Schema(type="array", @SWG\Items(ref="#/definitions/Invitation"))
      *     ),
      *     @SWG\Response(
      *         response=404,
@@ -92,7 +92,7 @@ class InvitationController extends MullenloweRestController
      * )
      *
      * @param Request $request
-     * @return \FOS\RestBundle\View\View
+     * @return View
      */
     public function cgetAction(Request $request)
     {

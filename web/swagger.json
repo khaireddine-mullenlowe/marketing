@@ -790,7 +790,10 @@
                     "200": {
                         "description": "Invitations",
                         "schema": {
-                            "$ref": "#/definitions/BasicEntityContextMulti"
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Invitation"
+                            }
                         }
                     },
                     "404": {
@@ -1127,7 +1130,7 @@
                 "operationId": "getInvitationsUser",
                 "responses": {
                     "200": {
-                        "description": "Interests for a user",
+                        "description": "Invitations for a user",
                         "schema": {
                             "$ref": "#/definitions/MyaudiUserInvitationContextMulti"
                         }

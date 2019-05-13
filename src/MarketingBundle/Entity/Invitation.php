@@ -111,7 +111,7 @@ class Invitation extends BaseEntity
     }
 
     /**
-     * Set campaignEvent
+     * Set CampaignEvent
      *
      * @param string $campaignEvent
      *
@@ -125,9 +125,9 @@ class Invitation extends BaseEntity
     }
 
     /**
-     * Get campaignEvent
+     * Get CampaignEvent
      *
-     * @return string
+     * @return CampaignEvent
      */
     public function getCampaignEvent()
     {
