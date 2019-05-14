@@ -76,6 +76,7 @@ class SwaggerDefinitions
      *    )
      * ),
      *
+     *
      * @SWG\Definition(
      *     definition="CampaignEvent",
      *     @SWG\Property(property="description", type="string"),
@@ -87,6 +88,14 @@ class SwaggerDefinitions
      *     @SWG\Property(property="endDate", type="string", format="date"),
      *     allOf={
      *         @SWG\Definition(ref="#definitions/BasicEntity")
+     *     }
+     * ),
+     *
+     * @SWG\Definition(
+     *     definition="CampaignEventComplete",
+     *     allOf={
+     *         @SWG\Definition(ref="#/definitions/CampaignEvent"),
+     *         @SWG\Definition(ref="#/definitions/TimestampableEntity"),
      *     }
      * ),
      *
