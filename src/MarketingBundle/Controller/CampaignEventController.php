@@ -108,7 +108,7 @@ class CampaignEventController extends MullenloweRestController
         $paginator = $this->get('knp_paginator');
         /** @var SlidingPagination $pager */
         $pager = $paginator->paginate(
-            $repository->findByCustomFilters($request->query->all()),
+            $repository->findByCustomFilters($request->query->all(), $request->query->all()),
             $request->query->getInt('page', PaginateEnum::CURRENT_PAGE),
             $request->query->getInt('limit', PaginateEnum::LIMIT)
         );

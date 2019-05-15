@@ -12,9 +12,10 @@ class CampaignEventRepository extends EntityRepository
 {
     /**
      * @param array $filters
+     * @param array $orderBy
      * @return \Doctrine\ORM\Query
      */
-    public function findByCustomFilters(array $filters)
+    public function findByCustomFilters(array $filters, array $orderBy)
     {
         $queryBuilder = $this->createQueryBuilder('b');
 
@@ -25,14 +26,14 @@ class CampaignEventRepository extends EntityRepository
                 ->setParameter('eventType', $filters['eventType']);
         }
 
-        if (!empty($filters['startDate'])) {
+        if (!empty($orderBy['startDate'])) {
             $queryBuilder
-                ->orderBy('b.startDate', $filters['startDate']);
+                ->orderBy('b.startDate', $orderBy['startDate']);
         }
 
-        if (!empty($filters['endDate'])) {
+        if (!empty($orderBy['endDate'])) {
             $queryBuilder
-                ->orderBy('b.endDate', $filters['endDate']);
+                ->orderBy('b.endDate', $orderBy['endDate']);
         }
 
         return $queryBuilder->getQuery();
