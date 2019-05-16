@@ -18,7 +18,7 @@ class MyaudiUserInvitationControllerCest
     public function tryCGetMyaudiUserInvitationOk(FunctionalTester $I) {
         $I->haveHttpHeader('Content-Type', 'application/json');
 
-        $I->sendGET('/invitation-user/1');
+        $I->sendGET('/invitation-user/');
         $I->seeResponseCodeIs(Response::HTTP_OK);
         $I->seeResponseIsJson();
         $I->seeResponseContains('{"total":1');
