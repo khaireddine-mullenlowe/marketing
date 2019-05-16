@@ -98,6 +98,128 @@
                         }
                     }
                 }
+            },
+            "put": {
+                "tags": [
+                    "CampaignEvent"
+                ],
+                "summary": "Update CampaignEvent by id",
+                "operationId": "putCampaignEventById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "CampaignEvent Id to update",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "campaignEvent",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CampaignEvent"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "the updated CampaignEvent",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "description": "Updates an existing CampaignEvent entity.",
+                                            "$ref": "#/definitions/CampaignEventComplete"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "updating error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "CampaignEvent"
+                ],
+                "summary": "Patch CampaignEvent by id",
+                "operationId": "patchCampaignEventById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "CampaignEvent Id to update",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "campaignEvent",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CampaignEvent"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "the updated CampaignEvent",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "description": "Partially updates an existing CampaignEvent entity.",
+                                            "$ref": "#/definitions/CampaignEventComplete"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "updating error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
             }
         },
         "/campaign-event": {
@@ -105,8 +227,8 @@
                 "tags": [
                     "CampaignEvent"
                 ],
-                "summary": "Get CampaignEvents",
-                "operationId": "getCampaignEvents",
+                "summary": "Get CampaignEvents collection",
+                "operationId": "getCampaignEventsCollection",
                 "parameters": [
                     {
                         "name": "eventTypeId",
@@ -121,6 +243,13 @@
                         "description": "limit",
                         "required": false,
                         "type": "integer"
+                    },
+                    {
+                        "name": "eventType",
+                        "in": "query",
+                        "description": "Find campaign events by eventType",
+                        "required": false,
+                        "type": "string"
                     }
                 ],
                 "responses": {
@@ -137,6 +266,60 @@
                         }
                     }
                 }
+            },
+            "post": {
+                "tags": [
+                    "CampaignEvent"
+                ],
+                "summary": "Create a new Campaign Event",
+                "operationId": "createCampaignEvent",
+                "parameters": [
+                    {
+                        "name": "CampaignEvent",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CampaignEvent"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "the created Campaign Event",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Context"
+                                },
+                                {
+                                    "properties": {
+                                        "data": {
+                                            "description": "Creates a new Campaign Event entity.",
+                                            "$ref": "#/definitions/CampaignEventComplete"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "internal error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
             }
         },
         "/contact-form/{id}": {
@@ -2970,6 +3153,16 @@
             "allOf": [
                 {
                     "$ref": "#definitions/BasicEntity"
+                }
+            ]
+        },
+        "CampaignEventComplete": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/CampaignEvent"
+                },
+                {
+                    "$ref": "#/definitions/TimestampableEntity"
                 }
             ]
         },
