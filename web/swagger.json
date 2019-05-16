@@ -107,6 +107,22 @@
                 ],
                 "summary": "Get CampaignEvents",
                 "operationId": "getCampaignEvents",
+                "parameters": [
+                    {
+                        "name": "eventTypeId",
+                        "in": "query",
+                        "description": "Find campaign events by eventTypeId",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "limit",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "CampaignEvents",
@@ -786,6 +802,15 @@
                 ],
                 "summary": "Get Invitations",
                 "operationId": "getInvitations",
+                "parameters": [
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "Get invitations where status",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Invitations",
@@ -1126,11 +1151,27 @@
                 "tags": [
                     "Invitation"
                 ],
-                "summary": "Get Invitations for a user",
+                "summary": "Get InvitationsUser",
                 "operationId": "getInvitationsUser",
+                "parameters": [
+                    {
+                        "name": "invitationId",
+                        "in": "query",
+                        "description": "Get myAudiUserInvitations by invitationId",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "userId",
+                        "in": "query",
+                        "description": "Get myAudiUserInvitations by userId",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
                 "responses": {
                     "200": {
-                        "description": "Invitations for a user",
+                        "description": "InvitationsUser",
                         "schema": {
                             "$ref": "#/definitions/MyaudiUserInvitationContextMulti"
                         }

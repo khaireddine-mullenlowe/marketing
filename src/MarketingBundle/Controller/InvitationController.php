@@ -25,6 +25,7 @@ use FOS\RestBundle\Controller\Annotations\Route;
 class InvitationController extends MullenloweRestController
 {
     const CONTEXT = 'Invitation';
+    const LIMIT = 1000;
 
     /**
      * @Rest\Get("/{id}", requirements={"id"="\d+"})
@@ -79,6 +80,13 @@ class InvitationController extends MullenloweRestController
      *     summary="Get Invitations",
      *     operationId="getInvitations",
      *     tags={"Invitation"},
+     *     @SWG\Parameter(
+     *         name="status",
+     *         in="query",
+     *         type="integer",
+     *         required=false,
+     *         description="Get invitations where status"
+     *     ),
      *     @SWG\Response(
      *         response="200",
      *         description="Invitations",
@@ -97,14 +105,19 @@ class InvitationController extends MullenloweRestController
     public function cgetAction(Request $request)
     {
         $repository = $this->getDoctrine()->getRepository('MarketingBundle:Invitation');
+        $queryBuilder = $repository->findAll();
+        $invitationStatus = $request->query->getInt('status');
+
+        if (isset($invitationStatus) && in_array($invitationStatus, [1, -1])) {
+            $queryBuilder = $repository->findBy(['status' => (int)$invitationStatus]);
+        }
 
         $paginator = $this->get('knp_paginator');
-
         /** @var SlidingPagination $pager */
         $pager = $paginator->paginate(
-            $repository->createQueryBuilder('invitation'),
+            $queryBuilder,
             $request->query->getInt('page', PaginateEnum::CURRENT_PAGE),
-            $request->query->getInt('limit', PaginateEnum::LIMIT)
+            $request->query->getInt('limit', self::LIMIT)
         );
 
         return $this->createPaginatedView($pager);

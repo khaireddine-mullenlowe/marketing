@@ -25,19 +25,34 @@ use FOS\RestBundle\Controller\Annotations\Route;
 class MyaudiUserInvitationController extends MullenloweRestController
 {
     const CONTEXT = 'MyaudiUserInvitation';
+    const LIMIT = 1000;
 
     /**
-     * @Rest\Get("/{userId}", requirements={"id"="\d+"})
+     * @Rest\Get("/")
      * @Rest\View()
      *
      * @SWG\Get(
      *     path="/invitation-user",
-     *     summary="Get Invitations for a user",
+     *     summary="Get InvitationsUser",
      *     operationId="getInvitationsUser",
      *     tags={"Invitation"},
+     *     @SWG\Parameter(
+     *         name="invitationId",
+     *         in="query",
+     *         type="integer",
+     *         required=false,
+     *         description="Get myAudiUserInvitations by invitationId"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="userId",
+     *         in="query",
+     *         type="integer",
+     *         required=false,
+     *         description="Get myAudiUserInvitations by userId"
+     *     ),
      *     @SWG\Response(
      *         response="200",
-     *         description="Invitations for a user",
+     *         description="InvitationsUser",
      *         @SWG\Definition(ref="#/definitions/MyaudiUserInvitationContextMulti")
      *     ),
      *     @SWG\Response(
@@ -48,19 +63,34 @@ class MyaudiUserInvitationController extends MullenloweRestController
      * )
      *
      * @param Request $request
-     * @param int     $userId
      * @return View
      */
-    public function cgetAction(Request $request, $userId)
+    public function cgetAction(Request $request)
     {
+        $criterias = [];
         $repository = $this->getDoctrine()->getRepository('MarketingBundle:MyaudiUserInvitation');
+        $queryBuilder = $repository->findAll();
+        $invitationId = $request->query->get('invitationId');
+        $userId = $request->query->get('userId');
+
+        if (!empty($invitationId) && !empty($userId)) {
+            $criterias = ['invitation' => $invitationId, 'myaudiUserId' => $userId];
+        } elseif (!empty($invitationId)) {
+            $criterias = ['invitation' => $invitationId];
+        } elseif (!empty($userId)) {
+            $criterias = ['myaudiUserId' => $userId];
+        }
+
+        if (!empty($criterias)) {
+            $queryBuilder = $repository->findBy($criterias);
+        }
 
         $paginator = $this->get('knp_paginator');
         /** @var SlidingPagination $pager */
         $pager = $paginator->paginate(
-            $repository->findBy(['myaudiUserId' => $userId]),
+            $queryBuilder,
             $request->query->getInt('page', PaginateEnum::CURRENT_PAGE),
-            $request->query->getInt('limit', PaginateEnum::LIMIT)
+            $request->query->getInt('limit', self::LIMIT)
         );
 
         return $this->createPaginatedView($pager);
