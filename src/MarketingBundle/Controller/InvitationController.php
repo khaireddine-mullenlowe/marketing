@@ -81,6 +81,13 @@ class InvitationController extends MullenloweRestController
      *     operationId="getInvitations",
      *     tags={"Invitation"},
      *     @SWG\Parameter(
+     *         name="name",
+     *         in="query",
+     *         type="string",
+     *         required=false,
+     *         description="Get invitations where name"
+     *     ),
+     *     @SWG\Parameter(
      *         name="status",
      *         in="query",
      *         type="integer",
@@ -106,10 +113,13 @@ class InvitationController extends MullenloweRestController
     {
         $repository = $this->getDoctrine()->getRepository('MarketingBundle:Invitation');
         $queryBuilder = $repository->findAll();
-        $invitationStatus = $request->query->getInt('status');
+        //Get invitations by criterias
+        if (!empty($this->handleInvitationCriterias($request))) {
+            $queryBuilder = $repository->findBy(
+                $this->handleCriterias($request)
+            );
 
-        if (isset($invitationStatus) && in_array($invitationStatus, [1, -1])) {
-            $queryBuilder = $repository->findBy(['status' => (int)$invitationStatus]);
+            return $this->createView($queryBuilder);
         }
 
         $paginator = $this->get('knp_paginator');
@@ -378,5 +388,25 @@ class InvitationController extends MullenloweRestController
         $em->flush();
 
         return $this->createView($invitation);
+    }
+
+    /**
+     * @param Request $request
+     * @return array
+     */
+    private function handleInvitationCriterias(Request $request)
+    {
+        $criterias = [];
+        $invitationStatus = $request->query->getInt('status');
+        $invitationName = $request->query->get('name');
+        if (!empty($invitationName) && is_string($invitationName)) {
+            $criterias = ['name' => $invitationName];
+        }
+
+        if (isset($invitationStatus) && in_array($invitationStatus, [1, -1])) {
+            $criterias = ['status' => (int)$invitationStatus];
+        }
+
+        return $criterias;
     }
 }

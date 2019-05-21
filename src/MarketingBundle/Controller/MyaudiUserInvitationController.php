@@ -37,14 +37,14 @@ class MyaudiUserInvitationController extends MullenloweRestController
      *     operationId="getInvitationsUser",
      *     tags={"Invitation"},
      *     @SWG\Parameter(
-     *         name="invitationId",
+     *         name="invitation",
      *         in="query",
      *         type="integer",
      *         required=false,
      *         description="Get myAudiUserInvitations by invitationId"
      *     ),
      *     @SWG\Parameter(
-     *         name="userId",
+     *         name="myaudiUserId",
      *         in="query",
      *         type="integer",
      *         required=false,
@@ -67,22 +67,13 @@ class MyaudiUserInvitationController extends MullenloweRestController
      */
     public function cgetAction(Request $request)
     {
-        $criterias = [];
         $repository = $this->getDoctrine()->getRepository('MarketingBundle:MyaudiUserInvitation');
         $queryBuilder = $repository->findAll();
-        $invitationId = $request->query->get('invitationId');
-        $userId = $request->query->get('userId');
-
-        if (!empty($invitationId) && !empty($userId)) {
-            $criterias = ['invitation' => $invitationId, 'myaudiUserId' => $userId];
-        } elseif (!empty($invitationId)) {
-            $criterias = ['invitation' => $invitationId];
-        } elseif (!empty($userId)) {
-            $criterias = ['myaudiUserId' => $userId];
-        }
-
-        if (!empty($criterias)) {
-            $queryBuilder = $repository->findBy($criterias);
+        //Get MyaudUserinvitations by criterias
+        if (!empty($this->handleMyaduUserInvitationCriterias($request))) {
+            $queryBuilder = $repository->findBy(
+                $this->handleMyaduUserInvitationCriterias($request)
+            );
         }
 
         $paginator = $this->get('knp_paginator');
@@ -204,5 +195,25 @@ class MyaudiUserInvitationController extends MullenloweRestController
         $em->flush();
 
         return $this->deleteView();
+    }
+
+    /**
+     * @param Request $request
+     * @return array
+     */
+    private function handleMyaduUserInvitationCriterias(Request $request)
+    {
+        $criterias = [];
+        $invitation = $request->query->get('invitation');
+        $myaudiUserId = $request->query->get('myaudiUserId');
+        if (!empty($invitation) && !empty($myaudiUserId)) {
+            $criterias = ['invitation' => $invitation, 'myaudiUserId' => $myaudiUserId];
+        } elseif (!empty($invitation)) {
+            $criterias = ['invitation' => $invitation];
+        } elseif (!empty($myaudiUserId)) {
+            $criterias = ['myaudiUserId' => $myaudiUserId];
+        }
+
+        return $criterias;
     }
 }
