@@ -116,7 +116,7 @@ class InvitationController extends MullenloweRestController
         //Get invitations by criterias
         if (!empty($this->handleInvitationCriterias($request))) {
             $queryBuilder = $repository->findBy(
-                $this->handleCriterias($request)
+                $this->handleInvitationCriterias($request)
             );
 
             return $this->createView($queryBuilder);
