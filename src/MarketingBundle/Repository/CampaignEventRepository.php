@@ -26,6 +26,12 @@ class CampaignEventRepository extends EntityRepository
                 ->setParameter('eventType', $filters['eventType']);
         }
 
+        if (!empty($filters['name'])) {
+            $queryBuilder
+                ->andWhere('b.name = :name')
+                ->setParameter('name', $filters['name']);
+        }
+
         if (!empty($orderBy['startDate'])) {
             $queryBuilder
                 ->orderBy('b.startDate', $orderBy['startDate']);
