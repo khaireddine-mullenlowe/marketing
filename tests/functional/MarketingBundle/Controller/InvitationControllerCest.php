@@ -4,7 +4,6 @@
 namespace Tests\functional\MarketingBundle\Controller;
 
 use FunctionalTester;
-use phpDocumentor\Reflection\Types\Static_;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -42,9 +41,7 @@ class InvitationControllerCest
         "description": "test_description", 
         "teaser": "test_teaser", 
         "mailto": "test_mailto", 
-        "pathDesktop": "test_pathDesktop", 
-        "pathTablet": "test_pathTablet", 
-        "pathMobile": "test_pathMobile", 
+        "pathVisual": "test_pathVisual", 
         "status": 1
         }';
 
@@ -69,9 +66,7 @@ class InvitationControllerCest
         "description": "test_description", 
         "teaser": "test_teaser", 
         "mailto": "test_mailto", 
-        "pathDesktop": "test_pathDesktop", 
-        "pathTablet": "test_pathTablet", 
-        "pathMobile": "test_pathMobile", 
+        "pathVisual": "test_pathVisual", 
         "status": 1
         }';
 

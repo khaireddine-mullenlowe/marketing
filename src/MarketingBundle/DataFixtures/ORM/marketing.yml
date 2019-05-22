@@ -31,9 +31,7 @@ MarketingBundle\Entity\Invitation:
     description: 'test_description'
     teaser: 'test_teaser'
     mailto: 'test_mailto'
-    pathDesktop: 'test_pathDesktop'
-    pathTablet: 'test_pathTablet'
-    pathMobile: 'test_pathMobile'
+    pathVisual: 'test_pathVisual'
     status: 1
 
 MarketingBundle\Entity\LeadProvider:

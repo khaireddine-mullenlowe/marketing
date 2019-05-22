@@ -27,9 +27,7 @@ class InvitationFormType extends AbstractType
             ->add('description', TextType::class)
             ->add('teaser', TextType::class)
             ->add('mailto', TextType::class)
-            ->add('pathDesktop', TextType::class)
-            ->add('pathTablet', TextType::class)
-            ->add('pathMobile', TextType::class)
+            ->add('pathVisual', TextType::class)
             ->add('status', IntegerType::class)
             ;
     }

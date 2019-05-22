@@ -548,11 +548,7 @@ fos_elastica:
                                     type: text
                                 mailto:
                                     type: text
-                                pathDesktop:
-                                    type: string
-                                pathTablet:
-                                    type: string
-                                pathMobile:
+                                pathVisual:
                                     type: string
                                 createdAt:
                                     type: date

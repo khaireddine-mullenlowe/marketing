@@ -64,25 +64,9 @@ class Invitation extends BaseEntity
      * @var string
      * @Assert\NotNull
      *
-     * @ORM\Column(name="path_desktop", type="string")
+     * @ORM\Column(name="path_visual", type="string")
      */
-    protected $pathDesktop;
-
-    /**
-     * @var string
-     * @Assert\NotNull
-     *
-     * @ORM\Column(name="path_tablet", type="string")
-     */
-    protected $pathTablet;
-
-    /**
-     * @var string
-     * @Assert\NotNull
-     *
-     * @ORM\Column(name="path_mobile", type="string")
-     */
-    protected $pathMobile;
+    protected $pathVisual;
 
     /**
      * @var \DateTime
@@ -207,74 +191,26 @@ class Invitation extends BaseEntity
     }
 
     /**
-     * Set pathDesktop
+     * Set pathVisual
      *
-     * @param string $pathDesktop
+     * @param string $pathVisual
      *
      * @return Invitation
      */
-    public function setPathDesktop($pathDesktop): Invitation
+    public function setPathVisual($pathVisual): Invitation
     {
-        $this->pathDesktop = $pathDesktop;
+        $this->pathVisual = $pathVisual;
 
         return $this;
     }
 
     /**
-     * Get pathDesktop
+     * Get pathVisual
      *
      * @return string
      */
-    public function getPathDesktop()
+    public function getPathVisual()
     {
-        return $this->pathDesktop;
-    }
-
-    /**
-     * Set pathTablet
-     *
-     * @param string $pathTablet
-     *
-     * @return Invitation
-     */
-    public function setPathTablet($pathTablet): Invitation
-    {
-        $this->pathTablet = $pathTablet;
-
-        return $this;
-    }
-
-    /**
-     * Get pathTablet
-     *
-     * @return string
-     */
-    public function getPathTablet()
-    {
-        return $this->pathTablet;
-    }
-
-    /**
-     * Set pathMobile
-     *
-     * @param string $pathMobile
-     *
-     * @return Invitation
-     */
-    public function setPathMobile($pathMobile): Invitation
-    {
-        $this->pathMobile = $pathMobile;
-
-        return $this;
-    }
-
-    /**
-     * Get pathMobile
-     *
-     * @return string
-     */
-    public function getPathMobile()
-    {
-        return $this->pathMobile;
+        return $this->pathVisual;
     }
 }

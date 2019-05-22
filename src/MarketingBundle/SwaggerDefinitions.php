@@ -378,9 +378,7 @@ class SwaggerDefinitions
      *     @SWG\Property(property="description", type="string"),
      *     @SWG\Property(property="teaser", type="string"),
      *     @SWG\Property(property="mailto", type="string"),
-     *     @SWG\Property(property="pathDesktop", type="string"),
-     *     @SWG\Property(property="pathTablet", type="string"),
-     *     @SWG\Property(property="pathMobile", type="string"),
+     *     @SWG\Property(property="pathVisual", type="string"),
      *     allOf={
      *         @SWG\Definition(ref="#definitions/BasicEntity")
      *     }

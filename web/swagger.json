@@ -987,6 +987,13 @@
                 "operationId": "getInvitations",
                 "parameters": [
                     {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Get invitations where name",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
                         "name": "status",
                         "in": "query",
                         "description": "Get invitations where status",
@@ -1338,14 +1345,14 @@
                 "operationId": "getInvitationsUser",
                 "parameters": [
                     {
-                        "name": "invitationId",
+                        "name": "invitation",
                         "in": "query",
                         "description": "Get myAudiUserInvitations by invitationId",
                         "required": false,
                         "type": "integer"
                     },
                     {
-                        "name": "userId",
+                        "name": "myaudiUserId",
                         "in": "query",
                         "description": "Get myAudiUserInvitations by userId",
                         "required": false,
@@ -3606,13 +3613,7 @@
                 "mailto": {
                     "type": "string"
                 },
-                "pathDesktop": {
-                    "type": "string"
-                },
-                "pathTablet": {
-                    "type": "string"
-                },
-                "pathMobile": {
+                "pathVisual": {
                     "type": "string"
                 }
             },
