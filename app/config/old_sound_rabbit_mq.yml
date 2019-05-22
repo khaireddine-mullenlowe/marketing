@@ -76,3 +76,4 @@ mullenlowe_common:
             - { context: 'Score',                           routing_key: 'crud.marketing.score' }
             - { context: 'OfferAftersale',                  routing_key: 'crud.marketing.offerAftersale' }
             - { context: 'OfferSale',                       routing_key: 'crud.marketing.offerSale' }
+            - { context: 'MyaudiUserInvitation',            routing_key: 'crud.marketing.myaudiUserInvitation' }

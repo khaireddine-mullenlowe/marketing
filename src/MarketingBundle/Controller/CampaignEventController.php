@@ -79,6 +79,20 @@ class CampaignEventController extends MullenloweRestController
      *     operationId="getCampaignEventsCollection",
      *     tags={"CampaignEvent"},
      *     @SWG\Parameter(
+     *         name="eventTypeId",
+     *         in="query",
+     *         type="integer",
+     *         required=false,
+     *         description="Find campaign events by eventTypeId"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="limit",
+     *         in="query",
+     *         type="integer",
+     *         required=false,
+     *         description="limit"
+     *     ),
+     *     @SWG\Parameter(
      *         name="eventType",
      *         in="query",
      *         type="string",
@@ -104,6 +118,17 @@ class CampaignEventController extends MullenloweRestController
     {
         /** @var CampaignEventRepository $repository */
         $repository = $this->getDoctrine()->getRepository('MarketingBundle:CampaignEvent');
+
+        if (!empty($request->query->getInt('limit'))
+            && $request->query->getInt('limit') === -1
+            && $request->query->getInt('eventTypeId')
+        ) {
+            $queryBuilder = $repository->findBy([
+                'eventType' => $request->query->getInt('eventTypeId')
+            ]);
+
+            return $this->createView($queryBuilder);
+        }
 
         $paginator = $this->get('knp_paginator');
         /** @var SlidingPagination $pager */
