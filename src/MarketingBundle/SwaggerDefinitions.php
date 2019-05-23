@@ -365,6 +365,57 @@ class SwaggerDefinitions
      *     @SWG\Property(property="data", type="array",
      *         @SWG\Items(ref="#definitions/ContactFormImportResponse")
      *    )
+     * ),
+     *
+     * @SWG\Definition(
+     *     definition="Invitation",
+     *     @SWG\Property(property="id", type="integer"),
+     *     @SWG\Property(property="campaignEvent", type="object",
+     *         allOf={
+     *             @SWG\Definition(ref="#definitions/CampaignEvent")
+     *         }
+     *     ),
+     *     @SWG\Property(property="description", type="string"),
+     *     @SWG\Property(property="teaser", type="string"),
+     *     @SWG\Property(property="mailto", type="string"),
+     *     @SWG\Property(property="pathVisual", type="string"),
+     *     allOf={
+     *         @SWG\Definition(ref="#definitions/BasicEntity")
+     *     }
+     * ),
+     *
+     * @SWG\Definition(
+     *     definition="MyaudiUserInvitation",
+     *     @SWG\Property(property="myaudiUserId", type="integer"),
+     *     @SWG\Property(property="marketingObjective", type="object",
+     *         allOf={
+     *              @SWG\Definition(ref="#definitions/MarketingObjective")
+     *         },
+     *     ),
+     *     @SWG\Property(property="isUnsubscribe", type="boolean"),
+     * ),
+     *
+     * @SWG\Definition(
+     *     definition="MyaudiUserInvitationPayload",
+     *     @SWG\Property(property="myaudiUserId", type="integer"),
+     *     @SWG\Property(property="invitation", type="integer"),
+     * ),
+     *
+     * @SWG\Definition(
+     *     definition="MyaudiUserInvitationContextMulti",
+     *     allOf={
+     *         @SWG\Definition(ref="#definitions/Context")
+     *     },
+     *     @SWG\Property(property="data", type="array",
+     *         @SWG\Items(ref="#definitions/MyaudiUserInvitation")
+     *     )
+     * )
+     *
+     * @SWG\Definition(
+     *     definition="InvitationComplete",
+     *     allOf={
+     *          @SWG\Definition(ref="#/definitions/TimestampableEntity"),
+     *     }
      * )
      *
      */
