@@ -1,8 +1,6 @@
 <?php
 
-
 namespace MarketingBundle\Form;
-
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -38,7 +36,7 @@ class InvitationUploadFormType extends AbstractType
     {
         $resolver->setDefaults([
             'csrf_protection'    => false,
-            'allow_extra_fields' => true,
+            'allow_extra_fields' => false,
         ]);
     }
 
