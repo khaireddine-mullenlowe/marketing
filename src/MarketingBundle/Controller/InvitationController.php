@@ -5,12 +5,10 @@ namespace MarketingBundle\Controller;
 
 use Doctrine\ORM\OptimisticLockException;
 use FOS\RestBundle\View\View;
-use MarketingBundle\Entity\CampaignEvent;
 use MarketingBundle\Entity\Invitation;
 use MarketingBundle\Enum\PaginateEnum;
 use MarketingBundle\Form\InvitationFormType;
 use MarketingBundle\Form\InvitationUploadFormType;
-use MarketingBundle\Service\ContactFormService;
 use MarketingBundle\Service\UploadInvitationVisualService;
 use Mullenlowe\CommonBundle\Controller\MullenloweRestController;
 use Mullenlowe\CommonBundle\Exception\NotFoundHttpException;
