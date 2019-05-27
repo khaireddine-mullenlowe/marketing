@@ -9,6 +9,9 @@ use MarketingBundle\Entity\CampaignEvent;
 use MarketingBundle\Entity\Invitation;
 use MarketingBundle\Enum\PaginateEnum;
 use MarketingBundle\Form\InvitationFormType;
+use MarketingBundle\Form\InvitationUploadFormType;
+use MarketingBundle\Service\ContactFormService;
+use MarketingBundle\Service\UploadInvitationVisualService;
 use Mullenlowe\CommonBundle\Controller\MullenloweRestController;
 use Mullenlowe\CommonBundle\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\Request;
@@ -360,6 +363,59 @@ class InvitationController extends MullenloweRestController
         $em->flush();
 
         return $this->deleteView();
+    }
+
+    /**
+     * @Rest\Post("/upload/")
+     * @Rest\View()
+     *
+     * @SWG\Post(
+     *     path="/invitation/upload/",
+     *     summary="Upload invitation visual",
+     *     operationId="uploadInvitationVisual",
+     *     tags={"Invitation"},
+     *     @SWG\Parameter(
+     *         name="InvitationVisualUploadPayload",
+     *         in="formData",
+     *         type="file",
+     *         required=true,
+     *         description="",
+     *         @SWG\Schema(ref="#/definitions/InvitationVisualUploadPayload")
+     *     ),
+     *     @SWG\Response(
+     *         response="200",
+     *         description="Upload visual success"
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="not found",
+     *         @SWG\Schema(ref="#/definitions/Error")
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="internal error",
+     *         @SWG\Schema(ref="#/definitions/Error")
+     *     )
+     * )
+     *
+     * @param Request $request
+     * @param UploadInvitationVisualService $invitationVisualService
+     * @return View
+     * @throws \Exception
+     */
+    public function uploadVisualAction(Request $request, UploadInvitationVisualService $invitationVisualService)
+    {
+        $form = $this->createForm(InvitationUploadFormType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            $uploadVisualInvitation = $invitationVisualService->uploadVisual($data['pathVisual']);
+
+            return $this->createView($uploadVisualInvitation, Response::HTTP_CREATED);
+        }
+
+        return $this->view($form, RESPONSE::HTTP_BAD_REQUEST);
     }
 
     /**

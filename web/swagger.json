@@ -1065,6 +1065,44 @@
                 ]
             }
         },
+        "/invitation/upload/": {
+            "post": {
+                "tags": [
+                    "Invitation"
+                ],
+                "summary": "Upload invitation visual",
+                "operationId": "uploadInvitationVisual",
+                "parameters": [
+                    {
+                        "name": "InvitationVisualUploadPayload",
+                        "in": "formData",
+                        "description": "",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/InvitationVisualUploadPayload"
+                        },
+                        "type": "file"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Upload visual success"
+                    },
+                    "404": {
+                        "description": "not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "internal error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
         "/lead-provider/{id}": {
             "get": {
                 "tags": [
@@ -3622,6 +3660,13 @@
                     "$ref": "#definitions/BasicEntity"
                 }
             ]
+        },
+        "InvitationVisualUploadPayload": {
+            "properties": {
+                "file": {
+                    "type": "file"
+                }
+            }
         },
         "MyaudiUserInvitation": {
             "properties": {

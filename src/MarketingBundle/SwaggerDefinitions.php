@@ -385,6 +385,11 @@ class SwaggerDefinitions
      * ),
      *
      * @SWG\Definition(
+     *     definition="InvitationVisualUploadPayload",
+     *     @SWG\Property(property="file", type="file")
+     * ),
+     *
+     * @SWG\Definition(
      *     definition="MyaudiUserInvitation",
      *     @SWG\Property(property="myaudiUserId", type="integer"),
      *     @SWG\Property(property="marketingObjective", type="object",
