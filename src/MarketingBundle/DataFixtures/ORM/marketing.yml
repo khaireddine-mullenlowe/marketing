@@ -24,6 +24,16 @@ MarketingBundle\Entity\Interest:
     name: 'interest'
     status: 1
 
+MarketingBundle\Entity\Invitation:
+  invitation1:
+    name: 'invitation'
+    campaignEvent: '@campaign_event1'
+    description: 'test_description'
+    teaser: 'test_teaser'
+    mailto: 'test_mailto'
+    pathVisual: 'test_pathVisual'
+    status: 1
+
 MarketingBundle\Entity\LeadProvider:
   lead_provider1:
     name: 'leadProvider'
@@ -92,4 +102,9 @@ MarketingBundle\Entity\ContactFormDesiredModel:
   contact_form_desired_model1:
     contactForm: '@contact_form1'
     desiredModelId: 1
-    
+
+MarketingBundle\Entity\MyaudiUserInvitation:
+  invitation_user1:
+    invitation: '@invitation1'
+    myaudiUserId: 1
+    subscription_date: '<(new \DateTime("now"))>'

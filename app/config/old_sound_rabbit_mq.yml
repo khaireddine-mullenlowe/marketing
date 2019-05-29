@@ -1,5 +1,9 @@
 parameters:
     crud_exchange: '%env%.CRUD'
+    dlx_name: '%env%.dead-letter'
+    dlq_name: '%env%.dead-letter'
+    scoring_queue: '%env%.scoring.crud'
+    scoring_routing_key: '%env%.scoring.crud'
 
 # RabbitMQ configuration
 old_sound_rabbit_mq:
@@ -29,6 +33,30 @@ old_sound_rabbit_mq:
             # See https://www.rabbitmq.com/uri-spec.html on how to encode values.
             url: 'amqp://%rabbitmq_user%:%rabbitmq_password%@%rabbitmq_host%/vhost?lazy=1&connection_timeout=6'
 
+    consumers:
+        scoring_crud:
+            connection: 'default'
+            exchange_options:
+                name: '%crud_exchange%'
+                type: 'direct'
+            queue_options:
+                name: '%scoring_queue%'
+                routing_keys:
+                  - '%scoring_routing_key%'
+                arguments:
+                    'x-dead-letter-exchange': ['S', '%dlx_name%']
+                    'x-dead-letter-routing-key': ['S', '%scoring_queue%']
+            callback: MarketingBundle\Service\AMQP\Consumer\ScoringConsumer
+
+        dead_messages:
+            connection: default
+            exchange_options: {name: '%dlx_name%', type: direct}
+            queue_options:
+                name: '%dlq_name%'
+                routing_keys:
+                    - '%scoring_queue%'
+            callback: Mullenlowe\CommonBundle\Component\AMQP\DeadLetterConsumer
+
     producers:
         marketing_crud:
             connection: 'default'
@@ -48,3 +76,4 @@ mullenlowe_common:
             - { context: 'Score',                           routing_key: 'crud.marketing.score' }
             - { context: 'OfferAftersale',                  routing_key: 'crud.marketing.offerAftersale' }
             - { context: 'OfferSale',                       routing_key: 'crud.marketing.offerSale' }
+            - { context: 'MyaudiUserInvitation',            routing_key: 'crud.marketing.myaudiUserInvitation' }

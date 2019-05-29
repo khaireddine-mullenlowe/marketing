@@ -43,3 +43,4 @@ parameters:
     env: dev
 
     guzzle_verify_ssl: true
+    documents_storage_dir: /storage/dev/product
