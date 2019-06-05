@@ -1,12 +1,12 @@
 <?php
 
-
 namespace MarketingBundle\Controller;
-
 
 use MarketingBundle\Entity\MyaudiUserInvitation;
 use MarketingBundle\Enum\PaginateEnum;
+use Knp\Bundle\PaginatorBundle\Pagination\SlidingPagination;
 use MarketingBundle\Form\MyaudiUserInvitationFormType;
+use MarketingBundle\Repository\MyaudiUserInvitationRepository;
 use Mullenlowe\CommonBundle\Controller\MullenloweRestController;
 use Mullenlowe\CommonBundle\Exception\BadRequestHttpException;
 use Mullenlowe\CommonBundle\Exception\NotFoundHttpException;
@@ -67,13 +67,12 @@ class MyaudiUserInvitationController extends MullenloweRestController
      */
     public function cgetAction(Request $request)
     {
+        /** @var MyaudiUserInvitationRepository $repository */
         $repository = $this->getDoctrine()->getRepository('MarketingBundle:MyaudiUserInvitation');
         $queryBuilder = $repository->findAll();
-        //Get MyaudUserinvitations by criterias
+        // Get MyaudUserinvitations by criterias
         if (!empty($this->handleMyaduUserInvitationCriterias($request))) {
-            $queryBuilder = $repository->findBy(
-                $this->handleMyaduUserInvitationCriterias($request)
-            );
+            $queryBuilder = $repository->findByCustomFilters($this->handleMyaduUserInvitationCriterias($request));
         }
 
         $paginator = $this->get('knp_paginator');
