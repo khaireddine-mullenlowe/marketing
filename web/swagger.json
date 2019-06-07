@@ -231,13 +231,6 @@
                 "operationId": "getCampaignEventsCollection",
                 "parameters": [
                     {
-                        "name": "eventTypeId",
-                        "in": "query",
-                        "description": "Find campaign events by eventTypeId",
-                        "required": false,
-                        "type": "integer"
-                    },
-                    {
                         "name": "limit",
                         "in": "query",
                         "description": "limit",
@@ -249,7 +242,7 @@
                         "in": "query",
                         "description": "Find campaign events by eventType",
                         "required": false,
-                        "type": "string"
+                        "type": "integer"
                     }
                 ],
                 "responses": {
