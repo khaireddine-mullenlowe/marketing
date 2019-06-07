@@ -79,13 +79,6 @@ class CampaignEventController extends MullenloweRestController
      *     operationId="getCampaignEventsCollection",
      *     tags={"CampaignEvent"},
      *     @SWG\Parameter(
-     *         name="eventTypeId",
-     *         in="query",
-     *         type="integer",
-     *         required=false,
-     *         description="Find campaign events by eventTypeId"
-     *     ),
-     *     @SWG\Parameter(
      *         name="limit",
      *         in="query",
      *         type="integer",
@@ -95,7 +88,7 @@ class CampaignEventController extends MullenloweRestController
      *     @SWG\Parameter(
      *         name="eventType",
      *         in="query",
-     *         type="string",
+     *         type="integer",
      *         required=false,
      *         description="Find campaign events by eventType"
      *     ),
@@ -118,22 +111,18 @@ class CampaignEventController extends MullenloweRestController
     {
         /** @var CampaignEventRepository $repository */
         $repository = $this->getDoctrine()->getRepository('MarketingBundle:CampaignEvent');
+        $criterias = $request->query->all();
 
-        if (!empty($request->query->getInt('limit'))
-            && $request->query->getInt('limit') === -1
-            && $request->query->getInt('eventTypeId')
-        ) {
-            $queryBuilder = $repository->findBy([
-                'eventType' => $request->query->getInt('eventTypeId')
-            ]);
+        if (!empty($criterias['limit']) && (int) $criterias['limit'] === -1) {
+            $queryBuilder = $repository->findByCustomFilters($criterias, $criterias);
 
-            return $this->createView($queryBuilder);
+            return $this->createView($queryBuilder->getResult());
         }
 
         $paginator = $this->get('knp_paginator');
         /** @var SlidingPagination $pager */
         $pager = $paginator->paginate(
-            $repository->findByCustomFilters($request->query->all(), $request->query->all()),
+            $repository->findByCustomFilters($criterias, $criterias),
             $request->query->getInt('page', PaginateEnum::CURRENT_PAGE),
             $request->query->getInt('limit', PaginateEnum::LIMIT)
         );
