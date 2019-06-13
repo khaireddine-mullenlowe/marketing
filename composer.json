@@ -45,7 +45,7 @@
         "doctrine/orm": "^2.5",
         "incenteev/composer-parameter-handler": "^2.0",
         "lexik/jwt-authentication-bundle": "2.6.1",
-        "mullenlowe/audi-agc5-common-bundle": "dev-master",
+        "mullenlowe/audi-agc5-common-bundle": "dev-release/3.4.0",
         "mullenlowe/component": "dev-master",
         "mullenlowe/etl-bundle": "dev-master",
         "nelmio/cors-bundle": "^1.5",
@@ -87,7 +87,10 @@
         ]
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "platform": {
+            "ext-mongo": "1.6.16"
+        }
     },
     "extra": {
         "symfony-app-dir": "app",

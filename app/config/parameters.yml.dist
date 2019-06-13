@@ -44,3 +44,9 @@ parameters:
 
     guzzle_verify_ssl: true
     documents_storage_dir: /storage/dev/product
+
+    # Mongo Config
+    mullenlowe_common.connection.host: 'mongodb://localhost'
+    mullenlowe_common.connection.port: '27017'
+    mullenlowe_common.connection.database: 'rmqp_db'
+    mullenlowe_common.connection.collection: 'rmqp_collection'
