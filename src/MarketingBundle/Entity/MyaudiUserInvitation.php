@@ -12,7 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @package MarketingBundle\Entity
  *
  * @ORM\Table(name="invitation_user")
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="MarketingBundle\Repository\MyaudiUserInvitationRepository")
  * @UniqueEntity(
  *     fields={"myaudiUserId", "invitation"},
  *     message="A subscription already exist for this user and invitation."
