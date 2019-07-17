@@ -3003,12 +3003,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:itagenceone/audi-agc5-common-bundle.git",
-                "reference": "aa5dc21b724b488b9c6b9494f0c78191188f930e"
+                "reference": "f90ba6d9eba4284300234b43e3e6f5d8dcb98f69"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/itagenceone/audi-agc5-common-bundle/zipball/aa5dc21b724b488b9c6b9494f0c78191188f930e",
-                "reference": "aa5dc21b724b488b9c6b9494f0c78191188f930e",
+                "url": "https://api.github.com/repos/itagenceone/audi-agc5-common-bundle/zipball/f90ba6d9eba4284300234b43e3e6f5d8dcb98f69",
+                "reference": "f90ba6d9eba4284300234b43e3e6f5d8dcb98f69",
                 "shasum": ""
             },
             "require": {
@@ -3071,7 +3071,7 @@
             "keywords": [
                 "bundle"
             ],
-            "time": "2019-07-10T11:12:06+00:00"
+            "time": "2019-07-15T11:24:17+00:00"
         },
         {
             "name": "mullenlowe/component",
