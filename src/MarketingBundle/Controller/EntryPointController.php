@@ -91,11 +91,11 @@ class EntryPointController extends MullenloweRestController
     public function cgetAction(Request $request)
     {
         $repository = $this->getDoctrine()->getRepository('MarketingBundle:EntryPoint');
-
         $paginator = $this->get('knp_paginator');
+
         /** @var SlidingPagination $pager */
         $pager = $paginator->paginate(
-            $repository->createQueryBuilder('entryPoint'),
+            $repository->findByCustomFilters($request->query->all()),
             $request->query->getInt('page', PaginateEnum::CURRENT_PAGE),
             $request->query->getInt('limit', PaginateEnum::LIMIT)
         );
