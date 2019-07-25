@@ -1,7 +1,7 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
     "content-hash": "25c2bf05e32f19628d0c62c758494256",
@@ -3003,12 +3003,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:itagenceone/audi-agc5-common-bundle.git",
-                "reference": "f90ba6d9eba4284300234b43e3e6f5d8dcb98f69"
+                "reference": "0611a365bedd8aab0ffefe677eb8b374a1f66f12"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/itagenceone/audi-agc5-common-bundle/zipball/f90ba6d9eba4284300234b43e3e6f5d8dcb98f69",
-                "reference": "f90ba6d9eba4284300234b43e3e6f5d8dcb98f69",
+                "url": "https://api.github.com/repos/itagenceone/audi-agc5-common-bundle/zipball/0611a365bedd8aab0ffefe677eb8b374a1f66f12",
+                "reference": "0611a365bedd8aab0ffefe677eb8b374a1f66f12",
                 "shasum": ""
             },
             "require": {
@@ -3071,7 +3071,7 @@
             "keywords": [
                 "bundle"
             ],
-            "time": "2019-07-15T11:24:17+00:00"
+            "time": "2019-07-25T09:30:52+00:00"
         },
         {
             "name": "mullenlowe/component",
