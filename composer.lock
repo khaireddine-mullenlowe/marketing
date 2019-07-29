@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "25c2bf05e32f19628d0c62c758494256",
+    "content-hash": "945dd3eb3a77019d3ef989b299bd97ef",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -2999,16 +2999,16 @@
         },
         {
             "name": "mullenlowe/audi-agc5-common-bundle",
-            "version": "dev-release/3.5.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "git@github.com:itagenceone/audi-agc5-common-bundle.git",
-                "reference": "0611a365bedd8aab0ffefe677eb8b374a1f66f12"
+                "reference": "79096ca86e2e1af427a00419c7ed8b81d99f0177"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/itagenceone/audi-agc5-common-bundle/zipball/0611a365bedd8aab0ffefe677eb8b374a1f66f12",
-                "reference": "0611a365bedd8aab0ffefe677eb8b374a1f66f12",
+                "url": "https://api.github.com/repos/itagenceone/audi-agc5-common-bundle/zipball/79096ca86e2e1af427a00419c7ed8b81d99f0177",
+                "reference": "79096ca86e2e1af427a00419c7ed8b81d99f0177",
                 "shasum": ""
             },
             "require": {
@@ -3071,7 +3071,7 @@
             "keywords": [
                 "bundle"
             ],
-            "time": "2019-07-25T09:30:52+00:00"
+            "time": "2019-07-29T14:30:41+00:00"
         },
         {
             "name": "mullenlowe/component",
