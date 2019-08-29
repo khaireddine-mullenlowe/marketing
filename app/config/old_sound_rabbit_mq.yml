@@ -78,4 +78,4 @@ mullenlowe_common:
             - { context: 'OfferSale',                       routing_key: 'crud.marketing.offerSale' }
             - { context: 'MyaudiUserInvitation',            routing_key: 'crud.marketing.myaudiUserInvitation' }
         dependencies:
-            - {name: 'myaudiUserId', path: 'myaudiUser.id'}
+            - {name: 'myaudiUserId', exclude: ['Score']}

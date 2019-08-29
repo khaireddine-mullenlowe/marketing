@@ -33,16 +33,29 @@ class ScoringConsumer implements ConsumerInterface
             $body = $this->getMessageBody($msg);
             $data = $body['data'];
 
-            $interest = $data['interest'];
-            $seriousness = $data['seriousness'];
+            $interest = floatval($data['interest']);
+            $seriousness = floatval($data['seriousness']);
             $contactType = $data['contactType'];
-            $myaudiUserId = $data['myaudiUserId'];
+            $myaudiUserId = intval($data['myaudiUserId']);
 
-            $score = new Score();
-            $score->setSeriousness($seriousness)
-                ->setContactType($contactType)
-                ->setInterestAverage($interest)
-                ->setMyaudiUserId($myaudiUserId);
+            $scores = $this
+                ->em
+                ->getRepository(Score::class)
+                ->findBy(['myaudiUserId' => $myaudiUserId], ['createdAt' => 'DESC']);
+
+            // If the last MyaudiUser's score is the same on of the current score, no insert will be done.
+            if (count($scores) > 0 && ($lastScore = $scores[0]) && $contactType === $lastScore->getContactType() &&
+                $seriousness === $lastScore->getSeriousness() && $interest === $lastScore->getInterestAverage()) {
+                    /** @var Score $score */
+                    $score = $lastScore;
+                    $score->setUpdatedAt(new \DateTime());
+            } else {
+                $score = new Score();
+                $score->setSeriousness($seriousness)
+                    ->setContactType($contactType)
+                    ->setInterestAverage($interest)
+                    ->setMyaudiUserId($myaudiUserId);
+            }
 
             $this->em->persist($score);
             $this->em->flush();
